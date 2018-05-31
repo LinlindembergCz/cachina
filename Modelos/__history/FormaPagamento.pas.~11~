@@ -1,0 +1,75 @@
+unit FormaPagamento;
+
+interface
+
+uses
+   CAtribEntity,  GenericEntidade;
+
+Type
+  [TableName('FormaPagamento')]
+  TFormaPagamento = class(TGenericEntidade)
+  private
+    FPercentualDesconto: Double;
+    FPercentualTaxaAdmin: Double;
+    FNumeroParcelas: integer;
+    FDescricao: string;
+    FCodigo: integer;
+    FCodigoFilial: integer;
+    FBaixaAutomatica: string;
+    FPadrao: string;
+    FDiasVencimento: integer;
+    FPercentualMulta: double;
+    FPercentualJuros: double;
+    FDiasAntecipacao: integer;
+    FPercentualTaxaCartao: double;
+    FPercentualTaxaAntecipacao: double;
+    FCNPJOperadoraCartao: string;
+    FCodigoBandeiraTEF : string;
+    FCodigoPagamentoCartao : string;
+    FTipo: string;
+  public
+    [KeyField('Codigo')]
+    property  Codigo: integer read FCodigo write FCodigo;
+    [FieldName('CodigoFilial')]
+    property  CodigoFilial: integer read FCodigoFilial write FCodigoFilial;
+    [FieldName('Descricao')]
+    property  Descricao: string read FDescricao write FDescricao;
+    [FieldName('NumeroParcelas')]
+   	property  NumeroParcelas:integer read FNumeroParcelas write FNumeroParcelas;
+    [FieldName('PercentualDesconto')]
+  	property  PercentualDesconto: Double read FPercentualDesconto write FPercentualDesconto;
+    [FieldName('PercentualTaxaAdmin')]
+  	property  PercentualTaxaAdmin: Double read FPercentualTaxaAdmin write FPercentualTaxaAdmin;
+    [FieldName('BaixaAutomatica')]
+    property BaixaAutomatica: string read FBaixaAutomatica write FBaixaAutomatica;
+    [FieldName('Padrao')]
+    property Padrao: string read FPadrao write FPadrao;
+     [FieldName('DiasVencimento')]
+    property DiasVencimento: integer read FDiasVencimento write FDiasVencimento;
+    [FieldName('PercentualJuros')]
+    property PercentualJuros: double read FPercentualJuros write FPercentualJuros;
+    [FieldName('PercentualMulta')]
+    property PercentualMulta: double read FPercentualMulta write FPercentualMulta;
+
+    [FieldName('PercentualTaxaCartao')]
+    property PercentualTaxaCartao: double read FPercentualTaxaCartao write FPercentualTaxaCartao;
+    [FieldName('PercentualTaxaAntecipacao')]
+    property PercentualTaxaAntecipacao: double read FPercentualTaxaAntecipacao write FPercentualTaxaAntecipacao;
+    [FieldName('DiasAntecipacao')]
+    property DiasAntecipacao: integer read FDiasAntecipacao write FDiasAntecipacao;
+
+    [FieldName('CNPJOperadoraCartao')]
+    property CNPJOperadoraCartao : string read FCNPJOperadoraCartao write FCNPJOperadoraCartao;
+    [FieldName('CodigoBandeiraTEF')]
+    property CodigoBandeiraTEF : string read FCodigoBandeiraTEF write FCodigoBandeiraTEF;
+    [FieldName('CodigoPagamentoCartao')]
+    property CodigoPagamentoCartao : string read FCodigoPagamentoCartao write FCodigoPagamentoCartao;
+    [FieldName('Tipo')]
+    property Tipo : string read FTipo write FTipo;
+  end;
+
+implementation
+
+{ TFormaPagamento }
+
+end.

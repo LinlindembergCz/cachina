@@ -1,0 +1,82 @@
+inherited FormEspecialistaDetalhes: TFormEspecialistaDetalhes
+  Caption = 'Especialista'
+  inherited Panel1: TPanel
+    inherited tabPrincipal: TPageControl
+      inherited TabSheet2: TTabSheet
+        object lbDescricao: TLabel
+          Height = 17
+          left = 8
+          top = 16
+          caption = 'Nome'
+          Width = 120
+        end
+        object lbNumero: TLabel
+          Height = 17
+          left = 8
+          top = 48
+          caption = 'Numero'
+          Width = 120
+        end
+        object edtNumero: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 2
+          left = 88
+          top = 48
+          Width = 100
+          Height = 22
+          KillFocusByReturn = False
+        end
+        object edtDescricao: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 3
+          left = 88
+          top = 16
+          Width = 441
+          Height = 22
+          KillFocusByReturn = False
+        end
+        object Label1: TLabel
+          Height = 17
+          left = 192
+          top = 48
+          caption = 'Numero operador/ CPF:'
+          Width = 120
+        end
+        object edtNumeroOperadora: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 5
+          left = 320
+          top = 48
+          Width = 185
+          Height = 22
+          KillFocusByReturn = False
+        end
+        object cboConselho: TComboBox
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 6
+          ItemHeight = 19
+          ItemIndex = -1
+          Items.Strings = (
+            'CRP'
+            'CRM')
+          left = 88
+          top = 80
+          Width = 100
+          Height = 22
+          KillFocusByReturn = False
+        end
+        object Label2: TLabel
+          Height = 17
+          left = 8
+          top = 88
+          caption = 'Conselho'
+          Width = 120
+        end
+      end
+    end
+  end
+
+  inherited srcEntidade: TDataSource
+    Left = 136
+  end
+end

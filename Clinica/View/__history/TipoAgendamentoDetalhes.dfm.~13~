@@ -1,0 +1,118 @@
+inherited FormTipoAgendamentoDetalhes: TFormTipoAgendamentoDetalhes
+  Caption = 'Procedimentos'
+  ExplicitWidth = 669
+  ExplicitHeight = 516
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited tabPrincipal: TPageControl
+      inherited TabSheet1: TTabSheet
+        inherited grdEntidade: TDBGrid
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'Codigo'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Descricao'
+              Width = 519
+              Visible = True
+            end>
+        end
+      end
+      inherited TabSheet2: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitWidth = 643
+        ExplicitHeight = 399
+        object lbDescricao: TLabel
+          Left = 16
+          Top = 32
+          Width = 46
+          Height = 13
+          Caption = 'Descricao'
+        end
+        object Label2: TLabel
+          Left = 16
+          Top = 75
+          Width = 24
+          Height = 13
+          Caption = 'Valor'
+        end
+        object Label3: TLabel
+          Left = 16
+          Top = 112
+          Width = 45
+          Height = 13
+          Caption = 'Conv'#234'nio'
+        end
+        object Label1: TLabel
+          Left = 16
+          Top = 155
+          Width = 83
+          Height = 13
+          Caption = 'Codifica'#231#227'o TUSS'
+        end
+        object Label4: TLabel
+          Left = 16
+          Top = 194
+          Width = 79
+          Height = 13
+          Caption = 'Codifica'#231#227'o AMB'
+        end
+        object edtDescricao: TEdit
+          Left = 104
+          Top = 29
+          Width = 473
+          Height = 21
+          TabOrder = 0
+        end
+        object cboCodigoConvenio: TComboBox
+          Left = 104
+          Top = 109
+          Width = 169
+          Height = 21
+          TabOrder = 1
+        end
+        object edtValor: TEdit
+          Left = 104
+          Top = 69
+          Width = 100
+          Height = 21
+          Cursor = crIBeam
+          TabOrder = 2
+        end
+        object edtCodificacaoTUSS: TEdit
+          Left = 104
+          Top = 149
+          Width = 100
+          Height = 21
+          Cursor = crIBeam
+          TabOrder = 3
+        end
+        object edtCodificacaoAMB: TEdit
+          Left = 104
+          Top = 188
+          Width = 100
+          Height = 21
+          Cursor = crIBeam
+          TabOrder = 4
+        end
+      end
+    end
+  end
+  inherited Panel2: TPanel
+    ExplicitLeft = 0
+    ExplicitTop = 0
+  end
+  inherited srcEntidade: TDataSource
+    Left = 576
+    Top = 422
+  end
+  inherited srcPesquisa: TDataSource
+    Left = 472
+    Top = 424
+  end
+end

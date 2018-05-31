@@ -1,0 +1,51 @@
+inherited FormModelosDetalhes: TFormModelosDetalhes
+  Caption = 'Modelos de produtos'
+  DesignerMobile = False
+  DesignerWidth = 0
+  DesignerHeight = 0
+  DesignerDeviceName = ''
+  DesignerOrientation = 0
+  DesignerOSVersion = ''
+  inherited Panel1: TPanel
+    inherited tabPrincipal: TTabControl
+      inherited TabItem2: TTabItem
+        object Label1: TLabel
+          Font.Style = [fsBold]
+          Height = 16.000000000000000000
+          Position.X = 8.000000000000000000
+          Position.Y = 11.000000000000000000
+          Text = 'Descri'#231#227'o'
+          Width = 63.000000000000000000
+        end
+        object Label2: TLabel
+          Font.Style = [fsBold]
+          Height = 16.000000000000000000
+          Position.X = 9.000000000000000000
+          Position.Y = 45.000000000000000000
+          Text = 'Marca'
+          Width = 40.000000000000000000
+        end
+        object cboMarca: TComboBox
+          DisableFocusEffect = False
+          Height = 21.000000000000000000
+          Position.X = 80.000000000000000000
+          Position.Y = 40.000000000000000000
+          TabOrder = 2
+          Width = 172.000000000000000000
+        end
+        object edtDescricao: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 3
+          Position.X = 77.000000000000000000
+          Position.Y = 6.000000000000000000
+          Width = 438.000000000000000000
+          Height = 21.000000000000000000
+          KillFocusByReturn = False
+        end
+      end
+    end
+  end
+  inherited StyleBook1: TStyleBook
+    ResourcesBin = {464D585F5354594C4520322E350100}
+  end
+end

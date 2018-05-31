@@ -1,0 +1,52 @@
+inherited FormCargoDetalhes: TFormCargoDetalhes
+  Caption = 'FormCargoDetalhes'
+  ExplicitWidth = 669
+  ExplicitHeight = 516
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited tabPrincipal: TPageControl
+      ExplicitWidth = 651
+      inherited TabSheet1: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitWidth = 643
+        ExplicitHeight = 399
+        object Label1: TLabel [0]
+          Left = 304
+          Top = 192
+          Width = 31
+          Height = 13
+          Caption = 'Label1'
+        end
+      end
+      inherited TabSheet2: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitWidth = 643
+        ExplicitHeight = 399
+        object Label2: TLabel
+          Left = 16
+          Top = 32
+          Width = 55
+          Height = 13
+          Caption = 'Descri'#231#227'o'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object edtDescricao: TEdit
+          Left = 80
+          Top = 29
+          Width = 505
+          Height = 21
+          TabOrder = 0
+          Text = 'edtDescricao'
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,165 @@
+unit ItemEntrada;
+
+interface
+
+uses
+ CAtribEntity,  GenericEntidade;
+
+type
+  [TableName('ItemEntrada')]
+  [Modulo('6')]
+  TItemEntrada = class(TGenericEntidade)
+  private
+    FDesconto: double;
+    FValor: double;
+    FCodigoProduto: integer;
+    FCodigo: integer;
+    FTotal: double;
+    FCodigoFilial: integer;
+    FCodigoEntrada: integer;
+    FQuantidade: double;
+    FCodigoEstoque: integer;
+    FOrdem: integer;
+    FFator: double;
+    FValorIPI: Double;
+    FValorICMS: Double;
+    FCST: string;
+    FBaseICMS: Double;
+    FCFOP: string;
+    procedure SetCodigo(const Value: integer);
+    procedure SetCodigoEntrada(const Value: integer);
+    procedure SetCodigoEstoque(const Value: integer);
+    procedure SetCodigoFilial(const Value: integer);
+    procedure SetCodigoProduto(const Value: integer);
+    procedure SetDesconto(const Value: double);
+    procedure SetOrdem(const Value: integer);
+    procedure SetQuantidade(const Value: double);
+    procedure SetTotal(const Value: double);
+    procedure SetValor(const Value: double);
+    procedure SetFator(const Value: double);
+    procedure SetBaseICMS(const Value: Double);
+    procedure SetCST(const Value: string);
+    procedure SetValorICMS(const Value: Double);
+    procedure SetValorIPI(const Value: Double);
+    procedure SetCFOP(const Value: string);
+  public
+    [KeyField('Codigo')]
+    property Codigo :integer read FCodigo write SetCodigo;
+    [FieldName('CodigoFilial')]
+    property CodigoFilial:integer read FCodigoFilial write SetCodigoFilial;
+    [FieldName('CodigoEntrada')]
+    property CodigoEntrada:integer read FCodigoEntrada write SetCodigoEntrada;
+    [FieldName('Ordem')]
+    property Ordem:integer read FOrdem write SetOrdem;
+    [FieldName('CodigoProduto')]
+    property CodigoProduto:integer read FCodigoProduto write SetCodigoProduto;
+    [FieldName('Quantidade')]
+    property Quantidade:double read FQuantidade write SetQuantidade;
+    [FieldName('Valor')]
+    property Valor:double read FValor write SetValor;
+    [FieldName('Desconto')]
+    property Desconto:double read FDesconto write SetDesconto;
+    [FieldName('Total')]
+    property Total :double read FTotal write SetTotal;
+    [FieldName('CodigoEstoque')]
+    property CodigoEstoque:integer read FCodigoEstoque write SetCodigoEstoque;
+    [FieldName('Fator')]
+    property Fator: double read FFator write SetFator;
+    [FieldName('CFOP')]
+    property CFOP :string read FCFOP write SetCFOP;
+
+    [FieldName('CST')]
+    property CST: string read FCST write SetCST;
+    [FieldName('BaseICMS')]
+    property BaseICMS: Double read FBaseICMS write SetBaseICMS;
+    [FieldName('ValorICMS')]
+    property ValorICMS: Double read FValorICMS write SetValorICMS;
+    [FieldName('ValorIPI')]
+    property ValorIPI: Double read FValorIPI write SetValorIPI;
+  end;
+
+implementation
+
+{ TItemEntrada }
+
+procedure TItemEntrada.SetBaseICMS(const Value: Double);
+begin
+  FBaseICMS := Value;
+end;
+
+procedure TItemEntrada.SetCFOP(const Value: string);
+begin
+  FCFOP := Value;
+end;
+
+procedure TItemEntrada.SetCodigo(const Value: integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TItemEntrada.SetCodigoEntrada(const Value: integer);
+begin
+  FCodigoEntrada := Value;
+end;
+
+procedure TItemEntrada.SetCodigoEstoque(const Value: integer);
+begin
+  FCodigoEstoque := Value;
+end;
+
+procedure TItemEntrada.SetCodigoFilial(const Value: integer);
+begin
+  FCodigoFilial := Value;
+end;
+
+procedure TItemEntrada.SetCodigoProduto(const Value: integer);
+begin
+  FCodigoProduto := Value;
+end;
+
+procedure TItemEntrada.SetCST(const Value: string);
+begin
+  FCST := Value;
+end;
+
+procedure TItemEntrada.SetDesconto(const Value: double);
+begin
+  FDesconto := Value;
+end;
+
+procedure TItemEntrada.SetFator(const Value: double);
+begin
+  FFator := Value;
+end;
+
+procedure TItemEntrada.SetOrdem(const Value: integer);
+begin
+  FOrdem := Value;
+end;
+
+procedure TItemEntrada.SetQuantidade(const Value: double);
+begin
+  FQuantidade := Value;
+end;
+
+procedure TItemEntrada.SetTotal(const Value: double);
+begin
+  FTotal := Value;
+end;
+
+procedure TItemEntrada.SetValor(const Value: double);
+begin
+  FValor := Value;
+end;
+
+procedure TItemEntrada.SetValorICMS(const Value: Double);
+begin
+  FValorICMS := Value;
+end;
+
+procedure TItemEntrada.SetValorIPI(const Value: Double);
+begin
+  FValorIPI := Value;
+end;
+
+end.

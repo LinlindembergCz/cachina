@@ -1,0 +1,45 @@
+unit Fornecedores;
+
+interface
+
+uses
+ CAtribEntity,  GenericEntidade;
+
+type
+  [TableName('Fornecedor')]
+  TFornecedor = class(TGenericEntidade)
+public
+  [FieldName('Codigo')]
+  property Codigo: Integer;
+  [FieldName('CodigoFilial')]
+  property CodigoFilial: Integer;
+  [FieldName('Nome')]
+  property Nome: string;
+  [FieldName('RazaoSocial')]
+  property RazaoSocial: string;
+  [FieldName('CPFCNPJ')]
+  property CPFCNPJ: string;
+  [FieldName('Endereco')]
+  property Endereco: string;
+  [FieldName('Bairro')]
+  property Bairro: string;
+  [FieldName('Municipio')]
+  property Municipio: string;
+  [FieldName('UF')]
+  property UF: string;
+  [FieldName('Telefones')]
+  property Telefones: string;
+  [FieldName('Email')]
+  property Email: string;
+  [FieldName('Site')]
+  property Site: string;
+  [FieldName('CodigoClassificacao')]
+  property CodigoClassificacao: Integer;
+  [FieldName('Observacao')]
+  property Observacao: string;
+end;
+
+implementation
+
+End.
+

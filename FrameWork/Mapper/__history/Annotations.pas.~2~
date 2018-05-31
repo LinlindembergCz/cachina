@@ -1,0 +1,38 @@
+unit Annotations;
+
+interface
+
+type
+  FieldName = class(TCustomAttribute)
+    private FName: String;
+  public
+    constructor Create(aName: String);
+    property Name: String read FName write FName;
+  end;
+
+  TableName = class(TCustomAttribute)
+  private
+    FName: string;
+  public
+    constructor Create(aName: String);
+    property Name: string read FName write FName;
+  end;
+
+
+implementation
+
+constructor FieldName.Create(aName: String);
+begin
+  FName := aName;
+end;
+
+{ TableName }
+
+constructor TableName.Create(aName: String);
+begin
+  FName := aName;
+end;
+
+
+end.
+

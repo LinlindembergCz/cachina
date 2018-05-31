@@ -1,0 +1,48 @@
+unit TabelasProdutos;
+
+interface
+
+uses
+   CAtribEntity,  GenericEntidade;
+
+Type
+  [TableName('FamiliaProdutos')]
+  TFamilia = class(TGenericEntity)
+  published
+    [KeyField('Codigo')]
+    property Codigo:integer;
+    [FieldName('CodigoFilial')]
+    property CodigoFiliar:integer;
+    [FieldName('Descricao')]
+    property Descricao: string;
+  end;
+
+  [TableName('GrupoProdutos')]
+  TGrupoProdutos = class(TGenericEntity)
+  published
+    [KeyField('Codigo')]
+    property Codigo:integer;
+    [FieldName('CodigoFilial')]
+    property CodigoFiliar:integer;
+    [FieldName('CodigoFamilia')]
+    property CodigoFamilia:integer;
+    [FieldName('Descricao')]
+    property Descricao: string;
+  end;
+
+  [TableName('SubGrupoProdutos')]
+  TSubGrupoProdutos = class(TGenericEntity)
+  published
+    [KeyField('Codigo')]
+    property Codigo:integer;
+    [FieldName('CodigoFilial')]
+    property CodigoFiliar:integer;
+    [FieldName('CodigoGrupo')]
+    property CodigoFamilia:integer;
+    [FieldName('Descricao')]
+    property Descricao: string;
+  end;
+
+implementation
+
+end.

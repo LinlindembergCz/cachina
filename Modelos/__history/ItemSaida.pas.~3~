@@ -1,0 +1,83 @@
+unit ItemSaida;
+
+interface
+
+uses
+ CAtribEntity,  GenericEntidade;
+
+type
+  [TableName('ItemSaida')]
+  TItemSaida = class(TGenericEntidade)
+  private
+    FValor: Double;
+    FCodigoProduto: Integer;
+    FCodigo: Integer;
+    FCodigoFilial: Integer;
+    FQuantidade: Double;
+    FCodigoEstoque: Double;
+    FOrdem: Integer;
+    procedure SetCodigo(const Value: Integer);
+    procedure SetCodigoEstoque(const Value: Double);
+    procedure SetCodigoFilial(const Value: Integer);
+    procedure SetCodigoProduto(const Value: Integer);
+    procedure SetOrdem(const Value: Integer);
+    procedure SetQuantidade(const Value: Double);
+    procedure SetValor(const Value: Double);
+public
+  [FieldName('Codigo')]
+  property Codigo: Integer read FCodigo write SetCodigo;
+  [FieldName('CodigoFilial')]
+  property CodigoFilial: Integer read FCodigoFilial write SetCodigoFilial;
+  [FieldName('CodigoProduto')]
+  property CodigoProduto: Integer read FCodigoProduto write SetCodigoProduto;
+  [FieldName('Ordem')]
+  property Ordem: Integer read FOrdem write SetOrdem;
+  [FieldName('Quantidade')]
+  property Quantidade: Double read FQuantidade write SetQuantidade;
+  [FieldName('Valor')]
+  property Valor: Double read FValor write SetValor;
+  [FieldName('CodigoEstoque')]
+  property CodigoEstoque: Double read FCodigoEstoque write SetCodigoEstoque;
+end;
+
+implementation
+
+{ TItemSaida }
+
+procedure TItemSaida.SetCodigo(const Value: Integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TItemSaida.SetCodigoEstoque(const Value: Double);
+begin
+  FCodigoEstoque := Value;
+end;
+
+procedure TItemSaida.SetCodigoFilial(const Value: Integer);
+begin
+  FCodigoFilial := Value;
+end;
+
+procedure TItemSaida.SetCodigoProduto(const Value: Integer);
+begin
+  FCodigoProduto := Value;
+end;
+
+procedure TItemSaida.SetOrdem(const Value: Integer);
+begin
+  FOrdem := Value;
+end;
+
+procedure TItemSaida.SetQuantidade(const Value: Double);
+begin
+  FQuantidade := Value;
+end;
+
+procedure TItemSaida.SetValor(const Value: Double);
+begin
+  FValor := Value;
+end;
+
+End.
+

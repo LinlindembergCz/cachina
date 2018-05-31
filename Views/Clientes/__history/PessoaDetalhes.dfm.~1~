@@ -1,0 +1,687 @@
+inherited FormPessoaDetalhes: TFormPessoaDetalhes
+  Caption = 'Clientes'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited tabPrincipal: TPageControl
+      inherited TabSheet1: TTabSheet
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
+        inherited DBGrid1: TDBGrid
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'Codigo'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Nome'
+              Width = 524
+              Visible = True
+            end>
+        end
+      end
+      inherited TabSheet2: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitWidth = 630
+        ExplicitHeight = 399
+        object tabProdutoDetalhes: TPageControl
+          Left = 3
+          Top = 11
+          Width = 617
+          Height = 385
+          ActivePage = TabSheet7
+          TabOrder = 0
+          object TabSheet7: TTabSheet
+            Caption = 'Dados Iniciais'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
+            object Label1: TLabel
+              Left = 11
+              Top = 20
+              Width = 32
+              Height = 13
+              Caption = 'Nome'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label2: TLabel
+              Left = 11
+              Top = 49
+              Width = 53
+              Height = 13
+              Caption = 'CPF/CNPJ'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label22: TLabel
+              Left = 11
+              Top = 76
+              Width = 70
+              Height = 13
+              Caption = 'Raz'#227'o social'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label3: TLabel
+              Left = 11
+              Top = 104
+              Width = 49
+              Height = 13
+              Caption = 'Telefone'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label4: TLabel
+              Left = 11
+              Top = 140
+              Width = 35
+              Height = 13
+              Caption = 'E-mail'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label12: TLabel
+              Left = 11
+              Top = 176
+              Width = 72
+              Height = 13
+              Caption = 'Classifica'#231#227'o'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object edtNome: TEdit
+              Tag = 1
+              Left = 93
+              Top = 12
+              Width = 453
+              Height = 21
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 0
+            end
+            object edtRazaoSocial: TEdit
+              Left = 93
+              Top = 76
+              Width = 453
+              Height = 21
+              TabOrder = 1
+            end
+            object edtCPFCNPJ: TEdit
+              Left = 92
+              Top = 39
+              Width = 133
+              Height = 21
+              TabOrder = 2
+              OnExit = edtCPFCNPJExit
+            end
+            object edtTelefone: TEdit
+              Left = 92
+              Top = 103
+              Width = 269
+              Height = 21
+              TabOrder = 3
+            end
+            object edtEmail: TEdit
+              Left = 92
+              Top = 137
+              Width = 266
+              Height = 21
+              TabOrder = 4
+            end
+            object cboClassificacaoCliente: TComboBox
+              Left = 92
+              Top = 169
+              Width = 153
+              Height = 21
+              TabOrder = 5
+            end
+          end
+          object TabSheet3: TTabSheet
+            Caption = 'Endere'#231'o'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
+            object Label5: TLabel
+              Left = 8
+              Top = 24
+              Width = 65
+              Height = 13
+              Caption = 'Logradouro'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label6: TLabel
+              Left = 8
+              Top = 64
+              Width = 34
+              Height = 13
+              Caption = 'Bairro'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label7: TLabel
+              Left = 8
+              Top = 99
+              Width = 53
+              Height = 13
+              Caption = 'Munic'#237'pio'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label8: TLabel
+              Left = 8
+              Top = 147
+              Width = 14
+              Height = 13
+              Caption = 'UF'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label9: TLabel
+              Left = 8
+              Top = 179
+              Width = 20
+              Height = 13
+              Caption = 'CEP'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label10: TLabel
+              Left = 7
+              Top = 223
+              Width = 79
+              Height = 13
+              Caption = 'Complemento'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object edtEndereco: TEdit
+              Left = 104
+              Top = 21
+              Width = 409
+              Height = 21
+              TabOrder = 0
+            end
+            object edtBairro: TEdit
+              Left = 104
+              Top = 58
+              Width = 409
+              Height = 21
+              TabOrder = 1
+            end
+            object edtMunicipio: TEdit
+              Left = 104
+              Top = 98
+              Width = 409
+              Height = 21
+              TabOrder = 2
+            end
+            object cboUF: TComboBox
+              Left = 104
+              Top = 144
+              Width = 73
+              Height = 21
+              TabOrder = 3
+              Items.Strings = (
+                'RN'
+                'AL'
+                'PE'
+                'PB'
+                'CE'
+                'MG'
+                'SP'
+                'RJ'
+                'RC'
+                'BR'
+                'BH'
+                'MA'
+                'SA'
+                'AM'
+                'MA'
+                'PR'
+                'PI'
+                'SC'
+                'SE')
+            end
+            object edtCEP: TEdit
+              Left = 104
+              Top = 178
+              Width = 145
+              Height = 21
+              TabOrder = 4
+            end
+            object edtComplemento: TEdit
+              Left = 104
+              Top = 216
+              Width = 412
+              Height = 21
+              TabOrder = 5
+            end
+          end
+          object TabSheet4: TTabSheet
+            Caption = 'Contatos'
+            OnEnter = TabSheet4Enter
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
+            object Label14: TLabel
+              Left = 5
+              Top = 17
+              Width = 32
+              Height = 13
+              Caption = 'Nome'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label15: TLabel
+              Left = 5
+              Top = 56
+              Width = 49
+              Height = 13
+              Caption = 'Telefone'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label21: TLabel
+              Left = 389
+              Top = 16
+              Width = 20
+              Height = 13
+              Caption = 'CPF'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label16: TLabel
+              Left = 339
+              Top = 54
+              Width = 62
+              Height = 13
+              Caption = 'Autorizado'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object edtNomeContato: TEdit
+              Left = 83
+              Top = 13
+              Width = 300
+              Height = 21
+              TabOrder = 0
+            end
+            object edtTelefoneContato: TEdit
+              Left = 83
+              Top = 50
+              Width = 137
+              Height = 21
+              TabOrder = 1
+            end
+            object edtCPFContato: TEdit
+              Left = 417
+              Top = 13
+              Width = 137
+              Height = 21
+              TabOrder = 4
+            end
+            object cboAutorizado: TComboBox
+              Left = 417
+              Top = 50
+              Width = 79
+              Height = 21
+              TabOrder = 6
+            end
+            object btnInserirContato: TButton
+              Left = 2
+              Top = 80
+              Width = 75
+              Height = 25
+              Caption = 'Novo'
+              TabOrder = 2
+              OnClick = btnInserirContatoClick
+            end
+            object btnConfirmarContato: TButton
+              Left = 93
+              Top = 80
+              Width = 75
+              Height = 25
+              Caption = 'Confirmar'
+              TabOrder = 3
+              OnClick = btnConfirmarContatoClick
+            end
+            object btnRemoverContato: TButton
+              Left = 180
+              Top = 80
+              Width = 75
+              Height = 25
+              Caption = 'Remover'
+              TabOrder = 5
+              OnClick = btnRemoverContatoClick
+            end
+            object DBGrid2: TDBGrid
+              Left = 0
+              Top = 115
+              Width = 609
+              Height = 242
+              Align = alBottom
+              DataSource = srcContatos
+              TabOrder = 7
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'Tahoma'
+              TitleFont.Style = []
+              OnCellClick = DBGrid2CellClick
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'Nome'
+                  Width = 440
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'Telefone'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'Autorizado'
+                  Visible = True
+                end>
+            end
+          end
+          object TabSheet5: TTabSheet
+            Caption = 'Ve'#237'culos'
+            OnEnter = TabSheet5Enter
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
+            object Label17: TLabel
+              Left = 8
+              Top = 12
+              Width = 41
+              Height = 13
+              Caption = 'Modelo'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label18: TLabel
+              Left = 6
+              Top = 54
+              Width = 30
+              Height = 13
+              Caption = 'Placa'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label19: TLabel
+              Left = 344
+              Top = 16
+              Width = 19
+              Height = 13
+              Caption = 'Cor'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label20: TLabel
+              Left = 344
+              Top = 52
+              Width = 22
+              Height = 13
+              Caption = 'Ano'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object btnInserirVeiculo: TButton
+              Left = 6
+              Top = 78
+              Width = 75
+              Height = 25
+              Caption = 'Novo'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 0
+              OnClick = btnInserirVeiculoClick
+            end
+            object btnConfirmarVeiculo: TButton
+              Left = 95
+              Top = 78
+              Width = 75
+              Height = 25
+              Caption = 'Confirmar'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 2
+              OnClick = btnConfirmarVeiculoClick
+            end
+            object btnRemoverVeiculo: TButton
+              Left = 184
+              Top = 78
+              Width = 75
+              Height = 25
+              Caption = 'Remover'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 3
+              OnClick = btnRemoverVeiculoClick
+            end
+            object cboCor: TComboBox
+              Left = 400
+              Top = 11
+              Width = 145
+              Height = 21
+              TabOrder = 1
+              Items.Strings = (
+                'Preto'
+                'Vermelho'
+                'Prata'
+                'Azul'
+                'Branco'
+                'Marrom'
+                'Verde'
+                'Amarelo')
+            end
+            object cboModelo: TComboBox
+              Left = 80
+              Top = 11
+              Width = 209
+              Height = 21
+              TabOrder = 4
+            end
+            object DBGrid3: TDBGrid
+              Left = 0
+              Top = 107
+              Width = 609
+              Height = 250
+              Align = alBottom
+              DataSource = srcVeiculos
+              TabOrder = 5
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'Tahoma'
+              TitleFont.Style = []
+              OnCellClick = DBGrid3CellClick
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'Modelo'
+                  Width = 179
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'Placa'
+                  Width = 91
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'Cor'
+                  Width = 106
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'Ano'
+                  Width = 88
+                  Visible = True
+                end>
+            end
+            object edtAno: TEdit
+              Left = 400
+              Top = 48
+              Width = 121
+              Height = 21
+              TabOrder = 6
+              Text = '2014'
+            end
+            object edtPlaca: TEdit
+              Left = 80
+              Top = 48
+              Width = 121
+              Height = 21
+              TabOrder = 7
+            end
+          end
+          object TabSheet6: TTabSheet
+            Caption = 'Observa'#231#227'o'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
+            object memoObservacao: TMemo
+              Left = 8
+              Top = 8
+              Width = 601
+              Height = 345
+              TabOrder = 0
+            end
+          end
+        end
+      end
+    end
+  end
+  inherited srcEntidade: TDataSource
+    Left = 136
+    Top = 358
+  end
+  inherited srcPesquisa: TDataSource
+    Left = 32
+    Top = 358
+  end
+  object srcContatos: TDataSource
+    AutoEdit = False
+    Left = 240
+    Top = 358
+  end
+  object srcVeiculos: TDataSource
+    AutoEdit = False
+    Left = 336
+    Top = 358
+  end
+end

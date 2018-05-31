@@ -1,0 +1,225 @@
+unit Entrada;
+
+interface
+
+uses
+ CAtribEntity,  GenericEntidade;
+
+type
+  [TableName('Entrada')]
+  TEntrada = class(TGenericEntidade)
+  private
+    FValorFrete: Double;
+    FCodigoFornecedor: Integer;
+    FValorIPI: Double;
+    FValorDesconto: Double;
+    FCodigo: Integer;
+    FValorICMS: Double;
+    FValorSeguro: Double;
+    FDataEmissao: TDatetime;
+    FCodigoFormaPagamento: Integer;
+    FValorDocumento: Double;
+    FValorCustofinanceiro: Double;
+    FTipoFrete: string;
+    FValorPIS: Double;
+    FValorDespesas: Double;
+    FValorCONFINS: Double;
+    FValorICMSSubstituto: Double;
+    FData: TDatetime;
+    FNumeroDocumento: string;
+    FCPFCNPJ: string;
+    FRazaoSocial: string;
+    FNome: string;
+    FTelefone: string;
+    FCodigoFilial: Integer;
+    procedure SetCodigo(const Value: Integer);
+    procedure SetCodigoFormaPagamento(const Value: Integer);
+    procedure SetCodigoFornecedor(const Value: Integer);
+    procedure SetData(const Value: TDatetime);
+    procedure SetDataEmissao(const Value: TDatetime);
+    procedure SetNumeroDocumento(const Value: string);
+    procedure SetTipoFrete(const Value: string);
+    procedure SetValorCONFINS(const Value: Double);
+    procedure SetValorCustofinanceiro(const Value: Double);
+    procedure SetValorDesconto(const Value: Double);
+    procedure SetValorDespesas(const Value: Double);
+    procedure SetValorDocumento(const Value: Double);
+    procedure SetValorFrete(const Value: Double);
+    procedure SetValorICMS(const Value: Double);
+    procedure SetValorICMSSubstituto(const Value: Double);
+    procedure SetValorIPI(const Value: Double);
+    procedure SetValorPIS(const Value: Double);
+    procedure SetValorSeguro(const Value: Double);
+    procedure SetCPFCNPJ(const Value: string);
+    procedure SetNome(const Value: string);
+    procedure SetRazaoSocial(const Value: string);
+    procedure SetTelefone(const Value: string);
+    procedure SetCodigoFilial(const Value: Integer);
+public
+  [KeyField('Codigo')]
+  [FieldName('Codigo')]
+  property Codigo: Integer read FCodigo write SetCodigo;
+  [FieldName('CodigoFilial')]
+  property CodigoFilial:Integer read FCodigoFilial write SetCodigoFilial;
+
+  [FieldName('Data')]
+  property Data: TDatetime read FData write SetData;
+  [FieldName('CodigoFornecedor')]
+  property CodigoFornecedor: Integer read FCodigoFornecedor write SetCodigoFornecedor;
+  [FieldName('NumeroDocumento')]
+  property NumeroDocumento: string read FNumeroDocumento write SetNumeroDocumento;
+  [FieldName('CodigoFormaPagamento')]
+  property CodigoFormaPagamento: Integer read FCodigoFormaPagamento write SetCodigoFormaPagamento;
+  [FieldName('ValorFrete')]
+  property ValorFrete: Double read FValorFrete write SetValorFrete;
+  [FieldName('ValorCustofinanceiro')]
+  property ValorCustofinanceiro: Double read FValorCustofinanceiro write SetValorCustofinanceiro;
+  [FieldName('ValorDespesas')]
+  property ValorDespesas: Double read FValorDespesas write SetValorDespesas;
+  [FieldName('TipoFrete')]
+  property TipoFrete: string read FTipoFrete write SetTipoFrete;
+  [FieldName('DataEmissao')]
+  property DataEmissao: TDatetime read FDataEmissao write SetDataEmissao;
+  [FieldName('ValorDocumento')]
+  property ValorDocumento: Double read FValorDocumento write SetValorDocumento;
+  [FieldName('ValorSeguro')]
+  property ValorSeguro: Double read FValorSeguro write SetValorSeguro;
+  [FieldName('ValorIPI')]
+  property ValorIPI: Double read FValorIPI write SetValorIPI;
+  [FieldName('ValorPIS')]
+  property ValorPIS: Double read FValorPIS write SetValorPIS;
+  [FieldName('ValorCONFINS')]
+  property ValorCONFINS: Double read FValorCONFINS write SetValorCONFINS;
+  [FieldName('ValorICMS')]
+  property ValorICMS: Double read FValorICMS write SetValorICMS;
+  [FieldName('ValorICMSSubstituto')]
+  property ValorICMSSubstituto: Double read FValorICMSSubstituto write SetValorICMSSubstituto;
+  [FieldName('ValorDesconto')]
+  property ValorDesconto: Double read FValorDesconto write SetValorDesconto;
+
+  property Nome: string read FNome write SetNome;
+  property CPFCNPJ: string read FCPFCNPJ write SetCPFCNPJ;
+  property RazaoSocial: string read FRazaoSocial write SetRazaoSocial;
+  property Telefone: string read FTelefone write SetTelefone;
+end;
+
+implementation
+
+{ TEntrada }
+
+procedure TEntrada.SetCodigo(const Value: Integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TEntrada.SetCodigoFilial(const Value: Integer);
+begin
+  FCodigoFilial := Value;
+end;
+
+procedure TEntrada.SetCodigoFormaPagamento(const Value: Integer);
+begin
+  FCodigoFormaPagamento := Value;
+end;
+
+procedure TEntrada.SetCodigoFornecedor(const Value: Integer);
+begin
+  FCodigoFornecedor := Value;
+end;
+
+procedure TEntrada.SetCPFCNPJ(const Value: string);
+begin
+  FCPFCNPJ := Value;
+end;
+
+procedure TEntrada.SetData(const Value: TDatetime);
+begin
+  FData := Value;
+end;
+
+procedure TEntrada.SetDataEmissao(const Value: TDatetime);
+begin
+  FDataEmissao := Value;
+end;
+
+procedure TEntrada.SetNome(const Value: string);
+begin
+  FNome := Value;
+end;
+
+procedure TEntrada.SetNumeroDocumento(const Value: string);
+begin
+  FNumeroDocumento := Value;
+end;
+
+procedure TEntrada.SetRazaoSocial(const Value: string);
+begin
+  FRazaoSocial := Value;
+end;
+
+procedure TEntrada.SetTelefone(const Value: string);
+begin
+  FTelefone := Value;
+end;
+
+procedure TEntrada.SetTipoFrete(const Value: string);
+begin
+  FTipoFrete := Value;
+end;
+
+procedure TEntrada.SetValorCONFINS(const Value: Double);
+begin
+  FValorCONFINS := Value;
+end;
+
+procedure TEntrada.SetValorCustofinanceiro(const Value: Double);
+begin
+  FValorCustofinanceiro := Value;
+end;
+
+procedure TEntrada.SetValorDesconto(const Value: Double);
+begin
+  FValorDesconto := Value;
+end;
+
+procedure TEntrada.SetValorDespesas(const Value: Double);
+begin
+  FValorDespesas := Value;
+end;
+
+procedure TEntrada.SetValorDocumento(const Value: Double);
+begin
+  FValorDocumento := Value;
+end;
+
+procedure TEntrada.SetValorFrete(const Value: Double);
+begin
+  FValorFrete := Value;
+end;
+
+procedure TEntrada.SetValorICMS(const Value: Double);
+begin
+  FValorICMS := Value;
+end;
+
+procedure TEntrada.SetValorICMSSubstituto(const Value: Double);
+begin
+  FValorICMSSubstituto := Value;
+end;
+
+procedure TEntrada.SetValorIPI(const Value: Double);
+begin
+  FValorIPI := Value;
+end;
+
+procedure TEntrada.SetValorPIS(const Value: Double);
+begin
+  FValorPIS := Value;
+end;
+
+procedure TEntrada.SetValorSeguro(const Value: Double);
+begin
+  FValorSeguro := Value;
+end;
+
+End.

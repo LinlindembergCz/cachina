@@ -1,0 +1,55 @@
+unit ClassificacaoCliente;
+
+interface
+
+uses
+   GenericEntidade;
+
+Type
+  [TableName('ClassificacaoCliente')]
+  TClassificacaoCliente = class(TGenericEntity)
+  private
+    FDesconto: Double;
+    FDescricao: string;
+    FCodigo: integer;
+    FCodigoFilial: integer;
+    procedure SetCodigo(const Value: integer);
+    procedure SetDesconto(const Value: Double);
+    procedure SetDescricao(const Value: string);
+    procedure SetCodigoFilial(const Value: integer);
+  public
+    [KeyField('Codigo')]
+    property Codigo: integer read FCodigo write SetCodigo;
+    [FieldName('CodigoFilial')]
+    property CodigoFilial: integer read FCodigoFilial write SetCodigoFilial;
+    [FieldName('Descricao')]
+    property Descricao: string read FDescricao write SetDescricao;
+    [FieldName('Desconto')]
+    property Desconto: Double read FDesconto write SetDesconto;
+  end;
+
+implementation
+
+{ TClassificacaoCliente }
+
+procedure TClassificacaoCliente.SetCodigo(const Value: integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TClassificacaoCliente.SetCodigoFilial(const Value: integer);
+begin
+  FCodigoFilial := Value;
+end;
+
+procedure TClassificacaoCliente.SetDesconto(const Value: Double);
+begin
+  FDesconto := Value;
+end;
+
+procedure TClassificacaoCliente.SetDescricao(const Value: string);
+begin
+  FDescricao := Value;
+end;
+
+end.

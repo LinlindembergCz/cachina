@@ -1,0 +1,557 @@
+unit ControllerEntrada;
+
+interface
+
+uses
+   Windows,Data.DB, Vcl.Controls,  Messages, SysUtils, Variants, Classes,  ControllerTabelas,
+   Forms, Mapper, GenericEntidade, ACBrNFe, Dialogs, UtilsString,pcnConversao;
+
+type
+  TControllerEntrada = class( TControllerTabelas )
+  private
+    ACBrNFe: TACBrNFe;
+    FDataSetitems: TDataSet;
+
+    procedure SetDataSetitems(const Value: TDataSet);
+    function ImportarItensNFe: string;
+
+    function CSTICMSToString(prsCst: TpcnCSTIcms): string;
+    function CSTIPIToString(prsCst: TpcnCstIpi): string;
+    function CSTPisToString(prsCst: TpcnCstPis): string;
+    function CSTCofinsToString(prsCst: TpcnCstCofins): string;
+
+
+
+
+  public
+    function SelectEntrada: string;
+    procedure Inserir(Objecto: TGenericEntidade);override;
+    procedure Atualizar(Objecto: TGenericEntidade);override;
+    procedure Excluir(Objecto: TGenericEntidade);override;
+    function GetDataSet( Objecto: TGenericEntidade;
+                         Condicao: string;
+                         Fields: string= ''): TDataset;
+    function GetSelect(Tabela, Condicao: string; Fields: string = ''): TDataset;
+    class function GetValue(Tabela, Condicao, Field: string): String; static;
+    procedure ExcluirItens(CodigoEntrada: string);
+    function GetMaxEntrada:String;
+
+    function ImportarNFe(Arquivo: string): string;
+    function GeraPagamento(CodigoFornecedor,
+                            NumeroDocumento,
+                            CodigoFormaPagamento,
+                            ValorDocumento,
+                            CentroCusto,
+                            CodigoEntrada: string): boolean;
+
+    function GetCodigoFornecedor: string;
+    function GetChaveAcesso: string;
+    function GetNumeroDocumento: string;
+    function GetEspecie: string;
+    function GetSerie: string;
+    function GetValorDocumento: Double;
+    function GetValorFrete: Double;
+    function GetValorDesconto: Double;
+    function GetDataEmissao: Tdatetime;
+    function GetTipoFrete: integer;
+    procedure AlterarCompraParaBaixada(CodigoCompra: string);
+    procedure AlterarCompraParaDevolvida(CodigoCompra: string);
+    property DataSetitems: TDataSet read FDataSetitems write SetDataSetitems;
+  end;
+
+  const
+  CamposEntrada  = 'T1.*,'+
+                   '(Select SUM( "Valor" * "Quantidade" - ( "Valor" * "Quantidade" * ( "Desconto" /100))) '+
+                   ' from ItemEntrada where "CodigoEntrada"= T1."Codigo") - '+
+                   '( ( Select SUM( "Valor" * "Quantidade" - ( "Valor" * "Quantidade" * ( "Desconto" /100))) '+
+                   '    From ItemEntrada where "CodigoEntrada"= T1."Codigo") * T1."ValorDesconto" / 100 )'+
+                   '    As TotalEntidade,'+
+                   ' forn."Nome", forn."CPFCNPJ", forn."Telefone", forn."RazaoSocial", forn."Endereco", forn."Bairro", '+
+                   ' forn."Municipio", forn."UF", forn."CEP", forn."CodigoIBGE", forn."InscricaoEstadual" ';
+
+  ConsultaTabela = 'Entrada T1 left join Pessoa forn on forn."Codigo"= T1."CodigoFornecedor"';
+
+  ConsultaItemEntrada = 'ItemEntrada T1 '+
+                        ' inner join Produtos prod on prod.codigo = T1.CodigoProduto'+
+                        ' left join TabelaNCM NCM on prod.CodigoNCM = NCM.Codigo';
+
+  CamposItemEntrada = 'T1.*, prod."Descricao", NCM.CodigoNCM as CodificacaoNCM';
+
+
+  CamposEntradaFormaPagamento = 'T1.*,(Select "Descricao" from FormaPagamento where "Codigo"=T1."CodigoFormaPagamento") as Descricao';
+
+implementation
+
+{ TControllerClientes }
+
+uses  GenericDAO, EntidadeFactory, Parcelar, ControllerPagamento, Produtos,
+  ProdutoListagem;//, EntradaListagem;
+
+procedure TControllerEntrada.AlterarCompraParaBaixada(CodigoCompra: string);
+begin
+   TGenericDAO.ExecSQL('Update Entrada set Situacao = ''BAIXADA'' WHERE Codigo= '+CodigoCompra);
+end;
+
+procedure TControllerEntrada.AlterarCompraParaDevolvida(CodigoCompra: string);
+begin
+   TGenericDAO.ExecSQL('Update Entrada set Situacao = ''DEVOLVIDA'' WHERE Codigo= '+CodigoCompra);
+end;
+
+procedure TControllerEntrada.Atualizar(Objecto: TGenericEntidade);
+begin
+  inherited  ;
+end;
+
+procedure TControllerEntrada.Excluir(Objecto: TGenericEntidade);
+begin
+  inherited ;
+end;
+
+
+function TControllerEntrada.GeraPagamento(CodigoFornecedor,
+                                           NumeroDocumento,
+                                           CodigoFormaPagamento,
+                                           ValorDocumento,
+                                           CentroCusto ,
+                                           CodigoEntrada : string):boolean;
+var
+   I:integer;
+   Data: TDatetime;
+   DataVencimento: TDatetime;
+   ValorParcela: Double;
+   Acada:boolean;
+   Dias :integer;
+   FormaPagamentoEntrada: string;
+   FormaPagamentoParcela: string;
+   ValorEntrada: Double;
+   Parcelas:integer;
+
+   ControllerPagamento: TControllerPagamento;
+begin
+  application.Createform(TFormParcelar, FormParcelar);
+
+  FormParcelar.edtValorParcelar.text   := ValorDocumento;
+  FormParcelar.edtQtdParcelas.text  := '1';
+
+  FormParcelar.cboCodigoFormaPagamento.keyValue := CodigoFormaPagamento;
+  FormParcelar.dateDataVencimento.date          := date;
+
+  if FormParcelar.ShowModal = mrOk then
+  begin
+    ValorParcela          :=(FormParcelar.Valor -
+                             FormParcelar.ValorEntrada) /
+                             FormParcelar.QtdParcelas;
+
+    DataVencimento        := FormParcelar.Vencimento;
+    Acada                 := FormParcelar.Acada;
+    Dias                  := FormParcelar.Dias;
+    FormaPagamentoParcela := FormParcelar.FormaPgtoParcela;
+    FormaPagamentoEntrada := FormParcelar.FormaPgtoEntrada;
+    ValorEntrada          := FormParcelar.ValorEntrada;
+    Parcelas              := FormParcelar.QtdParcelas;
+
+    ControllerPagamento   := TControllerPagamento.create;
+    try
+        if FormParcelar.ValorEntrada > 0 then
+        begin
+          ControllerPagamento.InserirConta( ValorEntrada,
+                        FormaPagamentoEntrada,
+                        datetostr(date),
+                        CodigoFornecedor,
+                        CodigoEntrada,
+                        CentroCusto,
+                        NumeroDocumento );
+        end;
+
+        ControllerPagamento.InserirParcelas( FormaPagamentoParcela,
+                         ValorParcela,
+                         DataVencimento,
+                         Acada,
+                         Dias,
+                         CodigoFornecedor,
+                         Parcelas ,
+                         CodigoEntrada,
+                         CentroCusto,
+                         NumeroDocumento);
+    finally
+      ControllerPagamento.free;
+      FormParcelar.free;
+    end;
+    result:= true;
+  end;
+end;
+
+function TControllerEntrada.GetDataSet(Objecto: TGenericEntidade;
+                                         Condicao: string;
+                                         Fields: string = ''): TDataset;
+begin
+  result:= inherited;
+end;
+
+function TControllerEntrada.GetMaxEntrada: String;
+begin
+   result := GetSelect('Entrada','0=0','isNull( Max("Codigo"),0)+1 as Max').FieldByName('Max').AsString;
+end;
+
+procedure TControllerEntrada.Inserir(Objecto:TGenericEntidade);
+begin
+  inherited;
+end;
+
+function TControllerEntrada.GetSelect(Tabela, Condicao: string; Fields: string= ''): TDataset;
+begin
+  result := TGenericDAO.GetSelect(Tabela,Condicao, Fields);
+end;
+
+class function TControllerEntrada.GetValue(Tabela, Condicao, Field: string): String;
+begin
+  result := TGenericDAO.GetValue(Tabela,Condicao, Field);
+end;
+
+function TControllerEntrada.SelectEntrada:string;
+begin
+  //FormEntradaListagem:= TFormEntradaListagem.Create(application);
+  //FormEntradaListagem.Showmodal;
+
+  //result:= FormEntradaListagem.Codigo;
+  //FormEntradaListagem.Free;
+
+end;
+
+procedure TControllerEntrada.SetDataSetitems(const Value: TDataSet);
+begin
+  FDataSetitems := Value;
+end;
+
+procedure TControllerEntrada.ExcluirItens(CodigoEntrada: string );
+begin
+  inherited;
+    TGenericDAO.DeleteSQL(TEntidadeFactory.GetNameEntidade(tpItemEntrada) ,
+                         ' CodigoEntrada ='+ CodigoEntrada);
+end;
+
+function TControllerEntrada.ImportarNFe(Arquivo: string): string;
+begin
+  ACBrNFe:= TACBrNFe.create(nil);
+  ACBrNFe.NotasFiscais.Clear;
+  ACBrNFe.NotasFiscais.LoadFromFile( Arquivo );
+
+  ImportarItensNFe;
+end;
+
+function TControllerEntrada.GetValorDesconto: Double;
+begin
+  result:= ACBrNFe.NotasFiscais.Items[0].NFe.Total.ICMSTot.vDesc;
+end;
+
+function TControllerEntrada.GetValorFrete: Double;
+begin
+  result:= ACBrNFe.NotasFiscais.Items[0].NFe.Total.ICMSTot.vFrete;
+end;
+
+function TControllerEntrada.GetValorDocumento: Double;
+begin
+  result:= ACBrNFe.NotasFiscais.Items[0].NFe.Total.ICMSTot.vNF;
+end;
+
+function TControllerEntrada.GetDataEmissao: Tdatetime;
+begin
+  result:= ACBrNFe.NotasFiscais.Items[0].NFe.Ide.dEmi;
+end;
+
+function TControllerEntrada.GetNumeroDocumento: string;
+begin
+  result:= inttostr(ACBrNFe.NotasFiscais.Items[0].NFe.Ide.nNF);
+end;
+
+function TControllerEntrada.GetChaveAcesso: string;
+begin
+  result:= SoNumeros(ACBrNFe.NotasFiscais.Items[0].NFe.infNFe.ID);
+end;
+
+function TControllerEntrada.GetEspecie: string;
+begin
+  result:= '55';
+end;
+
+function TControllerEntrada.GetSerie: string;
+begin
+  result:= SoNumeros(inttostr(ACBrNFe.NotasFiscais.Items[0].NFe.Ide.Serie));
+end;
+
+function TControllerEntrada.GetTipoFrete: integer;
+begin
+  case ACBrNFe.NotasFiscais.Items[0].NFe.Transp.modFrete of
+     mfContaEmitente: result:= 0;
+     mfContaDestinatario: result:= 1;
+     mfContaTerceiros: result:= 2;
+     mfProprioRemetente: result:= 3;
+     mfProprioDestinatario: result:= 4;
+     mfSemFrete: result:= 5;
+  end;
+end;
+
+function TControllerEntrada.GetCodigoFornecedor: string;
+var
+  cpfcnpj: string;
+begin
+   cpfcnpj := ACBrNFe.NotasFiscais.Items[0].NFe.Emit.CNPJCPF;
+   result  := TGenericDAO.GetValue('Pessoa','CPFCNPJ='+ quotedstr( cpfcnpj ),'Codigo');
+end;
+
+function TControllerEntrada.ImportarItensNFe: string;
+var
+  CodigoProduto: string;
+  I:integer;
+  Count: Integer;
+  DescricaoProduto: string;
+  mResult: TModalResult;
+begin
+   with ACBrNFe.NotasFiscais.Items[0].NFe do
+   begin
+      for I := 0 to Det.Count-1 do
+      begin
+         with Det.Items[I] do
+         begin
+            DescricaoProduto:= Prod.xProd;
+            CodigoProduto:= GetValue('Produtos', ' upper(Descricao)  = ' + quotedstr( uppercase( DescricaoProduto)) ,'Codigo');
+            if CodigoProduto = '' then
+            begin
+              application.CreateForm( TFormProdutoListagem, FormProdutoListagem );
+              FormProdutoListagem.lbdescricao.Caption:= DescricaoProduto;
+
+              if Pos( ' ', DescricaoProduto ) > 0 then
+                 DescricaoProduto:=  Copy( DescricaoProduto, 0 , Pos( ' ', DescricaoProduto ) - 1 );
+
+              FormProdutoListagem.srcEntidade.DataSet:= TGenericDAO.GetAll<TProdutos>( TProdutos.Create ,
+                                                       'Descricao LIKE ' + quotedstr( DescricaoProduto +'%'),
+                                                       'Codigo, Descricao');
+              mResult:= FormProdutoListagem.ShowModal;
+
+              if mResult = mrOk then
+              begin
+                CodigoProduto    := FormProdutoListagem.srcEntidade.DataSet.FieldByName('Codigo').AsString;
+                DescricaoProduto := FormProdutoListagem.srcEntidade.DataSet.FieldByName('Descricao').AsString;
+              end;
+              FormProdutoListagem.Close;
+              FormProdutoListagem.Free;
+              FormProdutoListagem := nil;
+
+            end;
+
+            if CodigoProduto = '' then
+            begin
+               TGenericDAO.InsertSQL('Produtos',
+
+                           'CodigoFilial,'+
+                           'Tipo,'+
+                           'Descricao,'+
+                           'CodigoNCM,'+
+                           'CodigoCEST,'+
+                           'CodigoUnidade,'+
+                           'CustoCompra, '+
+                           'Ativo',
+                           '1 , '+
+                           ' ''MATERIAL'' , '+
+                           QuotedStr( Prod.xProd )+','+
+                           ' ( Select Codigo from TabelaNCM where CodigoNCM ='+ quotedstr(Prod.NCM) +')'+','+
+                           QuotedStr( Prod.CEST )+','+
+                           ' ( Select Codigo from UnidadeMedida where Descricao ='+ quotedstr(Prod.uCom) +')'+','+
+                           stringreplace( FloatToStr(Prod.vUnCom), ',','.',[]));
+
+               DescricaoProduto := Prod.xProd;
+               CodigoProduto    := GetValue('Produtos', ' upper(Descricao)  = ' +
+                                   quotedstr( uppercase( DescricaoProduto)) ,'Codigo');
+
+               showmessage( 'Produto "'+ Prod.xProd +'" cadastrado com sucesso!');
+            end;
+
+            FDataSetitems.append;
+
+            Count := FDataSetitems.RecordCount + 1;
+
+            FDataSetitems.fieldByName('Ordem').Value            := Count;
+            FDataSetitems.fieldByName('Codigo').readonly        := false;
+            FDataSetitems.fieldByName('Codigo').Value           := Count;
+            FDataSetitems.fieldByName('CodigoFilial').asstring  := '1';
+            FDataSetitems.fieldByName('CodigoProduto').asstring := CodigoProduto;
+            FDataSetitems.fieldByName('CodigoEstoque').asstring := '1';
+            FDataSetitems.fieldByName('Quantidade').asstring    := FloatToStr(Prod.qCom);
+            FDataSetitems.fieldByName('Valor').asstring         := FloatToStr(Prod.vUnCom);
+            FDataSetitems.fieldByName('Desconto').asstring      := FloatToStr(Prod.vDesc);
+            FDataSetitems.fieldByName('Total').asstring         := FloatToStr(Prod.vProd);
+            FDataSetitems.fieldByName('CFOP').asstring          := '1403';
+            FDataSetitems.fieldByName('Descricao').asstring     := DescricaoProduto;
+            FDataSetitems.fieldByName('Fator').asstring         := '1';
+
+            FDataSetitems.fieldByName('BaseICMS').asstring      := FloatToStr(Imposto.ICMS.vBC);
+            FDataSetitems.fieldByName('BaseIPI').asstring       := FloatToStr(Imposto.IPI.vBC);
+            FDataSetitems.fieldByName('BasePIS').asstring       := FloatToStr(Imposto.PIS.vBC);
+            FDataSetitems.fieldByName('BaseCOFINS').asstring    := FloatToStr(Imposto.COFINS.vBC);
+
+            FDataSetitems.fieldByName('ValorICMS').asstring     := FloatToStr(Imposto.ICMS.vICMS);
+            FDataSetitems.fieldByName('ValorIPI').asstring      := FloatToStr(Imposto.IPI.vIPI);
+            FDataSetitems.fieldByName('ValorPIS').asstring      := FloatToStr(Imposto.PIS.vPIS);
+            FDataSetitems.fieldByName('ValorCOFINS').asstring   := FloatToStr(Imposto.COFINS.vCOFINS);
+
+            FDataSetitems.fieldByName('PercentualICMS').asstring     := FloatToStr(Imposto.ICMS.pICMS);
+            FDataSetitems.fieldByName('PercentualIPI').asstring      := FloatToStr(Imposto.IPI.pIPI);
+            FDataSetitems.fieldByName('PercentualPIS').asstring      := FloatToStr(Imposto.PIS.pPIS);
+            FDataSetitems.fieldByName('PercentualCOFINS').asstring   := FloatToStr(Imposto.COFINS.pCOFINS);
+
+            FDataSetitems.fieldByName('CST').asstring        := CSTICMSToString(Imposto.ICMS.CST);
+            FDataSetitems.fieldByName('CSTIPI').asstring        := CSTIPIToString(Imposto.IPI.CST);
+            FDataSetitems.fieldByName('CSTPIS').asstring        := CSTPISToString(Imposto.PIS.CST);
+            FDataSetitems.fieldByName('CSTCOFINS').asstring     := CSTCOFINSToString(Imposto.COFINS.CST);
+
+            FDataSetitems.post;
+
+         end;
+      end;
+   end;
+end;
+
+function TControllerEntrada.CSTICMSToString( prsCst :TpcnCSTIcms ) : string;
+var cst : string;
+begin
+   if prsCst = cst00 then
+      cst := '00'
+   Else if prsCst = cst10 then
+      cst := '10'
+   Else if prsCst = cst20 then
+      cst := '20'
+   Else if prsCst =cst30  then
+      cst := '30'
+   Else if prsCst = cst40 then
+      cst := '40'
+   Else if prsCst = cst41  then
+      cst := '41'
+   Else if prsCst = cst45  then
+      cst := '45'
+   Else if prsCst =  cst50 then
+      cst := '50'
+   Else if prsCst = cst51 then
+      cst := '51'
+   Else if prsCst = cst60 then
+      cst := '60'
+   Else if prsCst = cst70  then
+      cst := '70'
+   Else if prsCst = cst80  then
+      cst := '80'
+   Else if prsCst = cst81 then
+      cst := '81'
+   Else
+      cst := '90';
+
+   Result := cst;
+
+end;
+
+function TControllerEntrada.CSTIPIToString( prsCst :TpcnCstIpi ) : string;
+var cst : string;
+begin
+   case prsCst of
+     ipi00: cst:= '00';
+     ipi49: cst:= '49';
+     ipi50: cst:= '50';
+     ipi99: cst:= '99';
+     ipi01: cst:= '01';
+     ipi02: cst:= '02';
+     ipi03: cst:= '03';
+     ipi04: cst:= '04';
+     ipi05: cst:= '05';
+     ipi51: cst:= '51';
+     ipi52: cst:= '52';
+     ipi53: cst:= '53';
+     ipi54: cst:= '54';
+     ipi55: cst:= '55';
+   end;
+    Result := cst;
+end;
+
+function TControllerEntrada.CSTPisToString( prsCst :TpcnCstPis ) : string;
+var cst : string;
+begin
+   case prsCst of
+     pis01: cst:= '01';
+     pis02: cst:= '02';
+     pis03: cst:= '03';
+     pis04: cst:= '04';
+     pis05: cst:= '05';
+     pis06: cst:= '06';
+     pis07: cst:= '07';
+     pis08: cst:= '08';
+     pis09: cst:= '09';
+     pis49: cst:= '49';
+     pis50: cst:= '50';
+     pis51: cst:= '51';
+     pis52: cst:= '52';
+     pis53: cst:= '53';
+     pis54: cst:= '54';
+     pis55: cst:= '55';
+     pis56: cst:= '56';
+     pis60: cst:= '60';
+     pis61: cst:= '61';
+     pis62: cst:= '62';
+     pis63: cst:= '63';
+     pis64: cst:= '64';
+     pis65: cst:= '65';
+     pis66: cst:= '66';
+     pis67: cst:= '67';
+     pis70: cst:= '70';
+     pis71: cst:= '71';
+     pis72: cst:= '72';
+     pis73: cst:= '73';
+     pis74: cst:= '74';
+     pis75: cst:= '75';
+     pis98: cst:= '98';
+     pis99: cst:= '99';
+   end;
+    Result := cst;
+end;
+
+
+function TControllerEntrada.CSTCofinsToString( prsCst :TpcnCstCofins ) : string;
+var cst : string;
+begin
+   case prsCst of
+     cof01: cst:= '01';
+     cof02: cst:= '02';
+     cof03: cst:= '03';
+     cof04: cst:= '04';
+     cof05: cst:= '05';
+     cof06: cst:= '06';
+     cof07: cst:= '07';
+     cof08: cst:= '08';
+     cof09: cst:= '09';
+     cof49: cst:= '49';
+     cof50: cst:= '50';
+     cof51: cst:= '51';
+     cof52: cst:= '52';
+     cof53: cst:= '53';
+     cof54: cst:= '54';
+     cof55: cst:= '55';
+     cof56: cst:= '56';
+     cof60: cst:= '60';
+     cof61: cst:= '61';
+     cof62: cst:= '62';
+     cof63: cst:= '63';
+     cof64: cst:= '64';
+     cof65: cst:= '65';
+     cof66: cst:= '66';
+     cof67: cst:= '67';
+     cof70: cst:= '70';
+     cof71: cst:= '71';
+     cof72: cst:= '72';
+     cof73: cst:= '73';
+     cof74: cst:= '74';
+     cof75: cst:= '75';
+     cof98: cst:= '98';
+     cof99: cst:= '99';
+   end;
+     Result := cst;
+end;
+ //TpcnCstIpi = (ipi00, ipi49, ipi50, ipi99, ipi01, ipi02, ipi03, ipi04, ipi05, ipi51, ipi52, ipi53, ipi54, ipi55);
+
+
+end.

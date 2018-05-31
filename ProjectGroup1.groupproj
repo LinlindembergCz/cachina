@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{C81F1836-F9F5-4FB3-BFA9-75BA597211D6}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Cachina.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Servidor\ServidorSistema.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Cachina">
+        <MSBuild Projects="Cachina.dproj"/>
+    </Target>
+    <Target Name="Cachina:Clean">
+        <MSBuild Projects="Cachina.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Cachina:Make">
+        <MSBuild Projects="Cachina.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ServidorSistema">
+        <MSBuild Projects="Servidor\ServidorSistema.dproj"/>
+    </Target>
+    <Target Name="ServidorSistema:Clean">
+        <MSBuild Projects="Servidor\ServidorSistema.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ServidorSistema:Make">
+        <MSBuild Projects="Servidor\ServidorSistema.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Cachina;ServidorSistema"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Cachina:Clean;ServidorSistema:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Cachina:Make;ServidorSistema:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

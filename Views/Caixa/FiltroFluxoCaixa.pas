@@ -1,0 +1,53 @@
+unit FiltroFluxoCaixa;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.DBCtrls,
+  Vcl.ComCtrls, DateUtils, Vcl.ExtCtrls;
+
+type
+  TFormFiltroFluxoCaixa = class(TForm)
+    GroupBox1: TGroupBox;
+    dateFim: TDateTimePicker;
+    dateInicio: TDateTimePicker;
+    Label1: TLabel;
+    Label2: TLabel;
+    cboCodigoCaixa: TDBLookupComboBox;
+    Label3: TLabel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    RadioGroup1: TRadioGroup;
+    procedure FormCreate(Sender: TObject);
+    procedure RadioGroup1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormFiltroFluxoCaixa: TFormFiltroFluxoCaixa;
+
+implementation
+
+{$R *.dfm}
+
+uses DBUtils, EntidadeFactory;
+
+procedure TFormFiltroFluxoCaixa.FormCreate(Sender: TObject);
+begin
+   FillLookUpCombobox( tpCaixa, cboCodigoCaixa);
+end;
+
+procedure TFormFiltroFluxoCaixa.RadioGroup1Click(Sender: TObject);
+begin
+  dateInicio.Date := strtodate('01/'+ inttostr(RadioGroup1.ItemIndex + 1)+'/'+ inttostr(yearOf(date)));
+  if RadioGroup1.ItemIndex < 11 then
+     dateFim.Date := strtodate('01/'+ inttostr(RadioGroup1.ItemIndex + 2) +'/'+ inttostr(yearOf(date)))-1
+  else
+    dateFim.Date := strtodate('31/'+ inttostr(RadioGroup1.ItemIndex + 1) +'/'+ inttostr(yearOf(date)));
+end;
+
+end.

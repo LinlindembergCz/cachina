@@ -1,0 +1,54 @@
+unit TipoAgendamentoDetalhes;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
+  TemplateDetalhesComTabGrid, System.Rtti, Data.Bind.EngExt, Fmx.Bind.DBEngExt,
+  Fmx.Bind.Grid, System.Bindings.Outputs, Fmx.Bind.Editors,
+  Data.Bind.Components, Data.Bind.DBScope, Data.Bind.Grid, Data.DB, FMX.Layouts,
+  FMX.Grid, FMX.TabControl, FMX.Ani, FMX.Edit, FMX.ListBox;
+
+type
+  TFormTipoAgendamentoDetalhes = class(TTemplateFormComTabGridDetalhes)
+    lbDescricao: TLabel;
+    edtDescricao: TEdit;
+    Label1: TLabel;
+    edtQuantidadeSessoes: TEdit;
+    Label2: TLabel;
+    cboCodigoConvenio: TComboBox;
+    Label3: TLabel;
+    edtValor: TNumberBox;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormTipoAgendamentoDetalhes: TFormTipoAgendamentoDetalhes;
+
+implementation
+
+{$R *.fmx}
+
+uses ControllerTabelas, EntidadeFactory, DBUtils;
+
+procedure TFormTipoAgendamentoDetalhes.FormCreate(Sender: TObject);
+begin
+  Controller := TControllertabelas.Create;
+  Entidade   := TEntidadeFactory.Criar(tpTipoAgendamento);
+  inherited;
+  CampoCodigo:= '"Codigo"';
+  with MapperEntidade do
+  begin
+    associar('Codigo', nil);
+    associar('Descricao', edtDescricao);
+    associar('QuantidadeSessoes', edtQuantidadeSessoes);
+  end;
+  FillCombobox(tpConvenio,cboCodigoConvenio);
+end;
+
+end.

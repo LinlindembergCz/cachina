@@ -1,0 +1,89 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, RTTI, Data.DB,
+  Datasnap.DBClient, Vcl.Grids, Vcl.DBGrids, GenericEntidade;
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+    Nome: TEdit;
+    Button2: TButton;
+    DBGrid1: TDBGrid;
+    DataSource1: TDataSource;
+    Button3: TButton;
+    Button4: TButton;
+    Button5: TButton;
+    CPF: TEdit;
+    Endereco: TEdit;
+    Button6: TButton;
+    ClientDataSet1: TClientDataSet;
+    ClientDataSet1Nome: TStringField;
+    ClientDataSet1CPF: TStringField;
+    ClientDataSet1Endereco: TStringField;
+    procedure Button2Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+      Entidade  : TGenericEntidade;
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+uses Mapper, Factory;
+
+{ TPessoa }
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  TMapper.Send_ObjectToComponent(self , Entidade );
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+  Entidade  := TFactory.CriarCliente;
+  TMapper.Send_ComponentToObject(self , Entidade );
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+   TMapper.Send_DataSetToComponent(self , ClientDataSet1 );
+end;
+
+procedure TForm1.Button4Click(Sender: TObject);
+begin
+  TMapper.Send_ObjectToDataSet(ClientDataSet1 , Entidade );
+  ClientDataSet1.post;
+end;
+
+procedure TForm1.Button5Click(Sender: TObject);
+begin
+  TMapper.Parser_SQLInsert( Entidade );
+end;
+
+procedure TForm1.Button6Click(Sender: TObject);
+begin
+  TMapper.Send_DataSetToObject(ClientDataSet1 , Entidade );
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+ClientDataSet1.CreateDataSet;
+end;
+
+end.

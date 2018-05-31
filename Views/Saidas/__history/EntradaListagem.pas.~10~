@@ -1,0 +1,93 @@
+unit EntradaListagem;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, TemplateListagemBase, Data.DB,
+  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls;
+
+type
+  TFormEntradaListagem = class(TTemplateFormListagemBase)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    SpeedButton3: TSpeedButton;
+    Label4: TLabel;
+    edtPlaca: TEdit;
+    dateInicio: TDateTimePicker;
+    dateFim: TDateTimePicker;
+    edtFornecedor: TEdit;
+    procedure FormCreate(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+  private
+    Fcodigo: string;
+    procedure Setcodigo(const Value: string);
+    { Private declarations }
+  public
+    { Public declarations }
+    Operacao: string;
+    property codigo:string read Fcodigo write Setcodigo;
+  end;
+
+var
+  FormEntradaListagem: TFormEntradaListagem;
+
+implementation
+
+uses
+EntidadeFactory, ControllerEntrada;
+
+{$R *.dfm}
+
+{ TTemplateFormListagemBase1 }
+
+procedure TFormEntradaListagem.FormCreate(Sender: TObject);
+var
+  Controller: TControllerEntrada;
+begin
+  inherited;
+  Controller:= TControllerEntrada.Create;
+  srcEntidade.DataSet:= Controller.GetSelect(
+                        ControllerEntrada.ConsultaTabela,
+                       '0=0',
+                        ControllerEntrada.CamposEntrada);
+  Controller.Free;
+
+end;
+
+procedure TFormEntradaListagem.Setcodigo(const Value: string);
+begin
+  Fcodigo := Value;
+end;
+
+procedure TFormEntradaListagem.SpeedButton3Click(Sender: TObject);
+var
+  Condicao: string;
+  Controller: TControllerEntrada;
+begin
+  Controller:= TControllerEntrada.Create;
+  inherited;
+  Condicao:= '0=0';
+
+  if edtPlaca.Text <> ''    then
+     Condicao:= Condicao + ' and NumeroDocumento='+ quotedstr(edtPlaca.Text);
+
+  if datetostr(dateInicio.Date) <> '' then
+     Condicao:= Condicao + ' and Data >='+ quotedstr( formatDatetime('DD/MM/YYYY', dateInicio.date) );
+
+  if datetostr(dateFim.Date) <> '' then
+     Condicao:= Condicao + ' and Data <='+ quotedstr( formatDatetime('DD/MM/YYYY', dateFim.date) );
+
+  if edtFornecedor.Text <> ''  then
+     Condicao:= Condicao + ' and forn.Nome Like '+ quotedstr( '%'+ edtFornecedor.Text +'%' );
+
+  srcEntidade.DataSet:= Controller.GetSelect(
+                        ControllerEntrada.ConsultaTabela,
+                        Condicao,
+                        CamposEntrada);
+  Controller.Free;
+
+end;
+
+end.

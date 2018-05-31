@@ -1,0 +1,91 @@
+unit FormaPagamento;
+
+interface
+
+uses
+   CAtribEntity,  GenericEntidade;
+
+Type
+  [TableName('FormaPagamento')]
+  TFormaPagamento = class(TGenericEntidade)
+  private
+    FPercentualDesconto: Double;
+    FPercentualTaxaAdmin: Double;
+    FNumeroParcelas: integer;
+    FDescricao: string;
+    FCodigo: integer;
+    FCodigoFilial: integer;
+    FBaixaAutomatica: string;
+    FPadrao: string;
+    procedure SetCodigo(const Value: integer);
+    procedure SetCodigoFilial(const Value: integer);
+    procedure SetDescricao(const Value: string);
+    procedure SetNumeroParcelas(const Value: integer);
+    procedure SetPercentualDesconto(const Value: Double);
+    procedure SetPercentualTaxaAdmin(const Value: Double);
+    procedure SetBaixaAutomatica(const Value: string);
+    procedure SetPadrao(const Value: string);
+  public
+    [KeyField('Codigo')]
+    property  Codigo: integer read FCodigo write SetCodigo;
+    [FieldName('CodigoFilial')]
+    property  CodigoFilial: integer read FCodigoFilial write SetCodigoFilial;
+    [FieldName('Descricao')]
+    property  Descricao: string read FDescricao write SetDescricao;
+    [FieldName('NumeroParcelas')]
+   	property  NumeroParcelas:integer read FNumeroParcelas write SetNumeroParcelas;
+    [FieldName('PercentualDesconto')]
+  	property  PercentualDesconto: Double read FPercentualDesconto write SetPercentualDesconto;
+    [FieldName('PercentualTaxaAdmin')]
+  	property  PercentualTaxaAdmin: Double read FPercentualTaxaAdmin write SetPercentualTaxaAdmin;
+    [FieldName('BaixaAutomatica')]
+    property BaixaAutomatica: string read FBaixaAutomatica write SetBaixaAutomatica;
+    [FieldName('Padrao')]
+    property Padrao: string read FPadrao write SetPadrao;
+  end;
+
+implementation
+
+{ TFormaPagamento }
+
+procedure TFormaPagamento.SetBaixaAutomatica(const Value: string);
+begin
+  FBaixaAutomatica := Value;
+end;
+
+procedure TFormaPagamento.SetCodigo(const Value: integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TFormaPagamento.SetCodigoFilial(const Value: integer);
+begin
+  FCodigoFilial := Value;
+end;
+
+procedure TFormaPagamento.SetDescricao(const Value: string);
+begin
+  FDescricao := Value;
+end;
+
+procedure TFormaPagamento.SetNumeroParcelas(const Value: integer);
+begin
+  FNumeroParcelas := Value;
+end;
+
+procedure TFormaPagamento.SetPadrao(const Value: string);
+begin
+  FPadrao := Value;
+end;
+
+procedure TFormaPagamento.SetPercentualDesconto(const Value: Double);
+begin
+  FPercentualDesconto := Value;
+end;
+
+procedure TFormaPagamento.SetPercentualTaxaAdmin(const Value: Double);
+begin
+  FPercentualTaxaAdmin := Value;
+end;
+
+end.

@@ -1,0 +1,53 @@
+unit EmpresaDetalhes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, TemplateDetalhesComTabGrid, Data.DB,
+  Vcl.Buttons, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TFormEmpresaDetalhes = class(TTemplateFormComTabGridDetalhes)
+    lbRazaoSocial: TLabel;
+    edtRazaoSocial: TEdit;
+    lbNome: TLabel;
+    edtNome: TEdit;
+    lbCNPJ: TLabel;
+    edtCNPJ: TEdit;
+    lbInscricaoEstadual: TLabel;
+    edtInscricaoEstadual: TEdit;
+    lbIncricaoMunicipal: TLabel;
+    edtIncricaoMunicipal: TEdit;
+    edtEndereco: TEdit;
+    edtBairro: TEdit;
+    edtCidade: TEdit;
+    edtUF: TEdit;
+    edtComplemento: TEdit;
+    edtCEP: TEdit;
+    edtTelefone: TEdit;
+    edtEmail: TEdit;
+    edtSite: TEdit;
+    lbSite: TLabel;
+    lbEmail: TLabel;
+    lbTelefone: TLabel;
+    lbCEP: TLabel;
+    lbComplemento: TLabel;
+    lbUF: TLabel;
+    lbCidade: TLabel;
+    lbBairro: TLabel;
+    lbEndereco: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormEmpresaDetalhes: TFormEmpresaDetalhes;
+
+implementation
+
+{$R *.dfm}
+
+end.

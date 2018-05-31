@@ -1,0 +1,141 @@
+unit Caixa;
+
+interface
+
+uses
+ CAtribEntity,  GenericEntidade;
+
+type
+  [TableName('Caixa')]
+  [Modulo('8')]
+  TCaixa = class(TGenericEntidade)
+  private
+    FDescricao: string;
+    FCodigo: Integer;
+    FCodigoFilial: Integer;
+    FStatus: string;
+    FValorSaldo: Double;
+    FTaxa: string;
+    FCendente: string;
+    FNossoNumero: string;
+    FCodigoBanco: string;
+    FConta: string;
+    FCarteira: string;
+    FAgencia: string;
+    FDigito: string;
+    procedure SetCodigo(const Value: Integer);
+    procedure SetCodigoFilial(const Value: Integer);
+    procedure SetDescricao(const Value: string);
+    procedure SetStatus(const Value: string);
+    procedure SetValorSaldo(const Value: Double);
+    procedure SetAgencia(const Value: string);
+    procedure SetCarteira(const Value: string);
+    procedure SetCendente(const Value: string);
+    procedure SetCodigoBanco(const Value: string);
+    procedure SetConta(const Value: string);
+    procedure SetDigito(const Value: string);
+    procedure SetNossoNumero(const Value: string);
+    procedure SetTaxa(const Value: string);
+public
+  [KeyField('Codigo')]
+  property Codigo: Integer read FCodigo write SetCodigo;
+  [FieldName('CodigoFilial')]
+  property CodigoFilial: Integer read FCodigoFilial write SetCodigoFilial;
+  [FieldName('Descricao')]
+  property Descricao: string read FDescricao write SetDescricao;
+  [FieldName('ValorSaldo')]
+  property ValorSaldo: Double read FValorSaldo write SetValorSaldo;
+  [FieldName('Status')]
+  property Status: string read FStatus write SetStatus;
+  [FieldName('CodigoBanco')]
+  property CodigoBanco : string read FCodigoBanco write SetCodigoBanco;
+  [FieldName('Cendente')]
+	property Cendente  : string read FCendente write SetCendente;
+  [FieldName('Carteira')]
+	property Carteira  : string read FCarteira write SetCarteira;
+  [FieldName('NossoNumero')]
+	property NossoNumero   : string read FNossoNumero write SetNossoNumero;
+  [FieldName('Agencia')]
+	property Agencia  : string read FAgencia write SetAgencia;
+  [FieldName('Conta')]
+	property Conta  : string read FConta write SetConta;
+  [FieldName('Digito')]
+	property Digito : string read FDigito write SetDigito;
+  [FieldName('Taxa')]
+	property Taxa : string read FTaxa write SetTaxa;
+
+
+
+end;
+
+implementation
+
+{ TCaixa }
+
+procedure TCaixa.SetAgencia(const Value: string);
+begin
+  FAgencia := Value;
+end;
+
+procedure TCaixa.SetCarteira(const Value: string);
+begin
+  FCarteira := Value;
+end;
+
+procedure TCaixa.SetCendente(const Value: string);
+begin
+  FCendente := Value;
+end;
+
+procedure TCaixa.SetCodigo(const Value: Integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TCaixa.SetCodigoBanco(const Value: string);
+begin
+  FCodigoBanco := Value;
+end;
+
+procedure TCaixa.SetCodigoFilial(const Value: Integer);
+begin
+  FCodigoFilial := Value;
+end;
+
+procedure TCaixa.SetConta(const Value: string);
+begin
+  FConta := Value;
+end;
+
+procedure TCaixa.SetDescricao(const Value: string);
+begin
+  FDescricao := Value;
+end;
+
+procedure TCaixa.SetDigito(const Value: string);
+begin
+  FDigito := Value;
+end;
+
+procedure TCaixa.SetNossoNumero(const Value: string);
+begin
+  FNossoNumero := Value;
+end;
+
+procedure TCaixa.SetStatus(const Value: string);
+begin
+  FStatus := Value;
+end;
+
+procedure TCaixa.SetTaxa(const Value: string);
+begin
+  FTaxa := Value;
+end;
+
+procedure TCaixa.SetValorSaldo(const Value: Double);
+begin
+  FValorSaldo := Value;
+end;
+
+End.
+

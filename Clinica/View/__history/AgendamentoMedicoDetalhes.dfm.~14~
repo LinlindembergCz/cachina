@@ -1,0 +1,284 @@
+inherited FormAgendamentoMedicosDetalhes: TFormAgendamentoMedicosDetalhes
+  ClientHeight = 516
+  ClientWidth = 1022
+  ExplicitWidth = 1038
+  ExplicitHeight = 554
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 1022
+    Height = 454
+    ExplicitWidth = 1022
+    ExplicitHeight = 454
+    inherited Panel3: TPanel
+      Width = 1020
+      ExplicitWidth = 1020
+      inherited lbData: TLabel
+        Left = 612
+        ExplicitLeft = 612
+      end
+      inherited chkMes: TCheckBox
+        Left = 916
+        ExplicitLeft = 916
+      end
+      inherited cboEspecialista: TComboBox
+        Width = 136
+        ExplicitWidth = 136
+      end
+    end
+    inherited pnlAgenda: TPanel
+      Width = 1020
+      Height = 233
+      ExplicitWidth = 1020
+      ExplicitHeight = 233
+      inherited Label3: TLabel
+        Top = 154
+        ExplicitTop = 154
+      end
+      inherited Label2: TLabel
+        Top = 182
+        ExplicitTop = 182
+      end
+      inherited Label4: TLabel
+        Top = 128
+        ExplicitTop = 128
+      end
+      inherited lbNomePaciente: TLabel
+        Top = 41
+        ExplicitTop = 41
+      end
+      inherited lbCodigoTipoAgendamento: TLabel
+        Top = 100
+        ExplicitTop = 100
+      end
+      inherited lbCodigoConvenio: TLabel
+        Top = 72
+        ExplicitTop = 72
+      end
+      inherited SpeedButton2: TSpeedButton
+        Left = 230
+        Top = 65
+        ExplicitLeft = 224
+        ExplicitTop = 65
+      end
+      inherited SpeedButton3: TSpeedButton
+        Left = 230
+        Top = 93
+        ExplicitLeft = 224
+        ExplicitTop = 93
+      end
+      inherited SpeedButton1: TSpeedButton
+        Left = 230
+        Top = 36
+        ExplicitLeft = 224
+        ExplicitTop = 36
+      end
+      inherited SpeedButton4: TSpeedButton
+        Left = 230
+        Top = 122
+        ExplicitLeft = 224
+        ExplicitTop = 122
+      end
+      inherited Label1: TLabel
+        Top = 208
+        ExplicitTop = 208
+      end
+      object Label5: TLabel [11]
+        Left = 3
+        Top = 11
+        Width = 46
+        Height = 13
+        Caption = 'Unidade'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object SpeedButton5: TSpeedButton [12]
+        Left = 230
+        Top = 5
+        Width = 24
+        Height = 22
+        Anchors = [akTop, akRight]
+        Caption = '...'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        OnClick = SpeedButton5Click
+        ExplicitLeft = 224
+      end
+      inherited dateData: TMonthCalendar
+        Left = 461
+        Height = 174
+        Date = 41722.594272430560000000
+        ExplicitLeft = 461
+        ExplicitHeight = 174
+      end
+      inherited rdgHora: TRadioGroup
+        Left = 260
+        Height = 174
+        ExplicitLeft = 260
+        ExplicitHeight = 174
+      end
+      inherited cboEncaminhado: TComboBox
+        Top = 149
+        Width = 136
+        ExplicitTop = 149
+        ExplicitWidth = 136
+      end
+      inherited cboSituacao: TComboBox
+        Top = 176
+        Width = 136
+        ExplicitTop = 176
+        ExplicitWidth = 136
+      end
+      inherited cboTabelaCID: TComboBox
+        Top = 122
+        Width = 136
+        ExplicitTop = 122
+        ExplicitWidth = 136
+      end
+      inherited cboCodigoTipoAgendamento: TComboBox
+        Top = 93
+        Width = 136
+        ExplicitTop = 93
+        ExplicitWidth = 136
+      end
+      inherited cboCodigoConvenio: TComboBox
+        Top = 65
+        Width = 136
+        ExplicitTop = 65
+        ExplicitWidth = 136
+      end
+      inherited GroupBox1: TGroupBox
+        Left = 726
+        Height = 226
+        ExplicitLeft = 726
+        ExplicitHeight = 226
+        inherited DBGrid1: TDBGrid
+          Height = 192
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'Data'
+              Width = 129
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Hora'
+              Width = 43
+              Visible = True
+            end>
+        end
+      end
+      inherited cboPaciente: TComboBox
+        Top = 36
+        Width = 136
+        ExplicitTop = 36
+        ExplicitWidth = 136
+      end
+      inherited edtAutorizacao: TEdit
+        Left = 89
+        Top = 202
+        Width = 135
+        ExplicitLeft = 89
+        ExplicitTop = 202
+        ExplicitWidth = 135
+      end
+      object cboCodigoHospital: TComboBox
+        Left = 89
+        Top = 6
+        Width = 136
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        DropDownCount = 16
+        TabOrder = 10
+      end
+    end
+    inherited StringGrid1: TDBGrid
+      Top = 265
+      Width = 1020
+      Height = 188
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'Codigo'
+          Width = 53
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Hora'
+          Width = 42
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Paciente'
+          Width = 327
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DescricaoConvenio'
+          Title.Caption = 'Conv'#234'nio'
+          Width = 77
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DescricaoTipoAgendamento'
+          Title.Caption = 'Procedimento'
+          Width = 217
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TabelaCID'
+          Title.Caption = 'CID'
+          Width = 209
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'QuantidadeSessoes'
+          Title.Caption = 'Sessoes'
+          Width = 49
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DataPagamento'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Valor'
+          Visible = True
+        end>
+    end
+  end
+  inherited Panel2: TPanel
+    Width = 1022
+    ExplicitWidth = 1022
+    inherited btnSair: TSpeedButton
+      Left = 950
+      ExplicitLeft = 950
+    end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 503
+    Width = 1022
+    ExplicitTop = 503
+    ExplicitWidth = 1022
+  end
+  inherited srcEntidade: TDataSource
+    Left = 448
+  end
+end

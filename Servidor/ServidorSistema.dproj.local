@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2012/01/29 22:17:59.000.632,=C:\Users\berg\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2012/02/25 17:15:28.000.538,=C:\Users\berg\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013/11/06 09:37:30.000.593,=C:\Users\berg\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2014/02/24 22:04:30.000.956,=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/03/01 07:32:42.000.916,=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/03/06 11:16:40.000.490,=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/03/07 16:22:52.000.450,=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/03/15 10:07:37.000.696,=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/03/15 10:20:37.000.208,=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/03/21 11:21:00.000.900,=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/04/25 10:46:13.000.837,=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/05/27 11:26:22.000.019,=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/06/19 20:32:07.000.364,=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/06/20 20:47:14.000.362,=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/07/14 19:06:02.000.989,=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/07/14 19:22:14.000.662,=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/07/15 10:01:32.000.612,=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/07/16 14:28:45.000.270,=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/08/13 10:38:38.000.069,=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/08/13 10:38:38.000.173,=C:\Users\berg\Documents\RAD Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2014/08/13 10:38:38.000.243,=C:\Users\berg\Documents\RAD Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2014/08/13 10:39:49.000.700,C:\Users\berg\Google Drive\Supremo\Sistema\Servidor\ServerContainerUnit1.pas=C:\Users\berg\Documents\RAD Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2014/08/13 10:39:49.000.700,C:\Users\berg\Google Drive\Supremo\Sistema\Servidor\ServerContainerUnit1.dfm=C:\Users\berg\Documents\RAD Studio\Projects\ServerContainerUnit1.dfm</Transaction>
+    <Transaction>2014/08/13 10:39:53.000.418,C:\Users\berg\Google Drive\Supremo\Sistema\Servidor\ServerMethodsUnit1.pas=C:\Users\berg\Documents\RAD Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2014/08/13 10:39:53.000.418,C:\Users\berg\Google Drive\Supremo\Sistema\Servidor\ServerMethodsUnit1.dfm=C:\Users\berg\Documents\RAD Studio\Projects\ServerMethodsUnit1.dfm</Transaction>
+    <Transaction>2014/08/13 10:39:58.000.368,C:\Users\berg\Google Drive\Supremo\Sistema\Servidor\ServidorDataSnap.pas=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2014/08/13 10:39:58.000.368,C:\Users\berg\Google Drive\Supremo\Sistema\Servidor\ServidorDataSnap.dfm=C:\Users\berg\Documents\RAD Studio\Projects\Unit2.dfm</Transaction>
+    <Transaction>2014/08/13 10:40:02.000.695,C:\Users\berg\Google Drive\Supremo\Sistema\Servidor\ServidorSistema.dproj=C:\Users\berg\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

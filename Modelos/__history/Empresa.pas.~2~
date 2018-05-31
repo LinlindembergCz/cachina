@@ -1,0 +1,156 @@
+unit Empresa;
+
+interface
+
+uses
+ CAtribEntity,  GenericEntidade;
+
+type
+  [TableName('Empresa')]
+  [Modulo('0')]
+  TEmpresa = class(TGenericEntidade)
+  private
+    FCNPJ: string;
+    FSite: string;
+    FEmail: string;
+    FBairro: string;
+    FUF: string;
+    FCodigo: Integer;
+    FCEP: string;
+    FRazaoSocial: string;
+    FComplemento: string;
+    FIncricaoMunicipal: string;
+    FInscricaoEstadual: string;
+    FNome: string;
+    FCidade: string;
+    FEndereco: string;
+    FTelefone: string;
+    procedure SetBairro(const Value: string);
+    procedure SetCEP(const Value: string);
+    procedure SetCidade(const Value: string);
+    procedure SetCNPJ(const Value: string);
+    procedure SetCodigo(const Value: Integer);
+    procedure SetComplemento(const Value: string);
+    procedure SetEmail(const Value: string);
+    procedure SetEndereco(const Value: string);
+    procedure SetIncricaoMunicipal(const Value: string);
+    procedure SetInscricaoEstadual(const Value: string);
+    procedure SetNome(const Value: string);
+    procedure SetRazaoSocial(const Value: string);
+    procedure SetSite(const Value: string);
+    procedure SetTelefone(const Value: string);
+    procedure SetUF(const Value: string);
+public
+  [KeyField('Codigo')]
+  property Codigo: Integer read FCodigo write SetCodigo;
+  [FieldName('RazaoSocial')]
+  property RazaoSocial: string read FRazaoSocial write SetRazaoSocial;
+  [FieldName('Nome')]
+  property Nome: string read FNome write SetNome;
+  [FieldName('CNPJ')]
+  property CNPJ: string read FCNPJ write SetCNPJ;
+  [FieldName('InscricaoEstadual')]
+  property InscricaoEstadual: string read FInscricaoEstadual write SetInscricaoEstadual;
+  [FieldName('IncricaoMunicipal')]
+  property IncricaoMunicipal: string read FIncricaoMunicipal write SetIncricaoMunicipal;
+  [FieldName('Endereco')]
+  property Endereco: string read FEndereco write SetEndereco;
+  [FieldName('Bairro')]
+  property Bairro: string read FBairro write SetBairro;
+  [FieldName('Cidade')]
+  property Cidade: string read FCidade write SetCidade;
+  [FieldName('UF')]
+  property UF: string read FUF write SetUF;
+  [FieldName('Complemento')]
+  property Complemento: string read FComplemento write SetComplemento;
+  [FieldName('CEP')]
+  property CEP: string read FCEP write SetCEP;
+  [FieldName('Telefone')]
+  property Telefone: string read FTelefone write SetTelefone;
+  [FieldName('Email')]
+  property Email: string read FEmail write SetEmail;
+  [FieldName('Site')]
+  property Site: string read FSite write SetSite;
+end;
+
+implementation
+
+{ TEmpresa }
+
+procedure TEmpresa.SetBairro(const Value: string);
+begin
+  FBairro := Value;
+end;
+
+procedure TEmpresa.SetCEP(const Value: string);
+begin
+  FCEP := Value;
+end;
+
+procedure TEmpresa.SetCidade(const Value: string);
+begin
+  FCidade := Value;
+end;
+
+procedure TEmpresa.SetCNPJ(const Value: string);
+begin
+  FCNPJ := Value;
+end;
+
+procedure TEmpresa.SetCodigo(const Value: Integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TEmpresa.SetComplemento(const Value: string);
+begin
+  FComplemento := Value;
+end;
+
+procedure TEmpresa.SetEmail(const Value: string);
+begin
+  FEmail := Value;
+end;
+
+procedure TEmpresa.SetEndereco(const Value: string);
+begin
+  FEndereco := Value;
+end;
+
+procedure TEmpresa.SetIncricaoMunicipal(const Value: string);
+begin
+  FIncricaoMunicipal := Value;
+end;
+
+procedure TEmpresa.SetInscricaoEstadual(const Value: string);
+begin
+  FInscricaoEstadual := Value;
+end;
+
+procedure TEmpresa.SetNome(const Value: string);
+begin
+  FNome := Value;
+end;
+
+procedure TEmpresa.SetRazaoSocial(const Value: string);
+begin
+  FRazaoSocial := Value;
+end;
+
+procedure TEmpresa.SetSite(const Value: string);
+begin
+  FSite := Value;
+end;
+
+procedure TEmpresa.SetTelefone(const Value: string);
+begin
+  FTelefone := Value;
+end;
+
+procedure TEmpresa.SetUF(const Value: string);
+begin
+  FUF := Value;
+end;
+
+End.
+

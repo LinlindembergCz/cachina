@@ -1,0 +1,29 @@
+unit ControllerParametros;
+
+interface
+
+type
+  TControllerParametros=class
+  private
+  public
+    class function GetCFOPPadraoVenda: string; static;
+    class function GetCFOPPadraoCompra: string; static;
+  end;
+
+implementation
+
+{ TControllerParametros }
+
+uses GenericDAO;
+
+class function TControllerParametros.GetCFOPPadraoVenda: string;
+begin
+   result := TGenericDAO.GetValue('Parametros','CFOPPADRAOVENDA', 'Valor');
+end;
+
+class function TControllerParametros.GetCFOPPadraoCompra: string;
+begin
+   result := TGenericDAO.GetValue('Parametros','CFOPPADRAOCOMPRA', 'Valor');
+end;
+
+end.

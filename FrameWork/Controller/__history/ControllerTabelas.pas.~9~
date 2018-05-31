@@ -1,0 +1,107 @@
+unit ControllerTabelas;
+
+interface
+
+uses
+   Windows, DB,  Messages, forms, SysUtils, Variants, Classes, Controller, GenericEntidade, mapper, strUtils;
+
+type
+  TControllerTabelas = class( TInterfacedObject, IController)
+  private
+    FCodigoModulo: string;
+    procedure SetCodigoModulo(const Value: string);
+  protected
+    Mapper: TMapper;
+    Entidade:TGenericEntidade;
+  public
+    procedure Inserir; virtual;
+    procedure Atualizar;virtual;
+    procedure Excluir;virtual;
+    procedure DeleteSQL(Tabela, Condicao: string);virtual;
+    function GetDataSet( Condicao: string;
+                         Fields: string= ''):TDataset;virtual;
+    function GetSelect(Select: string ): TDataset;overload;
+    function GetSelect(Select, Condicao:string; Fields: string= ''):TDataset;overload;
+
+    procedure Inicializar(Sender:TStringList);virtual;
+
+    class function GetValue(Tabela, Condicao, Field: string): String; static;
+    property CodigoModulo: string read FCodigoModulo write SetCodigoModulo;
+
+    function GetMaxEntidade(Tabela: string):string;
+
+    constructor Create(Sender:TForm);virtual;
+  end;
+
+implementation
+
+{ TControllerTabelas }
+
+uses GenericDAO;
+
+class function TControllerTabelas.GetValue(Tabela, Condicao, Field: string): String;
+begin
+  result := TGenericDAO.GetValue(Tabela,Condicao, Field);
+end;
+
+procedure TControllerTabelas.Inserir;
+begin
+  TGenericDAO.Insert(Entidade, '' );
+end;
+
+procedure TControllerTabelas.Atualizar;
+begin
+  TGenericDAO.Update(Entidade , '' );
+end;
+
+procedure TControllerTabelas.Excluir;
+begin
+  TGenericDAO.Delete(Entidade ,  '' );
+end;
+
+constructor TControllerTabelas.Create(Sender: TForm);
+begin
+
+end;
+
+procedure TControllerTabelas.DeleteSQL(Tabela, Condicao: string);
+begin
+  TGenericDAO.DeleteSQL(Tabela, Condicao);
+end;
+
+function TControllerTabelas.GetDataSet(Condicao: string; Fields: string= ''): TDataset;
+begin
+   result := TGenericDAO.GetAll(Entidade,Condicao, Fields);
+end;
+
+function TControllerTabelas.GetMaxEntidade(Tabela: string): string;
+var
+  DataSet: TDataSet;
+begin
+   DataSet:= TGenericDAO.GetSelect('Select  ISNULL( Max(Codigo), 0) +1 as Max From '+
+             Tabela+' T1' );
+   result := trim(DataSet.FieldByName('Max').asstring);
+end;
+
+procedure TControllerTabelas.SetCodigoModulo(const Value: string);
+begin
+  FCodigoModulo := Value;
+end;
+
+function TControllerTabelas.GetSelect(Select, Condicao: string; Fields: string= ''): TDataset;
+begin
+  result := TGenericDAO.GetSelect(Select,Condicao, Fields);
+end;
+
+function TControllerTabelas.GetSelect(Select: string ): TDataset;
+begin
+  result := TGenericDAO.GetSelect(Select);
+end;
+
+procedure TControllerTabelas.Inicializar(Sender: TStringList);
+begin
+
+end;
+
+
+end.

@@ -1,0 +1,300 @@
+unit Pessoa;
+
+interface
+
+uses
+   CAtribEntity,  GenericEntidade;
+
+Type
+  [TableName('Pessoa')]
+  [Modulo('5')]
+  TPessoa = class(TGenericEntidade)
+  private
+    FObservacao: string;
+    FEmail: string;
+    FCodigoClassificacao: integer;
+    FCodigo: integer;
+    FCodigoFilial: integer;
+    FCPFCNPJ: string;
+    FRazaoSocial: string;
+    FNome: string;
+    FTelefone: string;
+    FBairro: string;
+    FUF: string;
+    FCEP: string;
+    FMunicipio: string;
+    FComplemento: string;
+    FEndereco: string;
+    FTipo: string;
+    FFaturar: string;
+    FEstadoCivil: string;
+    FDataNascimento: TDatetime;
+    FCodigoProfissao: Integer;
+    FRendaFormal: double;
+    FRendaFamiliar: double;
+    FCodigoPessoaMae: integer;
+    FFilhos: integer;
+    FCodigoConjuge: integer;
+    FCodigoPessoaPai: integer;
+    FRG: string;
+    FOE: string;
+    FInscricaoEstadual: string;
+    procedure SetCodigo(const Value: integer);
+    procedure SetCodigoClassificacao(const Value: integer);
+    procedure SetCodigoFilial(const Value: integer);
+    procedure SetCPFCNPJ(const Value: string);
+    procedure SetEmail(const Value: string);
+    procedure SetNome(const Value: string);
+    procedure SetObservacao(const Value: string);
+    procedure SetRazaoSocial(const Value: string);
+    procedure SetTelefone(const Value: string);
+    procedure SetBairro(const Value: string);
+    procedure SetCEP(const Value: string);
+    procedure SetComplemento(const Value: string);
+    procedure SetEndereco(const Value: string);
+    procedure SetMunicipio(const Value: string);
+    procedure SetUF(const Value: string);
+    procedure SetTipo(const Value: string);
+    procedure SetFaturar(const Value: string);
+    procedure SetEstadoCivil(const Value: string);
+    procedure SetDataNascimento(const Value: TDatetime);
+    procedure SetCodigoProfissao(const Value: Integer);
+    procedure SetRendaFormal(const Value: double);
+    procedure SetCodigoConjuge(const Value: integer);
+    procedure SetCodigoPessoaMae(const Value: integer);
+    procedure SetCodigoPessoaPai(const Value: integer);
+    procedure SetFilhos(const Value: integer);
+    procedure SetRendaFamiliar(const Value: double);
+    procedure SetInscricaoEstadual(const Value: string);
+    procedure SetOE(const Value: string);
+    procedure SetRG(const Value: string);
+  public
+    [KeyField('Codigo')]
+    property Codigo :integer read FCodigo write SetCodigo;
+    [FieldName('CodigoFilial')]
+    property CodigoFilial :integer read FCodigoFilial write SetCodigoFilial;
+    [FieldName('CodigoClassificacao')]
+    property CodigoClassificacao:integer read FCodigoClassificacao write SetCodigoClassificacao;
+    [FieldName('Nome')]
+    property Nome : string read FNome write SetNome;
+    [FieldName('RazaoSocial')]
+    [Required('RazaoSocial')]
+    property RazaoSocial : string read FRazaoSocial write SetRazaoSocial;
+
+
+
+
+    [FieldName('Observacao')]
+    property Observacao : string read FObservacao write SetObservacao;
+    [FieldName('CPFCNPJ')]
+    property CPFCNPJ : string read FCPFCNPJ write SetCPFCNPJ;
+
+    [FieldName('InscricaoEstadual')]
+    [Required('InscricaoEstadual')]
+    property InscricaoEstadual : string read FInscricaoEstadual write SetInscricaoEstadual;
+
+    [FieldName('RG')]
+    property RG : string read FRG write SetRG;
+
+    [FieldName('OE')]
+    property OE : string read FOE write SetOE;
+
+
+
+
+    [FieldName('Email')]
+    property Email: string read FEmail write SetEmail;
+    [FieldName('Telefone')]
+    [Required('Telefone')]
+    property Telefone: string read FTelefone write SetTelefone;
+    [FieldName('Endereco')]
+    [Required('Endereco')]
+    property Endereco: string read FEndereco write SetEndereco;
+    [FieldName('UF')]
+    [Required('UF')]
+    property UF: string read FUF write SetUF;
+    [FieldName('Bairro')]
+    [Required('Bairro')]
+    property Bairro: string read FBairro write SetBairro;
+    [FieldName('Municipio')]
+    [Required('Municipio')]
+    property Municipio: string read FMunicipio write SetMunicipio;
+    [FieldName('CEP')]
+    [Required('CEP')]
+    property CEP: string read FCEP write SetCEP;
+    [FieldName('Complemento')]
+    property Complemento: string read FComplemento write SetComplemento;
+    [FieldName('Tipo')]
+    property Tipo: string read FTipo write SetTipo;
+    [FieldName('Faturar')]
+    property Faturar: string read FFaturar write SetFaturar;
+    //[FieldName('EstadoCivil')]
+    property EstadoCivil: string read FEstadoCivil write SetEstadoCivil;
+    //[FieldName('CodigoPessoaPai')]
+    property CodigoPessoaPai: integer read FCodigoPessoaPai write SetCodigoPessoaPai;
+    //[FieldName('CodigoPessoaMae')]
+    property CodigoPessoaMae: integer read FCodigoPessoaMae write SetCodigoPessoaMae;
+    //[FieldName('CodigoPessoaConjuge')]
+    property CodigoPessoaConjuge: integer read FCodigoConjuge write SetCodigoConjuge;
+    //[FieldName('Filhos')]
+    property Filhos: integer read FFilhos write SetFilhos;
+    //[FieldName('DataNascimento')]
+    property DataNascimento: TDatetime read FDataNascimento write SetDataNascimento;
+    //[FieldName('CodigoProfissao')]
+    property CodigoProfissao: Integer read FCodigoProfissao write SetCodigoProfissao;
+    //[FieldName('Renda')]
+    property RendaFormal: double read FRendaFormal write SetRendaFormal;
+    //[FieldName('RendaFamiliar')]
+    property RendaFamiliar: double read FRendaFamiliar write SetRendaFamiliar;
+  end;
+
+implementation
+
+{ TClientes }
+
+procedure TPessoa.SetBairro(const Value: string);
+begin
+  FBairro := Value;
+end;
+
+procedure TPessoa.SetCEP(const Value: string);
+begin
+  FCEP := Value;
+end;
+
+procedure TPessoa.SetCodigo(const Value: integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TPessoa.SetCodigoClassificacao(const Value: integer);
+begin
+  FCodigoClassificacao := Value;
+end;
+
+procedure TPessoa.SetCodigoConjuge(const Value: integer);
+begin
+  FCodigoConjuge := Value;
+end;
+
+procedure TPessoa.SetCodigoFilial(const Value: integer);
+begin
+  FCodigoFilial := Value;
+end;
+
+procedure TPessoa.SetCodigoPessoaMae(const Value: integer);
+begin
+  FCodigoPessoaMae := Value;
+end;
+
+procedure TPessoa.SetCodigoPessoaPai(const Value: integer);
+begin
+  FCodigoPessoaPai := Value;
+end;
+
+procedure TPessoa.SetCodigoProfissao(const Value: Integer);
+begin
+  FCodigoProfissao := Value;
+end;
+
+procedure TPessoa.SetComplemento(const Value: string);
+begin
+  FComplemento := Value;
+end;
+
+procedure TPessoa.SetCPFCNPJ(const Value: string);
+begin
+  FCPFCNPJ := Value;
+end;
+
+procedure TPessoa.SetDataNascimento(const Value: TDatetime);
+begin
+  FDataNascimento := Value;
+end;
+
+procedure TPessoa.SetEmail(const Value: string);
+begin
+  FEmail := Value;
+end;
+
+procedure TPessoa.SetEndereco(const Value: string);
+begin
+  FEndereco := Value;
+end;
+
+procedure TPessoa.SetEstadoCivil(const Value: string);
+begin
+  FEstadoCivil := Value;
+end;
+
+procedure TPessoa.SetFaturar(const Value: string);
+begin
+  FFaturar := Value;
+end;
+
+procedure TPessoa.SetFilhos(const Value: integer);
+begin
+  FFilhos := Value;
+end;
+
+procedure TPessoa.SetInscricaoEstadual(const Value: string);
+begin
+  FInscricaoEstadual := Value;
+end;
+
+procedure TPessoa.SetMunicipio(const Value: string);
+begin
+  FMunicipio := Value;
+end;
+
+procedure TPessoa.SetNome(const Value: string);
+begin
+  FNome := Value;
+end;
+
+procedure TPessoa.SetObservacao(const Value: string);
+begin
+  FObservacao := Value;
+end;
+
+procedure TPessoa.SetOE(const Value: string);
+begin
+  FOE := Value;
+end;
+
+procedure TPessoa.SetRazaoSocial(const Value: string);
+begin
+  FRazaoSocial := Value;
+end;
+
+procedure TPessoa.SetRendaFamiliar(const Value: double);
+begin
+  FRendaFamiliar := Value;
+end;
+
+procedure TPessoa.SetRendaFormal(const Value: double);
+begin
+  FRendaFormal := Value;
+end;
+
+procedure TPessoa.SetRG(const Value: string);
+begin
+  FRG := Value;
+end;
+
+procedure TPessoa.SetTelefone(const Value: string);
+begin
+  FTelefone := Value;
+end;
+
+procedure TPessoa.SetTipo(const Value: string);
+begin
+  FTipo := Value;
+end;
+
+procedure TPessoa.SetUF(const Value: string);
+begin
+  FUF := Value;
+end;
+
+end.

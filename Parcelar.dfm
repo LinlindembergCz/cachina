@@ -1,0 +1,235 @@
+object FormParcelar: TFormParcelar
+  Left = 0
+  Top = 0
+  BorderStyle = bsDialog
+  Caption = 'Parcelamento'
+  ClientHeight = 327
+  ClientWidth = 358
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object BitBtn1: TBitBtn
+    Left = 100
+    Top = 287
+    Width = 75
+    Height = 25
+    Kind = bkOK
+    NumGlyphs = 2
+    TabOrder = 0
+    OnClick = BitBtn1Click
+  end
+  object BitBtn2: TBitBtn
+    Left = 181
+    Top = 287
+    Width = 75
+    Height = 25
+    Caption = 'Cancelar'
+    Kind = bkCancel
+    NumGlyphs = 2
+    TabOrder = 1
+  end
+  object GroupBox1: TGroupBox
+    Left = 8
+    Top = 8
+    Width = 340
+    Height = 273
+    TabOrder = 2
+    object Label1: TLabel
+      Left = 10
+      Top = 166
+      Width = 67
+      Height = 13
+      Caption = 'Vencimento'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 10
+      Top = 57
+      Width = 29
+      Height = 13
+      Caption = 'Valor'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 10
+      Top = 194
+      Width = 44
+      Height = 13
+      Caption = 'Entrada'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 10
+      Top = 136
+      Width = 74
+      Height = 13
+      Caption = 'Qtd. Parcelas'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label5: TLabel
+      Left = 10
+      Top = 220
+      Width = 185
+      Height = 13
+      Caption = 'Forma de Pagamento da Entrada'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 310
+      Top = 165
+      Width = 23
+      Height = 13
+      Caption = 'dias'
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label7: TLabel
+      Left = 10
+      Top = 81
+      Width = 166
+      Height = 13
+      Caption = 'Forma de Pagamento parcela'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label8: TLabel
+      Left = 11
+      Top = 8
+      Width = 31
+      Height = 13
+      Caption = 'Caixa'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object edtValorParcelar: TEdit
+      Left = 95
+      Top = 51
+      Width = 110
+      Height = 21
+      Color = clSilver
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 0
+      Text = '0'
+    end
+    object dateDataVencimento: TDateTimePicker
+      Left = 95
+      Top = 160
+      Width = 110
+      Height = 21
+      Date = 41774.373928125000000000
+      Time = 41774.373928125000000000
+      TabOrder = 1
+    end
+    object edtValorEntrada: TEdit
+      Left = 95
+      Top = 189
+      Width = 110
+      Height = 21
+      TabOrder = 2
+      Text = '0'
+    end
+    object edtQtdParcelas: TEdit
+      Left = 95
+      Top = 133
+      Width = 110
+      Height = 21
+      TabOrder = 3
+      Text = '0'
+    end
+    object edtDias: TSpinEdit
+      Left = 267
+      Top = 160
+      Width = 38
+      Height = 22
+      Enabled = False
+      MaxValue = 0
+      MinValue = 0
+      TabOrder = 4
+      Value = 30
+    end
+    object chkACada: TCheckBox
+      Left = 213
+      Top = 165
+      Width = 55
+      Height = 17
+      Caption = 'a cada'
+      TabOrder = 5
+      OnClick = chkACadaClick
+    end
+    object cboCodigoFormaPagamentoEntrada: TDBLookupComboBox
+      Left = 10
+      Top = 240
+      Width = 317
+      Height = 21
+      TabOrder = 6
+    end
+    object cboCodigoFormaPagamento: TDBLookupComboBox
+      Left = 10
+      Top = 98
+      Width = 318
+      Height = 21
+      TabOrder = 7
+      OnCloseUp = cboCodigoFormaPagamentoCloseUp
+    end
+    object cboCaixa: TDBLookupComboBox
+      Left = 12
+      Top = 25
+      Width = 318
+      Height = 21
+      TabOrder = 8
+      OnCloseUp = cboCodigoFormaPagamentoCloseUp
+    end
+  end
+end

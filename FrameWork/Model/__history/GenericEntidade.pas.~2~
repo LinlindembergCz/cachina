@@ -1,0 +1,13 @@
+unit GenericEntidade;
+
+interface
+
+uses Annotations;
+
+type
+  TGenericEntidade = class(TCustomAttribute)
+  end;
+
+implementation
+
+end.

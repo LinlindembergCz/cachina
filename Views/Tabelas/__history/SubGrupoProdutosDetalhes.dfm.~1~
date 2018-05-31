@@ -1,0 +1,51 @@
+inherited FormSubGrupoProdutosDetalhes: TFormSubGrupoProdutosDetalhes
+  Caption = 'Sub grupo de produtos'
+  FormStyle = fsStayOnTop
+  inherited Panel1: TPanel
+    inherited tabPrincipal: TTabControl
+      inherited TabSheet1: TTabSheet
+        Height = 24
+        inherited StringGrid1: TDBgrid
+          Height = 356
+        end
+      end
+      inherited TabSheet2: TTabSheet
+        Height = 24
+        left = 62
+        object lbDescricao: TLabel
+          Height = 17
+          left = 8
+          Top = 32
+          caption = 'Descricao'
+          Width = 120
+        end
+        object Grupo: TLabel
+          Height = 17
+          left = 8
+          Top = 64
+          caption = 'Grupo de produtos'
+          Width = 120
+        end
+        object edtDescricao: TEdit
+          Tag = 1
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 2
+          left = 112
+          Top = 32
+          Width = 417
+          Height = 22
+          KillFocusByReturn = False
+          OnKeyDown = EditDown
+        end
+        object cboCodigoGrupo: TComboBox
+          DisableFocusEffect = False
+          Height = 22
+          left = 112
+          Top = 64
+          TabOrder = 3
+          Width = 417
+        end
+      end
+    end
+  end
+end

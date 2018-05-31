@@ -1,0 +1,47 @@
+unit CategoriasDetalhes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, TemplateDetalhesComTabGrid, Data.DB,
+  Vcl.Buttons, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TTemplateFormComTabGridDetalhes1 = class(TTemplateFormComTabGridDetalhes)
+    lbDescricao: TLabel;
+    lbCodificacao: TLabel;
+    edtCodificacao: TEdit;
+    edtDescricao: TEdit;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  TemplateFormComTabGridDetalhes1: TTemplateFormComTabGridDetalhes1;
+
+implementation
+
+{$R *.dfm}
+
+uses EntidadeFactory, ControllerTabelas;
+
+procedure TTemplateFormComTabGridDetalhes1.FormCreate(Sender: TObject);
+begin
+  inherited;
+  Controller:= TControllerTabelas.Create;
+  Entidade  := TEntidadeFactory.Criar(tpCategoria);
+  with MapperEntidade do
+  begin
+    associar('Codigo', nil);
+    associar('CodigoFilial', nil);
+    associar('Descricao', edtDescricao);
+    associar('Codificacao', edtCodificacao);
+  end;
+
+end;
+
+end.

@@ -1,0 +1,382 @@
+unit PessoaDetalhes;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  Graphics, Controls, Forms, Dialogs, StdCtrls,
+  TemplateDetalhesComTabGrid, System.Rtti, Data.DB, Grids,
+  GenericEntidade,  Mapper, Vcl.DBGrids,  Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TFormPessoaDetalhes = class(TTemplateFormComTabGridDetalhes)
+    TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
+    TabSheet5: TTabSheet;
+    TabSheet6: TTabSheet;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label14: TLabel;
+    edtNomeContato: TEdit;
+    Label15: TLabel;
+    edtTelefoneContato: TEdit;
+    Label21: TLabel;
+    edtCPFContato: TEdit;
+    cboAutorizado: TComboBox;
+    Label16: TLabel;
+    btnInserirContato: TButton;
+    btnConfirmarContato: TButton;
+    btnRemoverContato: TButton;
+    Label17: TLabel;
+    Label18: TLabel;
+    btnInserirVeiculo: TButton;
+    btnConfirmarVeiculo: TButton;
+    btnRemoverVeiculo: TButton;
+    Label19: TLabel;
+    cboCor: TComboBox;
+    Label20: TLabel;
+    memoObservacao: TMemo;
+    srcContatos: TDataSource;
+    srcVeiculos: TDataSource;
+    cboModelo: TComboBox;
+    tabProdutoDetalhes: TPageControl;
+    TabSheet7: TTabSheet;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label22: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label12: TLabel;
+    DBGrid2: TDBGrid;
+    DBGrid3: TDBGrid;
+    edtAno: TEdit;
+    edtPlaca: TEdit;
+    edtNome: TEdit;
+    edtRazaoSocial: TEdit;
+    edtCPFCNPJ: TEdit;
+    edtTelefone: TEdit;
+    edtEmail: TEdit;
+    cboClassificacaoCliente: TComboBox;
+    edtEndereco: TEdit;
+    edtBairro: TEdit;
+    edtMunicipio: TEdit;
+    cboUF: TComboBox;
+    edtCEP: TEdit;
+    edtComplemento: TEdit;
+    procedure btnConfirmarContatoClick(Sender: TObject);
+    procedure btnInserirVeiculoClick(Sender: TObject);
+    procedure btnInserirContatoClick(Sender: TObject);
+    procedure btnConfirmarVeiculoClick(Sender: TObject);
+    procedure btnRemoverContatoClick(Sender: TObject);
+    procedure btnRemoverVeiculoClick(Sender: TObject);
+    procedure DBGrid3DblClick(Sender: TObject);
+    procedure edtCPFCNPJExit(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure DBGrid3CellClick(Column: TColumn);
+    procedure DBGrid2CellClick(Column: TColumn);
+    procedure TabSheet4Enter(Sender: TObject);
+    procedure TabSheet5Enter(Sender: TObject);
+  private
+    Veiculos: TGenericEntidade;
+    Contatos: TGenericEntidade;
+    ClientesFieldMapList  : TStringList;
+    ContatosFieldMapList  : TStringList;
+    VeiculosFieldMapList  : TStringList;
+    MapperContatos:TMapper;
+    MapperVeiculos:TMapper;
+    procedure MapearCampoContatos;
+    procedure MapearCamposClientes;
+    procedure MapearCampoVeiculos;
+    procedure ConsultarContatos;
+    procedure ConsultarVeiculos;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormPessoaDetalhes: TFormPessoaDetalhes;
+
+implementation
+
+uses
+  ControllerClientes, ControllerTabelas, EntidadeFactory, DBUtils, DialogsUtils;
+
+{$R *.dfm}
+
+procedure TFormPessoaDetalhes.FormCreate(Sender: TObject);
+begin
+  Controller := TControllerClientes.Create;
+  Entidade   := TEntidadeFactory.Criar(tpPessoa);
+  Contatos   := TEntidadeFactory.Criar(tpContatos);
+  Veiculos   := TEntidadeFactory.Criar(tpVeiculos);
+  inherited;
+
+  MapearCamposClientes;
+  MapearCampoContatos;
+  MapearCampoVeiculos;
+
+  FillCombobox( tpClassificacaoCliente, cboClassificacaoCliente );
+  FillCombobox( tpModeloVeiculo, cboModelo );
+end;
+
+procedure TFormPessoaDetalhes.MapearCamposClientes;
+begin
+  with MapperEntidade do
+  begin
+    Associar('Codigo', nil);
+    Associar('CPFCNPJ', edtCPFCNPJ);
+    Associar('CodigoClassificacao', cboClassificacaoCliente);
+    Associar('Telefone', edtTelefone);
+    Associar('Email', edtEmail);
+    Associar('Observacao', memoObservacao);
+    Associar('Endereco', edtEndereco);
+    Associar('Bairro', edtBairro);
+    Associar('Municipio', edtMunicipio);
+    Associar('UF', cboUF);
+    Associar('CEP', edtCEP);
+    Associar('Nome', edtNome);
+    Associar('Complemento', edtComplemento);
+    Associar('RazaoSocial', edtRazaoSocial);
+  end;
+
+  CampoPesquisa := 'Nome';
+end;
+
+procedure  TFormPessoaDetalhes.ConsultarContatos;
+begin
+     if (Operacao <> 'Insert') then
+     srcContatos.Dataset:= Controller.GetDataset(Contatos,
+                           'CodigoCliente='+quotedstr(srcEntidade.DataSet.FieldByName('Codigo').AsString))
+  else
+     srcContatos.Dataset:= Controller.GetDataset(Contatos,'CodigoCliente=0');
+
+  if MapperContatos <> nil then
+  MapperContatos.Dataset := srcContatos.Dataset;
+end;
+
+procedure TFormPessoaDetalhes.MapearCampoContatos;
+begin
+  ContatosFieldMapList := TStringList.Create;
+
+  ConsultarContatos;
+
+  MapperContatos := TMapper.Create(Contatos,ContatosFieldMapList,srcContatos.DataSet);
+  MapperContatos.Dataset := srcContatos.Dataset;
+  with MapperContatos do
+  begin
+    Associar('CodigoCliente', nil);
+    Associar('Nome', edtNomeContato);
+    Associar('Telefone', edtTelefoneContato);
+    Associar('Autorizado', cboAutorizado);
+    Associar('CPF', edtCPFContato);
+  end;
+end;
+
+procedure TFormPessoaDetalhes.ConsultarVeiculos;
+begin
+  if (Operacao <> 'Insert') then
+     srcVeiculos.Dataset:= Controller.GetDataset(Veiculos,
+                           'CodigoCliente='+quotedstr(srcEntidade.DataSet.FieldByName('Codigo').AsString),
+                           StrCamposVeiculos )
+  else
+     srcVeiculos.Dataset:= Controller.GetDataset(Veiculos,
+                       'CodigoCliente=0 ', StrCamposVeiculos );
+  if MapperVeiculos <> nil then
+     MapperVeiculos.Dataset:= srcVeiculos.Dataset;
+end;
+
+procedure TFormPessoaDetalhes.MapearCampoVeiculos;
+begin
+  VeiculosFieldMapList := TStringList.Create;
+
+  ConsultarVeiculos;
+
+  MapperVeiculos:=TMapper.Create(Veiculos,VeiculosFieldMapList,srcVeiculos.DataSet);
+  with MapperVeiculos do
+  begin
+    Associar('CodigoCliente', nil);
+    Associar('CodigoModelo', cboModelo);
+    Associar('Placa', edtPlaca);
+    Associar('Cor', cboCor);
+    Associar('Ano', edtAno);
+  end;
+end;
+
+procedure TFormPessoaDetalhes.TabSheet4Enter(Sender: TObject);
+begin
+  inherited;
+    ConsultarContatos;
+end;
+
+procedure TFormPessoaDetalhes.TabSheet5Enter(Sender: TObject);
+begin
+  inherited;
+  ConsultarVeiculos;
+end;
+
+procedure TFormPessoaDetalhes.btnConfirmarContatoClick(Sender: TObject);
+var
+  CodigoCliente: string;
+begin
+  inherited;
+  if  srcEntidade.DataSet.FieldByName('Codigo').AsString <> '' then
+  begin
+      MapperContatos.ComponentToEntidade;
+      CodigoCliente:= srcEntidade.DataSet.FieldByName('Codigo').AsString;
+      MapperContatos.SendValueToFieldEntidade('Codigo', srcContatos.DataSet.FieldByName('Codigo').AsString);
+      MapperContatos.SendValueToFieldEntidade( 'CodigoCliente', CodigoCliente);
+
+      if not srcContatos.Dataset.Locate('CPF',edtCPFContato.Text,[]) then
+         Controller.Inserir(Contatos)
+      else
+         Controller.Atualizar(Contatos);
+
+      ConsultarContatos;
+  end
+  else
+    showmessage('Não existe cliente confirmado!');
+end;
+
+procedure TFormPessoaDetalhes.btnConfirmarVeiculoClick(Sender: TObject);
+var
+  CodigoCliente: string;
+begin
+  inherited;
+  if srcEntidade.DataSet.FieldByName('Codigo').AsString <> '' then
+  begin
+    MapperVeiculos.ComponentToEntidade;
+    CodigoCliente      := srcEntidade.DataSet.FieldByName('Codigo').AsString;
+    //MapperVeiculos.SendValueToFieldEntidade('Placa', srcVeiculos.DataSet.FieldByName('Placa').AsString);
+    MapperVeiculos.SendValueToFieldEntidade('CodigoCliente', CodigoCliente);
+
+    if not srcVeiculos.Dataset.Locate('Placa',edtPlaca.Text,[]) then
+       Controller.Inserir(Veiculos)
+    else
+       Controller.Atualizar(Veiculos);
+
+    ConsultarVeiculos;
+  end
+  else
+    showmessage('Não existe cliente confirmado!');
+end;
+
+procedure TFormPessoaDetalhes.btnRemoverContatoClick(Sender: TObject);
+begin
+  inherited;
+  if not srcContatos.DataSet.IsEmpty then
+  begin
+      MapperContatos.SendValueToFieldEntidade('Codigo',
+      srcContatos.DataSet.FieldByName('Codigo').AsString);
+
+      if TDialogs.ConfirmarExclusao then
+      begin
+        Controller.Excluir(Contatos);
+        srcContatos.DataSet.delete;
+      end;
+  end;
+end;
+
+procedure TFormPessoaDetalhes.btnRemoverVeiculoClick(Sender: TObject);
+begin
+  inherited;
+  if not srcVeiculos.DataSet.isEmpty then
+  begin
+     MapperVeiculos.SendValueToFieldEntidade('Placa',
+     srcVeiculos.DataSet.FieldByName('Placa').AsString);
+
+     if TDialogs.ConfirmarExclusao then
+     begin
+        Controller.Excluir(Veiculos);
+        srcVeiculos.DataSet.delete;
+     end;
+  end;
+end;
+
+procedure TFormPessoaDetalhes.DBGrid2CellClick(Column: TColumn);
+begin
+  inherited;
+  if Contatos <> nil then
+    FreeandNil(Contatos);
+  Contatos := TEntidadeFactory.Criar(tpContatos);
+  MapperContatos.Entidade := Contatos;
+  MapperContatos.Dataset := srcContatos.DataSet;
+  MapperContatos.SendDataSetToEntidade;
+  MapperContatos.EntidadeToComponent;
+end;
+
+procedure TFormPessoaDetalhes.DBGrid3CellClick(Column: TColumn);
+begin
+  inherited;
+  if Veiculos <> nil then
+    FreeandNil(Veiculos);
+  Veiculos := TEntidadeFactory.Criar(tpVeiculos);
+  MapperVeiculos.Entidade := Veiculos;
+  MapperVeiculos.Dataset := srcVeiculos.DataSet;
+  MapperVeiculos.SendDataSetToEntidade;
+  MapperVeiculos.EntidadeToComponent;
+end;
+
+procedure TFormPessoaDetalhes.DBGrid3DblClick(Sender: TObject);
+begin
+  inherited;
+  MapperEntidade.EntidadeToComponent;
+end;
+
+procedure TFormPessoaDetalhes.btnInserirVeiculoClick(Sender: TObject);
+begin
+  MapperVeiculos.SendNullToComponent;
+  inherited;
+end;
+
+procedure TFormPessoaDetalhes.btnInserirContatoClick(Sender: TObject);
+begin
+  MapperContatos.SendNullToComponent;
+  inherited;
+end;
+
+procedure TFormPessoaDetalhes.edtCPFCNPJExit(Sender: TObject);
+var
+  DataSet: TDataset;
+  cpfcnpj: string;
+begin
+  inherited;
+  if edtCPFCNPJ.text <> '' then
+  begin
+     if length(cpfcnpj) = 11 then
+     begin
+        edtCPFCNPJ.text :=copy(cpfcnpj,0,3)+'.'+copy(cpfcnpj,4,3)+'.'+copy(cpfcnpj,7,3)+'-'+copy(cpfcnpj,10,2);
+     end
+     else
+     if length(cpfcnpj) = 14 then
+     begin
+        edtCPFCNPJ.text:=copy(cpfcnpj,0,2)+'.'+copy(cpfcnpj,3,3)+'.'+copy(cpfcnpj,6,3)+'/'+copy(cpfcnpj,9,4)+'-'+copy(cpfcnpj,13,2);
+     end;
+  end;
+
+  if (Operacao = 'Insert') and (edtCPFCNPJ.Text <> '') then
+  begin
+    DataSet := TControllerClientes.GetClienteCPFCNPJ( edtCPFCNPJ.Text );
+    if not DataSet.IsEmpty then
+    begin
+      srcEntidade.DataSet.Close;
+      srcEntidade.DataSet:= DataSet;
+
+      showmessage('Este CPF/CNPJ já existe!');
+
+      MapperEntidade.SendValueToFieldDataSet('Codigo',
+      srcEntidade.DataSet.FieldByName('Codigo').AsString);
+
+      MapperEntidade.EntidadeToComponent;
+      Operacao:= '';
+      AtualizarBotoes;
+      abort;
+    end;
+  end;
+end;
+
+end.

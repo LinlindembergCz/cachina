@@ -1,0 +1,44 @@
+unit Clientes;
+
+interface
+
+uses
+  GenericEntidade, AtributoEntidade;
+
+type
+  [TableName('Clientes')]
+  TCliente = class(TGenericEntidade)
+  private
+    FNome: string;
+    FCPF: string;
+    FEndereco: string;
+    procedure SetNome(const Value: string);
+    procedure SetCPF(const Value: string);
+    procedure SetEndereco(const Value: string);
+  public
+    [FieldName('Nome')]
+    property Nome: string read FNome write SetNome;
+    [FieldName('CPF')]
+    property CPF: string read FCPF write SetCPF;
+    [FieldName('Endereco')]
+    property Endereco: string read FEndereco write SetEndereco;
+  end;
+
+implementation
+
+procedure TCliente.SetCPF(const Value: string);
+begin
+  FCPF := Value;
+end;
+
+procedure TCliente.SetEndereco(const Value: string);
+begin
+  FEndereco := Value;
+end;
+
+procedure TCliente.SetNome(const Value: string);
+begin
+  FNome := Value;
+end;
+
+end.

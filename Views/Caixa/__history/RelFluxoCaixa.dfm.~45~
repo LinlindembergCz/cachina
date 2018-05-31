@@ -1,0 +1,1337 @@
+object FormRelFluxoCaixa: TFormRelFluxoCaixa
+  Left = 0
+  Top = 0
+  Caption = 'FormRelFluxoCaixa'
+  ClientHeight = 409
+  ClientWidth = 1149
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Scaled = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object QuickRep1: TQuickRep
+    Left = 8
+    Top = 16
+    Width = 1123
+    Height = 794
+    DataSet = ClientDataSet1
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    Functions.Strings = (
+      'PAGENUMBER'
+      'COLUMNNUMBER'
+      'REPORTTITLE')
+    Functions.DATA = (
+      '0'
+      '0'
+      #39#39)
+    Options = [FirstPageHeader, LastPageFooter]
+    Page.Columns = 1
+    Page.Orientation = poLandscape
+    Page.PaperSize = A4
+    Page.Continuous = False
+    Page.Values = (
+      100.000000000000000000
+      2100.000000000000000000
+      100.000000000000000000
+      2970.000000000000000000
+      100.000000000000000000
+      100.000000000000000000
+      0.000000000000000000)
+    PrinterSettings.Copies = 1
+    PrinterSettings.OutputBin = Auto
+    PrinterSettings.Duplex = False
+    PrinterSettings.FirstPage = 0
+    PrinterSettings.LastPage = 0
+    PrinterSettings.UseStandardprinter = False
+    PrinterSettings.UseCustomBinCode = False
+    PrinterSettings.CustomBinCode = 0
+    PrinterSettings.ExtendedDuplex = 0
+    PrinterSettings.UseCustomPaperCode = False
+    PrinterSettings.CustomPaperCode = 0
+    PrinterSettings.PrintMetaFile = False
+    PrinterSettings.PrintQuality = 0
+    PrinterSettings.Collate = 0
+    PrinterSettings.ColorOption = 0
+    PrintIfEmpty = True
+    SnapToGrid = True
+    Units = MM
+    Zoom = 100
+    PrevFormStyle = fsNormal
+    PreviewInitialState = wsNormal
+    PrevInitialZoom = qrZoomToFit
+    PreviewDefaultSaveType = stQRP
+    PreviewLeft = 0
+    PreviewTop = 0
+    object DetailBand1: TQRBand
+      Left = 38
+      Top = 129
+      Width = 1047
+      Height = 37
+      Frame.DrawBottom = True
+      Frame.DrawLeft = True
+      Frame.DrawRight = True
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        97.895833333333330000
+        2770.187500000000000000)
+      PreCaluculateBandHeight = True
+      KeepOnOnePage = False
+      BandType = rbDetail
+      object QRDBText1: TQRDBText
+        Left = 298
+        Top = 2
+        Width = 64
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          788.458333333333300000
+          5.291666666666667000
+          169.333333333333300000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'JaneiroConta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText2: TQRDBText
+        Left = 361
+        Top = 2
+        Width = 75
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          955.145833333333300000
+          5.291666666666667000
+          198.437500000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'FevereiroConta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText3: TQRDBText
+        Left = 487
+        Top = 2
+        Width = 51
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1288.520833333333000000
+          5.291666666666667000
+          134.937500000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'AbrilConta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText4: TQRDBText
+        Left = 424
+        Top = 2
+        Width = 59
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1121.833333333333000000
+          5.291666666666667000
+          156.104166666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'MarcoConta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText5: TQRDBText
+        Left = 744
+        Top = 2
+        Width = 64
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1968.500000000000000000
+          5.291666666666667000
+          169.333333333333300000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'AgostoConta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText6: TQRDBText
+        Left = 684
+        Top = 2
+        Width = 54
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1809.750000000000000000
+          5.291666666666667000
+          142.875000000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'JulhoConta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText7: TQRDBText
+        Left = 552
+        Top = 2
+        Width = 51
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1460.500000000000000000
+          5.291666666666667000
+          134.937500000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'MaioConta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText8: TQRDBText
+        Left = 615
+        Top = 2
+        Width = 58
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1627.187500000000000000
+          5.291666666666667000
+          153.458333333333300000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'JunhoConta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText9: TQRDBText
+        Left = 931
+        Top = 2
+        Width = 78
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          2463.270833333333000000
+          5.291666666666667000
+          206.375000000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'NovembroConta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText10: TQRDBText
+        Left = 869
+        Top = 2
+        Width = 68
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          2299.229166666667000000
+          5.291666666666667000
+          179.916666666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'OutubroConta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText11: TQRDBText
+        Left = 805
+        Top = 2
+        Width = 75
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          2129.895833333333000000
+          5.291666666666667000
+          198.437500000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'SetembroConta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText12: TQRDBText
+        Left = 994
+        Top = 2
+        Width = 78
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          2629.958333333333000000
+          5.291666666666667000
+          206.375000000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'DezembroConta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText13: TQRDBText
+        Left = 3
+        Top = 2
+        Width = 289
+        Height = 32
+        Size.Values = (
+          84.666666666666670000
+          7.937500000000000000
+          5.291666666666667000
+          764.645833333333300000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = True
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'Descricao'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText14: TQRDBText
+        Left = 298
+        Top = 18
+        Width = 36
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          788.458333333333300000
+          47.625000000000000000
+          95.250000000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'Janeiro'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText15: TQRDBText
+        Left = 361
+        Top = 18
+        Width = 47
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          955.145833333333300000
+          47.625000000000000000
+          124.354166666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'Fevereiro'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText16: TQRDBText
+        Left = 424
+        Top = 18
+        Width = 31
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1121.833333333333000000
+          47.625000000000000000
+          82.020833333333330000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'Marco'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText17: TQRDBText
+        Left = 487
+        Top = 18
+        Width = 23
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1288.520833333333000000
+          47.625000000000000000
+          60.854166666666670000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'Abril'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText18: TQRDBText
+        Left = 552
+        Top = 18
+        Width = 23
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1460.500000000000000000
+          47.625000000000000000
+          60.854166666666670000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'Maio'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText19: TQRDBText
+        Left = 615
+        Top = 18
+        Width = 30
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1627.187500000000000000
+          47.625000000000000000
+          79.375000000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'Junho'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText20: TQRDBText
+        Left = 684
+        Top = 18
+        Width = 26
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1809.750000000000000000
+          47.625000000000000000
+          68.791666666666670000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'Julho'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText21: TQRDBText
+        Left = 744
+        Top = 18
+        Width = 36
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1968.500000000000000000
+          47.625000000000000000
+          95.250000000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'Agosto'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText22: TQRDBText
+        Left = 805
+        Top = 18
+        Width = 47
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          2129.895833333333000000
+          47.625000000000000000
+          124.354166666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'Setembro'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText23: TQRDBText
+        Left = 869
+        Top = 18
+        Width = 40
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          2299.229166666667000000
+          47.625000000000000000
+          105.833333333333300000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'Outubro'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText24: TQRDBText
+        Left = 931
+        Top = 18
+        Width = 50
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          2463.270833333333000000
+          47.625000000000000000
+          132.291666666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'Novembro'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText25: TQRDBText
+        Left = 994
+        Top = 18
+        Width = 50
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          2629.958333333333000000
+          47.625000000000000000
+          132.291666666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = ClientDataSet1
+        DataField = 'Dezembro'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+    end
+    object TitleBand1: TQRBand
+      Left = 38
+      Top = 38
+      Width = 1047
+      Height = 91
+      Frame.DrawTop = True
+      Frame.DrawBottom = True
+      Frame.DrawLeft = True
+      Frame.DrawRight = True
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        240.770833333333300000
+        2770.187500000000000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbTitle
+      object QRLabel1: TQRLabel
+        Left = 3
+        Top = 68
+        Width = 105
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          7.937500000000000000
+          179.916666666666700000
+          277.812500000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Plano de Contas'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object QRLabel2: TQRLabel
+        Left = 298
+        Top = 68
+        Width = 24
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          788.458333333333300000
+          179.916666666666700000
+          63.500000000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Jan'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object QRLabel3: TQRLabel
+        Left = 362
+        Top = 68
+        Width = 24
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          957.791666666666700000
+          179.916666666666700000
+          63.500000000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Fev'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object QRLabel4: TQRLabel
+        Left = 424
+        Top = 68
+        Width = 27
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1121.833333333333000000
+          179.916666666666700000
+          71.437500000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Ma'#231
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object QRLabel5: TQRLabel
+        Left = 488
+        Top = 68
+        Width = 23
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1291.166666666667000000
+          179.916666666666700000
+          60.854166666666670000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        BiDiMode = bdRightToLeft
+        ParentBiDiMode = False
+        Caption = 'Abr'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object QRLabel6: TQRLabel
+        Left = 554
+        Top = 68
+        Width = 24
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1465.791666666667000000
+          179.916666666666700000
+          63.500000000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Mai'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object QRLabel7: TQRLabel
+        Left = 618
+        Top = 68
+        Width = 24
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1635.125000000000000000
+          179.916666666666700000
+          63.500000000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Jun'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object QRLabel8: TQRLabel
+        Left = 684
+        Top = 68
+        Width = 20
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1809.750000000000000000
+          179.916666666666700000
+          52.916666666666670000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Jul'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object QRLabel9: TQRLabel
+        Left = 745
+        Top = 68
+        Width = 26
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1971.145833333333000000
+          179.916666666666700000
+          68.791666666666670000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Ago'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object QRLabel10: TQRLabel
+        Left = 805
+        Top = 68
+        Width = 22
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          2129.895833333333000000
+          179.916666666666700000
+          58.208333333333330000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Set'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object QRLabel11: TQRLabel
+        Left = 869
+        Top = 68
+        Width = 23
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          2299.229166666667000000
+          179.916666666666700000
+          60.854166666666670000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Out'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object QRLabel12: TQRLabel
+        Left = 933
+        Top = 68
+        Width = 25
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          2468.562500000000000000
+          179.916666666666700000
+          66.145833333333330000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Nov'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object QRLabel13: TQRLabel
+        Left = 996
+        Top = 68
+        Width = 25
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          2635.250000000000000000
+          179.916666666666700000
+          66.145833333333330000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Dez'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object QRLabel14: TQRLabel
+        Left = 507
+        Top = 20
+        Width = 98
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1341.437500000000000000
+          52.916666666666670000
+          259.291666666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Fluxo de Caixa'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+    end
+  end
+  object ClientDataSet1: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 448
+    Top = 264
+    Data = {
+      060200009619E0BD01000000180000001A00000000000300000006020B436F64
+      696669636163616F010049000000010005574944544802000200140009446573
+      63726963616F010049000000010005574944544802000200C800074A616E6569
+      726F08000400000000000946657665726569726F0800040000000000054D6172
+      636F080004000000000005416272696C0800040000000000044D61696F080004
+      0000000000054A756E686F0800040000000000054A756C686F08000400000000
+      000641676F73746F080004000000000008536574656D62726F08000400000000
+      00074F75747562726F0800040000000000084E6F76656D62726F080004000000
+      00000C4A616E6569726F436F6E746108000400000000000E4665766572656972
+      6F436F6E746108000400000000000A4D6172636F436F6E746108000400000000
+      000A416272696C436F6E74610800040000000000094D61696F436F6E74610800
+      0400000000000A4A756E686F436F6E746108000400000000000A4A756C686F43
+      6F6E746108000400000000000B41676F73746F436F6E74610800040000000000
+      0D536574656D62726F436F6E746108000400000000000C4F75747562726F436F
+      6E746108000400000000000D4E6F76656D62726F436F6E746108000400000000
+      000D44657A656D62726F436F6E746108000400000000000844657A656D62726F
+      08000400000000000000}
+    object ClientDataSet1Codificacao: TStringField
+      FieldName = 'Codificacao'
+    end
+    object ClientDataSet1Descricao: TStringField
+      FieldName = 'Descricao'
+      Size = 200
+    end
+    object ClientDataSet1Janeiro: TFloatField
+      FieldName = 'Janeiro'
+    end
+    object ClientDataSet1Fevereiro: TFloatField
+      FieldName = 'Fevereiro'
+    end
+    object ClientDataSet1Marco: TFloatField
+      FieldName = 'Marco'
+    end
+    object ClientDataSet1Abril: TFloatField
+      FieldName = 'Abril'
+    end
+    object ClientDataSet1Maio: TFloatField
+      FieldName = 'Maio'
+    end
+    object ClientDataSet1Junho: TFloatField
+      FieldName = 'Junho'
+    end
+    object ClientDataSet1Julho: TFloatField
+      FieldName = 'Julho'
+    end
+    object ClientDataSet1Agosto: TFloatField
+      FieldName = 'Agosto'
+    end
+    object ClientDataSet1Setembro: TFloatField
+      FieldName = 'Setembro'
+    end
+    object ClientDataSet1Outubro: TFloatField
+      FieldName = 'Outubro'
+    end
+    object ClientDataSet1Novembro: TFloatField
+      FieldName = 'Novembro'
+    end
+    object ClientDataSet1JaneiroConta: TFloatField
+      FieldName = 'JaneiroConta'
+    end
+    object ClientDataSet1FevereiroConta: TFloatField
+      FieldName = 'FevereiroConta'
+    end
+    object ClientDataSet1MarcoConta: TFloatField
+      FieldName = 'MarcoConta'
+    end
+    object ClientDataSet1AbrilConta: TFloatField
+      FieldName = 'AbrilConta'
+    end
+    object ClientDataSet1MaioConta: TFloatField
+      FieldName = 'MaioConta'
+    end
+    object ClientDataSet1JunhoConta: TFloatField
+      FieldName = 'JunhoConta'
+    end
+    object ClientDataSet1JulhoConta: TFloatField
+      FieldName = 'JulhoConta'
+    end
+    object ClientDataSet1AgostoConta: TFloatField
+      FieldName = 'AgostoConta'
+    end
+    object ClientDataSet1SetembroConta: TFloatField
+      FieldName = 'SetembroConta'
+    end
+    object ClientDataSet1OutubroConta: TFloatField
+      FieldName = 'OutubroConta'
+    end
+    object ClientDataSet1NovembroConta: TFloatField
+      FieldName = 'NovembroConta'
+    end
+    object ClientDataSet1DezembroConta: TFloatField
+      FieldName = 'DezembroConta'
+    end
+    object ClientDataSet1Dezembro: TFloatField
+      FieldName = 'Dezembro'
+    end
+  end
+end

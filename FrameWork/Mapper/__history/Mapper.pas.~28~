@@ -1,0 +1,282 @@
+unit Mapper;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Vcl.StdCtrls, RTTI,  DB, GenericEntidade;
+
+type
+   TMapper = class
+   private
+     class function GetTableName(Obj: TGenericEntidade): String; static;
+     class function GetKeyField(Obj: TGenericEntidade): String; static;
+
+
+   public
+      class var Contexto : TRttiContext;
+      class var TypObj   : TRttiType;
+      class procedure Send_ComponentToObject(Form:TForm; Objeto: TGenericEntidade);static;
+      class procedure Send_ObjectToComponent( Objeto: TGenericEntidade; Form:TForm);static;
+      class procedure Send_ObjectToDataSet( Objeto: TGenericEntidade; DataSet: TDataSet;State:TDataSetState);static;
+      class procedure Send_DataSetToObject(DataSet: TDataSet; Objeto: TGenericEntidade); static;
+      class procedure Send_DataSetToComponent( DataSet: TDataSet; Form: TForm); static;
+
+      class function Parser_SQLInsert(Objeto: TGenericEntidade):string;static;
+      class function Parser_SQLUpdate(Objeto: TGenericEntidade):string;static;
+      class function Parser_SQLDelete(Objeto: TGenericEntidade): string; static;
+   end;
+
+implementation
+
+uses AtributoEntidade;
+
+class function TMapper.Parser_SQLInsert(Objeto: TGenericEntidade): string;
+var
+   Prop   : TRttiProperty;
+   Values : string;
+   Fields : string;
+begin
+   try
+      Contexto := TRttiContext.Create;
+      TypObj := Contexto.GetType(Objeto.ClassInfo);
+      for Prop in TypObj.GetProperties do
+      begin
+         Fields := Fields + Prop.Name+' , ';
+         Values := Values + quotedstr(Prop.GetValue(Objeto).AsString)+' , ';
+      end;
+      result := ' INSERT INTO '+ GetTableName( Objeto ) +' ('+Fields +') VALUES ('+Values+')';
+   finally
+      Contexto.Free;
+   end;
+end;
+
+class function TMapper.Parser_SQLUpdate(Objeto: TGenericEntidade): string;
+var
+   Prop   : TRttiProperty;
+   Values : string;
+   Fields : string;
+   Atributo: TCustomAttribute;
+   Where: string;
+begin
+   try
+      Contexto := TRttiContext.Create;
+      TypObj := Contexto.GetType(Objeto.ClassInfo);
+      for Prop in TypObj.GetProperties do
+      begin
+        for Atributo in TypObj.GetAttributes do
+        begin
+           if Atributo is KeyField then
+           begin
+              Where := KeyField(Atributo).Name + ' = '+Prop.GetValue(Objeto).AsString
+           end;
+        end;
+         Fields := Fields + Prop.Name +' = '+quotedstr(Prop.GetValue(Objeto).AsString)+' , ';
+      end;
+      result := 'Update '+ GetTableName( Objeto ) +' Set '+ Fields +
+                ' where '+ Where ;
+   finally
+      Contexto.Free;
+   end;
+end;
+
+
+class function TMapper.Parser_SQLDelete(Objeto: TGenericEntidade): string;
+var
+   Prop   : TRttiProperty;
+   Values : string;
+   KeyField : string;
+   Atributo: TCustomAttribute;
+   Where: string;
+begin
+   try
+      Contexto := TRttiContext.Create;
+      TypObj := Contexto.GetType(Objeto.ClassInfo);
+      for Prop in TypObj.GetProperties do
+      begin
+         if Atributo is KeyField then
+         begin
+              Where := KeyField(Atributo).Name + ' = '+Prop.GetValue(Objeto).AsString
+         end;
+
+      end;
+      result := 'Delete From '+ GetTableName( Objeto ) +' where '+GetKeyField( Objeto ) +' = '+ KeyField;
+   finally
+      Contexto.Free;
+   end;
+end;
+
+class procedure TMapper.Send_ComponentToObject(Form:TForm; Objeto: TGenericEntidade);
+var
+   j  : Integer;
+   Prop     : TRttiProperty;
+   Atributo : TCustomAttribute;
+begin
+   try
+      Contexto := TRttiContext.Create;
+      for j := 0 to Form.componentcount -1 do
+      begin
+         TypObj := Contexto.GetType(Objeto.ClassInfo);
+         for Prop in TypObj.GetProperties do
+         begin
+            if Prop.Name = Form.components[j].Name  then
+            begin
+               Prop.SetValue( Objeto , TEdit(Form.components[j]).Text );
+               TEdit(Form.components[j]).Text:= '';
+            end;
+         end;
+      end;
+   finally
+      Contexto.Free;
+   end;
+end;
+
+class procedure TMapper.Send_ObjectToComponent( Objeto: TGenericEntidade; Form:TForm);
+var
+   j  : Integer;
+   Prop     : TRttiProperty;
+begin
+   try
+      Contexto := TRttiContext.Create;
+      for j := 0 to Form.componentcount -1 do
+      begin
+         TypObj := Contexto.GetType(Objeto.ClassInfo);
+         for Prop in TypObj.GetProperties do
+         begin
+            if Prop.Name = Form.components[j].Name then
+            begin
+               TEdit(Form.components[j]).text := Prop.GetValue(Objeto).AsString;
+
+            end;
+         end;
+      end;
+   finally
+     Contexto.Free;
+   end;
+end;
+
+class procedure TMapper.Send_ObjectToDataSet( Objeto: TGenericEntidade; DataSet: TDataSet;State:TDataSetState );
+var
+   j  : Integer;
+   Prop     : TRttiProperty;
+begin
+   try
+      if State = dsInsert then
+         DataSet.append
+      else
+         DataSet.edit;
+
+      Contexto := TRttiContext.Create;
+      for j := 0 to DataSet.Fieldcount -1 do
+      begin
+         TypObj := Contexto.GetType(Objeto.ClassInfo);
+         for Prop in TypObj.GetProperties do
+         begin
+            if Prop.Name = DataSet.Fields[j].fieldname then
+            begin
+               DataSet.FieldByName(Prop.Name).AsString  := Prop.GetValue(Objeto).AsString;
+
+            end;
+         end;
+      end;
+
+      DataSet.post;
+   finally
+     Contexto.Free;
+   end;
+end;
+
+class procedure TMapper.Send_DataSetToComponent( DataSet: TDataSet; Form: TForm);
+var
+   j  : Integer;
+   Prop     : TRttiProperty;
+begin
+   try
+      Contexto := TRttiContext.Create;
+      for j := 0 to Form.componentcount -1 do
+      begin
+         TypObj := Contexto.GetType(DataSet.ClassInfo);
+         if DataSet.FindField(Form.components[j].Name) <> nil then
+         begin
+            TEdit(Form.components[j]).text := DataSet.FieldByName(Form.components[j].Name).AsString;
+
+         end;
+      end;
+   finally
+     Contexto.Free;
+   end;
+end;
+
+class procedure TMapper.Send_DataSetToObject(DataSet:TDataSet; Objeto: TGenericEntidade);
+var
+   j  : Integer;
+   Prop     : TRttiProperty;
+   Atributo : TCustomAttribute;
+begin
+   try
+      Contexto := TRttiContext.Create;
+      for j := 0 to DataSet.fieldcount -1 do
+      begin
+         TypObj := Contexto.GetType(Objeto.ClassInfo);
+         for Prop in TypObj.GetProperties do
+         begin
+            if Prop.Name = DataSet.fields[j].FieldName  then
+            begin
+               Prop.SetValue( Objeto , DataSet.FieldByName(Prop.Name ).AsString );
+
+            end;
+         end;
+      end;
+   finally
+     Contexto.Free;
+   end;
+end;
+
+class function TMapper.GetKeyField(Obj: TGenericEntidade): String;
+var
+   Contexto: TRttiContext;
+   TypObj: TRttiType;
+   Atributo: TCustomAttribute;
+   strTable: String;
+begin
+   try
+      Contexto := TRttiContext.Create;
+      TypObj := Contexto.GetType(TObject(Obj).ClassInfo);
+      for Atributo in TypObj.GetAttributes do
+      begin
+         if Atributo is KeyField then
+         begin
+            result:= TableName(Atributo).Name;
+         end;
+      end;
+   finally
+     Contexto.Free;
+   end;
+
+end;
+
+class function TMapper.GetTableName(Obj: TGenericEntidade): String;
+var
+   Contexto: TRttiContext;
+   TypObj: TRttiType;
+   Atributo: TCustomAttribute;
+   strTable: String;
+begin
+   try
+      Contexto := TRttiContext.Create;
+      TypObj := Contexto.GetType(TObject(Obj).ClassInfo);
+      for Atributo in TypObj.GetAttributes do
+      begin
+         if Atributo is TableName then
+         begin
+            result:= TableName(Atributo).Name;
+         end;
+      end;
+   finally
+     Contexto.Free;
+   end;
+end;
+
+end.
+

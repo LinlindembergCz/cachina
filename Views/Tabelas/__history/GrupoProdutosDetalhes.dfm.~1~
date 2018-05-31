@@ -1,0 +1,110 @@
+inherited FormGrupoProdutosDetalhes: TFormGrupoProdutosDetalhes
+  Caption = 'Grupo de produtos'
+  FormStyle = fsStayOnTop
+
+  inherited Panel1: TPanel
+    inherited tabPrincipal: TTabControl
+      inherited TabSheet1: TTabSheet
+        Height = 24
+        inherited StringGrid1: TDBgrid
+          Height = 356
+        end
+      end
+      inherited TabSheet2: TTabSheet
+        Height = 24
+        left = 62
+        object lbDescriacao: TLabel
+          Height = 17
+          left = 8
+          Top = 32
+          caption = 'Descriacao'
+          Width = 120
+        end
+        object Familia: TLabel
+          Height = 17
+          left = 8
+          Top = 64
+          caption = 'CodigoFamilia'
+          Width = 120
+        end
+        object edtDescriacao: TEdit
+          Tag = 1
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 2
+          left = 88
+          Top = 32
+          Width = 441
+          Height = 22
+          KillFocusByReturn = False
+          OnKeyDown = EditDown
+        end
+        object cboCodigoFamilia: TComboBox
+          DisableFocusEffect = False
+          Height = 22
+          left = 88
+          Top = 64
+          TabOrder = 3
+          Width = 441
+        end
+      end
+    end
+  end
+  
+end
+inherited FormGrupoProdutosDetalhes: TFormGrupoProdutosDetalhes
+  Caption = 'Grupo de produtos'
+  FormStyle = fsStayOnTop
+  DesignerMobile = False
+  DesignerWidth = 0
+  DesignerHeight = 0
+  DesignerDeviceName = ''
+  DesignerOrientation = 0
+  DesignerOSVersion = ''
+  inherited Panel1: TPanel
+    inherited tabPrincipal: TPageControle
+      inherited TabSheet1: TTabSheet
+        Height = 24
+        inherited StringGrid1: TDBgrid
+          Height = 356
+        end
+      end
+      inherited TabSheet2: TTabSheet
+        Height = 24
+        left = 62
+        object lbDescriacao: TLabel
+          Height = 17
+          left = 8
+          Top = 32
+          caption = 'Descriacao'
+          Width = 120
+        end
+        object Familia: TLabel
+          Height = 17
+          left = 8
+          Top = 64
+          caption = 'CodigoFamilia'
+          Width = 120
+        end
+        object edtDescriacao: TEdit
+          Tag = 1
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 2
+          left = 88
+          Top = 32
+          Width = 441
+          Height = 22
+          KillFocusByReturn = False
+          OnKeyDown = EditDown
+        end
+        object cboCodigoFamilia: TComboBox
+          DisableFocusEffect = False
+          Height = 22
+          left = 88
+          Top = 64
+          TabOrder = 3
+          Width = 441
+        end
+      end
+    end
+  end  
+end

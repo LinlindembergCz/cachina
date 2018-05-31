@@ -1,0 +1,12 @@
+unit GenericEntidade;
+
+interface
+
+type
+  TGenericEntidade = class
+
+  end;
+
+implementation
+
+end.

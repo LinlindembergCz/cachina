@@ -1,0 +1,182 @@
+unit Pagamentos;
+
+interface
+
+uses
+ CAtribEntity,  GenericEntidade, Variants;
+
+type
+  [TableName('Pagamento')]
+  [Modulo('11')]
+  TPagamento = class(TGenericEntidade)
+  private
+    FObservacao: string;
+    FValor: Double;
+    FDescricao: string;
+    FCodigo: Integer;
+    FDataVencimento: TDatetime;
+    FCodigoFilial: Integer;
+    FCodigoPessoa: Integer;
+    FCodigoFormaPagamento: Integer;
+    FSituacao: string;
+    FCodigoCaixa: Integer;
+    FCodigoCategoria: Integer;
+    FData: TDatetime;
+    FNumeroDocumento: string;
+    FDataBaixa: TDatetime;
+    FValorBaixado: Double;
+    FCodigoFuncionario: integer;
+    FCodigoCentroCusto: string;
+    procedure SetCodigo(const Value: Integer);
+    procedure SetCodigoCaixa(const Value: Integer);
+    procedure SetCodigoCategoria(const Value: Integer);
+    procedure SetCodigoFilial(const Value: Integer);
+    procedure SetCodigoFormaPagamento(const Value: Integer);
+    procedure SetCodigoPessoa(const Value: Integer);
+    procedure SetData(const Value: TDatetime);
+    procedure SetDataVencimento(const Value: TDatetime);
+    procedure SetDescricao(const Value: string);
+    procedure SetNumeroDocumento(const Value: string);
+    procedure SetObservacao(const Value: string);
+    procedure SetSituacao(const Value: string);
+    procedure SetValor(const Value: Double);
+    procedure SetDataBaixa(const Value: TDatetime);
+    procedure SetValorBaixado(const Value: Double);
+    procedure SetCodigoFuncionario(const Value: integer);
+    procedure SetCodigoCentroCusto(const Value: string);
+public
+  [KeyField('Codigo')]
+  property Codigo: Integer read FCodigo write SetCodigo;
+  [FieldName('CodigoFilial')]
+  property CodigoFilial: Integer read FCodigoFilial write SetCodigoFilial;
+  [FieldName('Data')]
+  property Data: TDatetime read FData write SetData;
+  [FieldName('Descricao')]
+  property Descricao: string read FDescricao write SetDescricao;
+  [FieldName('CodigoPessoa')]
+  property CodigoPessoa: Integer read FCodigoPessoa write SetCodigoPessoa;
+  [FieldName('Valor')]
+  property Valor: Double read FValor write SetValor;
+  [FieldName('CodigoCategoria')]
+  property CodigoCategoria: Integer read FCodigoCategoria write SetCodigoCategoria;
+  [FieldName('Situacao')]
+  property Situacao: string read FSituacao write SetSituacao;
+  [FieldName('CodigoCaixa')]
+  property CodigoCaixa: Integer read FCodigoCaixa write SetCodigoCaixa;
+  [FieldName('NumeroDocumento')]
+  property NumeroDocumento: string read FNumeroDocumento write SetNumeroDocumento;
+  [FieldName('DataVencimento')]
+  property DataVencimento: TDatetime read FDataVencimento write SetDataVencimento;
+  [FieldName('CodigoFormaPagamento')]
+  property CodigoFormaPagamento: Integer read FCodigoFormaPagamento write SetCodigoFormaPagamento;
+  [FieldName('Observacao')]
+  property Observacao: string read FObservacao write SetObservacao;
+  [FieldName('DataBaixa')]
+  property DataBaixa: TDatetime read FDataBaixa write SetDataBaixa;
+  [FieldName('ValorBaixado')]
+  property ValorBaixado: Double read FValorBaixado write SetValorBaixado;
+  [FieldName('CodigoFuncionario')]
+  property CodigoFuncionario: integer read FCodigoFuncionario write SetCodigoFuncionario;
+  [FieldName('CodigoCentroCusto')]
+  property CodigoCentroCusto: string read FCodigoCentroCusto write SetCodigoCentroCusto;
+
+
+  constructor Create;
+end;
+
+implementation
+
+{ TPagamento }
+
+constructor TPagamento.Create;
+begin
+
+end;
+
+procedure TPagamento.SetCodigo(const Value: Integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TPagamento.SetCodigoCaixa(const Value: Integer);
+begin
+  FCodigoCaixa := Value;
+end;
+
+procedure TPagamento.SetCodigoCategoria(const Value: Integer);
+begin
+  FCodigoCategoria := Value;
+end;
+
+procedure TPagamento.SetCodigoCentroCusto(const Value: string);
+begin
+  FCodigoCentroCusto := Value;
+end;
+
+procedure TPagamento.SetCodigoFilial(const Value: Integer);
+begin
+  FCodigoFilial := Value;
+end;
+
+procedure TPagamento.SetCodigoFormaPagamento(const Value: Integer);
+begin
+  FCodigoFormaPagamento := Value;
+end;
+
+procedure TPagamento.SetCodigoFuncionario(const Value: integer);
+begin
+  FCodigoFuncionario := Value;
+end;
+
+procedure TPagamento.SetCodigoPessoa(const Value: Integer);
+begin
+  FCodigoPessoa := Value;
+end;
+
+procedure TPagamento.SetData(const Value: TDatetime);
+begin
+  FData := Value;
+end;
+
+procedure TPagamento.SetDataBaixa(const Value: TDatetime);
+begin
+  FDataBaixa := Value;
+end;
+
+procedure TPagamento.SetDataVencimento(const Value: TDatetime);
+begin
+  FDataVencimento := Value;
+end;
+
+procedure TPagamento.SetDescricao(const Value: string);
+begin
+  FDescricao := Value;
+end;
+
+procedure TPagamento.SetNumeroDocumento(const Value: string);
+begin
+  FNumeroDocumento := Value;
+end;
+
+procedure TPagamento.SetObservacao(const Value: string);
+begin
+  FObservacao := Value;
+end;
+
+procedure TPagamento.SetSituacao(const Value: string);
+begin
+  FSituacao := Value;
+end;
+
+procedure TPagamento.SetValor(const Value: Double);
+begin
+  FValor := Value;
+end;
+
+procedure TPagamento.SetValorBaixado(const Value: Double);
+begin
+  FValorBaixado := Value;
+end;
+
+End.
+

@@ -1,0 +1,16 @@
+[MSSQLConnection]
+SchemaOverride=sa.dbo
+;DelegateConnection=DBXTraceConnection
+DriverName=MSSQL
+HostName=ServerName
+DataBase=Database Name
+User_Name=user
+Password=password
+BlobSize=-1
+ErrorResourceFile=
+LocaleCode=0000
+IsolationLevel=ReadCommitted
+OS Authentication=False
+Prepare SQL=False
+ConnectTimeout=60
+Mars_Connection=False

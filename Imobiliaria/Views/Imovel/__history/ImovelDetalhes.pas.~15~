@@ -1,0 +1,227 @@
+unit ImovelDetalhes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, TemplateDetalhesComTabGrid,
+  Vcl.StdCtrls, Vcl.ComCtrls, Data.DB, Vcl.Buttons, Vcl.Grids, Vcl.DBGrids,
+  Vcl.ExtCtrls, Vcl.FileCtrl;
+
+type
+  TFormImoveisDetalhes = class(TTemplateFormComTabGridDetalhes)
+    PageControl1: TPageControl;
+    TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
+    TabSheet5: TTabSheet;
+    edtTitulo: TEdit;
+    cboCodigoResponsavel: TComboBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    cboCodigoProprietario: TComboBox;
+    Label4: TLabel;
+    cboCodigoSituacao: TComboBox;
+    Label5: TLabel;
+    cboFinalidade: TComboBox;
+    Label6: TLabel;
+    cboCodigoTipo: TComboBox;
+    Label9: TLabel;
+    cboCodigoCliente: TComboBox;
+    dateDataCadastro: TDateTimePicker;
+    Label10: TLabel;
+    Label11: TLabel;
+    edtReferencia: TEdit;
+    Label12: TLabel;
+    edtEndereco: TEdit;
+    Label13: TLabel;
+    edtBairro: TEdit;
+    Label14: TLabel;
+    edtCidade: TEdit;
+    Label15: TLabel;
+    cboUF: TComboBox;
+    Label16: TLabel;
+    edtCEP: TEdit;
+    Label17: TLabel;
+    edtComplemento: TEdit;
+    Label18: TLabel;
+    edtAreaTotal: TEdit;
+    edtAreaConstruida: TEdit;
+    Label19: TLabel;
+    edtGaragens: TEdit;
+    Label20: TLabel;
+    Label21: TLabel;
+    edtQuartos: TEdit;
+    edtAno: TEdit;
+    Label22: TLabel;
+    edtBanheiros: TEdit;
+    edtSuites: TEdit;
+    Label24: TLabel;
+    Label25: TLabel;
+    Label23: TLabel;
+    edtValorVenda: TEdit;
+    Label26: TLabel;
+    edtComissaoCorretor: TEdit;
+    Label27: TLabel;
+    edtValorCondominio: TEdit;
+    Label28: TLabel;
+    edtValorEntrada: TEdit;
+    memoObservacao: TMemo;
+    Label29: TLabel;
+    TabSheet6: TTabSheet;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    Label7: TLabel;
+    dateDataVencimento: TDateTimePicker;
+    chkPublicado: TCheckBox;
+    chkEmplacado: TCheckBox;
+    chkPermuta: TCheckBox;
+    chkSuspenso: TCheckBox;
+    FileListBoxfoto: TFileListBox;
+    Image2: TImage;
+    ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
+    ComboBox3: TComboBox;
+    Edit1: TEdit;
+    ComboBox4: TComboBox;
+    ComboBox5: TComboBox;
+    ComboBox6: TComboBox;
+    Edit2: TEdit;
+    Label8: TLabel;
+    Label30: TLabel;
+    Label31: TLabel;
+    Label32: TLabel;
+    Label33: TLabel;
+    Label34: TLabel;
+    Label35: TLabel;
+    Label36: TLabel;
+    Label37: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure TabSheet6Show(Sender: TObject);
+  private
+    function RetornarPastaPadraoImovel: string;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormImoveisDetalhes: TFormImoveisDetalhes;
+
+implementation
+
+{$R *.dfm}
+
+uses EntidadeFactory, ControllerTabelas, DBUtils, Principal;
+
+procedure TFormImoveisDetalhes.FormCreate(Sender: TObject);
+begin
+  Entidade:= TEntidadeFactory.criar(tpimovel);
+  Controller := TControllerTabelas.create;
+  inherited;
+  with MapperEntidade do
+  begin
+    associar('Codigo', nil);
+    associar('CodigoFilial', nil);
+    associar('Referencia', edtReferencia);
+    associar('CodigoResponsavel',  cboCodigoResponsavel);
+    associar('CodigoCliente',  cboCodigoCliente);
+    associar('CodigoClienteProprietario',  cboCodigoProprietario);
+    associar('Endereco', edtEndereco);
+    associar('Bairro', edtBairro);
+    associar('Cidade', edtCidade);
+    associar('Estado', cboUF);
+    associar('Quartos', edtQuartos);
+    associar('Suites', edtSuites);
+    associar('Balheiros', edtBanheiros);
+    associar('AreaTotal', edtAreaTotal);
+    associar('AreaContruida', edtAreaConstruida);
+    associar('ValorVenda', edtValorVenda);
+    //associar('ValorAluguel', edtValorAluguel);
+    associar('ValorCondominio', edtValorCondominio);
+    associar('Complemento', edtComplemento);
+    associar('Titulo', edtTitulo);
+    associar('DataCadastro', dateDataCadastro);
+    associar('CodigoTipo',  cboCodigoTipo);
+    associar('CodigoSituacao',  cboCodigoSituacao);
+    associar('Finalidade', cboFinalidade);
+    associar('Observacao', memoObservacao);
+    associar('ComissaoCorretor', edtComissaoCorretor);
+    associar('Garagens', edtGaragens);
+    associar('ValorEntrada', edtValorEntrada);
+    associar('DataVencimento', dateDataVencimento);
+    associar('Publicado', chkPublicado);
+    associar('Emplacado', chkEmplacado);
+    associar('EstudaPermuta', chkPermuta);
+    //associar('TextoAnuncio', edtTextoAnuncio);
+    //associar('TextoVistoria', edtTextoVistoria);
+    //associar('TextoCondicoesComerciais', edtTextoCondicoesComerciais);
+    associar('Suspenso',chkSuspenso);
+  end;
+  FillCombobox(tpImovelSituacao, cboCodigoSituacao);
+  FillCombobox(tpImovelTipo, cboCodigoTipo);
+  FillCombobox(tpFuncionarios, cboCodigoResponsavel);
+  FillCombobox(tpPessoa, cboCodigoProprietario,' "Tipo"=''CLIENTE''');
+  FillCombobox(tpPessoa, cboCodigoCliente,' "Tipo"=''CLIENTE''');
+
+end;
+
+procedure TFormImoveisDetalhes.SpeedButton1Click(Sender: TObject);
+begin
+  inherited;
+  FormPrincipal.ActFuncionarios.execute;
+end;
+
+procedure TFormImoveisDetalhes.SpeedButton2Click(Sender: TObject);
+begin
+  inherited;
+    FormPrincipal.ActClientes.execute;
+end;
+
+procedure TFormImoveisDetalhes.SpeedButton3Click(Sender: TObject);
+begin
+  inherited;
+    FormPrincipal.ActSituacao.execute;
+end;
+
+procedure TFormImoveisDetalhes.SpeedButton4Click(Sender: TObject);
+begin
+  inherited;
+    FormPrincipal.ActClientes.execute;
+end;
+
+procedure TFormImoveisDetalhes.SpeedButton5Click(Sender: TObject);
+begin
+  inherited;
+    FormPrincipal.ActTipo.execute;
+end;
+
+procedure TFormImoveisDetalhes.TabSheet6Show(Sender: TObject);
+begin
+  inherited;
+  FileListBoxFoto.Directory := RetornarPastaPadraoImovel;
+  FileListBoxFoto.Update;
+end;
+
+function TFormImoveisDetalhes.RetornarPastaPadraoImovel:string;
+begin
+  {
+  if directoryExists(BDPrincipal.ConfiguracaoconfPastaVirtual.asstring+'\'+
+  BDImobiliaria.ImovelimovReferencia.asstring) then
+     result:= BDPrincipal.ConfiguracaoconfPastaVirtual.asstring+'\'+
+     BDImobiliaria.ImovelimovReferencia.asstring
+  else
+  if directoryExists(BDPrincipal.ConfiguracaoconfPastaVirtual.asstring) then
+     result:= BDPrincipal.ConfiguracaoconfPastaVirtual.asstring;
+  }
+end;
+
+end.

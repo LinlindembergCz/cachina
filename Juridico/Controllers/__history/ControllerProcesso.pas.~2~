@@ -1,0 +1,78 @@
+ unit ControllerProcesso;
+
+interface
+
+uses
+   Windows,Data.DB,  Messages, SysUtils, Variants, Classes,  ControllerTabelas,
+   Forms, Mapper, GenericEntidade;
+
+type
+  TControllerProcesso = class( TControllerTabelas )
+  private
+
+
+
+  public
+    function SelectSaida: string;
+    procedure Inserir(Objecto: TGenericEntidade);override;
+    procedure Atualizar(Objecto: TGenericEntidade);override;
+    procedure Excluir(Objecto: TGenericEntidade);override;
+    function GetDataSet(Objecto: TGenericEntidade;
+                        Condicao: string;
+                        Fields: string= ''):TDataset;
+    function GetSelect(Tabela, Condicao: string; Fields: string = ''): TDataset;
+    class function GetValue(Tabela, Condicao, Field: string): String; static;
+
+    function GetMaxSaida:String;
+
+  end;
+  const
+  CamposProcesso  = 'T1.*';
+  ConsultaTabela = 'Processo T1';
+
+implementation
+
+{ TControllerProcesso }
+
+uses  GenericDAO;
+
+procedure TControllerProcesso.Atualizar(Objecto: TGenericEntidade);
+begin
+  inherited  ;
+end;
+
+procedure TControllerProcesso.Excluir(Objecto: TGenericEntidade);
+begin
+  inherited ;
+end;
+
+function TControllerProcesso.GetDataSet(Objecto: TGenericEntidade;
+                                         Condicao: string;
+                                         Fields: string = ''): TDataset;
+begin
+  result:= inherited;
+end;
+
+function TControllerProcesso.GetMaxSaida: String;
+begin
+   result := GetSelect('Processo','0=0','isNull( Max("Codigo"),0)+1 as Max').FieldByName('Max').AsString;
+end;
+
+procedure TControllerProcesso.Inserir(Objecto:TGenericEntidade);
+begin
+  inherited;
+end;
+
+function TControllerProcesso.GetSelect(Tabela, Condicao: string; Fields: string= ''): TDataset;
+begin
+  result := TGenericDAO.GetSelect(Tabela,Condicao, Fields);
+end;
+
+class function TControllerProcesso.GetValue(Tabela, Condicao, Field: string): String;
+begin
+  result := TGenericDAO.GetValue(Tabela,Condicao, Field);
+end;
+
+
+
+end.

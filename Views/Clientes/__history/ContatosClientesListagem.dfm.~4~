@@ -1,0 +1,30 @@
+inherited FormContatosClientesListagem: TFormContatosClientesListagem
+  Caption = 'Contatos'
+  ClientHeight = 372
+  FormStyle = fsStayOnTop
+  OnActivate = FormActivate
+  ExplicitWidth = 656
+  ExplicitHeight = 410
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited btnSelecionar: TSpeedButton
+      Caption = 'Selecionar'
+    end
+  end
+  inherited Grid1: TDBGrid
+    Height = 299
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'Codigo'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Nome'
+        Width = 532
+        Visible = True
+      end>
+  end
+end

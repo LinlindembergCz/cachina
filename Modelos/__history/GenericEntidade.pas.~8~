@@ -1,0 +1,16 @@
+unit GenericEntidade;
+
+interface
+  Uses
+  RTTI, Classes;
+
+
+type
+  TGenericEntidade = class(TObject)
+
+  end;
+
+
+implementation
+
+end.

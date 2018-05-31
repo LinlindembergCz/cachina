@@ -1,0 +1,14 @@
+unit GenericEntidade;
+
+interface
+
+uses RTTI, Classes, Annotations;
+
+type
+   [TableName('Clientes')]
+  TGenericEntidade = class(TObject)
+  end;
+
+implementation
+
+end.

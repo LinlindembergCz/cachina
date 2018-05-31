@@ -1,0 +1,29 @@
+unit AgendamentoMedicoDetalhes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, AgendamentoDetalhes, Vcl.Menus, Data.DB,
+  Datasnap.DBClient, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids,
+  Vcl.ExtCtrls, Vcl.Buttons;
+
+type
+  TFormAgendamentoDetalhes1 = class(TFormAgendamentoDetalhes)
+    Label5: TLabel;
+    cboHospital: TComboBox;
+    SpeedButton5: TSpeedButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormAgendamentoDetalhes1: TFormAgendamentoDetalhes1;
+
+implementation
+
+{$R *.dfm}
+
+end.

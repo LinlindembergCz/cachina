@@ -1,0 +1,81 @@
+unit PedidoListagem;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, TemplateListagemBase, Data.DB,
+  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls;
+
+type
+  TFormPedidoListagem = class(TTemplateFormListagemBase)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    SpeedButton3: TSpeedButton;
+    Label4: TLabel;
+    edtPlaca: TEdit;
+    dateInicio: TDateTimePicker;
+    dateFim: TDateTimePicker;
+    edtFornecedor: TEdit;
+    btnInserir: TButton;
+    btnAlterar: TButton;
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure btnInserirClick(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnSelecionarClick(Sender: TObject);
+  private
+    Fcodigo: string;
+    procedure Setcodigo(const Value: string);
+    { Private declarations }
+  public
+    { Public declarations }
+    Operacao: string;
+    property codigo:string read Fcodigo write Setcodigo;
+  end;
+
+var
+  FormPedidoListagem: TFormPedidoListagem;
+
+implementation
+
+uses   EntidadeFactory, Mapper, GenericEntidade, strutils;
+
+{$R *.dfm}
+
+procedure TFormPedidoListagem.btnAlterarClick(Sender: TObject);
+begin
+  inherited;
+  Codigo := srcEntidade.DataSet.FieldByName('Codigo').AsString;
+  Operacao := 'Update';
+  close;
+end;
+
+procedure TFormPedidoListagem.btnInserirClick(Sender: TObject);
+begin
+  inherited;
+  Codigo   := '';
+  Operacao := 'Insert';
+  close;
+end;
+
+procedure TFormPedidoListagem.btnSelecionarClick(Sender: TObject);
+begin
+  inherited;
+  Codigo   := srcEntidade.DataSet.FieldByName('Codigo').AsString;
+  Operacao := '';
+  close;
+end;
+
+procedure TFormPedidoListagem.Setcodigo(const Value: string);
+begin
+  Fcodigo := Value;
+end;
+
+procedure TFormPedidoListagem.SpeedButton2Click(Sender: TObject);
+begin
+  inherited;
+  close;
+end;
+
+end.

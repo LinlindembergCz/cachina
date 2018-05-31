@@ -1,0 +1,146 @@
+unit Fornecedores;
+
+interface
+
+uses
+ CAtribEntity,  GenericEntidade;
+
+type
+  [TableName('Fornecedor')]
+  TFornecedores = class(TGenericEntidade)
+  private
+    FObservacao: string;
+    FSite: string;
+    FEmail: string;
+    FBairro: string;
+    FCodigoClassificacao: Integer;
+    FUF: string;
+    FCodigo: Integer;
+    FCodigoFilial: Integer;
+    FCPFCNPJ: string;
+    FMunicipio: string;
+    FRazaoSocial: string;
+    FTelefones: string;
+    FNome: string;
+    FEndereco: string;
+    procedure SetBairro(const Value: string);
+    procedure SetCodigo(const Value: Integer);
+    procedure SetCodigoClassificacao(const Value: Integer);
+    procedure SetCodigoFilial(const Value: Integer);
+    procedure SetCPFCNPJ(const Value: string);
+    procedure SetEmail(const Value: string);
+    procedure SetEndereco(const Value: string);
+    procedure SetMunicipio(const Value: string);
+    procedure SetNome(const Value: string);
+    procedure SetObservacao(const Value: string);
+    procedure SetRazaoSocial(const Value: string);
+    procedure SetSite(const Value: string);
+    procedure SetTelefones(const Value: string);
+    procedure SetUF(const Value: string);
+public
+  [FieldName('Codigo')]
+  property Codigo: Integer read FCodigo write SetCodigo;
+  [FieldName('CodigoFilial')]
+  property CodigoFilial: Integer read FCodigoFilial write SetCodigoFilial;
+  [FieldName('Nome')]
+  property Nome: string read FNome write SetNome;
+  [FieldName('RazaoSocial')]
+  property RazaoSocial: string read FRazaoSocial write SetRazaoSocial;
+  [FieldName('CPFCNPJ')]
+  property CPFCNPJ: string read FCPFCNPJ write SetCPFCNPJ;
+  [FieldName('Endereco')]
+  property Endereco: string read FEndereco write SetEndereco;
+  [FieldName('Bairro')]
+  property Bairro: string read FBairro write SetBairro;
+  [FieldName('Municipio')]
+  property Municipio: string read FMunicipio write SetMunicipio;
+  [FieldName('UF')]
+  property UF: string read FUF write SetUF;
+  [FieldName('Telefones')]
+  property Telefones: string read FTelefones write SetTelefones;
+  [FieldName('Email')]
+  property Email: string read FEmail write SetEmail;
+  [FieldName('Site')]
+  property Site: string read FSite write SetSite;
+  [FieldName('CodigoClassificacao')]
+  property CodigoClassificacao: Integer read FCodigoClassificacao write SetCodigoClassificacao;
+  [FieldName('Observacao')]
+  property Observacao: string read FObservacao write SetObservacao;
+end;
+
+implementation
+
+{ TFornecedores }
+
+procedure TFornecedores.SetBairro(const Value: string);
+begin
+  FBairro := Value;
+end;
+
+procedure TFornecedores.SetCodigo(const Value: Integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TFornecedores.SetCodigoClassificacao(const Value: Integer);
+begin
+  FCodigoClassificacao := Value;
+end;
+
+procedure TFornecedores.SetCodigoFilial(const Value: Integer);
+begin
+  FCodigoFilial := Value;
+end;
+
+procedure TFornecedores.SetCPFCNPJ(const Value: string);
+begin
+  FCPFCNPJ := Value;
+end;
+
+procedure TFornecedores.SetEmail(const Value: string);
+begin
+  FEmail := Value;
+end;
+
+procedure TFornecedores.SetEndereco(const Value: string);
+begin
+  FEndereco := Value;
+end;
+
+procedure TFornecedores.SetMunicipio(const Value: string);
+begin
+  FMunicipio := Value;
+end;
+
+procedure TFornecedores.SetNome(const Value: string);
+begin
+  FNome := Value;
+end;
+
+procedure TFornecedores.SetObservacao(const Value: string);
+begin
+  FObservacao := Value;
+end;
+
+procedure TFornecedores.SetRazaoSocial(const Value: string);
+begin
+  FRazaoSocial := Value;
+end;
+
+procedure TFornecedores.SetSite(const Value: string);
+begin
+  FSite := Value;
+end;
+
+procedure TFornecedores.SetTelefones(const Value: string);
+begin
+  FTelefones := Value;
+end;
+
+procedure TFornecedores.SetUF(const Value: string);
+begin
+  FUF := Value;
+end;
+
+End.
+

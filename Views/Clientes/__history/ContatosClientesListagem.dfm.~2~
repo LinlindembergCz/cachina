@@ -1,0 +1,11 @@
+inherited FormContatosClientesListagem: TFormContatosClientesListagem
+  Caption = 'Contatos'
+  ClientHeight = 372
+  FormStyle = fsStayOnTop
+  OnActivate = FormActivate
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Grid1: TDBGrid
+    Height = 299
+  end
+end

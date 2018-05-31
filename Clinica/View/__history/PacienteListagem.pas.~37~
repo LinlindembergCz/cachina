@@ -1,0 +1,103 @@
+unit PacienteListagem;
+
+interface
+
+uses TemplateDetalhesComTabGrid, Vcl.Controls, Vcl.StdCtrls, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.ComCtrls, System.Classes, Vcl.ExtCtrls, TemplateListagemBase,
+  Vcl.Buttons, ControllerPaciente,Sysutils;
+
+
+type
+  TFormPacienteListagem = class(TTemplateFormListagemBase)
+    edtPesquisa: TEdit;
+    btnPesquisar: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    procedure FormCreate(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure edtPesquisaKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtPesquisaKeyPress(Sender: TObject; var Key: Char);
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    FCodigo: string;
+    procedure SetCodigo(const Value: string);
+    { Private declarations }
+  public
+    { Public declarations }
+    NomeTabela: string;
+    ControllerPaciente: TControllerPaciente;
+    property Codigo: string read FCodigo write SetCodigo;
+  end;
+
+var
+  FormPacienteListagem: TFormPacienteListagem;
+
+implementation
+
+{$R *.dfm}
+
+uses EntidadeFactory, Mapper, Principal, Windows;
+
+procedure TFormPacienteListagem.edtPesquisaKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  inherited;
+  if key = vk_return then
+    btnPesquisar.Click;
+end;
+
+procedure TFormPacienteListagem.edtPesquisaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  inherited;
+  key:= upcase(Key);
+end;
+
+procedure TFormPacienteListagem.FormCreate(Sender: TObject);
+begin
+  inherited;
+  NomeTabela := TEntidadeFactory.GetNameEntidade(tpTriagem)+' T1';
+  ControllerPaciente  := TControllerPaciente.Create;
+  srcEntidade.DataSet := ControllerPaciente.GetSelect( NomeTabela,
+                         '0=0 Order by "Nome"');
+end;
+
+procedure TFormPacienteListagem.SetCodigo(const Value: string);
+begin
+  FCodigo := Value;
+end;
+
+procedure TFormPacienteListagem.SpeedButton1Click(Sender: TObject);
+begin
+  inherited;
+  edtPesquisa.Text:= FormPrincipal.ShowParcienteDetalhesInsert(edtPesquisa.Text);
+  btnPesquisar.Click;
+end;
+
+procedure TFormPacienteListagem.SpeedButton2Click(Sender: TObject);
+begin
+  inherited;
+  if Grid1.Focused then
+    Codigo := srcEntidade.DataSet.FieldByName('Codigo').AsString;
+end;
+
+procedure TFormPacienteListagem.SpeedButton3Click(Sender: TObject);
+begin
+  inherited;
+  Codigo := srcEntidade.DataSet.FieldByName('Codigo').AsString;
+  FormPrincipal.ShowParcienteDetalhes(Codigo);
+end;
+
+procedure TFormPacienteListagem.btnPesquisarClick(Sender: TObject);
+begin
+  inherited;
+  srcEntidade.DataSet := ControllerPaciente.GetSelect(NomeTabela,
+                         '"Nome" Like ('+quotedstr('%'+edtPesquisa.Text+'%')+' or ' +
+                         '"NumeroCarteira="'+quotedstr(edtPesquisa.Text)+
+                         ') Order by "Nome"');
+end;
+
+end.

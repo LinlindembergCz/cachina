@@ -1,0 +1,110 @@
+unit CaixaDetalhes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, TemplateDetalhesComTabGrid, Data.DB,
+  Vcl.Buttons, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ExtCtrls,
+  Vcl.Mask, Vcl.DBCtrls, Data.Bind.Components, Data.Bind.ObjectScope, Vcl.Menus,
+  System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,
+  Vcl.Bind.DBEngExt;
+
+type
+  TFormCaixaDetalhes = class(TTemplateFormComTabGridDetalhes)
+    Label1: TLabel;
+    edtDescricao: TEdit;
+    cboStatus: TComboBox;
+    lbCodificacao: TLabel;
+    edtValorSaldo: TEdit;
+    GroupBox1: TGroupBox;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label8: TLabel;
+    Label2: TLabel;
+    edtAgencia: TEdit;
+    edtConta: TEdit;
+    edtDigito: TEdit;
+    edtCendente: TEdit;
+    edtNossoNumero: TEdit;
+    edtCarteira: TEdit;
+    edtCodigoBanco: TEdit;
+    edtTaxa: TEdit;
+    Label3: TLabel;
+    edtConvenio: TEdit;
+    DataGeneratorAdapter1: TDataGeneratorAdapter;
+    AdapterBindSource1: TAdapterBindSource;
+    BindingsList1: TBindingsList;
+    LinkControlToField1: TLinkControlToField;
+    LinkControlToField2: TLinkControlToField;
+    LinkControlToField3: TLinkControlToField;
+    LinkFillControlToField1: TLinkFillControlToField;
+    LinkControlToField4: TLinkControlToField;
+    LinkControlToField5: TLinkControlToField;
+    LinkControlToField6: TLinkControlToField;
+    LinkControlToField7: TLinkControlToField;
+    LinkControlToField8: TLinkControlToField;
+    LinkControlToField9: TLinkControlToField;
+    LinkControlToField10: TLinkControlToField;
+    LinkControlToField11: TLinkControlToField;
+    procedure FormCreate(Sender: TObject);
+    procedure AdapterBindSource1CreateAdapter(Sender: TObject;
+      var ABindSourceAdapter: TBindSourceAdapter);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormCaixaDetalhes: TFormCaixaDetalhes;
+
+implementation
+
+{$R *.dfm}
+
+uses ControllerTabelas, EntidadeFactory, Caixa;
+
+procedure TFormCaixaDetalhes.AdapterBindSource1CreateAdapter(Sender: TObject;
+  var ABindSourceAdapter: TBindSourceAdapter);
+begin
+  inherited;
+  Entidade  := TEntidadeFactory.criar(tpCaixa);
+  ABindSourceAdapter := TObjectBindSourceAdapter<TCaixa>.create(self, Entidade as TCaixa);
+end;
+
+procedure TFormCaixaDetalhes.FormCreate(Sender: TObject);
+var
+  I: Integer;
+begin
+  Controller:= TControllerTabelas.create;
+  inherited;
+  for I := 0 to DataGeneratorAdapter1.FieldDefs.Count-1 do
+     MapperEntidade.FieldMapList.Add( DataGeneratorAdapter1.FieldDefs[i].Name);
+
+  {
+  with MapperEntidade do
+  begin
+    associar('Codigo', nil);
+    associar('Descricao', edtDescricao);
+    associar('ValorSaldo', edtValorSaldo);
+    associar('Status', cboStatus);
+    associar('Agencia', edtAgencia);
+    associar('Conta',edtConta);
+    associar('Digito',edtDigito);
+    associar('Cendente',edtCendente);
+    associar('NossoNumero',edtNossoNumero);
+    associar('Carteira',edtCarteira);
+    associar('CodigoBanco',edtCodigoBanco);
+    associar('Taxa',edtTaxa);
+    associar('Convenio',edtConvenio);
+  end;
+  }
+
+end;
+
+end.

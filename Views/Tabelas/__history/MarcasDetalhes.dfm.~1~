@@ -1,0 +1,38 @@
+inherited FormMarcasDetalhes: TFormMarcasDetalhes
+  Caption = 'Marcas de produtos'
+
+  inherited Panel1: TPanel
+    inherited tabPrincipal: TTabControl
+      inherited TabSheet1: TTabSheet
+        Height = 24
+        inherited StringGrid1: TDBgrid
+          Height = 356
+        end
+      end
+      inherited TabSheet2: TTabSheet
+        Height = 24
+        left = 62
+        object Label1: TLabel
+          Font.Style = [fsBold]
+          Height = 16
+          left = 8
+          Top = 17
+          caption = 'Descri'#231#227'o'
+          Width = 63
+        end
+        object edtDescricao: TEdit
+          Tag = 1
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 1
+          left = 77
+          Top = 17
+          Width = 422
+          Height = 21
+          KillFocusByReturn = False
+          OnKeyDown = EditDown
+        end
+      end
+    end
+  end
+  
+end

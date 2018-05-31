@@ -1,0 +1,60 @@
+inherited FormTabelaCIDDetalhes: TFormTabelaCIDDetalhes
+  Caption = 'Tabela CID'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited tabPrincipal: TPageControl
+      inherited TabSheet1: TTabSheet
+        inherited DBGrid1: TDBGrid
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'Codificacao'
+              Width = 82
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Descricao'
+              Width = 509
+              Visible = True
+            end>
+        end
+      end
+      inherited TabSheet2: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitWidth = 630
+        ExplicitHeight = 399
+        object Label1: TLabel
+          Left = 8
+          Top = 25
+          Width = 55
+          Height = 13
+          Caption = 'Codifica'#231#227'o'
+        end
+        object lbDescricao: TLabel
+          Left = 11
+          Top = 60
+          Width = 46
+          Height = 13
+          Caption = 'Descricao'
+        end
+        object edtCodificacao: TEdit
+          Left = 84
+          Top = 19
+          Width = 103
+          Height = 21
+          TabOrder = 0
+        end
+        object edtDescricao: TEdit
+          Left = 84
+          Top = 57
+          Width = 521
+          Height = 21
+          TabOrder = 1
+        end
+      end
+    end
+  end
+end

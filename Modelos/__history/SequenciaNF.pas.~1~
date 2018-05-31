@@ -1,0 +1,32 @@
+unit SequenciaNF;
+
+interface
+
+uses
+ CAtribEntity,  GenericEntidade;
+
+type
+  [TableName('SequenciaNF')]
+  TSequenciaNF = class(TGenericEntidade)
+  private
+    FCodigo: Integer;
+    FCodigoFilial: Integer;
+    FSequencia: string;
+    FEspecie: string;
+    FSerie: string;
+  public
+    [KeyField('Codigo')]
+    property Codigo: Integer read FCodigo write FCodigo;
+    [FieldName('CodigoFilial')]
+    property CodigoFilial: Integer read FCodigoFilial write FCodigoFilial;
+    [FieldName('Sequencia')]
+    property Descricao: Integer read FSequencia write FSequencia;
+    [FieldName('Especie')]
+    property Especie: string read FEspecie write FEspecie;
+    [FieldName('Serie')]
+    property Serie: string read FSerie write FSerie;
+  end;
+
+implementation
+
+end.

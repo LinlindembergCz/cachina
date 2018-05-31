@@ -1,0 +1,16 @@
+object ServerMethodsGeneric: TServerMethodsGeneric
+  OldCreateOrder = False
+  Height = 298
+  Width = 479
+  object dspConsulta: TDataSetProvider
+    DataSet = FDQuery1
+    OnDataRequest = dspConsultaDataRequest
+    Left = 144
+    Top = 168
+  end
+  object FDQuery1: TFDQuery
+    Connection = ServerContainer1.FDConnection1
+    Left = 152
+    Top = 120
+  end
+end

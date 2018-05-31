@@ -1,0 +1,49 @@
+inherited FormClassificacaoDetalhes: TFormClassificacaoDetalhes
+  Caption = 'TemplateFormComTabGridDetalhes1'
+
+  inherited Panel1: TPanel
+    inherited tabPrincipal: TPageControl
+      ActivePageIndex = 1
+      inherited TabSheet1: TTabSheet
+        IsSelected = False
+      end
+      inherited TabSheet2: TTabSheet
+        IsSelected = True
+        object Label1: TLabel
+          Font.Style = [fsBold]
+          Height = 16
+          left = 8
+          top = 17
+          caption = 'Descri'#231#227'o'
+          Width = 63
+        end
+        object edtDescricao: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 1
+          left = 77
+          top = 16
+          Width = 422
+          Height = 21
+          KillFocusByReturn = False
+        end
+        object Label2: TLabel
+          Font.Style = [fsBold]
+          Height = 16
+          left = 10
+          top = 52
+          caption = 'Desconto'
+          Width = 61
+        end
+        object edtDesconto: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 3
+          left = 77
+          top = 49
+          Width = 82
+          Height = 21
+          KillFocusByReturn = False
+        end
+      end
+    end
+  end
+end

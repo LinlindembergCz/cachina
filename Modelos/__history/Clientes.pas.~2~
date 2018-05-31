@@ -1,0 +1,158 @@
+unit Clientes;
+
+interface
+
+uses
+   CAtribEntity,  GenericEntidade;
+
+Type
+  [TableName('Clientes')]
+  TClientes = class(TGenericEntity)
+  private
+    FObservacao: string;
+    FEmail: string;
+    FCodigoClassificacao: integer;
+    FCodigo: integer;
+    FCodigoFilial: integer;
+    FCPFCNPJ: string;
+    FRazaSocial: string;
+    FNome: string;
+    FTelefone: string;
+    FBairro: string;
+    FUF: string;
+    FCEP: string;
+    FMunicipio: string;
+    FComplemento: string;
+    FEndereco: string;
+    procedure SetCodigo(const Value: integer);
+    procedure SetCodigoClassificacao(const Value: integer);
+    procedure SetCodigoFilial(const Value: integer);
+    procedure SetCPFCNPJ(const Value: string);
+    procedure SetEmail(const Value: string);
+    procedure SetNome(const Value: string);
+    procedure SetObservacao(const Value: string);
+    procedure SetRazaSocial(const Value: string);
+    procedure SetTelefone(const Value: string);
+    procedure SetBairro(const Value: string);
+    procedure SetCEP(const Value: string);
+    procedure SetComplemento(const Value: string);
+    procedure SetEndereco(const Value: string);
+    procedure SetMunicipio(const Value: string);
+    procedure SetUF(const Value: string);
+  public
+    [KeyField('Codigo')]
+    [FieldName('Codigo')]
+    property Codigo :integer read FCodigo write SetCodigo;
+    [FieldName('CodigoFilial')]
+    property CodigoFilial :integer read FCodigoFilial write SetCodigoFilial;
+    [FieldName('CodigoClassificacao')]
+    property CodigoClassificacao:integer read FCodigoClassificacao write SetCodigoClassificacao;
+    [FieldName('Nome')]
+    property Nome : string read FNome write SetNome;
+    [FieldName('RazaSocial')]
+    property RazaSocial : string read FRazaSocial write SetRazaSocial;
+    [FieldName('Observacao')]
+    property Observacao : string read FObservacao write SetObservacao;
+    [FieldName('CPFCNPJ')]
+    property CPFCNPJ : string read FCPFCNPJ write SetCPFCNPJ;
+    [FieldName('Email')]
+    property Email: string read FEmail write SetEmail;
+    [FieldName('Telefone')]
+    property Telefone: string read FTelefone write SetTelefone;
+
+    [FieldName('Endereco')]
+    property Endereco: string read FEndereco write SetEndereco;
+    [FieldName('UF')]
+    property UF: string read FUF write SetUF;
+    [FieldName('Bairro')]
+    property Bairro: string read FBairro write SetBairro;
+    [FieldName('Municipio')]
+    property Municipio: string read FMunicipio write SetMunicipio;
+    [FieldName('CEP')]
+    property CEP: string read FCEP write SetCEP;
+    [FieldName('Complemento')]
+    property Complemento: string read FComplemento write SetComplemento;
+
+
+  end;
+
+implementation
+
+{ TClientes }
+
+procedure TClientes.SetBairro(const Value: string);
+begin
+  FBairro := Value;
+end;
+
+procedure TClientes.SetCEP(const Value: string);
+begin
+  FCEP := Value;
+end;
+
+procedure TClientes.SetCodigo(const Value: integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TClientes.SetCodigoClassificacao(const Value: integer);
+begin
+  FCodigoClassificacao := Value;
+end;
+
+procedure TClientes.SetCodigoFilial(const Value: integer);
+begin
+  FCodigoFilial := Value;
+end;
+
+procedure TClientes.SetComplemento(const Value: string);
+begin
+  FComplemento := Value;
+end;
+
+procedure TClientes.SetCPFCNPJ(const Value: string);
+begin
+  FCPFCNPJ := Value;
+end;
+
+procedure TClientes.SetEmail(const Value: string);
+begin
+  FEmail := Value;
+end;
+
+procedure TClientes.SetEndereco(const Value: string);
+begin
+  FEndereco := Value;
+end;
+
+procedure TClientes.SetMunicipio(const Value: string);
+begin
+  FMunicipio := Value;
+end;
+
+procedure TClientes.SetNome(const Value: string);
+begin
+  FNome := Value;
+end;
+
+procedure TClientes.SetObservacao(const Value: string);
+begin
+  FObservacao := Value;
+end;
+
+procedure TClientes.SetRazaSocial(const Value: string);
+begin
+  FRazaSocial := Value;
+end;
+
+procedure TClientes.SetTelefone(const Value: string);
+begin
+  FTelefone := Value;
+end;
+
+procedure TClientes.SetUF(const Value: string);
+begin
+  FUF := Value;
+end;
+
+end.

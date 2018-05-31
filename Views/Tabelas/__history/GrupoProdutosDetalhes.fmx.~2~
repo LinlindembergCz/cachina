@@ -1,0 +1,61 @@
+inherited FormGrupoProdutosDetalhes: TFormGrupoProdutosDetalhes
+  Caption = 'TemplateFormComTabGridDetalhes1'
+  DesignerMobile = False
+  DesignerWidth = 0
+  DesignerHeight = 0
+  DesignerDeviceName = ''
+  DesignerOrientation = 0
+  DesignerOSVersion = ''
+  inherited Panel1: TPanel
+    inherited tabPrincipal: TTabControl
+      inherited TabItem2: TTabItem
+        object lbDescriacao: TLabel
+          Height = 17.000000000000000000
+          Position.X = 8.000000000000000000
+          Position.Y = 32.000000000000000000
+          Text = 'Descriacao'
+          Width = 120.000000000000000000
+        end
+        object Familia: TLabel
+          Height = 17.000000000000000000
+          Position.X = 8.000000000000000000
+          Position.Y = 64.000000000000000000
+          Text = 'CodigoFamilia'
+          Width = 120.000000000000000000
+        end
+        object edtDescriacao: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 2
+          Position.X = 88.000000000000000000
+          Position.Y = 32.000000000000000000
+          Width = 441.000000000000000000
+          Height = 22.000000000000000000
+          KillFocusByReturn = False
+        end
+        object cboCodigoFamilia: TComboBox
+          DisableFocusEffect = False
+          Height = 22.000000000000000000
+          Position.X = 88.000000000000000000
+          Position.Y = 64.000000000000000000
+          TabOrder = 3
+          Width = 441.000000000000000000
+        end
+      end
+    end
+  end
+  inherited StyleBook1: TStyleBook
+    ResourcesBin = {464D585F5354594C4520322E350100}
+  end
+  inherited BindingsList1: TBindingsList
+    inherited LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Columns = <
+        item
+          MemberName = 'Codigo'
+        end
+        item
+          MemberName = 'Descricao'
+          Width = 550
+        end>
+    end
+  end
+end

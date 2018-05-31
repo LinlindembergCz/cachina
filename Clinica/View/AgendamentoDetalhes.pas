@@ -1,0 +1,567 @@
+unit AgendamentoDetalhes;
+
+interface
+
+uses Windows , TemplateDetalhesBase, Data.DB, Datasnap.DBClient, Vcl.StdCtrls,DateUtils,
+  Vcl.Buttons, Vcl.Controls, Vcl.DBGrids, Vcl.Grids, Vcl.Samples.Calendar, VCL.Dialogs,
+  System.Classes, Vcl.ExtCtrls, StrUtils, SysUtils, Vcl.ComCtrls, Vcl.DBCtrls,
+  Vcl.ValEdit, ControllerFuncionarios, Mapper, Vcl.Menus;
+
+type
+  TFormAgendamentoDetalhes = class(TTemplateFormBaseDetalhes)
+    Panel3: TPanel;
+    CornerButton1: TButton;
+    Button1: TButton;
+    Button2: TButton;
+    pnlAgenda: TPanel;
+    dateData: TMonthCalendar;
+    rdgHora: TRadioGroup;
+    lbData: TLabel;
+    chkMes: TCheckBox;
+    cboEspecialista: TComboBox;
+    lbPsicologo: TLabel;
+    srcSessoes: TDataSource;
+    StatusBar1: TStatusBar;
+    cboEncaminhado: TComboBox;
+    Label3: TLabel;
+    Label2: TLabel;
+    cboSituacao: TComboBox;
+    cboTabelaCID: TComboBox;
+    Label4: TLabel;
+    lbNomePaciente: TLabel;
+    lbCodigoTipoAgendamento: TLabel;
+    cboCodigoTipoAgendamento: TComboBox;
+    cboCodigoConvenio: TComboBox;
+    lbCodigoConvenio: TLabel;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    GroupBox1: TGroupBox;
+    DBGrid1: TDBGrid;
+    cboPaciente: TComboBox;
+    ClientDataSet1: TClientDataSet;
+    ClientDataSet1tste: TStringField;
+    PopupMenu1: TPopupMenu;
+    Remover1: TMenuItem;
+    Label1: TLabel;
+    edtAutorizacao: TEdit;
+    StringGrid1: TDBGrid;
+    procedure FormCreate(Sender: TObject);
+    procedure dateDataChange(Sender: TObject);
+    procedure cboEspecialistaChange(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure btnConfirmarClick(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure chkMesClick(Sender: TObject);
+    procedure CornerButton1Click(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnInserirClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure cboCodigoConvenioChange(Sender: TObject);
+    procedure StringGrid1DblClick(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure dateDataDblClick(Sender: TObject);
+    procedure dateDataGetMonthBoldInfo(Sender: TObject; Month, Year: Cardinal;
+      var MonthBoldInfo: Cardinal);
+    procedure StringGrid1CellClick(Column: TColumn);
+    procedure Remover1Click(Sender: TObject);
+    procedure StringGrid1TitleClick(Column: TColumn);
+  private
+    ControllerFuncionarios:TControllerFuncionarios;
+    MapperSessoes : TMapper;
+    ColumnFieldName: string;
+    function GetDate:TDatetime;
+    procedure ConsultaAgenda(Data:Tdatetime);
+    procedure PreencherComponenteTipoAgendamento(CodigoConvenio:string);
+    procedure ConsultaSessoes(Codigo: string='');
+    procedure PersistirSessoes;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormAgendamentoDetalhes: TFormAgendamentoDetalhes;
+
+implementation
+
+{$R *.dfm}
+
+uses
+   ControllerAgenda, EntidadeFactory, DBUtils,  Principal, GenericEntidade,
+   Especialista, DialogsUtils;
+
+procedure TFormAgendamentoDetalhes.ConsultaAgenda(Data: Tdatetime);
+var
+  Especialista : string;
+begin
+   if cboEspecialista.ItemIndex > -1 then
+      Especialista:= Inttostr( Integer( cboEspecialista.Items.Objects[ cboEspecialista.ItemIndex ] ) ) ;
+
+
+  if srcEntidade.Dataset <> nil then
+  begin
+     srcEntidade.Dataset := Controller.GetDataset( Entidade, ifthen( not chkMes.Checked,
+                            TControllerAgenda.GetIntervaloAgenda(Data),
+                            ' Extract(MONTH from T1."Data") ='+ inttostr(monthof(Data)))+' and '+
+                            ifThen( Especialista <> '' , 'T1."CodigoEspecialista"='+ Especialista, '0=1' )+
+                            ' Order by  '+ ifthen(ColumnFieldName<> '', ColumnFieldName, 'T1."Hora"') , Campos );
+
+     MapperEntidade.Dataset := srcEntidade.DataSet;
+
+  end;
+
+end;
+
+procedure TFormAgendamentoDetalhes.PreencherComponenteTipoAgendamento(CodigoConvenio:string);
+begin
+  cboCodigoTipoAgendamento.Items.Clear;
+
+  FillCombobox(tpTipoAgendamento, cboCodigoTipoAgendamento,
+                                  '"CodigoConvenio"=' + CodigoConvenio+
+                                  ' or "CodigoConvenio" is Null  or "CodigoConvenio" = 0 ');
+
+  cboCodigoTipoAgendamento.ItemIndex:= 0;
+  cboCodigoTipoAgendamento.Repaint;
+end;
+
+procedure TFormAgendamentoDetalhes.Remover1Click(Sender: TObject);
+var
+  Sessoes: TGenericEntidade;
+begin
+  inherited;
+  Sessoes:= TEntidadeFactory.Criar(tpSessoes);
+  MapperSessoes.Entidade:= Sessoes;
+  if srcSessoes.DataSet.FieldByName('Codigo').AsString <> '' then
+     MapperSessoes.SendValueToFieldEntidade('Codigo', srcSessoes.DataSet.FieldByName('Codigo').AsString);
+  Controller.Excluir(Sessoes);
+  Sessoes.Free;
+  srcSessoes.DataSet.delete;
+end;
+
+procedure TFormAgendamentoDetalhes.ConsultaSessoes(Codigo: string = '');
+begin
+  MapperSessoes := TMapper.Create(nil, srcSessoes.DataSet );
+  MapperSessoes.Associar('Codigo',nil);
+  MapperSessoes.Associar('CodigoAgendamento',nil);
+  MapperSessoes.Associar('Data',nil);
+  MapperSessoes.Associar('Hora',nil);
+  MapperSessoes.Associar('NumeroAutorizacao',nil);
+
+  if (Operacao <> 'Insert') and (Operacao <> 'Update') then
+  begin
+    if Codigo = '' then
+       Codigo := srcEntidade.Dataset.FieldByName('Codigo').AsString;
+
+    srcSessoes.DataSet := Controller.GetSelect('Sessoes T1', ' "CodigoAgendamento"=' +
+                                        ifthen(Codigo <> '',
+                                               Codigo, '0'));
+    srcSessoes.DataSet.FieldByName('Codigo').ProviderFlags := [pfInUpdate,pfInWhere,pfInKey];
+    srcSessoes.DataSet.fieldbyname('Data').ProviderFlags := [pfInUpdate,pfInWhere,pfInKey];
+
+    srcSessoes.DataSet.FieldByName('Codigo').Required := false;
+    srcSessoes.DataSet.FieldByName('CodigoAgendamento').Required := false;
+    TClientDataSet(srcSessoes.DataSet).IndexFieldNames := 'Data';
+
+  end;
+end;
+
+procedure TFormAgendamentoDetalhes.CornerButton1Click(Sender: TObject);
+var
+  Especialista:integer;
+  Convenio:integer;
+  TipoAgendamento:integer;
+  Sessoes:string;
+  Paciente:string;
+  Telefone:string;
+  Hora:string;
+  CodigoPaciente: String;
+  CodigoCID: integer;
+begin
+  inherited;
+  Alterar;
+
+  Especialista    := cboEspecialista.ItemIndex;
+  Convenio        := cboCodigoConvenio.ItemIndex;
+  TipoAgendamento := cboCodigoTipoAgendamento.ItemIndex;
+  Paciente        := cboPaciente.Text;
+  CodigoCID       := cboTabelaCID.ItemIndex;
+  CodigoPaciente  := srcEntidade.DataSet.FieldByName('CodigoPaciente').AsString;
+
+  Inserir;
+
+  cboEspecialista.ItemIndex          := Especialista;
+  cboCodigoConvenio.ItemIndex        := Convenio;
+  cboCodigoTipoAgendamento.ItemIndex := TipoAgendamento;
+  cboPaciente.Text                   := Paciente;
+  cboTabelaCID.ItemIndex             := CodigoCID;
+
+  if CodigoPaciente <> '' then
+     MapperEntidade.SendValueToFieldEntidade('CodigoPaciente',CodigoPaciente );
+end;
+
+procedure TFormAgendamentoDetalhes.btnAlterarClick(Sender: TObject);
+var
+  CodigoConvenio: Integer;
+begin
+  CodigoConvenio := srcEntidade.DataSet.FieldByName('CodigoConvenio').AsInteger;
+
+  PreencherComponenteTipoAgendamento(inttostr(CodigoConvenio));
+  ConsultaSessoes;
+  inherited;
+  MapperEntidade.SendValueToFieldEntidade('Codigo', srcEntidade.DataSet.FieldByName('Codigo').AsString);
+  MapperEntidade.SendValueToFieldEntidade('Data', srcEntidade.DataSet.FieldByName('Data').AsString);
+  MapperEntidade.SendValueToFieldEntidade('Hora', srcEntidade.DataSet.FieldByName('Hora').AsString);
+  rdgHora.ItemIndex := rdgHora.Items.IndexOf(srcEntidade.DataSet.FieldByName('Hora').AsString);
+  btnConfirmar.Visible:= true;
+end;
+
+procedure TFormAgendamentoDetalhes.btnConfirmarClick(Sender: TObject);
+var
+  keyValue:Integer;
+begin
+
+  ControllerFuncionarios.UsuarioAdministrador(FormPrincipal.Login);
+
+  if cboEspecialista.Text = '' then
+  begin
+     showmessage('Selecione o especialista!');
+     abort;
+  end;
+
+  if (cboPaciente.text <> '' ) then
+  begin
+      if (Operacao <> 'Update')  then
+      begin
+          Operacao:= 'Insert';
+          MapperEntidade.SendValueToFieldEntidade('Codigo',
+          TControllerAgenda(Controller).GetMaxAgenda );
+      end
+      else
+      begin
+          Operacao:= 'Update';
+      end;
+
+      srcSessoes.DataSet.first;
+      if srcSessoes.DataSet.FieldByName('Data').AsString <> '' then
+      begin
+          MapperEntidade.SendValueToFieldEntidade('Data', srcSessoes.DataSet.FieldByName('Data').AsString);
+          MapperEntidade.SendValueToFieldEntidade('Hora', srcSessoes.DataSet.FieldByName('Hora').AsString);
+      end
+      else
+      begin
+          MapperEntidade.SendValueToFieldEntidade('Data', datetostr(dateData.Date) );
+          if rdgHora.itemIndex > -1 then
+             MapperEntidade.SendValueToFieldEntidade('Hora', rdgHora.Items.Strings[rdgHora.itemIndex] );
+      end;
+
+      if srcSessoes.DataSet.recordcount > 0 then
+         MapperEntidade.SendValueToFieldEntidade( 'QuantidadeSessoes', inttostr(srcSessoes.DataSet.recordcount) )
+      else
+         MapperEntidade.SendValueToFieldEntidade( 'QuantidadeSessoes', '1' );
+
+      if cboTabelaCID.Text <> '' then
+         MapperEntidade.SendValueToFieldEntidade( 'CodigoCID',
+        inttostr(Integer(cboTabelaCID.Items.Objects[cboTabelaCID.Items.IndexOf(cboTabelaCID.Text) ])));
+
+      inherited;
+
+      ConsultaAgenda( MapperEntidade.GetValueDatetimeEntidade('Data') );
+
+
+      PersistirSessoes;
+
+      keyValue:= cboEspecialista.ItemIndex;
+      MapperEntidade.SendNullToComponent;
+      ConsultaSessoes( '-1' );
+
+      cboEspecialista.ItemIndex := keyValue;
+      cboPaciente.text := '';
+      cboTabelaCID.text := '';
+
+  end;
+
+
+end;
+
+procedure TFormAgendamentoDetalhes.PersistirSessoes;
+var
+  Values: string;
+  Sessoes: TGenericEntidade;
+  I: Integer;
+  CodigoAgendamento: string;
+begin
+  CodigoAgendamento:= MapperEntidade.GetValueEntidade('Codigo');
+
+  if (CodigoAgendamento <> '0') and (CodigoAgendamento <> '')  then
+     srcEntidade.DataSet.Locate('Codigo', CodigoAgendamento ,[])
+  else
+     srcEntidade.DataSet.Locate('NomePaciente', cboPaciente.Text,[]);
+
+  if (CodigoAgendamento = '') or (CodigoAgendamento = '0') then
+  begin
+    DialogsUtils.TDialogs.MensagemAtencao('codigo do agendamento inválido');
+    abort;
+  end;
+
+  TControllerAgenda(Controller).DeleteSQL('Sessoes','"CodigoAgendamento"='+ CodigoAgendamento);
+
+  MapperSessoes.DataSet:= srcSessoes.DataSet;
+
+  while not srcSessoes.DataSet.eof do
+  begin
+    Sessoes:= TEntidadeFactory.Criar(tpSessoes);
+
+    MapperSessoes.Entidade:= Sessoes;
+
+    MapperSessoes.SendDataSetToEntidade;
+    MapperSessoes.SendValueToFieldEntidade('CodigoAgendamento', CodigoAgendamento);
+    Controller.Inserir(Sessoes);
+
+    srcSessoes.DataSet.Next;
+  end;
+end;
+
+procedure TFormAgendamentoDetalhes.btnExcluirClick(Sender: TObject);
+begin
+  inherited;
+  ConsultaAgenda(GetDate);
+end;
+
+procedure TFormAgendamentoDetalhes.btnInserirClick(Sender: TObject);
+var
+  i , j, k , w , y:integer;
+  pacinte: string;
+  telefone: string;
+  hora: string;
+  situacao: string;
+begin
+  i := cboEspecialista.ItemIndex;
+  j := cboCodigoConvenio.ItemIndex;
+  k := cboCodigoTipoAgendamento.ItemIndex;
+  w := cboEncaminhado.ItemIndex;
+  y := cboSituacao.ItemIndex;
+
+  ConsultaSessoes('-1');
+  Inserir;
+
+  cboEspecialista.ItemIndex          := i;
+  cboCodigoConvenio.ItemIndex        := j;
+  cboCodigoTipoAgendamento.ItemIndex := k;
+  cboEncaminhado.ItemIndex           := w;
+  cboSituacao.ItemIndex              := 0;
+  btnConfirmar.Visible:= true;
+
+  //pnlAgenda.Visible:= true;
+end;
+
+procedure TFormAgendamentoDetalhes.Button1Click(Sender: TObject);
+var
+  Paciente: string;
+  CodigoEspecialista: string;
+  Mes: string;
+begin
+  inherited;
+  ControllerFuncionarios.UsuarioAdministrador(FormPrincipal.Login);
+
+  if  cboEspecialista.ItemIndex  > -1 then
+      CodigoEspecialista:= Inttostr( Integer( cboEspecialista.Items.Objects[ cboEspecialista.ItemIndex ] ) );
+  Mes      := inttostr( monthOf(GetDate) );
+  Paciente := srcEntidade.DataSet.FieldByName('Paciente').AsString;
+  FormPrincipal.ShowAgendaPesquisa( CodigoEspecialista, Paciente , Mes );
+end;
+
+procedure TFormAgendamentoDetalhes.Button2Click(Sender: TObject);
+begin
+  inherited;
+  FormPrincipal.ActAgendaRecorrencia.Execute;
+  ConsultaAgenda(GetDate);
+end;
+
+procedure TFormAgendamentoDetalhes.cboCodigoConvenioChange(Sender: TObject);
+var
+  CodigoConvenio: Integer;
+begin
+  inherited;
+  if cboCodigoConvenio.ItemIndex > -1 then
+  begin
+    CodigoConvenio := Integer(cboCodigoConvenio.Items.Objects[cboCodigoConvenio.ItemIndex]);
+    PreencherComponenteTipoAgendamento(inttostr(CodigoConvenio));
+  end;
+end;
+
+procedure TFormAgendamentoDetalhes.cboEspecialistaChange(Sender: TObject);
+begin
+  inherited;
+  ConsultaAgenda(GetDate);
+end;
+
+procedure TFormAgendamentoDetalhes.chkMesClick(Sender: TObject);
+begin
+  inherited;
+  ConsultaAgenda(GetDate);
+end;
+
+procedure TFormAgendamentoDetalhes.dateDataChange(Sender: TObject);
+begin
+  inherited;
+  lbData.caption  := FormatDateTime('dddddd',GetDate);
+  if (Operacao <> 'Insert') and  (Operacao <> 'Update')  then
+  begin
+    ConsultaAgenda(GetDate);
+    ConsultaSessoes;
+  end;
+end;
+
+procedure TFormAgendamentoDetalhes.dateDataDblClick(Sender: TObject);
+begin
+  inherited;
+  if (rdgHora.itemIndex = -1)  then
+  begin
+    showmessage('Informe a hora');
+    abort;
+  end;
+
+  if (not srcSessoes.DataSet.Locate('Data', datetostr(dateData.Date), [] )) then
+  begin
+     srcSessoes.DataSet.last;
+
+     srcSessoes.DataSet.Append;
+     srcSessoes.DataSet.fieldbyname('Codigo').Value := dayOf(dateData.Date);
+     srcSessoes.DataSet.fieldbyname('CodigoAgendamento').Value := 0;
+     srcSessoes.DataSet.fieldbyname('Data').Value := dateData.Date;
+     srcSessoes.DataSet.fieldbyname('Hora').Value := rdgHora.Items.Strings[rdgHora.itemIndex];
+     srcSessoes.DataSet.Post;
+  end;
+end;
+
+procedure TFormAgendamentoDetalhes.dateDataGetMonthBoldInfo(Sender: TObject;
+  Month, Year: Cardinal; var MonthBoldInfo: Cardinal);
+begin
+  inherited;
+  dateData.BoldDays([1,10,20], MonthBoldInfo);
+end;
+
+procedure TFormAgendamentoDetalhes.FormCreate(Sender: TObject);
+begin
+  dateData.Date := date;
+  Controller    := TControllerAgenda.Create;
+  ControllerFuncionarios := TControllerFuncionarios.Create;
+  Entidade      := TEntidadeFactory.Criar(tpAgendamento);
+  Campos        := TControllerAgenda.GetCamposAgenda;
+  Condicao      := TControllerAgenda.GetIntervaloAgenda(GetDate);
+  inherited;
+  CampoCodigo:= '"Codigo"';
+  with MapperEntidade do
+  begin
+     associar('Codigo',                nil);
+     associar('CodigoConvenio',        cboCodigoConvenio);
+     associar('CodigoTipoAgendamento', cboCodigoTipoAgendamento);
+     associar('NomePaciente',          cboPaciente);
+     associar('Telefone',              nil);
+     associar('Hora',                  nil);
+     associar('Situacao',              cboSituacao);
+     associar('CodigoEncaminhado',     cboEncaminhado);
+     associar('QuantidadeSessoes',     nil);
+     associar('CodigoPaciente',        cboPaciente);
+     //DEVE FICAR SEMPRE POR ULTIMO
+     associar('CodigoEspecialista',    cboEspecialista);
+     associar('Data',                  nil);
+     associar('CodigoCID',       cboTabelaCID);
+     associar('Autorizacao',       edtAutorizacao);
+  end;
+  FillCombobox(tpConvenio,cboCodigoConvenio);
+  FillCombobox(tpEspecialista,cboEspecialista,'0=0','Codigo','Descricao','Descricao');
+  FillCombobox(tpEspecialista,cboEncaminhado,'0=0','Codigo','Descricao','Descricao');
+  FillCombobox(tpTabelaCID,cboTabelaCID);
+  FillCombobox(tpTriagem,cboPaciente,'0=0','Codigo','Nome','Nome');
+  ConsultaSessoes( '-1' );
+
+end;
+
+function TFormAgendamentoDetalhes.GetDate: TDatetime;
+begin
+  result:= dateData.Date;
+end;
+
+procedure TFormAgendamentoDetalhes.SpeedButton1Click(Sender: TObject);
+var
+  CodigoPaciente: string;
+  NomePaciente: string;
+  Telefone: string;
+  CodigoConvenio: string;
+  CodigoCID: string;
+begin
+  inherited;
+  if cboCodigoConvenio.ItemIndex > -1 then
+  CodigoConvenio:= inttostr( Integer(cboCodigoConvenio.Items.Objects[cboCodigoConvenio.ItemIndex]));
+
+  NomePaciente := cboPaciente.Text;
+
+  CodigoPaciente := FormPrincipal.SelecionarPaciente(CodigoConvenio, NomePaciente, Telefone, CodigoCID);
+
+  cboPaciente.Items.Clear;
+  FillCombobox(tpTriagem,cboPaciente,'0=0','Codigo','Nome','Nome');
+
+  if CodigoPaciente <> '' then
+  begin
+    cboPaciente.Text := NomePaciente;
+    if CodigoConvenio <> '' then
+    begin
+       cboCodigoConvenio.ItemIndex := cboCodigoConvenio.Items.IndexOfObject(
+                                      TObject(strtoint(CodigoConvenio)));
+       PreencherComponenteTipoAgendamento(CodigoConvenio);
+    end;
+    if CodigoCID <> ''  then
+       cboTabelaCID.ItemIndex := cboTabelaCID.Items.IndexOfObject(
+                                      TObject(strtoint(CodigoCID)));
+
+    MapperEntidade.SendValueToFieldEntidade('CodigoPaciente',CodigoPaciente );
+  end;
+end;
+
+procedure TFormAgendamentoDetalhes.SpeedButton2Click(Sender: TObject);
+begin
+  inherited;
+  FormPrincipal.ActConvenio.Execute;
+  FillCombobox(tpConvenio,cboCodigoConvenio);
+end;
+
+procedure TFormAgendamentoDetalhes.SpeedButton3Click(Sender: TObject);
+begin
+  inherited;
+  FormPrincipal.ActTipoAgendamento.Execute;
+end;
+
+procedure TFormAgendamentoDetalhes.SpeedButton4Click(Sender: TObject);
+begin
+  inherited;
+  FormPrincipal.ActTabelaCID.Execute;
+  FillCombobox(tpTabelaCID,cboTabelaCID);
+end;
+
+procedure TFormAgendamentoDetalhes.StringGrid1CellClick(Column: TColumn);
+begin
+  inherited;
+  ConsultaSessoes;
+end;
+
+procedure TFormAgendamentoDetalhes.StringGrid1DblClick(Sender: TObject);
+begin
+  inherited;
+  Operacao:= '';
+  btnAlterar.Click;
+end;
+
+procedure TFormAgendamentoDetalhes.StringGrid1TitleClick(Column: TColumn);
+begin
+  inherited;
+  TClientDataSet(srcEntidade.dataset).IndexFieldNames:=  Column.FieldName;
+  ColumnFieldName:= Column.FieldName;
+end;
+
+end.

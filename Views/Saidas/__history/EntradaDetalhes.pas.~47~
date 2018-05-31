@@ -1,0 +1,368 @@
+unit EntradaDetalhes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, TemplateDetalhesBase, Vcl.StdCtrls,
+  Data.DB, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.DBCtrls, Vcl.Grids, strutils,
+  Vcl.DBGrids, GenericEntidade, EntidadeFactory, Mapper, ItensEntrada, ControllerProdutos;
+
+type
+  TFormEntradaDetalhes = class(TTemplateFormBaseDetalhes)
+    dateData: TDateTimePicker;
+    cboCodigoFornecedor: TDBLookupComboBox;
+    edtNumeroDocumento: TEdit;
+    cboCodigoFormaPagamento: TComboBox;
+    cboTipoFrete: TComboBox;
+    edtValorFrete: TEdit;
+    edtValorCustofinanceiro: TEdit;
+    edtValorDespesas: TEdit;
+    edtValorDocumento: TEdit;
+    edtValorSeguro: TEdit;
+    edtValorIPI: TEdit;
+    edtValorPIS: TEdit;
+    edtValorCONFINS: TEdit;
+    edtValorICMS: TEdit;
+    edtValorICMSSubstituto: TEdit;
+    dateDataEmissao: TDateTimePicker;
+    grdItens: TDBGrid;
+    gpbItens: TGroupBox;
+    Label6: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label9: TLabel;
+    edtCodigoItem: TEdit;
+    edtQuantidade: TEdit;
+    edtValor: TEdit;
+    BitBtn1: TButton;
+    CornerButton1: TButton;
+    edtOrdem: TEdit;
+    cboProduto: TDBLookupComboBox;
+    srcItens: TDataSource;
+    srcfornecedores: TDataSource;
+    edtCodigo: TEdit;
+    Label1: TLabel;
+    edtValorDesconto: TEdit;
+    srcProdutos: TDataSource;
+    Label2: TLabel;
+    cboEstoque: TDBLookupComboBox;
+    srcEstoque: TDataSource;
+    CornerButton2: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure btnConfirmarClick(Sender: TObject);
+    procedure btnInserirClick(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure cboProdutoCloseUp(Sender: TObject);
+    procedure grdItensCellClick(Column: TColumn);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure CornerButton2Click(Sender: TObject);
+  private
+    { Private declarations }
+    ItemEntradaFieldMapList: TStringList;
+    ItensEntrada           : TItensEntrada;
+    ItemEntrada            : TGenericEntidade;
+    MapperItemEntrada      : TMapper;
+    ControllerProdutos     : TControllerProdutos;
+    procedure MapearCamposItemEntrada;
+    procedure PersistirItemEntrada;
+    procedure RefreshDataSetItemEntrada(Codigo: string ='');
+    procedure GetEntrada(CodigoEntrada: string);
+    procedure AjustaTamanhoGrid;
+    procedure CarregarProdutos;
+    procedure GetItemEntrada;
+    procedure CarregarEstoques;
+  public
+    { Public declarations }
+  end;
+
+var
+  FormEntradaDetalhes: TFormEntradaDetalhes;
+
+implementation
+
+{$R *.dfm}
+
+uses ControllerEntrada,  ControllerFornecedores, DBUtils, Principal;
+
+procedure TFormEntradaDetalhes.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  PersistirItemEntrada;
+  edtOrdem.Text        := '';
+  edtCodigoItem.Text   := '';
+  cboProduto.KeyValue    := Null;
+  edtQuantidade.Text   := '1';
+  edtValor.Text        := '0';
+//edtDescontoItem.Text := '0';
+end;
+
+procedure TFormEntradaDetalhes.PersistirItemEntrada;
+var
+  DescricaoProduto: string;
+  Update: Boolean;
+  Count: Integer;
+begin
+  with MapperItemEntrada do
+  begin
+    Update := ItemEntrada<> nil;
+    if not Update then
+    begin
+      Entidade := TEntidadeFactory.Criar(tpItemEntrada);
+      DataSet := srcItens.DataSet;
+    end;
+
+    ComponentToEntidade;
+
+    if not Update then
+    begin
+      Count := srcItens.DataSet.RecordCount + 1;
+      SendValueToFieldEntidade('Ordem', inttostr(Count));
+      SendValueToFieldEntidade('Codigo', inttostr(Count));
+      ItensEntrada.Add(Entidade);
+      srcItens.DataSet.append;
+      DescricaoProduto := cboProduto.text;
+      SendValueToFieldDataSet('Descricao', DescricaoProduto);
+      SendEntidadeToDataSet;
+      srcItens.DataSet.Post;
+    end
+    else
+    begin
+      Controller.Atualizar(Entidade);
+      srcItens.Dataset := TControllerEntrada(Controller).GetDataSet(MapperItemEntrada.Entidade,
+                          'CodigoEntrada=' + srcEntidade.DataSet.FieldByName('Codigo').AsString,
+                          CamposItemEntrada);
+    end;
+  end;
+end;
+
+procedure TFormEntradaDetalhes.RefreshDataSetItemEntrada(Codigo: string ='');
+var
+  CodigoEntrada: string;
+begin
+  CodigoEntrada:= ifthen( Codigo <> '',
+                            Codigo ,
+                            MapperEntidade.DataSet.FieldByName('Codigo').AsString);
+
+  srcItens.Dataset := Controller.GetSelect( TMapper.GetTableNameClasse(
+                      TEntidadeFactory.GetClassInfo(tpItemEntrada) )+' T1 ',
+                      'CodigoEntrada=' +
+                      ifthen(CodigoEntrada <> '',CodigoEntrada,'0') ,
+                      CamposItemEntrada);
+
+  MapperItemEntrada.Dataset:= srcItens.Dataset;
+end;
+
+procedure TFormEntradaDetalhes.GetEntrada(CodigoEntrada: string);
+begin
+  Condicao := 'T1.Codigo=' + CodigoEntrada;
+  srcEntidade.Dataset := Controller.GetSelect(ControllerEntrada.ConsultaTabela, Condicao, CamposEntrada);
+  MapperEntidade.Dataset := srcEntidade.Dataset;
+end;
+
+
+procedure TFormEntradaDetalhes.grdItensCellClick(Column: TColumn);
+begin
+  inherited;
+  if Operacao = 'Update' then
+  begin
+    GetItemEntrada;
+  end;
+end;
+
+procedure TFormEntradaDetalhes.GetItemEntrada;
+begin
+  if ItemEntrada <> nil then
+    FreeandNil(ItemEntrada);
+  ItemEntrada := TEntidadeFactory.Criar(tpItemEntrada);
+  MapperItemEntrada.Entidade := ItemEntrada;
+  MapperItemEntrada.Dataset := srcItens.DataSet;
+  MapperItemEntrada.SendDataSetToEntidade;
+  MapperItemEntrada.EntidadeToComponent;
+end;
+
+procedure TFormEntradaDetalhes.btnAlterarClick(Sender: TObject);
+begin
+  CarregarProdutos;
+  CarregarEstoques;
+  inherited;
+  AjustaTamanhoGrid;
+end;
+
+procedure TFormEntradaDetalhes.btnCancelarClick(Sender: TObject);
+begin
+  inherited;
+  AjustaTamanhoGrid;
+end;
+
+procedure TFormEntradaDetalhes.btnConfirmarClick(Sender: TObject);
+var
+  i:integer;
+  CodigoEntrada: string;
+begin
+  if Operacao = 'Insert' then
+     edtCodigo.Text := TControllerEntrada(Controller).GetMaxEntrada;
+
+  CodigoEntrada:=  edtCodigo.Text;
+  inherited;
+  if (ItensEntrada <> nil)  and (ItensEntrada.Count > 0) then
+  begin
+
+    for I := 0 to ItensEntrada.Count -1 do
+    begin
+      MapperItemEntrada.Entidade := ItensEntrada.Items[i];
+      MapperItemEntrada.SendValueToFieldEntidade( 'CodigoEntrada', CodigoEntrada );
+
+      Controller.Inserir(ItensEntrada.Items[i])
+    end;
+    RefreshDataSetItemEntrada(CodigoEntrada);
+    ItensEntrada.clear;
+  end;
+
+  GetEntrada(CodigoEntrada);
+
+  //AtualizarLabelTotal;
+  AjustaTamanhoGrid;
+
+end;
+
+procedure TFormEntradaDetalhes.btnExcluirClick(Sender: TObject);
+begin
+  inherited;
+  AjustaTamanhoGrid;
+end;
+
+procedure TFormEntradaDetalhes.btnInserirClick(Sender: TObject);
+begin
+  RefreshDataSetItemEntrada('0');
+  inherited;
+  CarregarProdutos;
+  CarregarEstoques;
+  edtQuantidade.Text    := '1';
+  dateData.Date     := date;
+  AjustaTamanhoGrid;
+  MapperEntidade.EntidadeToComponent;
+end;
+
+procedure  TFormEntradaDetalhes.CarregarProdutos;
+begin
+   srcProdutos.DataSet := ControllerProdutos.GetSelect( TEntidadeFactory.GetNameEntidade(tpProduto)+
+                                                       ' T1 ','0=0','Codigo, Descricao');
+end;
+
+procedure  TFormEntradaDetalhes.CarregarEstoques;
+begin
+   srcEstoque.DataSet := ControllerProdutos.GetSelect('Estoque T1 ','0=0','Codigo, Descricao');
+end;
+
+procedure TFormEntradaDetalhes.cboProdutoCloseUp(Sender: TObject);
+begin
+  inherited;
+  if cboProduto.text <>  '' then
+     edtCodigoItem.text := inttostr( Integer(cboProduto.KeyValue ));
+end;
+
+procedure TFormEntradaDetalhes.CornerButton2Click(Sender: TObject);
+var
+  CodigoEntrada: string;
+begin
+  CodigoEntrada := FormPrincipal.ShowEntradaListagem;
+  if CodigoEntrada <> '' then
+  begin
+    GetEntrada(CodigoEntrada);
+    MapperEntidade.SendValueToFieldEntidade('CodigoFornecedor',
+    MapperEntidade.DataSet.FieldByName('CodigoFornecedor').AsString);
+    MapperEntidade.EntidadeToComponent;
+    RefreshDataSetItemEntrada(CodigoEntrada);
+  end;
+end;
+
+procedure TFormEntradaDetalhes.AjustaTamanhoGrid;
+begin
+  if (Operacao = 'Update') or (Operacao = 'Insert') then
+  begin
+     grdItens.Height:= grdItens.Height - gpbItens.Height - 5;
+     grdItens.top := grdItens.top + gpbItens.Height + 5;
+  end
+  else
+  begin
+     grdItens.Height:= grdItens.Height + gpbItens.Height + 5;
+     grdItens.top :=  grdItens.top - gpbItens.Height - 5;
+  end;
+end;
+
+procedure TFormEntradaDetalhes.FormCreate(Sender: TObject);
+var
+  ItemEntrada:TGenericEntidade;
+  CodigEntrada: string;
+begin
+  Controller         := TControllerEntrada.Create;
+  ControllerProdutos := TControllerProdutos.Create;
+  Entidade           := TEntidadeFactory.Criar(tpEntrada);
+  Tabela             := ControllerEntrada.ConsultaTabela;
+  Campos             := ControllerEntrada.CamposEntrada;
+  ItemEntrada        := TEntidadeFactory.Criar(tpItemEntrada);
+  ItensEntrada       := TItensEntrada.create;
+  Condicao           := '0=1';
+
+  inherited;
+
+  with MapperEntidade do
+  begin
+      associar('Codigo', edtCodigo);
+      associar('Data', dateData);
+      associar('CodigoFornecedor',  cboCodigoFornecedor);
+      associar('NumeroDocumento', edtNumeroDocumento);
+      associar('CodigoFormaPagamento',  cboCodigoFormaPagamento);
+      associar('ValorFrete', edtValorFrete);
+      associar('ValorCustofinanceiro', edtValorCustofinanceiro);
+      associar('ValorDespesas', edtValorDespesas);
+      associar('TipoFrete', cboTipoFrete);
+      associar('DataEmissao', dateDataEmissao);
+      associar('ValorDocumento', edtValorDocumento);
+      associar('ValorSeguro', edtValorSeguro);
+      associar('ValorIPI', edtValorIPI);
+      associar('ValorPIS', edtValorPIS);
+      associar('ValorCONFINS', edtValorCONFINS);
+      associar('ValorICMS', edtValorICMS);
+      associar('ValorICMSSubstituto', edtValorICMSSubstituto);
+      associar('ValorDesconto', edtValorDesconto);
+  end;
+
+  MapearCamposItemEntrada;
+
+  FillCombobox( tpFormaPagamento , cboCodigoFormaPagamento);
+
+  srcfornecedores.DataSet:= TControllerfornecedores.Create.GetSelect(
+                            TEntidadeFactory.GetNameEntidade(tpPessoa),
+                            'Tipo=''FORNECEDOR''','Codigo,Nome');
+
+end;
+
+procedure TFormEntradaDetalhes.MapearCamposItemEntrada;
+begin
+  ItemEntradaFieldMapList := TStringList.Create;
+
+  MapperItemEntrada   := TMapper.create(nil,
+                           ItemEntradaFieldMapList,
+                           srcItens.DataSet );
+
+  with MapperItemEntrada do
+  begin
+    Associar('Codigo', nil);
+    Associar('Ordem', edtOrdem);
+    Associar('CodigoFilial', nil);
+    Associar('CodigoEntrada', nil);
+    Associar('CodigoProduto', edtCodigoItem);
+    Associar('Quantidade', edtQuantidade);
+    Associar('Valor', edtValor);
+  //Associar('Desconto', edtDescontoItem);
+    Associar('CodigoProduto', cboProduto);
+    Associar('CodigoEstoque', cboEstoque);
+  end;
+end;
+
+end.

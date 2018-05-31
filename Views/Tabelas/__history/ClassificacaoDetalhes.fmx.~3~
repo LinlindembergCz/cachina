@@ -1,0 +1,54 @@
+inherited FormClassificacaoDetalhes: TFormClassificacaoDetalhes
+  Caption = 'TemplateFormComTabGridDetalhes1'
+  DesignerMobile = False
+  DesignerWidth = 0
+  DesignerHeight = 0
+  DesignerDeviceName = ''
+  DesignerOrientation = 0
+  DesignerOSVersion = ''
+  inherited Panel1: TPanel
+    inherited TabControl1: TTabControl
+      TabIndex = 1
+      inherited TabItem1: TTabItem
+        IsSelected = False
+      end
+      inherited TabItem2: TTabItem
+        IsSelected = True
+        object Label1: TLabel
+          Font.Style = [fsBold]
+          Height = 16.000000000000000000
+          Position.X = 8.000000000000000000
+          Position.Y = 17.000000000000000000
+          Text = 'Descri'#231#227'o'
+          Width = 63.000000000000000000
+        end
+        object Label2: TLabel
+          Font.Style = [fsBold]
+          Height = 16.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 52.000000000000000000
+          Text = 'Desconto'
+          Width = 61.000000000000000000
+        end
+        object edtDescricao: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 0
+          Position.X = 77.000000000000000000
+          Position.Y = 16.000000000000000000
+          Width = 422.000000000000000000
+          Height = 21.000000000000000000
+          KillFocusByReturn = False
+        end
+        object edtDesconto: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 1
+          Position.X = 77.000000000000000000
+          Position.Y = 49.000000000000000000
+          Width = 82.000000000000000000
+          Height = 21.000000000000000000
+          KillFocusByReturn = False
+        end
+      end
+    end
+  end
+end

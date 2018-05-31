@@ -1,0 +1,25 @@
+unit FactoryController;
+
+interface
+
+uses
+InterfaceController ;
+
+type
+  TFactoryController  = class
+  public
+     class function CriarControllerCliente: IController;
+  end;
+
+implementation
+
+{ TFactoryController }
+
+uses ControllerCliente;
+
+class function TFactoryController.CriarControllerCliente: IController;
+begin
+   result := TControllerCliente.create;
+end;
+
+end.

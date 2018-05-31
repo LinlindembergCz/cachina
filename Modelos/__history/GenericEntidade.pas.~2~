@@ -1,0 +1,17 @@
+unit GenericEntidade;
+
+interface
+  Uses Vcl.Controls, RTTI, System.Classes;
+
+
+type
+  TGenericEntity = class(TComponent)
+
+  end;
+
+
+
+
+implementation
+
+end.

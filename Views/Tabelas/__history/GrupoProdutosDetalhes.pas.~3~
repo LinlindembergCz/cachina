@@ -1,0 +1,48 @@
+unit GrupoProdutosDetalhes;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
+  TemplateDetalhesComTabGrid, System.Rtti, Data.Bind.EngExt, Fmx.Bind.DBEngExt,
+  Fmx.Bind.Grid, System.Bindings.Outputs, Fmx.Bind.Editors,
+  Data.Bind.Components, Data.Bind.DBScope, Data.Bind.Grid, Data.DB, FMX.Layouts,
+  FMX.Grid, FMX.TabControl, FMX.Ani, FMX.ListBox, FMX.Edit;
+
+type
+  TFormGrupoProdutosDetalhes = class(TTemplateFormComTabGridDetalhes)
+    edtDescriacao: TEdit;
+    cboCodigoFamilia: TComboBox;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormGrupoProdutosDetalhes: TFormGrupoProdutosDetalhes;
+
+implementation
+
+{$R *.fmx}
+
+uses ControllerTabelas, EntidadeFactory, DBUtils;
+
+procedure TFormGrupoProdutosDetalhes.FormCreate(Sender: TObject);
+begin
+  Controller := TControllerTabelas.Create;
+  Entidade   := TEntidadeFactory.Criar(tpGrupo);
+  inherited;
+  with MapperEntidade do
+  begin
+    associar('Codigo', nil);
+    associar('Descriacao', edtDescriacao);
+    associar('CodigoFamilia',  cboCodigoFamilia);
+  end;
+
+  FillCombobox( tpGrupo, cboCodigoFamilia );
+end;
+
+end.

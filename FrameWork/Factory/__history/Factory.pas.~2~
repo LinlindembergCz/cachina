@@ -1,0 +1,25 @@
+unit Factory;
+
+interface
+
+uses
+GenericEntidade ;
+
+type
+  TFactory  = class
+  public
+     class function CriarCliente: TGenericEntidade;
+  end;
+
+implementation
+
+uses Clientes;
+
+{ TFactory }
+
+class function TFactory.CriarCliente: TCliente;
+begin
+
+end;
+
+end.

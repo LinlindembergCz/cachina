@@ -1,0 +1,189 @@
+unit ItemOrcamento;
+
+interface
+
+uses
+   CAtribEntity,  GenericEntidade, Contnrs, Classes, SysUtils;
+
+Type
+  [TableName('ItemOrcamento')]
+  [Modulo('4')]
+  TItemOrcamento = class(TGenericEntidade)
+  private
+    FDesconto: Double;
+    FValor: Double;
+    FCodigoProduto: integer;
+    FCodigo: integer;
+    FTotal: Double;
+    FCodigoFilial: integer;
+    FCodigoOrcamento: integer;
+    FQuantidade: Double;
+    FOrdem: integer;
+    FCodigoFuncionario: integer;
+    FPercentualComissao: Double;
+    FCodigoUnidade: integer;
+    FFator: double;
+    FObservacao: string;
+    Fstatus: string;
+    FHoraFim: string;
+    FHoraInicio: string;
+    procedure SetCodigo(const Value: integer);
+    procedure SetCodigoFilial(const Value: integer);
+    procedure SetCodigoOrcamento(const Value: integer);
+    procedure SetCodigoProduto(const Value: integer);
+    procedure SetDesconto(const Value: Double);
+    procedure SetOrdem(const Value: integer);
+    procedure SetQuantidade(const Value: Double);
+    procedure SetTotal(const Value: Double);
+    procedure SetValor(const Value: Double);
+    procedure SetCodigoFuncionario(const Value: integer);
+    procedure SetPercentualComissao(const Value: Double);
+    procedure SetCodigoUnidade(const Value: integer);
+    procedure SetFator(const Value: double);
+    procedure SetHoraFim(const Value: string);
+    procedure SetHoraInicio(const Value: string);
+    procedure SetObservacao(const Value: string);
+    procedure Setstatus(const Value: string);
+  strict private
+    procedure UpdateTotal;
+  published
+    [KeyField('Codigo')]
+    property  Codigo: integer read FCodigo write SetCodigo;
+    [FieldName('CodigoFilial')]
+    property  CodigoFilial: integer read FCodigoFilial write SetCodigoFilial;
+    [FieldName('CodigoOrcamento')]
+    property  CodigoOrcamento: integer read FCodigoOrcamento write SetCodigoOrcamento;
+    [FieldName('Ordem')]
+    property  Ordem:  integer read FOrdem write SetOrdem;
+    [FieldName('CodigoProduto')]
+    property  CodigoProduto: integer read FCodigoProduto write SetCodigoProduto;
+    [FieldName('Quantidade')]
+    property  Quantidade: Double read FQuantidade write SetQuantidade;
+    [FieldName('Valor')]
+    property  Valor: Double read FValor write SetValor;
+    [FieldName('Desconto')]
+    property  Desconto: Double read FDesconto write SetDesconto;
+    [FieldName('Total')]
+    property  Total: Double read FTotal write SetTotal;
+    [FieldName('CodigoFuncionario')]
+    property  CodigoFuncionario: integer read FCodigoFuncionario write SetCodigoFuncionario;
+    [FieldName('PercentualComissao')]
+    property PercentualComissao: Double read FPercentualComissao write SetPercentualComissao;
+    [FieldName('CodigoUnidade')]
+    property CodigoUnidade: integer read FCodigoUnidade write SetCodigoUnidade;
+    [FieldName('Fator')]
+    property Fator: double read FFator write SetFator;
+
+    property HoraInicio: string read FHoraInicio write SetHoraInicio;
+    property HoraFim: string read FHoraFim write SetHoraFim;
+    property Observacao: string read FObservacao write SetObservacao;
+    property status: string read Fstatus write Setstatus;
+  end;
+
+implementation
+
+{ TContatos }
+
+procedure TItemOrcamento.SetCodigo(const Value: integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TItemOrcamento.SetCodigoFilial(const Value: integer);
+begin
+  FCodigoFilial := Value;
+end;
+
+procedure TItemOrcamento.SetCodigoFuncionario(const Value: integer);
+begin
+  FCodigoFuncionario := Value;
+end;
+
+procedure TItemOrcamento.SetCodigoOrcamento(const Value: integer);
+begin
+  FCodigoOrcamento := Value;
+end;
+
+procedure TItemOrcamento.SetCodigoProduto(const Value: integer);
+begin
+  FCodigoProduto := Value;
+end;
+
+procedure TItemOrcamento.SetCodigoUnidade(const Value: integer);
+begin
+  FCodigoUnidade := Value;
+end;
+
+procedure TItemOrcamento.SetDesconto(const Value: Double);
+begin
+  FDesconto := Value;
+  UpdateTotal;
+end;
+
+procedure TItemOrcamento.SetFator(const Value: double);
+begin
+  FFator := Value;
+end;
+
+procedure TItemOrcamento.SetHoraFim(const Value: string);
+begin
+  FHoraFim := Value;
+end;
+
+procedure TItemOrcamento.SetHoraInicio(const Value: string);
+begin
+  FHoraInicio := Value;
+end;
+
+procedure TItemOrcamento.SetObservacao(const Value: string);
+begin
+  FObservacao := Value;
+end;
+
+procedure TItemOrcamento.SetOrdem(const Value: integer);
+begin
+  FOrdem := Value;
+end;
+
+procedure TItemOrcamento.SetPercentualComissao(const Value: Double);
+begin
+  FPercentualComissao := Value;
+end;
+
+procedure TItemOrcamento.UpdateTotal;
+begin
+  FTotal := FValor * FQuantidade - (FValor * FQuantidade * FDesconto / 100);
+end;
+
+procedure TItemOrcamento.SetQuantidade(const Value: Double);
+begin
+  FQuantidade := Value;
+  UpdateTotal;
+end;
+
+procedure TItemOrcamento.Setstatus(const Value: string);
+begin
+  Fstatus := Value;
+end;
+
+procedure TItemOrcamento.SetValor(const Value: Double);
+begin
+  FValor := Value;
+  UpdateTotal;
+end;
+
+procedure TItemOrcamento.SetTotal(const Value: Double);
+begin
+  FTotal := Value;
+end;
+{
+Obs : A diretiva “default” na propriedade “Items” de TItensPedido permite ter uma
+caminho mais curto para acessar o item por exemplo :
+
+ItensPedido[5].Codigo_Produto;
+
+ao invés de :
+
+ItensPedido.GetItem(5).Codigo_Produto;
+}
+end.

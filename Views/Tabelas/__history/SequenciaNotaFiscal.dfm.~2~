@@ -1,0 +1,17 @@
+inherited FormSequenciaNotaFiscal: TFormSequenciaNotaFiscal
+  Caption = 'FormSequenciaNotaFiscal'
+  ExplicitWidth = 743
+  ExplicitHeight = 516
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited tabPrincipal: TPageControl
+      inherited TabSheet2: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitWidth = 717
+        ExplicitHeight = 399
+      end
+    end
+  end
+end

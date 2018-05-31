@@ -1,0 +1,30 @@
+unit MarcasDetalhes;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
+  TemplateDetalhesComTabGrid, System.Rtti, Data.Bind.EngExt, Fmx.Bind.DBEngExt,
+  Fmx.Bind.Grid, System.Bindings.Outputs, Fmx.Bind.Editors,
+  Data.Bind.Components, Data.Bind.DBScope, Data.Bind.Grid, Data.DB, FMX.Layouts,
+  FMX.Grid, FMX.TabControl, FMX.Ani, FMX.Edit;
+
+type
+  TFormMarcasDetalhes = class(TTemplateFormComTabGridDetalhes)
+    Label1: TLabel;
+    edtDescricao: TEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormMarcasDetalhes: TFormMarcasDetalhes;
+
+implementation
+
+{$R *.fmx}
+
+end.

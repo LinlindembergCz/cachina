@@ -1,0 +1,62 @@
+unit RelComissaoOrcamento;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Datasnap.DBClient, QRCtrls,
+  QuickRpt, Vcl.Imaging.jpeg, Vcl.ExtCtrls, QRPDFFilt, QRExport;
+
+type
+  TFormRelComissaoOrcamento = class(TForm)
+    cdsOrcamentoComissao: TClientDataSet;
+    QuickRep2: TQuickRep;
+    TitleBand1: TQRBand;
+    QRSysData2: TQRSysData;
+    QRLabel6: TQRLabel;
+    QRImage1: TQRImage;
+    DetailBand1: TQRBand;
+    QRDBText1: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRDBText9: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText29: TQRDBText;
+    QRGroup1: TQRGroup;
+    QRDBText10: TQRDBText;
+    QRBand1: TQRBand;
+    QRExpr1: TQRExpr;
+    SummaryBand1: TQRBand;
+    QRExpr2: TQRExpr;
+    QRExpr3: TQRExpr;
+    QRExpr4: TQRExpr;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRDBText3: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRLabel2: TQRLabel;
+    QRExcelFilter1: TQRExcelFilter;
+    QRPDFFilter1: TQRPDFFilter;
+    QRDBText6: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRLabel1: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRDBText7: TQRDBText;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    Condicao: string;
+  end;
+
+var
+  FormRelComissaoOrcamento: TFormRelComissaoOrcamento;
+
+implementation
+
+{$R *.dfm}
+
+uses ControllerOrcamento;
+
+end.
+
+

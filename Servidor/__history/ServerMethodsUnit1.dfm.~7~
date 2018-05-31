@@ -1,0 +1,21 @@
+object ServerMethodsGeneric: TServerMethodsGeneric
+  OldCreateOrder = False
+  Height = 298
+  Width = 479
+  object dspConsulta: TDataSetProvider
+    DataSet = FDQuery1
+    OnDataRequest = dspConsultaDataRequest
+    Left = 144
+    Top = 168
+  end
+  object FDQuery1: TFDQuery
+    AutoCalcFields = False
+    Connection = ServerContainer1.FDConnection1
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    UpdateOptions.AssignedValues = [uvCheckReadOnly, uvCheckUpdatable]
+    UpdateOptions.CheckReadOnly = False
+    UpdateOptions.CheckUpdatable = False
+    Left = 144
+    Top = 104
+  end
+end

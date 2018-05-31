@@ -1,0 +1,223 @@
+unit ControllerOrcamento;
+
+interface
+
+uses
+   Windows,Data.DB,  Messages, SysUtils, Variants, Classes,  ControllerTabelas,
+   Forms, Mapper, GenericEntidade, strutils;
+
+type
+  TControllerOrcamento = class( TControllerTabelas )
+  private
+
+  public
+    //function SelectOrcamento: string;
+    procedure Inserir(Objecto: TGenericEntidade);override;
+    procedure Atualizar(Objecto: TGenericEntidade);override;
+    procedure Excluir(Objecto: TGenericEntidade);override;
+    function GetDataSet(Objecto: TGenericEntidade;
+                        Condicao: string;
+                        Fields: string= ''):TDataset;
+    function GetSelect(Tabela, Condicao: string; Fields: string = ''): TDataset;
+    //class function GetValue(Tabela, Condicao, Field: string): String; static;
+    function GetMaxOrcamento:String;
+    procedure VincularVeiculo(Placa, Ano, Cor, CodigoModelo,
+      CodigoCliente: string);
+    procedure ExcluirItens(CodigoOrcamento: string);
+    procedure ExcluirOrcamentoFormaPagamento(CodigoOrcamento: string);
+
+    procedure AlterarSituacaoParaFaturado(  Condicao: string;
+                                            CodigoLoteRecebimento : string = '');
+    function GetOrcamentoComissao(Condicao: string):Tdataset;
+    procedure Retornar(CodigoOrcamento: string);
+
+  end;
+
+  const
+  ConsultaTabela   = ' Orcamento T1'+
+                     ' left join Pessoa clie       on clie.Codigo         = T1.CodigoCliente'+
+                     ' left join Veiculos vei      on vei.CodigoCliente   = clie.Codigo and T1.Placa=vei.Placa'+
+                     ' left join ModeloVeiculo mod on mod.Codigo          = vei.CodigoModelo'+
+                     ' left join LoteNFE NFe       on NFe.CodigoOrcamento = T1.Codigo';
+
+  CamposOrcamento  = ' Distinct T1.*,'+
+                     ' cast( (Select SUM( Valor * Quantidade - ( Valor * Quantidade * ( Desconto /100))) '+
+                     ' from ItemOrcamento where CodigoOrcamento= T1.codigo) - '+
+                     ' ( (Select SUM( Valor * Quantidade - ( Valor * Quantidade * ( Desconto /100))) '+
+                     '   From ItemOrcamento where CodigoOrcamento= T1.codigo) * T1.Desconto / 100 )'+
+                     '   as Numeric(10,2) ) As Total,'+
+                     ' clie.Nome, clie.CPFCNPJ, clie.Telefone, clie.RazaoSocial, clie.Endereco, '+
+                     ' clie.Bairro, clie.Municipio, clie.UF,  clie.InscricaoEstadual, clie.CEP,  '+
+                     ' mod.Descricao as Modelo , vei.Ano, vei.Cor, '+
+                     ' vei.Potencia, vei.Cilindrada, vei.PesoLiquido,'+
+                     ' vei.PesoBruto, vei.NumeroSerie, vei.Kilometragem, vei.Renavan, '+
+                     ' vei.PrecoCompra, vei.PrecoVenda, NFe.ChaveAcesso, Nfe.DataEmissao as DataEmissaoNfe, '+
+                     ' ( CASE WHEN UPPER(clie.Municipio) =''NATAL'' THEN '+
+                     '  ''2408102'' '+
+                     ' WHEN UPPER(clie.Municipio) =''PARNAMIRIM'' THEN  '+
+                     '  ''2403251'' '+
+                     ' ELSE '+
+                     ' isNULL( clie.CodigoIBGE , ''2408102'' ) END) as CodigoIBGE';
+
+  ConsultaTabelaItem  = ' ItemOrcamento T1 '+
+                        ' inner join Produtos prod on prod.codigo = T1.CodigoProduto'+
+                        ' left  join TabelaNCM NCM on prod.CodigoNCM = NCM.Codigo'+
+                        ' left  join TabelaNFSe NFSe on prod.CodigoServicoNFSe = NFSe.Codigo';
+
+  CamposItemOrcamento = 'T1.*, '+
+                        ' prod.Descricao ,'+
+                        ' prod.Tipo ,'+
+                        ' NCM.CodigoNCM as CodificacaoNCM,'+
+                        ' '' '' As Selecionado, '+
+                        ' NFSe.CodigoNFSe , NFSe.Descricao as DescricaoServicoNFSe, '+
+                        ' (Select Nome from Funcionarios where Funcionarios.Codigo=CodigoFuncionario) as Funcionario';
+
+  CamposOrcamentoFormaPagamento = 'T1.*,'+
+                        ' cast(  ( Valor - (Valor * PercentualDesconto / 100 ) ) as Numeric(10,2) )  as Liquido, '+
+                        ' ValorPago - ( Valor - (Valor * PercentualDesconto / 100 ) )  As Troco, '+
+                        ' ( Select Descricao from FormaPagamento where Codigo=T1.CodigoFormaPagamento ) as Descricao';
+
+implementation
+
+{ TControllerClientes }
+
+uses  GenericDAO,  EntidadeFactory;
+
+procedure TControllerOrcamento.AlterarSituacaoParaFaturado(  Condicao: string;
+ CodigoLoteRecebimento : string = '');
+begin
+  TGenericDAO.UpdateSQL('Orcamento', '"Situacao"=''Faturado'' , DataFaturamento= GETDATE() '+
+                                     ifthen( CodigoLoteRecebimento <> '',
+                                     ', "CodigoLoteRecebimento"='+CodigoLoteRecebimento,''),
+                                     Condicao );
+end;
+
+procedure TControllerOrcamento.Atualizar(Objecto: TGenericEntidade);
+begin
+  inherited  ;
+end;
+
+procedure TControllerOrcamento.Excluir(Objecto: TGenericEntidade);
+begin
+  inherited ;
+end;
+
+function TControllerOrcamento.GetDataSet(Objecto: TGenericEntidade;
+                                         Condicao: string;
+                                         Fields: string = ''): TDataset;
+begin
+  result:= inherited;
+end;
+
+function TControllerOrcamento.GetMaxOrcamento: String;
+begin
+   result := GetSelect('Orcamento','0=0',
+   'isNull( Max(Codigo),0)+1 as Max').FieldByName('Max').AsString;
+end;
+
+function TControllerOrcamento.GetOrcamentoComissao(Condicao: string): Tdataset;
+begin
+   result := GetSelect(' Orcamento T1'+
+             ' INNER JOIN ItemOrcamento   item ON T1.Codigo   = item.CodigoOrcamento'+
+             ' INNER JOIN Pessoa clie          ON clie.Codigo = T1.CodigoCliente'+
+             ' INNER JOIN Funcionarios    func ON func.Codigo = item.CodigoFuncionario'+
+             ' INNER JOIN Produtos        prod ON prod.Codigo = item.CodigoProduto'+
+             ' LEFT  JOIN Veiculos        vei  ON vei.Placa   = T1.Placa and T1.CodigoCliente = vei.CodigoCliente'+
+             ' LEFT  JOIN ModeloVeiculo   mode ON mode.Codigo = vei.CodigoModelo'+
+             ' left join LoteNFE NFe       on NFe.CodigoOrcamento = T1.Codigo or '+
+             '                                NFe.CodigoLoteRecebimento = T1.CodigoLoteRecebimento' ,
+
+              Condicao+' ORDER BY func.Nome ',
+
+             ' func.Nome as NomeFuncionario ,'+
+             ' T1.Codigo as CodigoOrcamento,'+
+             ' T1.DataFaturamento,'+
+             ' mode.Descricao as Modelo,'+
+             ' T1.Placa,'+
+             ' (item.Quantidade * item.Valor)  as Total,'+
+             ' T1.Observacao, '+
+             ' func.Comissao,'+
+             ' clie.Nome as NomeCliente,'+
+             ' prod.Descricao, '+
+             '( case  '+
+             '   when exists(Select count(*) from Recebimento where   '+
+             '        (CodigoOrcamento = T1.Codigo or CodigoLoteRecebimento = T1.CodigoLoteRecebimento ) and  '+
+             '        PercentualTaxaCartao > 0 )then  '+
+             '          (( item.Quantidade * item.Valor ) -   '+
+             '           (( item.Quantidade * item.Valor ) * isnull( (Select top 1  isnull(PercentualTaxaCartao,0) /100 from Recebimento where '+
+             '            ( CodigoOrcamento = T1.Codigo or CodigoLoteRecebimento = T1.CodigoLoteRecebimento)),0) )) '+
+             '              * ISNULL( func.Comissao , 0 ) / 100  '+
+             '     else  '+
+             '          (( item.Quantidade * item.Valor ) - '+
+             '            ( item.Quantidade * item.Valor  * 0 / 100 ) ) * '+
+             '              ISNULL( func.Comissao , 0 ) / 100 '+
+             '     end '+
+             '   ) as ValorComissao, '+
+             '   ( ( item.Quantidade * item.Valor )  * 0 / 100 ) as Imposto, '+
+             '     (( item.Quantidade * item.Valor ) * (Select top 1 PercentualTaxaCartao / 100 from Recebimento where '+
+             '      (CodigoOrcamento = T1.Codigo or CodigoLoteRecebimento = T1.CodigoLoteRecebimento ) and PercentualTaxaCartao > 0  ) ) as Taxa' );
+end;
+
+procedure TControllerOrcamento.Inserir(Objecto:TGenericEntidade);
+begin
+  inherited;
+end;
+
+procedure TControllerOrcamento.Retornar(CodigoOrcamento: string);
+var
+  Orcamento:TGenericEntidade;
+  ItemOrcamento:TGenericEntidade;
+begin
+  {PMapper.Dataset := GetSelect('Orcamento','Codigo');
+  PMapper.Entidade := TEntidadeFactory.Criar(tpOrcamento);
+  PMapper.SendDataSetToEntidade;
+  PMapper.SendValueToFieldEntidade('Situacao', 'Retorno');}
+
+  TGenericDAO.ExecSQL('Exec spRetornar '+CodigoOrcamento);
+
+
+end;
+
+function TControllerOrcamento.GetSelect(Tabela, Condicao: string; Fields: string= ''): TDataset;
+begin
+  result := TGenericDAO.GetSelect(Tabela,Condicao, Fields);
+end;
+
+
+procedure TControllerOrcamento.VincularVeiculo(Placa, Ano, Cor, CodigoModelo, CodigoCliente: string);
+  var
+  Veiculo:TGenericEntidade;
+  MapperVeiculo:TMapper;
+  Controller: TControllerTabelas;
+begin
+  Veiculo := TEntidadeFactory.Criar(tpVeiculos);
+  MapperVeiculo  := TMapper.create(Veiculo);
+  with MapperVeiculo do
+  begin
+    associar('Placa',nil, Placa);
+    associar('CodigoFilial',nil );
+    associar('CodigoCliente',nil, CodigoCliente);
+    associar('Ano',nil, Ano);
+    associar('Cor',nil, Cor);
+    associar('CodigoModelo',nil, CodigoModelo);
+    associar('Data',nil, datetostr(date));
+  end;
+  Inserir( Veiculo );
+end;
+
+procedure TControllerOrcamento.ExcluirItens(CodigoOrcamento: string );
+begin
+  inherited;
+    TGenericDAO.DeleteSQL(TEntidadeFactory.GetNameEntidade(tpItemOrcamento) ,
+                         ' CodigoOrcamento ='+ CodigoOrcamento);
+end;
+
+procedure TControllerOrcamento.ExcluirOrcamentoFormaPagamento(
+  CodigoOrcamento: string);
+begin
+       TGenericDAO.DeleteSQL(TEntidadeFactory.GetNameEntidade(tpOrcamentoFormaPagamento) ,
+                         ' CodigoOrcamento ='+ CodigoOrcamento);
+end;
+
+end.
+

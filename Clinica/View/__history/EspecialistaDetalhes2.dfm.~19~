@@ -1,0 +1,235 @@
+inherited FormEspecialistaDetalhes2: TFormEspecialistaDetalhes2
+  Caption = 'Especialistas'
+  ClientWidth = 641
+  ExplicitWidth = 657
+  ExplicitHeight = 516
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 641
+    ExplicitWidth = 645
+    object lbDescricao: TLabel
+      Left = 8
+      Top = 16
+      Width = 27
+      Height = 13
+      Caption = 'Nome'
+    end
+    object StringGrid1: TDBGrid
+      Left = 7
+      Top = 207
+      Width = 625
+      Height = 210
+      DataSource = srcEntidade
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      OnCellClick = StringGrid1CellClick
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'Codigo'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Descricao'
+          Width = 519
+          Visible = True
+        end>
+    end
+    object edtDescricao: TEdit
+      Left = 48
+      Top = 9
+      Width = 580
+      Height = 21
+      TabOrder = 1
+    end
+    object PageControl1: TPageControl
+      Left = 7
+      Top = 40
+      Width = 625
+      Height = 161
+      ActivePage = TabSheet1
+      TabOrder = 2
+      object TabSheet1: TTabSheet
+        Caption = 'Dados'
+        ExplicitWidth = 281
+        ExplicitHeight = 165
+        object lbNumero: TLabel
+          Left = 3
+          Top = 22
+          Width = 37
+          Height = 13
+          Caption = 'Numero'
+        end
+        object Label2: TLabel
+          Left = 3
+          Top = 56
+          Width = 44
+          Height = 13
+          Caption = 'Conselho'
+        end
+        object Label1: TLabel
+          Left = 3
+          Top = 89
+          Width = 23
+          Height = 13
+          Caption = 'CPF:'
+        end
+        object edtNumero: TEdit
+          Left = 80
+          Top = 16
+          Width = 100
+          Height = 21
+          TabOrder = 0
+        end
+        object cboConselho: TComboBox
+          Left = 80
+          Top = 48
+          Width = 100
+          Height = 21
+          TabOrder = 1
+          Items.Strings = (
+            'CRP'
+            'CRM')
+        end
+        object edtNumeroOperadora: TEdit
+          Left = 80
+          Top = 84
+          Width = 100
+          Height = 21
+          TabOrder = 2
+        end
+      end
+      object TabSheet2: TTabSheet
+        Caption = 'Convenios'
+        ImageIndex = 1
+        ExplicitWidth = 281
+        ExplicitHeight = 165
+        object Label4: TLabel
+          Left = 5
+          Top = 11
+          Width = 45
+          Height = 13
+          Caption = 'Convenio'
+        end
+        object Label3: TLabel
+          Left = 5
+          Top = 42
+          Width = 67
+          Height = 13
+          Caption = 'Indentificador'
+        end
+        object edtIndentificador: TEdit
+          Left = 78
+          Top = 35
+          Width = 161
+          Height = 21
+          TabOrder = 0
+        end
+        object Button1: TButton
+          Left = 80
+          Top = 62
+          Width = 75
+          Height = 25
+          Caption = 'Adicionar'
+          TabOrder = 1
+          OnClick = Button1Click
+        end
+        object Button2: TButton
+          Left = 164
+          Top = 62
+          Width = 75
+          Height = 25
+          Caption = 'Remover'
+          TabOrder = 2
+          OnClick = Button2Click
+        end
+        object cboConvenio: TComboBox
+          Left = 78
+          Top = 3
+          Width = 161
+          Height = 21
+          TabOrder = 3
+        end
+        object DBGrid1: TDBGrid
+          Left = 261
+          Top = 3
+          Width = 310
+          Height = 124
+          DataSource = srcEspecialistaConvenio
+          TabOrder = 4
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          OnCellClick = DBGrid1CellClick
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'Convenio'
+              Width = 150
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Matricula'
+              Width = 119
+              Visible = True
+            end>
+        end
+      end
+      object TabSheet3: TTabSheet
+        Caption = 'Usuario'
+        ImageIndex = 2
+        ExplicitWidth = 578
+        object Label5: TLabel
+          Left = 3
+          Top = 22
+          Width = 25
+          Height = 13
+          Caption = 'Login'
+        end
+        object Label6: TLabel
+          Left = 3
+          Top = 62
+          Width = 30
+          Height = 13
+          Caption = 'Senha'
+        end
+        object edtLogin: TEdit
+          Left = 80
+          Top = 16
+          Width = 100
+          Height = 21
+          TabOrder = 0
+        end
+        object edtSenha: TEdit
+          Left = 80
+          Top = 56
+          Width = 100
+          Height = 21
+          TabOrder = 1
+        end
+      end
+    end
+  end
+  inherited Panel2: TPanel
+    Width = 641
+    ExplicitWidth = 645
+  end
+  inherited srcEntidade: TDataSource
+    Left = 104
+    Top = 334
+  end
+  object srcEspecialistaConvenio: TDataSource
+    AutoEdit = False
+    Left = 496
+    Top = 190
+  end
+end

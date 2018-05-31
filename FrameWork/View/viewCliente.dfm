@@ -1,0 +1,150 @@
+object FormViewCLiente: TFormViewCLiente
+  Left = 0
+  Top = 0
+  Caption = 'FormViewCLiente'
+  ClientHeight = 352
+  ClientWidth = 605
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 8
+    Top = 12
+    Width = 33
+    Height = 13
+    Caption = 'Codigo'
+  end
+  object Label2: TLabel
+    Left = 8
+    Top = 49
+    Width = 27
+    Height = 13
+    Caption = 'Nome'
+  end
+  object Label3: TLabel
+    Left = 8
+    Top = 80
+    Width = 19
+    Height = 13
+    Caption = 'CPF'
+  end
+  object Label4: TLabel
+    Left = 8
+    Top = 117
+    Width = 45
+    Height = 13
+    Caption = 'Endereco'
+  end
+  object SpeedButton1: TSpeedButton
+    Left = 189
+    Top = 8
+    Width = 23
+    Height = 22
+    Caption = '!'
+    OnClick = SpeedButton1Click
+  end
+  object SpeedButton2: TSpeedButton
+    Left = 381
+    Top = 41
+    Width = 23
+    Height = 22
+    Caption = '!'
+    OnClick = SpeedButton2Click
+  end
+  object Nome: TEdit
+    Left = 86
+    Top = 41
+    Width = 289
+    Height = 21
+    TabOrder = 0
+  end
+  object DBGrid1: TDBGrid
+    Left = 9
+    Top = 184
+    Width = 588
+    Height = 156
+    DataSource = DataSource1
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object CPF: TEdit
+    Left = 86
+    Top = 76
+    Width = 289
+    Height = 21
+    TabOrder = 2
+  end
+  object Endereco: TEdit
+    Left = 86
+    Top = 109
+    Width = 289
+    Height = 21
+    TabOrder = 3
+  end
+  object Button7: TButton
+    Left = 89
+    Top = 145
+    Width = 75
+    Height = 25
+    Caption = 'Insert'
+    TabOrder = 4
+    OnClick = Button7Click
+  end
+  object Button8: TButton
+    Left = 170
+    Top = 145
+    Width = 75
+    Height = 25
+    Caption = 'Update'
+    TabOrder = 5
+    OnClick = Button8Click
+  end
+  object Button9: TButton
+    Left = 8
+    Top = 145
+    Width = 75
+    Height = 25
+    Caption = 'Edit'
+    TabOrder = 6
+    OnClick = Button9Click
+  end
+  object Codigo: TEdit
+    Left = 86
+    Top = 8
+    Width = 97
+    Height = 21
+    TabOrder = 7
+  end
+  object Button1: TButton
+    Left = 256
+    Top = 145
+    Width = 75
+    Height = 25
+    Caption = 'Delete'
+    TabOrder = 8
+    OnClick = Button1Click
+  end
+  object DataSource1: TDataSource
+    DataSet = Clientes
+    Left = 306
+    Top = 220
+  end
+  object Clientes: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 220
+    Top = 220
+  end
+end

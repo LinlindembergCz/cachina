@@ -1,0 +1,85 @@
+unit ControllerCliente;
+
+interface
+
+uses GenericEntidade, viewCliente, Controller, Forms , DB, Mapper, Classes, DBClient;
+
+type
+  TControllerCliente = class(TController)
+  private
+
+  public
+    procedure Editar;override;
+    procedure Inserir;override;
+    procedure Atualizar;override;
+    procedure Excluir;override;
+    procedure GetDataSet;override;
+
+    {
+    function  GetDataSet(Condicao: string; Fields: string= ''):TDataSet;override;
+    function  GetSelect(Select:String; Condicao: string; Fields: string= ''):TDataSet;
+    }
+    constructor Create(Sender: TForm; ClientDataSet:TClientDataSet);override;
+  end;
+
+implementation
+
+{ TControllerCliente }
+
+uses FactoryEntidade;
+
+procedure TControllerCliente.Inserir;
+begin
+  inherited;
+end;
+
+procedure TControllerCliente.Atualizar;
+begin
+  inherited;
+end;
+
+procedure TControllerCliente.Editar;
+begin
+ inherited;
+end;
+
+procedure TControllerCliente.Excluir;
+begin
+  inherited;
+end;
+
+procedure TControllerCliente.GetDataSet;
+begin
+  inherited;
+
+end;
+
+constructor TControllerCliente.Create(Sender: TForm; ClientDataSet:TClientDataSet);
+begin
+  inherited Create(Sender, ClientDataSet);
+  View := (Sender as TFormViewCLiente);
+  Entidade := TFactoryEntidade.CriarCliente;
+  //ClientDataSet.CreateDataSet;
+end;
+
+{
+procedure TControllerCliente.Excluir;
+begin
+
+end;
+
+function TControllerCliente.GetDataSet( Condicao,
+  Fields: string): TDataSet;
+begin
+
+end;
+
+function TControllerCliente.GetSelect(Select, Condicao,
+  Fields: string): TDataSet;
+begin
+
+end;
+}
+
+
+end.

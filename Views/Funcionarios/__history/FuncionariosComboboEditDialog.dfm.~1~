@@ -1,0 +1,5 @@
+inherited FormFuncionariosComboboEditDialog: TFormFuncionariosComboboEditDialog
+  Caption = 'Funcion'#225'rio'
+  OnCreate = FormCreate
+
+end

@@ -1,0 +1,91 @@
+unit EntidadeFactory;
+
+interface
+
+uses
+  GenericEntidade, Dialogs;
+
+Type
+  TTipoEntidade = (tpClassificacaoCliente, tpProduto, tpPessoa, tpContatos,
+                   tpVeiculos, tpModeloVeiculo, tpMarcaVeiculo, tpFormaPagamento,
+                   tpFuncionarios,tpFuncionarioComissao, tpOrcamento,tpOrcamentoFormaPagamento, tpItemOrcamento, tpParametrosPrecoVenda,
+                   tpFamilia, tpGrupo, tpSubGrupo);
+
+  TEntidadeFactory = class
+  private
+
+  public
+    class function Criar (const TipoEntidade: TTipoEntidade):TGenericEntidade;
+    class function GetClassInfo(const TipoEntidade: TTipoEntidade): Pointer; static;
+    class function GetNameEntidade(const TipoEntidade:TTipoEntidade): string;
+  end;
+
+implementation
+
+{ TEntidadeFactory }
+
+uses
+  ClassificacaoCliente, Produtos, Contatos, Veiculos, Pessoa,
+  ModeloVeiculo, MarcaVeiculo, FormaPagamento, Funcionarios,
+  ParametrosPrecoVenda, Orcamento, ItemOrcamento, TabelasProdutos,
+  FuncionarioComissao, Mapper;
+
+class function TEntidadeFactory.Criar(
+  const TipoEntidade: TTipoEntidade): TGenericEntidade;
+begin
+  case TipoEntidade of
+    tpClassificacaoCliente : result := TClassificacaoCliente.create;
+    tpProduto              : result := TProdutos.create;
+    tpPessoa             : result := TPessoa.create;
+    tpContatos             : result := TContatos.create;
+    tpVeiculos             : result := TVeiculos.create;
+    tpModeloVeiculo        : result := TModeloVeiculo.create;
+    tpMarcaVeiculo         : result := TMarcaVeiculo.create;
+    tpFormaPagamento       : result := TFormaPagamento.create;
+    tpFuncionarios         : result := TFuncionarios.create;
+    tpFuncionarioComissao  : result := TFuncionarioComissao.Create;
+    tpParametrosPrecoVenda : result := TParametrosPrecoVenda.create;
+    tpOrcamento            : result := TOrcamento.Create;
+    tpOrcamentoFormaPagamento : result := TOrcamentoFormaPagamento.Create;
+    tpItemOrcamento        : result := TItemOrcamento.Create;
+    tpFamilia              : result := TFamiliaProdutos.Create;
+    tpGrupo                : result := TGrupoProdutos.Create;
+    tpSubGrupo             : result := TSubGrupoProdutos.Create;
+  else
+    showmessage('Tipo de classe nao implementada pela factory!');
+  end;
+end;
+
+class function TEntidadeFactory.GetClassInfo(
+  const TipoEntidade: TTipoEntidade): Pointer;
+begin
+  case TipoEntidade of
+    tpClassificacaoCliente : result := TClassificacaoCliente.ClassInfo;
+    tpProduto              : result := TProdutos.ClassInfo;
+    tpPessoa               : result := TPessoa.ClassInfo;
+    tpContatos             : result := TContatos.ClassInfo;
+    tpVeiculos             : result := TVeiculos.ClassInfo;
+    tpModeloVeiculo        : result := TModeloVeiculo.ClassInfo;
+    tpMarcaVeiculo         : result := TMarcaVeiculo.ClassInfo;
+    tpFormaPagamento       : result := TFormaPagamento.ClassInfo;
+    tpFuncionarios         : result := TFuncionarios.ClassInfo;
+    tpFuncionarioComissao  : result := TFuncionarioComissao.ClassInfo;
+    tpParametrosPrecoVenda : result := TParametrosPrecoVenda.ClassInfo;
+    tpOrcamento            : result := TOrcamento.ClassInfo;
+    tpOrcamentoFormaPagamento : result := TOrcamentoFormaPagamento.ClassInfo;
+    tpItemOrcamento        : result := TItemOrcamento.ClassInfo;
+    tpFamilia              : result := TFamiliaProdutos.ClassInfo;
+    tpGrupo                : result := TGrupoProdutos.ClassInfo;
+    tpSubGrupo             : result := TSubGrupoProdutos.ClassInfo;
+  else
+    showmessage('Tipo de classe nao implementada pela factory!');
+  end;
+end;
+
+class function TEntidadeFactory.GetNameEntidade(
+  const TipoEntidade: TTipoEntidade): string;
+begin
+   result := TMapper.GetTableNameClasse( GetClassInfo(TipoEntidade));
+end;
+
+end.

@@ -1,0 +1,17 @@
+unit OrcamentosDAO;
+
+interface
+
+Uses Forms, Db, Rtti, CAtribEntity, TypInfo, SysUtils, srvModBaseDados,
+DBClient, Provider, Dialogs, strUtils, GenericEntidade, GenericDAO;
+
+type
+  TOrcamentosDAO = class(TGenericDAO)
+
+  public
+
+  end;
+
+implementation
+
+end.

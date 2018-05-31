@@ -1,0 +1,42 @@
+unit Unit4;
+
+interface
+
+type
+  [TableName('TPessoa')]
+  TPessoa = class
+  private
+    FNome: string;
+    FCPF: string;
+    FEndereco: string;
+    procedure SetNome(const Value: string);
+    procedure SetCPF(const Value: string);
+    procedure SetEndereco(const Value: string);
+  public
+    [FieldName('Nome')]
+    property Nome: string read FNome write SetNome;
+    [FieldName('CPF')]
+    property CPF: string read FCPF write SetCPF;
+    [FieldName('Endereco')]
+    property Endereco: string read FEndereco write SetEndereco;
+  end;
+
+
+implementation
+
+procedure TPessoa.SetCPF(const Value: string);
+begin
+  FCPF := Value;
+end;
+
+procedure TPessoa.SetEndereco(const Value: string);
+begin
+  FEndereco := Value;
+end;
+
+procedure TPessoa.SetNome(const Value: string);
+begin
+  FNome := Value;
+end;
+
+end.

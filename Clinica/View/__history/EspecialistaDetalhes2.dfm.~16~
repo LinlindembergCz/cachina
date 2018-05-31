@@ -1,0 +1,189 @@
+inherited FormEspecialistaDetalhes2: TFormEspecialistaDetalhes2
+  Caption = 'Especialistas'
+  ClientWidth = 645
+  ExplicitWidth = 661
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 645
+    ExplicitWidth = 645
+    object lbDescricao: TLabel
+      Left = 8
+      Top = 16
+      Width = 27
+      Height = 13
+      Caption = 'Nome'
+    end
+    object lbNumero: TLabel
+      Left = 8
+      Top = 48
+      Width = 37
+      Height = 13
+      Caption = 'Numero'
+    end
+    object Label2: TLabel
+      Left = 8
+      Top = 88
+      Width = 44
+      Height = 13
+      Caption = 'Conselho'
+    end
+    object Label1: TLabel
+      Left = 8
+      Top = 125
+      Width = 23
+      Height = 13
+      Caption = 'CPF:'
+    end
+    object StringGrid1: TDBGrid
+      Left = 7
+      Top = 207
+      Width = 625
+      Height = 210
+      DataSource = srcEntidade
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      OnCellClick = StringGrid1CellClick
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'Codigo'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Descricao'
+          Width = 519
+          Visible = True
+        end>
+    end
+    object edtDescricao: TEdit
+      Left = 88
+      Top = 16
+      Width = 233
+      Height = 21
+      TabOrder = 1
+    end
+    object edtNumero: TEdit
+      Left = 88
+      Top = 48
+      Width = 100
+      Height = 21
+      TabOrder = 2
+    end
+    object cboConselho: TComboBox
+      Left = 88
+      Top = 80
+      Width = 100
+      Height = 21
+      TabOrder = 3
+      Items.Strings = (
+        'CRP'
+        'CRM')
+    end
+    object edtNumeroOperadora: TEdit
+      Left = 88
+      Top = 120
+      Width = 185
+      Height = 21
+      TabOrder = 4
+    end
+    object GroupBox1: TGroupBox
+      Left = 379
+      Top = 3
+      Width = 253
+      Height = 198
+      Caption = 'Conv'#234'nios'
+      TabOrder = 5
+      object Label4: TLabel
+        Left = 10
+        Top = 27
+        Width = 45
+        Height = 13
+        Caption = 'Convenio'
+      end
+      object Label3: TLabel
+        Left = 10
+        Top = 58
+        Width = 67
+        Height = 13
+        Caption = 'Indentificador'
+      end
+      object DBGrid1: TDBGrid
+        Left = 10
+        Top = 108
+        Width = 234
+        Height = 83
+        DataSource = srcEspecialistaConvenio
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        OnCellClick = DBGrid1CellClick
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'Convenio'
+            Width = 106
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Matricula'
+            Width = 94
+            Visible = True
+          end>
+      end
+      object edtIndentificador: TEdit
+        Left = 83
+        Top = 51
+        Width = 161
+        Height = 21
+        TabOrder = 1
+      end
+      object cboConvenio: TComboBox
+        Left = 83
+        Top = 19
+        Width = 161
+        Height = 21
+        TabOrder = 2
+      end
+      object Button1: TButton
+        Left = 85
+        Top = 78
+        Width = 75
+        Height = 25
+        Caption = 'Adicionar'
+        TabOrder = 3
+        OnClick = Button1Click
+      end
+      object Button2: TButton
+        Left = 169
+        Top = 78
+        Width = 75
+        Height = 25
+        Caption = 'Remover'
+        TabOrder = 4
+      end
+    end
+  end
+  inherited Panel2: TPanel
+    Width = 645
+    ExplicitWidth = 645
+  end
+  inherited srcEntidade: TDataSource
+    Left = 104
+    Top = 334
+  end
+  object srcEspecialistaConvenio: TDataSource
+    AutoEdit = False
+    Left = 496
+    Top = 190
+  end
+end

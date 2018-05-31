@@ -1,0 +1,341 @@
+object FormRelRecibo: TFormRelRecibo
+  Left = 0
+  Top = 0
+  Caption = 'FormRelRecibo'
+  ClientHeight = 528
+  ClientWidth = 831
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Scaled = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object QuickRep1: TQuickRep
+    Left = 21
+    Top = 8
+    Width = 794
+    Height = 1123
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    Functions.Strings = (
+      'PAGENUMBER'
+      'COLUMNNUMBER'
+      'REPORTTITLE')
+    Functions.DATA = (
+      '0'
+      '0'
+      #39#39)
+    Options = [FirstPageHeader, LastPageFooter]
+    Page.Columns = 1
+    Page.Orientation = poPortrait
+    Page.PaperSize = A4
+    Page.Continuous = False
+    Page.Values = (
+      100.000000000000000000
+      2970.000000000000000000
+      100.000000000000000000
+      2100.000000000000000000
+      100.000000000000000000
+      100.000000000000000000
+      0.000000000000000000)
+    PrinterSettings.Copies = 1
+    PrinterSettings.OutputBin = Auto
+    PrinterSettings.Duplex = False
+    PrinterSettings.FirstPage = 0
+    PrinterSettings.LastPage = 0
+    PrinterSettings.UseStandardprinter = False
+    PrinterSettings.UseCustomBinCode = False
+    PrinterSettings.CustomBinCode = 0
+    PrinterSettings.ExtendedDuplex = 0
+    PrinterSettings.UseCustomPaperCode = False
+    PrinterSettings.CustomPaperCode = 0
+    PrinterSettings.PrintMetaFile = False
+    PrinterSettings.PrintQuality = 0
+    PrinterSettings.Collate = 0
+    PrinterSettings.ColorOption = 0
+    PrintIfEmpty = True
+    SnapToGrid = True
+    Units = MM
+    Zoom = 100
+    PrevFormStyle = fsNormal
+    PreviewInitialState = wsNormal
+    PrevInitialZoom = qrZoomToFit
+    PreviewDefaultSaveType = stQRP
+    PreviewLeft = 0
+    PreviewTop = 0
+    object TitleBand1: TQRBand
+      Left = 38
+      Top = 38
+      Width = 718
+      Height = 467
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        1235.604166666667000000
+        1899.708333333333000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbTitle
+      object QRSysData1: TQRSysData
+        Left = 552
+        Top = 16
+        Width = 68
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1460.500000000000000000
+          42.333333333333330000
+          179.916666666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        Data = qrsDateTime
+        Transparent = False
+        ExportAs = exptText
+        FontSize = 10
+      end
+      object QRLabel1: TQRLabel
+        Left = 304
+        Top = 40
+        Width = 93
+        Height = 30
+        Size.Values = (
+          79.375000000000000000
+          804.333333333333300000
+          105.833333333333300000
+          246.062500000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'RECIBO'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -24
+        Font.Name = 'Arial'
+        Font.Style = [fsBold, fsUnderline]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 18
+      end
+      object lbTexto: TQRLabel
+        Left = 32
+        Top = 176
+        Width = 665
+        Height = 105
+        Size.Values = (
+          277.812500000000000000
+          84.666666666666670000
+          465.666666666666700000
+          1759.479166666667000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = True
+        Caption = 
+          'Recebi de sr(a) #Nome a import'#226'ncia de R$ #Valor (#Extenso)  ref' +
+          'erente a #Servico .'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 12
+      end
+      object QRLabel5: TQRLabel
+        Left = 256
+        Top = 412
+        Width = 218
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          677.333333333333300000
+          1090.083333333333000000
+          576.791666666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = '_______________________________'
+        Color = clWhite
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object lbNomeAssinatura: TQRLabel
+        Left = 312
+        Top = 435
+        Width = 107
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          825.500000000000000000
+          1150.937500000000000000
+          283.104166666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'lbNomeAssinatura'
+        Color = clWhite
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+    end
+    object ChildBand1: TQRChildBand
+      Left = 38
+      Top = 505
+      Width = 718
+      Height = 480
+      Frame.DrawTop = True
+      Frame.Style = psDashDotDot
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        1270.000000000000000000
+        1899.708333333333000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      ParentBand = TitleBand1
+      PrintOrder = cboAfterParent
+      object QRSysData2: TQRSysData
+        Left = 552
+        Top = 16
+        Width = 68
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1460.500000000000000000
+          42.333333333333330000
+          179.916666666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        Data = qrsDateTime
+        Transparent = False
+        ExportAs = exptText
+        FontSize = 10
+      end
+      object QRLabel2: TQRLabel
+        Left = 304
+        Top = 40
+        Width = 93
+        Height = 30
+        Size.Values = (
+          79.375000000000000000
+          804.333333333333300000
+          105.833333333333300000
+          246.062500000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'RECIBO'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -24
+        Font.Name = 'Arial'
+        Font.Style = [fsBold, fsUnderline]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 18
+      end
+      object lbTexto2: TQRLabel
+        Left = 32
+        Top = 176
+        Width = 665
+        Height = 105
+        Size.Values = (
+          277.812500000000000000
+          84.666666666666670000
+          465.666666666666700000
+          1759.479166666667000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = True
+        Caption = 
+          'Recebi de sr(a) #NomeCliente a quantia a import'#226'ncia de R$ #Valo' +
+          'r (#Extenso)  referente a #Servico .'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 12
+      end
+      object QRLabel6: TQRLabel
+        Left = 256
+        Top = 412
+        Width = 218
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          677.333333333333300000
+          1090.083333333333000000
+          576.791666666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = '_______________________________'
+        Color = clWhite
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object QRLabel7: TQRLabel
+        Left = 312
+        Top = 435
+        Width = 126
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          825.500000000000000000
+          1150.937500000000000000
+          333.375000000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'CG VELOCIMETROS'
+        Color = clWhite
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+    end
+  end
+end

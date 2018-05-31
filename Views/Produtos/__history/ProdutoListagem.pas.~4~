@@ -1,0 +1,39 @@
+unit ProdutoListagem;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, TemplateListagemBase, Data.DB,
+  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TFormProdutoListagem = class(TTemplateFormListagemBase)
+    procedure Grid1DblClick(Sender: TObject);
+    procedure btnSelecionarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormProdutoListagem: TFormProdutoListagem;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFormProdutoListagem.btnSelecionarClick(Sender: TObject);
+begin
+  ModalResult:= mrOk;
+end;
+
+procedure TFormProdutoListagem.Grid1DblClick(Sender: TObject);
+begin
+  ModalResult:= mrOk;
+  inherited;
+
+end;
+
+end.

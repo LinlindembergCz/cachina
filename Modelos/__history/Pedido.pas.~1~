@@ -1,0 +1,45 @@
+unit Pedido;
+
+interface
+
+uses
+ CAtribEntity,  GenericEntidade;
+
+type
+  [TableName('Pedido')]
+  TPedido = class(TGenericEntidade)
+public
+  [FieldName('Codigo')]
+  property Codigo: Integer;
+  [FieldName('CodigoFilial')]
+  property CodigoFilial: Integer;
+  [FieldName('CodigoFornecedor')]
+  property CodigoFornecedor: Integer;
+  [FieldName('Data')]
+  property Data: TDatetime;
+  [FieldName('CodigoFuncionario')]
+  property CodigoFuncionario: Integer;
+  [FieldName('Situacao')]
+  property Situacao: string;
+  [FieldName('Observacao')]
+  property Observacao: string;
+  [FieldName('Desconto')]
+  property Desconto: Double;
+  [FieldName('Frete')]
+  property Frete: Double;
+  [FieldName('TipoFrete')]
+  property TipoFrete: string;
+  [FieldName('CodigoFormaPagamento')]
+  property CodigoFormaPagamento: Integer;
+  [FieldName('Previsao')]
+  property Previsao: TDatetime;
+  [FieldName('EnderecoEntrega')]
+  property EnderecoEntrega: string;
+  [FieldName('Contato')]
+  property Contato: string;
+end;
+
+implementation
+
+End.
+

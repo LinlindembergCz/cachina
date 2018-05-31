@@ -1,0 +1,6 @@
+inherited FormFuncionariosComboboEditDialog: TFormFuncionariosComboboEditDialog
+  Caption = 'Funcion'#225'rio'
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+end

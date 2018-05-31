@@ -1,0 +1,49 @@
+unit ClassificacaoDetalhes;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
+  TemplateDetalhesComTabGrid, System.Rtti, Data.Bind.EngExt, Fmx.Bind.DBEngExt,
+  Fmx.Bind.Grid, System.Bindings.Outputs, Fmx.Bind.Editors,
+  Data.Bind.Components, Data.Bind.DBScope, Data.Bind.Grid, Data.DB, FMX.Layouts,
+  FMX.Grid, FMX.TabControl, FMX.Ani, FMX.Edit, Controls, StdCtrls, DB, Grids,
+  DBGrids, ComCtrls, Classes, ExtCtrls;
+
+type
+  TFormClassificacaoDetalhes = class(TTemplateFormComTabGridDetalhes)
+    Label1: TLabel;
+    edtDescricao: TEdit;
+    Label2: TLabel;
+    edtDesconto: TEdit;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormClassificacaoDetalhes: TFormClassificacaoDetalhes;
+
+implementation
+
+{$R *.dfm}
+
+uses ControllerTabelas, EntidadeFactory;
+
+procedure TFormClassificacaoDetalhes.FormCreate(Sender: TObject);
+begin
+  Controller := TControllerTabelas.Create;
+  Entidade   := TEntidadeFactory.Criar(tpClassificacaoCliente);
+  inherited;
+  with MapperEntidade do
+  begin
+    Associar('Codigo', nil);
+    Associar('Descricao', edtDescricao);
+    Associar('Desconto', edtDesconto);
+  end;
+end;
+
+end.

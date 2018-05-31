@@ -1,0 +1,65 @@
+unit Caixa;
+
+interface
+
+uses
+ CAtribEntity,  GenericEntidade;
+
+type
+  [TableName('Caixa')]
+  TCaixa = class(TGenericEntidade)
+  private
+    FDescricao: string;
+    FCodigo: Integer;
+    FCodigoFilial: Integer;
+    FStatus: string;
+    FValorSaldo: Double;
+    procedure SetCodigo(const Value: Integer);
+    procedure SetCodigoFilial(const Value: Integer);
+    procedure SetDescricao(const Value: string);
+    procedure SetStatus(const Value: string);
+    procedure SetValorSaldo(const Value: Double);
+public
+  [KeyField('Codigo')]
+  property Codigo: Integer read FCodigo write SetCodigo;
+  [FieldName('CodigoFilial')]
+  property CodigoFilial: Integer read FCodigoFilial write SetCodigoFilial;
+  [FieldName('Descricao')]
+  property Descricao: string read FDescricao write SetDescricao;
+  [FieldName('ValorSaldo')]
+  property ValorSaldo: Double read FValorSaldo write SetValorSaldo;
+  [FieldName('Status')]
+  property Status: string read FStatus write SetStatus;
+end;
+
+implementation
+
+{ TCaixa }
+
+procedure TCaixa.SetCodigo(const Value: Integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TCaixa.SetCodigoFilial(const Value: Integer);
+begin
+  FCodigoFilial := Value;
+end;
+
+procedure TCaixa.SetDescricao(const Value: string);
+begin
+  FDescricao := Value;
+end;
+
+procedure TCaixa.SetStatus(const Value: string);
+begin
+  FStatus := Value;
+end;
+
+procedure TCaixa.SetValorSaldo(const Value: Double);
+begin
+  FValorSaldo := Value;
+end;
+
+End.
+

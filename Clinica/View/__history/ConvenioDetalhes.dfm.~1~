@@ -1,0 +1,37 @@
+inherited FormConvenioDetalhes: TFormConvenioDetalhes
+  Caption = 'Convenios'
+  inherited Panel1: TPanel
+    inherited tabPrincipal: TPageControl
+      TabIndex = 1
+      inherited TabSheet1: TTabSheet
+        Height = 24
+        IsSelected = False
+        inherited DBGrid1: TDBGrid
+          Height = 356
+        end
+      end
+      inherited TabSheet2: TTabSheet
+        Height = 24
+        IsSelected = True
+        left = 62
+        object edtDescricao: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 0
+          left = 88
+          top = 32
+          Width = 521
+          Height = 22
+          KillFocusByReturn = False
+        end
+        object lbDescricao: TLabel
+          Height = 17
+          left = 8
+          top = 32
+          caption = 'Descricao'
+          Width = 120
+        end
+      end
+    end
+  end
+  
+end

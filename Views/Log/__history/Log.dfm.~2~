@@ -1,0 +1,35 @@
+inherited FormLogListagem: TFormLogListagem
+  Caption = 'FormLogListagem'
+  OnCreate = FormCreate
+  ExplicitWidth = 656
+  ExplicitHeight = 518
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited SpeedButton2: TSpeedButton
+      Left = 554
+      Top = 8
+      ExplicitLeft = 554
+      ExplicitTop = 8
+    end
+    inherited btnSelecionar: TSpeedButton
+      Left = 554
+      Top = 33
+      ExplicitLeft = 554
+      ExplicitTop = 33
+    end
+  end
+  inherited Grid1: TDBGrid
+    Width = 400
+  end
+  object DBMemo1: TDBMemo [2]
+    Left = 400
+    Top = 73
+    Width = 240
+    Height = 407
+    Align = alRight
+    DataField = 'Descricao'
+    DataSource = srcEntidade
+    TabOrder = 2
+  end
+end

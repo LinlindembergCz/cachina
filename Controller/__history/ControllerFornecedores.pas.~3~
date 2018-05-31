@@ -1,0 +1,72 @@
+unit ControllerFornecedores;
+
+interface
+
+uses
+   Windows,Data.DB,  Messages, SysUtils, Variants, Classes,  ControllerTabelas,
+   GenericEntidade;
+
+type
+  TControllerfornecedores= class( TControllerTabelas )
+  private
+
+  public
+    procedure Inserir(Objecto: TGenericEntidade);override;
+    procedure Atualizar(Objecto: TGenericEntidade);override;
+    procedure Excluir(Objecto: TGenericEntidade);override;
+    function GetDataSet(Objecto: TGenericEntidade;
+                        Condicao: string;
+                        Fields: string= '') :TDataset;
+    function GetSelect(Tabela, Condicao:string; Fields: string= ''):TDataset;
+  end;
+
+  resourcestring
+  StrCamposVeiculos = 'Placa,'#9'CodigoCliente,'#9'CodigoFilial,'#9'CodigoMo' +
+  'delo,'#9'Chassi,'#9'Ano,'#9'Cor,'#9'Observacao,'#9'Data,'+
+  '(Select Descricao from ModeloVeiculo where Codigo= CodigoModelo) as Modelo';
+
+implementation
+
+{ TControllerClientes }
+
+uses  GenericDAO, EntidadeFactory,  Principal, UtilsNumeros,
+  UtilsString;
+
+procedure TControllerfornecedores.Atualizar(Objecto: TGenericEntidade);
+begin
+  if Length( UtilsString.SoNumeros( PMapper.GetValueEntidade('CPFCNPJ') ) ) = 14 then
+     PMapper.IsRiquired(['Endereco','Bairro','RazaoSocial','Municipio','CEP','Telefone','UF']);
+  PMapper.SendValueToFieldEntidade('Tipo','FORNECEDOR');
+  inherited  ;
+end;
+
+procedure TControllerfornecedores.Excluir(Objecto: TGenericEntidade);
+begin
+  inherited ;
+end;
+
+
+function TControllerfornecedores.GetDataSet(Objecto: TGenericEntidade;Condicao: string;  Fields: string= ''): TDataset;
+begin
+  result:= inherited;
+end;
+
+function TControllerfornecedores.GetSelect(Tabela, Condicao,
+  Fields: string): TDataset;
+begin
+  result:= inherited;
+end;
+
+procedure TControllerfornecedores.Inserir(Objecto:TGenericEntidade);
+begin
+  CodigoModulo := 2;
+  if Length( UtilsString.SoNumeros( PMapper.GetValueEntidade('CPFCNPJ') ) ) = 14 then
+     PMapper.IsRiquired(['Endereco','Bairro','RazaoSocial','Municipio','CEP','Telefone','UF']);
+
+  PMapper.SendValueToFieldEntidade('Tipo','FORNECEDOR');
+  inherited;
+end;
+
+
+
+end.

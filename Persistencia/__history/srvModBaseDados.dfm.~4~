@@ -1,0 +1,95 @@
+object DSServerModuleBaseDados: TDSServerModuleBaseDados
+  OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  Height = 377
+  Width = 638
+  object SQLConnection1: TSQLConnection
+    DriverName = 'DataSnap'
+    LoginPrompt = False
+    Params.Strings = (
+      'DriverUnit=Data.DBXDataSnap'
+      'CommunicationProtocol=tcp/ip'
+      'DatasnapContext=datasnap/'
+      
+        'DriverAssemblyLoader=Borland.Data.TDBXClientDriverLoader,Borland' +
+        '.Data.DbxClientDriver,Version=16.0.0.0,Culture=neutral,PublicKey' +
+        'Token=91d62ebb5b0d1b1b'
+      'DriverName=DataSnap'
+      'HostName=192.168.0.12'
+      'port=211'
+      'Filters={}')
+    Left = 96
+    Top = 64
+  end
+  object cdsConsulta: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspConsulta'
+    Left = 328
+    Top = 224
+  end
+  object DSProviderConnectioneBase: TDSProviderConnection
+    ServerClassName = 'TServerMethodsGeneric'
+    SQLConnection = SQLConnection1
+    Left = 96
+    Top = 11
+  end
+  object ServerMethod_ExecSQL: TSqlServerMethod
+    Params = <
+      item
+        DataType = ftWideString
+        Precision = 2000
+        Name = 'SQL'
+        ParamType = ptInput
+      end>
+    SQLConnection = SQLConnection1
+    ServerMethodName = 'TServerMethodsGeneric.ExecSQl'
+    Left = 216
+    Top = 16
+  end
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      'Database=CACHINA'
+      'User_Name=user'
+      'Server=.\sqlexpress'
+      'OSAuthent=Yes'
+      'DriverID=MSSQL')
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvUpdateNonBaseFields]
+    UpdateOptions.UpdateNonBaseFields = True
+    UpdateOptions.CheckReadOnly = False
+    UpdateOptions.CheckUpdatable = False
+    Left = 464
+    Top = 80
+  end
+  object FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink
+    Left = 464
+    Top = 24
+  end
+  object dspConsulta: TDataSetProvider
+    DataSet = FDQuery1
+    Constraints = False
+    OnDataRequest = dspConsultaDataRequest
+    Left = 464
+    Top = 184
+  end
+  object FDQuery1: TFDQuery
+    AutoCalcFields = False
+    ObjectView = False
+    IndexesActive = False
+    Connection = FDConnection1
+    FetchOptions.AssignedValues = [evItems]
+    FetchOptions.Items = [fiBlobs, fiDetails]
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvUpdateChngFields, uvRefreshDelete, uvCountUpdatedRecords, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
+    UpdateOptions.EnableDelete = False
+    UpdateOptions.EnableInsert = False
+    UpdateOptions.EnableUpdate = False
+    UpdateOptions.RefreshDelete = False
+    UpdateOptions.CountUpdatedRecords = False
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.CheckReadOnly = False
+    UpdateOptions.CheckUpdatable = False
+    Left = 464
+    Top = 136
+  end
+end

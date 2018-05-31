@@ -1,0 +1,49 @@
+unit ModelosDetalhes;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
+  TemplateDetalhesComTabGrid, System.Rtti, Data.Bind.EngExt, Fmx.Bind.DBEngExt,
+  Fmx.Bind.Grid, System.Bindings.Outputs, Fmx.Bind.Editors,
+  Data.Bind.Components, Data.Bind.DBScope, Data.Bind.Grid, Data.DB, FMX.Layouts,
+  FMX.Grid, FMX.TabControl, FMX.Ani, FMX.ListBox, FMX.Edit;
+
+type
+  TFormModelosDetalhes = class(TTemplateFormComTabGridDetalhes)
+    Label1: TLabel;
+    Label2: TLabel;
+    cboMarca: TComboBox;
+    edtDescricao: TEdit;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormModelosDetalhes: TFormModelosDetalhes;
+
+implementation
+
+{$R *.dfm}
+
+uses ControllerTabelas,  EntidadeFactory, DBUtils;
+
+procedure TFormModelosDetalhes.FormCreate(Sender: TObject);
+begin
+  Controller := TControllerTabelas.Create;
+  Entidade   := TEntidadeFactory.Criar(tpModeloVeiculo);
+  inherited;
+  with MapperEntidade do
+  begin
+    Associar('Codigo', nil);
+    Associar('Descricao', edtDescricao);
+    Associar('CodigoMarca', cboMarca);
+  end;
+  FillCombobox(tpMarcaVeiculo, cboMarca);
+end;
+
+end.

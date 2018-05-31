@@ -1,0 +1,344 @@
+unit Produtos;
+
+interface
+
+uses
+   CAtribEntity,  GenericEntidade;
+
+Type
+  [TableName('Produtos')]
+  [Modulo('3')]
+  TProdutos = class(TGenericEntidade)
+  private
+    FCodigoFabricante: integer;
+    FCodigoUnidade: integer;
+    FValorDespesa: Double;
+    FObservacao: string;
+    FValorMarkUp: Double;
+    FCodigoMarca: integer;
+    FCodigoSubGrupo: integer;
+    FValorDesconto: Double;
+    FValorVenda: Double;
+    FCodigoGrupo: integer;
+    FDescricao: string;
+    FCustoCompra: Double;
+    FCodigo: integer;
+    FMargemLucro: Double;
+    FCodigoFilial: integer;
+    FCodigoFamilia: integer;
+    FReferencia: string;
+    FTipo: string;
+    FPercentualEncargos: double;
+    FPercentualDespesasInd: double;
+    FPerncentualICMS: double;
+    FPercentualComissao: double;
+    FPercentualPIS: double;
+    FPercentualCOFINS: double;
+    FPercentualIPI: double;
+    FFatorMarkup: double;
+    FSimplesNacional: double;
+    FPercentualTaxaAdmin: double;
+    FCodigoParametroPrecovenda: integer;
+    FPercentualCustoFixo: double;
+    FPercentualDesconto: double;
+    FCodigoNCM: string;
+    FSituacaoTributariaICMS: string;
+    FSituacaoTributariaPIS: string;
+    FSituacaoTributariaCOFINS: string;
+    FSituacaoTributariaIPI: string;
+    procedure SetCodigo(const Value: integer);
+    procedure SetCodigoFabricante(const Value: integer);
+    procedure SetCodigoFamilia(const Value: integer);
+    procedure SetCodigoFilial(const Value: integer);
+    procedure SetCodigoGrupo(const Value: integer);
+    procedure SetCodigoMarca(const Value: integer);
+    procedure SetCodigoSubGrupo(const Value: integer);
+    procedure SetCodigoUnidade(const Value: integer);
+    procedure SetCustoCompra(const Value: Double);
+    procedure SetDescricao(const Value: string);
+    procedure SetMargemLucro(const Value: Double);
+    procedure SetObservacao(const Value: string);
+    procedure SetReferencia(const Value: string);
+    procedure SetTipo(const Value: string);
+    procedure SetValorDesconto(const Value: Double);
+    procedure SetValorDespesa(const Value: Double);
+    procedure SetValorMarkUp(const Value: Double);
+    procedure SetValorVenda(const Value: Double);
+    procedure SetPercentualCOFINS(const Value: double);
+    procedure SetPercentualComissao(const Value: double);
+    procedure SetPercentualDespesasInd(const Value: double);
+    procedure SetPercentualEncargos(const Value: double);
+    procedure SetPercentualIPI(const Value: double);
+    procedure SetPercentualPIS(const Value: double);
+    procedure SetPerncentualICMS(const Value: double);
+    procedure SetFatorMarkup(const Value: double);
+    procedure SetSimplesNacional(const Value: double);
+    procedure SetPercentualTaxaAdmin(const Value: double);
+    procedure SetCodigoParametroPrecovenda(const Value: integer);
+    procedure SetPercentualCustoFixo(const Value: double);
+    procedure SetPercentualDesconto(const Value: double);
+    procedure SetCodigoNCM(const Value: string);
+    procedure SetSituacaoTributariaCOFINS(const Value: string);
+    procedure SetSituacaoTributariaICMS(const Value: string);
+    procedure SetSituacaoTributariaIPI(const Value: string);
+    procedure SetSituacaoTributariaPIS(const Value: string);
+  public
+    [KeyField('Codigo')]
+    property  Codigo: integer read FCodigo write SetCodigo;
+    [FieldName('CodigoFilial')]
+    property  CodigoFilial: integer read FCodigoFilial write SetCodigoFilial;
+    [FieldName('Descricao')]
+    property  Descricao: string read FDescricao write SetDescricao;
+    [FieldName('CodigoFamilia')]
+    property  CodigoFamilia: integer read FCodigoFamilia write SetCodigoFamilia;
+    [FieldName('CodigoGrupo')]
+    property  CodigoGrupo: integer read FCodigoGrupo write SetCodigoGrupo;
+    [FieldName('CodigoSubGrupo')]
+    property  CodigoSubGrupo: integer read FCodigoSubGrupo write SetCodigoSubGrupo;
+    [FieldName('CodigoUnidade')]
+    property  CodigoUnidade: integer read FCodigoUnidade write SetCodigoUnidade;
+    [FieldName('Referencia')]
+    property  Referencia: string read FReferencia write SetReferencia;
+    [FieldName('CodigoFabricante')]
+    property  CodigoFabricante: integer read FCodigoFabricante write SetCodigoFabricante;
+    [FieldName('CodigoMarca')]
+    property  CodigoMarca: integer read FCodigoMarca write SetCodigoMarca;
+    [FieldName('Tipo')]
+    property  Tipo: string read FTipo write SetTipo;
+    [FieldName('CustoCompra')]
+    property  CustoCompra: Double read FCustoCompra write SetCustoCompra;
+    [FieldName('ValorVenda')]
+    property  ValorVenda: Double read FValorVenda write SetValorVenda;
+    [FieldName('MargemLucro')]
+    property  MargemLucro: Double read FMargemLucro write SetMargemLucro;
+    [FieldName('ValorMarkUp')]
+    property  ValorMarkUp: Double read FValorMarkUp write SetValorMarkUp;
+    [FieldName('ValorDesconto')]
+    property  ValorDesconto: Double read FValorDesconto write SetValorDesconto;
+    [FieldName('ValorDespesa')]
+    property  ValorDespesa: Double read FValorDespesa write SetValorDespesa;
+    [FieldName('Observacao')]
+    property  Observacao: string read FObservacao write SetObservacao;
+    [FieldName('PercentualEncargos')]
+    property PercentualEncargos:double read FPercentualEncargos write SetPercentualEncargos;
+    [FieldName('PerncentualICMS')]
+    property PerncentualICMS:double read FPerncentualICMS write SetPerncentualICMS;
+    [FieldName('PercentualPIS')]
+    property PercentualPIS:double read FPercentualPIS write SetPercentualPIS;
+    [FieldName('PercentualCOFINS')]
+    property PercentualCOFINS:double read FPercentualCOFINS write SetPercentualCOFINS;
+    [FieldName('PercentualIPI')]
+    property PercentualIPI:double read FPercentualIPI write SetPercentualIPI;
+    [FieldName('PercentualComissao')]
+    property PercentualComissao:double read FPercentualComissao write SetPercentualComissao;
+    [FieldName('PercentualDespesasInd')]
+    property PercentualDespesasInd:double read FPercentualDespesasInd write SetPercentualDespesasInd;
+    [FieldName('FatorMarkup')]
+    property FatorMarkup:double read FFatorMarkup write SetFatorMarkup;
+    [FieldName('SimplesNacional')]
+    property SimplesNacional:double read FSimplesNacional write SetSimplesNacional;
+    [FieldName('PercentualTaxaAdmin')]
+    property PercentualTaxaAdmin:double read FPercentualTaxaAdmin write SetPercentualTaxaAdmin;
+    [FieldName('CodigoParametroPrecoVenda')]
+    property CodigoParametroPrecoVenda:integer read FCodigoParametroPrecoVenda write SetCodigoParametroPrecovenda;
+    [FieldName('PercentualDesconto')]
+    property PercentualDesconto: double read FPercentualDesconto write SetPercentualDesconto;
+    [FieldName('PercentualCustoFixo')]
+    property PercentualCustoFixo: double read FPercentualCustoFixo write SetPercentualCustoFixo;
+    [FieldName('CodigoNCM')]
+    property CodigoNCM: string read FCodigoNCM write SetCodigoNCM;
+    [FieldName('SituacaoTributariaICMS')]
+    property SituacaoTributariaICMS: string read FSituacaoTributariaICMS write SetSituacaoTributariaICMS;
+    [FieldName('SituacaoTributariaIPI')]
+    property SituacaoTributariaIPI: string read FSituacaoTributariaIPI write SetSituacaoTributariaIPI;
+    [FieldName('SituacaoTributariaPIS')]
+    property SituacaoTributariaPIS: string read FSituacaoTributariaPIS write SetSituacaoTributariaPIS;
+    [FieldName('SituacaoTributariaCOFINS')]
+    property SituacaoTributariaCOFINS: string read FSituacaoTributariaCOFINS write SetSituacaoTributariaCOFINS;
+  end;
+
+implementation
+
+{ TProdutos }
+
+procedure TProdutos.SetCodigo(const Value: integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TProdutos.SetCodigoFabricante(const Value: integer);
+begin
+  FCodigoFabricante := Value;
+end;
+
+procedure TProdutos.SetCodigoFamilia(const Value: integer);
+begin
+  FCodigoFamilia := Value;
+end;
+
+procedure TProdutos.SetCodigoFilial(const Value: integer);
+begin
+  FCodigoFilial := Value;
+end;
+
+procedure TProdutos.SetCodigoGrupo(const Value: integer);
+begin
+  FCodigoGrupo := Value;
+end;
+
+procedure TProdutos.SetCodigoMarca(const Value: integer);
+begin
+  FCodigoMarca := Value;
+end;
+
+procedure TProdutos.SetCodigoNCM(const Value: string);
+begin
+  FCodigoNCM := Value;
+end;
+
+procedure TProdutos.SetCodigoParametroPrecovenda(const Value: integer);
+begin
+  FCodigoParametroPrecovenda := Value;
+end;
+
+procedure TProdutos.SetCodigoSubGrupo(const Value: integer);
+begin
+  FCodigoSubGrupo := Value;
+end;
+
+procedure TProdutos.SetCodigoUnidade(const Value: integer);
+begin
+  FCodigoUnidade := Value;
+end;
+
+procedure TProdutos.SetCustoCompra(const Value: Double);
+begin
+  FCustoCompra := Value;
+end;
+
+procedure TProdutos.SetDescricao(const Value: string);
+begin
+  FDescricao := Value;
+end;
+
+procedure TProdutos.SetFatorMarkup(const Value: double);
+begin
+  FFatorMarkup := Value;
+end;
+
+procedure TProdutos.SetMargemLucro(const Value: Double);
+begin
+  FMargemLucro := Value;
+end;
+
+procedure TProdutos.SetObservacao(const Value: string);
+begin
+  FObservacao := Value;
+end;
+
+procedure TProdutos.SetPercentualCOFINS(const Value: double);
+begin
+  FPercentualCOFINS := Value;
+end;
+
+procedure TProdutos.SetPercentualComissao(const Value: double);
+begin
+  FPercentualComissao := Value;
+end;
+
+procedure TProdutos.SetPercentualCustoFixo(const Value: double);
+begin
+  FPercentualCustoFixo := Value;
+end;
+
+procedure TProdutos.SetPercentualDesconto(const Value: double);
+begin
+  FPercentualDesconto := Value;
+end;
+
+procedure TProdutos.SetPercentualDespesasInd(const Value: double);
+begin
+  FPercentualDespesasInd := Value;
+end;
+
+procedure TProdutos.SetPercentualEncargos(const Value: double);
+begin
+  FPercentualEncargos := Value;
+end;
+
+procedure TProdutos.SetPercentualIPI(const Value: double);
+begin
+  FPercentualIPI := Value;
+end;
+
+procedure TProdutos.SetPercentualPIS(const Value: double);
+begin
+  FPercentualPIS := Value;
+end;
+
+procedure TProdutos.SetPercentualTaxaAdmin(const Value: double);
+begin
+  FPercentualTaxaAdmin := Value;
+end;
+
+procedure TProdutos.SetPerncentualICMS(const Value: double);
+begin
+  FPerncentualICMS := Value;
+end;
+
+procedure TProdutos.SetReferencia(const Value: string);
+begin
+  FReferencia := Value;
+end;
+
+procedure TProdutos.SetSimplesNacional(const Value: double);
+begin
+  FSimplesNacional := Value;
+end;
+
+procedure TProdutos.SetSituacaoTributariaCOFINS(const Value: string);
+begin
+  FSituacaoTributariaCOFINS := Value;
+end;
+
+procedure TProdutos.SetSituacaoTributariaICMS(const Value: string);
+begin
+  FSituacaoTributariaICMS := Value;
+end;
+
+procedure TProdutos.SetSituacaoTributariaIPI(const Value: string);
+begin
+  FSituacaoTributariaIPI := Value;
+end;
+
+procedure TProdutos.SetSituacaoTributariaPIS(const Value: string);
+begin
+  FSituacaoTributariaPIS := Value;
+end;
+
+procedure TProdutos.SetTipo(const Value: string);
+begin
+  FTipo := Value;
+end;
+
+procedure TProdutos.SetValorDesconto(const Value: Double);
+begin
+  FValorDesconto := Value;
+end;
+
+procedure TProdutos.SetValorDespesa(const Value: Double);
+begin
+  FValorDespesa := Value;
+end;
+
+procedure TProdutos.SetValorMarkUp(const Value: Double);
+begin
+  FValorMarkUp := Value;
+end;
+
+procedure TProdutos.SetValorVenda(const Value: Double);
+begin
+  FValorVenda := Value;
+end;
+
+end.

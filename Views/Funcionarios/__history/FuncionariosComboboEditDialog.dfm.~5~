@@ -1,0 +1,34 @@
+inherited FormFuncionariosComboboEditDialog: TFormFuncionariosComboboEditDialog
+  Caption = 'Funcion'#225'rios'
+  ClientHeight = 119
+  OnCreate = FormCreate
+  ExplicitHeight = 157
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited lbEntidade: TLabel
+    Top = 16
+    Width = 67
+    Height = 16
+    Font.Height = -13
+    ExplicitTop = 16
+    ExplicitWidth = 67
+    ExplicitHeight = 16
+  end
+  inherited Button1: TButton
+    Left = 96
+    Top = 76
+    ExplicitLeft = 96
+    ExplicitTop = 76
+  end
+  inherited Button2: TButton
+    Left = 200
+    Top = 76
+    ExplicitLeft = 200
+    ExplicitTop = 76
+  end
+  inherited ComboEdit1: TComboBox
+    Top = 36
+    DropDownCount = 20
+    ExplicitTop = 36
+  end
+end

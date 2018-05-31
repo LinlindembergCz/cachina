@@ -1,0 +1,39 @@
+unit EstabelecimentoDetalhes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, TemplateDetalhesComTabGrid, Data.DB,
+  Vcl.Buttons, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TFormEstabelecimentoDetalhes = class(TTemplateFormComTabGridDetalhes)
+    lbDescricao: TLabel;
+    edtDescricao: TEdit;
+    lbEndereco: TLabel;
+    edtEndereco: TEdit;
+    lbBairro: TLabel;
+    edtBairro: TEdit;
+    lbMunicipio: TLabel;
+    edtMunicipio: TEdit;
+    lbUF: TLabel;
+    edtUF: TEdit;
+    lbNumero: TLabel;
+    edtNumero: TEdit;
+    lbCNPJ: TLabel;
+    edtCNPJ: TEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormEstabelecimentoDetalhes: TFormEstabelecimentoDetalhes;
+
+implementation
+
+{$R *.dfm}
+
+end.

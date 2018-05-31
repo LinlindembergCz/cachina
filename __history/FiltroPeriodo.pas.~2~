@@ -1,0 +1,51 @@
+unit FiltroPeriodo;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ComCtrls, DateUtils;
+
+type
+  TFormFiltroPeriodo = class(TForm)
+    DateTimePicker1: TDateTimePicker;
+    DateTimePicker2: TDateTimePicker;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    Label1: TLabel;
+    Label2: TLabel;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    DataInicial: TDatetime;
+    DataFinal: TDatetime;
+    class function Show: TFormFiltroPeriodo;
+  end;
+
+var
+  FormFiltroPeriodo: TFormFiltroPeriodo;
+
+implementation
+
+{$R *.dfm}
+
+{ TFormFiltroPeriodo }
+
+procedure TFormFiltroPeriodo.FormCreate(Sender: TObject);
+begin
+  DateTimePicker1.Date:= StartOfTheYear(Date);
+  DateTimePicker2.Date:= DATE;
+end;
+
+class function TFormFiltroPeriodo.Show: TFormFiltroPeriodo;
+begin
+   application.Createform( TFormFiltroPeriodo, FormFiltroPeriodo);
+   if FormFiltroPeriodo.ShowModal = mrOk then
+       result := FormFiltroPeriodo
+   else
+       result := nil;
+end;
+
+end.

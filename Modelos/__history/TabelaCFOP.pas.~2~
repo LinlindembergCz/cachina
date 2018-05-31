@@ -1,0 +1,25 @@
+unit TabelaCFOP;
+
+interface
+
+uses
+ CAtribEntity,  GenericEntidade;
+
+type
+  [TableName('TabelaCFOP')]
+  TTabelaCFOP = class(TGenericEntidade)
+  private
+    FCFOP     : string;
+    FDescricao: string;
+    FGrupo    : string;
+    FSubGrupo:  string;
+  public
+    property CFOP     : string read FCFOP write FCFOP;
+    property Descricao: string read FDescricao write FDescricao;
+    property Grupo    : string read FGrupo write FGrupo;
+    property SubGrupo:  string read FSubGrupo write FSubGrupo;
+  end;
+
+implementation
+
+end.

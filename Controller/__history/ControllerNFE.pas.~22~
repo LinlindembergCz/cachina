@@ -1,0 +1,203 @@
+unit ControllerNFE;
+
+interface
+
+uses
+  IniFiles, ShellAPI, pcnRetConsReciNFe, math,  Mapper, GenericEntidade, strutils,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, Buttons, ComCtrls, OleCtrls, SHDocVw,
+  ACBrNFe, pcnConversao, ACBrNFeDANFEClass, ACBrUtil,
+  pcnNFeW, pcnNFeRTXT, pcnAuxiliar, ACBrDFeUtil,  DB,
+  XMLIntf, XMLDoc,  ControllerTabelas;
+
+Type
+  TContollerNFE = class( TControllerTabelas )
+  private
+
+  public
+    class function GetMaxLoteNFE: string;
+    class function GetMaxLoteNFC: string;
+    class procedure InserirLoteNFE( CodigoLote,
+                              ChaveAcesso,
+                              Protocolo,
+                              CodigoOrcamento,
+                              CodigoLoteRecebimento,
+                              Especie : string);
+   class function CriarNFE(Tipo: string; DataSetEntidade, DataSetProdutos,
+      DataSetCobranca: TDataset):boolean;
+
+   class  function GetBandeira(prsBandeira: string): TpcnBandeiraCartao;
+   class  function GetFormaPagamento(prsFormaPagamento: string): TpcnFormaPagamento;
+   class  function RetornarCSOSN(prsSitB: String): TpcnCSOSNIcms;
+   class  function RetornarCST(prsSitB: String): TpcnCSTIcms;
+
+  end;
+
+  Const
+    DEVOLUCAO_FORNECEDOR = 'DEVOLUCAO_A_FORNECEDOR';
+    VENDA_CLIENTE = 'VENDA';
+
+implementation
+
+uses GenericDAO, EntidadeFactory, EmissorNfe;
+
+{ TContollerNFE }
+
+class function TContollerNFE.GetMaxLoteNFE: string;
+begin
+   result := TGenericDAO.GetValue('SequenciaNF','Especie=''NFE'' ','isNull( Sequencia , 0 ) + 1');//TGenericDAO.GetValue('LoteNFE','Especie=''NFE'' ','isNull( Max(CodigoLote) , 0 ) + 1');
+end;
+
+class function TContollerNFE.GetMaxLoteNFC: string;
+begin
+   result := TGenericDAO.GetValue('SequenciaNF','Especie=''NFC'' ','isNull( Sequencia , 0 ) + 1');//TGenericDAO.GetValue('LoteNFE','Especie=''NFC'' ','isNull( Max(CodigoLote) , 0 ) + 1');
+end;
+
+
+class procedure TContollerNFE.InserirLoteNFE(CodigoLote,
+                                       ChaveAcesso,
+                                       Protocolo,
+                                       CodigoOrcamento,
+                                       CodigoLoteRecebimento,
+                                       Especie: string);
+begin
+  TGenericDAO.InsertSQL('LoteNFE',
+
+                        'CodigoLote,'+
+                        'CodigoFilial,'+
+                        'ChaveAcesso,'+
+                        'CodigoOrcamento,'+
+                        'CodigoLoteRecebimento,'+
+                        'Protocolo,'+
+                        'Especie',
+                         CodigoLote +','+
+                         '1'+','+
+                         quotedstr(ChaveAcesso)+','+
+                         quotedstr(CodigoOrcamento)+','+
+                         quotedstr(CodigoLoteRecebimento)+','+
+                         quotedstr(Protocolo)+','+
+                         quotedstr(Especie)  );
+
+  TGenericDAO.UpdateSQL( 'SequenciaNF',
+                         'Sequencia= Sequencia + 1',
+                         ' Especie= '+ quotedstr(Especie) );
+end;
+
+class function TContollerNFE.CriarNFE(Tipo: string; DataSetEntidade,
+  DataSetProdutos, DataSetCobranca: TDataset):boolean;
+var
+  CodigoOrcamentos: string;
+  CodigoLoteRecebimentos: string;
+  CodigoCliente: string;
+  CodigoLote: string;
+begin
+   Application.CreateForm(TFormEmissorNfe, FormEmissorNfe);
+
+   FormEmissorNfe.DataSetEntidade := DataSetEntidade;
+   FormEmissorNfe.DataSetProdutos := DataSetProdutos;
+   FormEmissorNfe.DataSetCobranca := DataSetCobranca;
+   FormEmissorNfe.TipoNfe := Tipo;
+
+   FormEmissorNfe.showmodal;
+   result:= FormEmissorNfe.EnviadaComSucesso;
+end;
+
+class function TContollerNFE.GetFormaPagamento( prsFormaPagamento : string ) : TpcnFormaPagamento;
+begin
+   if prsFormaPagamento = '01' then
+      Result := fpDinheiro
+   else if prsFormaPagamento = '02' then
+      Result := fpCheque
+   else if prsFormaPagamento = '03' then
+      Result := fpCartaoCredito
+   else if prsFormaPagamento = '04' then
+      Result := fpCartaoDebito
+   else if prsFormaPagamento = '11' then
+      Result := fpBoletoBancario
+   else
+      Result := fpOutro;
+end;
+
+class function TContollerNFE.GetBandeira( prsBandeira : string ) : TpcnBandeiraCartao;
+begin
+  //
+   if prsBandeira = '01' then
+      Result := bcVisa
+   else if prsBandeira = '02' then
+      Result := bcMasterCard
+   else if prsBandeira = '03' then
+      Result := bcAmericanExpress
+   else if prsBandeira = '04' then
+      Result := bcSorocred
+   else if prsBandeira = '05' then
+      Result := bcDinersClub
+   else if prsBandeira = '06' then
+      Result := bcElo
+   else if prsBandeira = '07' then
+      Result := bcHipercard
+   else
+      Result := bcOutros;
+end;
+
+class function TContollerNFE.RetornarCST( prsSitB :String ) : TpcnCSTIcms;
+var lIcms : TpcnCSTIcms;
+begin
+   if prsSitB = '00' then
+      lIcms := cst00
+   Else if prsSitB = '10' then
+      lIcms := cst10
+   Else if prsSitB = '20' then
+      lIcms := cst20
+   Else if prsSitB = '30' then
+      lIcms := cst30
+   Else if prsSitB = '40' then
+      lIcms := cst40
+   Else if prsSitB = '41' then
+      lIcms := cst41
+   Else if prsSitB = '45' then
+      lIcms := cst45
+   Else if prsSitB = '50' then
+      lIcms := cst50
+   Else if prsSitB = '51' then
+      lIcms := cst51
+   Else if prsSitB = '60' then
+      lIcms := cst60
+   Else if prsSitB = '70' then
+      lIcms := cst70
+   Else if prsSitB = '80' then
+      lIcms := cst80
+   Else if prsSitB = '81' then
+      lIcms := cst81
+   Else
+      lIcms := cst90;
+
+   Result := lIcms;
+
+end;
+
+class function TContollerNFE.RetornarCSOSN( prsSitB :String ) : TpcnCSOSNIcms;
+var lIcms : TpcnCSOSNIcms;
+begin
+   if prsSitB = '101' then
+      lIcms := csosn101
+   Else if prsSitB = '102' then
+      lIcms := csosn102
+   Else if prsSitB = '103' then
+      lIcms := csosn103
+   Else if prsSitB = '201' then
+      lIcms := csosn201
+   Else if prsSitB = '202' then
+      lIcms := csosn202
+   Else if prsSitB = '300' then
+      lIcms := csosn300
+   Else if prsSitB = '400' then
+      lIcms := csosn400
+   Else if prsSitB = '500' then
+      lIcms := csosn500
+   Else
+      lIcms := csosn900;
+
+   Result := lIcms;
+end;
+
+end.

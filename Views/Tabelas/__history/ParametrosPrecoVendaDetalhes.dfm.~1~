@@ -1,0 +1,171 @@
+inherited FormParametrosPrecoVendaDetalhes: TFormParametrosPrecoVendaDetalhes
+  Caption = 'TemplateFormComTabGridDetalhes1'
+
+  inherited Panel1: TPanel
+    inherited tabPrincipal: TPageControle
+      inherited TabSheet1: TTabSheet
+        Height = 24
+        inherited StringGrid1: TDBgrid
+          Height = 356
+        end
+      end
+      inherited TabSheet2: TTabSheet
+        Height = 24
+        left = 62
+        object Label1: TLabel
+          Font.Style = [fsBold]
+          Height = 16
+          left = 8
+          Top = 14
+          caption = 'Descric'#227'o:'
+          Width = 68
+        end
+        object edtDescricao: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 1
+          caption = 'edtDescricao'
+          left = 94
+          Top = 13
+          Width = 403
+          Height = 21
+          KillFocusByReturn = False
+          OnKeyDown = EditDown
+        end
+        object Label8: TLabel
+          Font.Style = [fsBold]
+          Height = 16
+          left = 8
+          Top = 48
+          caption = 'Imposto:'
+          Width = 58
+        end
+        object edtParamImpostoSimples: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 3
+          caption = '2,5'
+          left = 94
+          Top = 40
+          Width = 57
+          Height = 21
+          KillFocusByReturn = False
+        end
+        object Label12: TLabel
+          Font.Style = [fsBold]
+          Height = 16
+          left = 5
+          Top = 79
+          caption = 'Taxa Cart'#227'o:'
+          Width = 83
+        end
+        object edtParamTaxa: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 5
+          caption = '4,7'
+          left = 94
+          Top = 70
+          Width = 57
+          Height = 21
+          KillFocusByReturn = False
+        end
+        object Label13: TLabel
+          Font.Style = [fsBold]
+          Height = 16
+          left = 5
+          Top = 108
+          caption = 'Comis'#227'o:'
+          Width = 58
+        end
+        object edtParamComissao: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 7
+          caption = '5'
+          left = 94
+          Top = 100
+          Width = 57
+          Height = 21
+          KillFocusByReturn = False
+        end
+        object Label24: TLabel
+          Font.Style = [fsBold]
+          Height = 16
+          left = 164
+          Top = 108
+          caption = 'Lucro:'
+          Width = 41
+        end
+        object Label22: TLabel
+          Font.Style = [fsBold]
+          Height = 16
+          left = 164
+          Top = 79
+          caption = 'Custo fixo:'
+          Width = 69
+        end
+        object Label23: TLabel
+          Font.Style = [fsBold]
+          Height = 16
+          left = 164
+          Top = 48
+          caption = 'Desconto Maximo:'
+          Width = 118
+        end
+        object edtParamDesconto: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 11
+          caption = '10'
+          left = 288
+          Top = 40
+          Width = 57
+          Height = 21
+          KillFocusByReturn = False
+        end
+        object edtParamCustoFixo: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 12
+          caption = '7'
+          left = 288
+          Top = 70
+          Width = 57
+          Height = 21
+          KillFocusByReturn = False
+        end
+        object edtParamLucro: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 13
+          caption = '8'
+          left = 288
+          Top = 100
+          Width = 57
+          Height = 21
+          KillFocusByReturn = False
+        end
+        object Label25: TLabel
+          Font.Style = [fsBold]
+          Height = 16
+          left = 364
+          Top = 108
+          caption = 'Mark-up:'
+          Width = 59
+        end
+        object edtMarkup: TEdit
+          Touch.InteractiveGestures = [igLongTap, igDoubleTap]
+          TabOrder = 15
+          caption = '37,2'
+          left = 429
+          Top = 100
+          Width = 57
+          Height = 21
+          KillFocusByReturn = False
+        end
+        object SpeedButton2: TSpeedButton
+          Height = 22
+          left = 493
+          Top = 101
+          caption = 'calcular'
+          Width = 68
+          OnClick = SpeedButton2Click
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,11 @@
+inherited FormContatosClientesListagem: TFormContatosClientesListagem
+  Caption = 'Contatos'
+  ClientHeight = 372
+  FormStyle = fsStayOnTop
+  OnActivate = FormActivate
+  DesignerMobile = False
+  inherited Grid1: TDBGrid
+    Height = 299
+  end
+  
+end

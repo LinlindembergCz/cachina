@@ -1,0 +1,46 @@
+inherited FormGrupoProdutosDetalhes: TFormGrupoProdutosDetalhes
+  Caption = 'Grupo de produtos'
+  FormStyle = fsStayOnTop
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited tabPrincipal: TPageControl
+      ActivePage = TabSheet2
+      inherited TabSheet2: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitWidth = 630
+        ExplicitHeight = 399
+        object lbDescriacao: TLabel
+          Left = 8
+          Top = 32
+          Width = 52
+          Height = 13
+          Caption = 'Descriacao'
+        end
+        object Familia: TLabel
+          Left = 8
+          Top = 64
+          Width = 65
+          Height = 13
+          Caption = 'CodigoFamilia'
+        end
+        object edtDescriacao: TEdit
+          Tag = 1
+          Left = 88
+          Top = 32
+          Width = 441
+          Height = 21
+          TabOrder = 0
+        end
+        object cboCodigoFamilia: TComboBox
+          Left = 88
+          Top = 64
+          Width = 441
+          Height = 21
+          TabOrder = 1
+        end
+      end
+    end
+  end
+end

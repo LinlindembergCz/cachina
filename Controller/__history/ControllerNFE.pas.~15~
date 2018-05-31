@@ -1,0 +1,101 @@
+unit ControllerNFE;
+
+interface
+
+uses
+  IniFiles, ShellAPI, pcnRetConsReciNFe, math,  Mapper, GenericEntidade, strutils,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, Buttons, ComCtrls, OleCtrls, SHDocVw,
+  ACBrNFe, pcnConversao, ACBrNFeDANFEClass, ACBrUtil,
+  pcnNFeW, pcnNFeRTXT, pcnAuxiliar, ACBrDFeUtil,  DB,
+  XMLIntf, XMLDoc,  ControllerTabelas;
+
+Type
+  TContollerNFE = class( TControllerTabelas )
+  private
+
+
+  public
+    class function GetMaxLoteNFE: string;
+    class function GetMaxLoteNFC: string;
+    class procedure InserirLoteNFE( CodigoLote,
+                              ChaveAcesso,
+                              Protocolo,
+                              CodigoOrcamento,
+                              CodigoLoteRecebimento,
+                              Especie : string);
+   class procedure CriarNFE(Tipo: string; DataSetEntidade, DataSetProdutos,
+      DataSetCobranca: TDataset);
+
+  end;
+
+  Const
+    DEVOLUCAO_FORNECEDOR = 'DEVOLUCAO_A_FORNECEDOR';
+    VENDA_CLIENTE = 'VENDA';
+
+implementation
+
+uses GenericDAO, EntidadeFactory, EmissorNfe;
+
+{ TContollerNFE }
+
+class function TContollerNFE.GetMaxLoteNFE: string;
+begin
+   result := TGenericDAO.GetValue('SequenciaNF','Especie=''NFE'' ','isNull( Sequencia , 0 ) + 1');//TGenericDAO.GetValue('LoteNFE','Especie=''NFE'' ','isNull( Max(CodigoLote) , 0 ) + 1');
+end;
+
+class function TContollerNFE.GetMaxLoteNFC: string;
+begin
+   result := TGenericDAO.GetValue('SequenciaNF','Especie=''NFC'' ','isNull( Sequencia , 0 ) + 1');//TGenericDAO.GetValue('LoteNFE','Especie=''NFC'' ','isNull( Max(CodigoLote) , 0 ) + 1');
+end;
+
+
+class procedure TContollerNFE.InserirLoteNFE(CodigoLote,
+                                       ChaveAcesso,
+                                       Protocolo,
+                                       CodigoOrcamento,
+                                       CodigoLoteRecebimento,
+                                       Especie: string);
+begin
+  TGenericDAO.InsertSQL('LoteNFE',
+
+                        'CodigoLote,'+
+                        'CodigoFilial,'+
+                        'ChaveAcesso,'+
+                        'CodigoOrcamento,'+
+                        'CodigoLoteRecebimento,'+
+                        'Protocolo,'+
+                        'Especie',
+                         CodigoLote +','+
+                         '1'+','+
+                         quotedstr(ChaveAcesso)+','+
+                         quotedstr(CodigoOrcamento)+','+
+                         quotedstr(CodigoLoteRecebimento)+','+
+                         quotedstr(Protocolo)+','+
+                         quotedstr(Especie)  );
+
+  TGenericDAO.UpdateSQL( 'SequenciaNF',
+                         'Sequencia= Sequencia + 1',
+                         ' Especie= '+ quotedstr(Especie) );
+end;
+
+class procedure TContollerNFE.CriarNFE(Tipo: string; DataSetEntidade,
+  DataSetProdutos, DataSetCobranca: TDataset);
+var
+  CodigoOrcamentos: string;
+  CodigoLoteRecebimentos: string;
+  CodigoCliente: string;
+  CodigoLote: string;
+begin
+    Application.CreateForm(TFormEmissorNfe, FormEmissorNfe);
+
+    FormEmissorNfe.DataSetEntidade := DataSetEntidade;
+    FormEmissorNfe.DataSetProdutos := DataSetProdutos;
+    FormEmissorNfe.DataSetCobranca := DataSetCobranca;
+    FormEmissorNfe.TipoNfe := Tipo;
+
+    FormEmissorNfe.showmodal;
+
+end;
+
+end.

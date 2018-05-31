@@ -1,0 +1,73 @@
+unit RelOrcamentoGeral;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, QRCtrls, Data.DB, Datasnap.DBClient,
+  QuickRpt, QRPDFFilt, QRExport, Vcl.ExtCtrls;
+
+type
+  TFormRelOrcamentoGeral = class(TForm)
+    QuickRep1: TQuickRep;
+    DetailBand1: TQRBand;
+    QRDBText1: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    PageHeaderBand1: TQRBand;
+    QRLabel1: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRSysData1: TQRSysData;
+    imgLogo: TQRImage;
+    QRExcelFilter1: TQRExcelFilter;
+    QRPDFFilter1: TQRPDFFilter;
+    QRSubDetail1: TQRSubDetail;
+    cdsOrcamento: TClientDataSet;
+    cdsItemOrcamento: TClientDataSet;
+    QRBand1: TQRBand;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRDBText9: TQRDBText;
+    QRDBText10: TQRDBText;
+    QRLabel2: TQRLabel;
+    QRDBText2: TQRDBText;
+    DataSource1: TDataSource;
+    QRDBText11: TQRDBText;
+    QRLabel7: TQRLabel;
+    QRDBText12: TQRDBText;
+    QRDBText13: TQRDBText;
+    procedure FormCreate(Sender: TObject);
+    procedure QRSubDetail1BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormRelOrcamentoGeral: TFormRelOrcamentoGeral;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFormRelOrcamentoGeral.FormCreate(Sender: TObject);
+begin
+//  imgLogo.picture.LoadFromFile(extractfilepath(application.ExeName)+'logo.jpg');
+end;
+
+procedure TFormRelOrcamentoGeral.QRSubDetail1BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  cdsItemOrcamento.filtered:= false;
+  cdsItemOrcamento.filter := 'CodigoOrcamento='+cdsOrcamento.fieldbyname('Codigo').asstring;
+  cdsItemOrcamento.filtered:= true;
+end;
+
+end.

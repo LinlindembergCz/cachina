@@ -1,0 +1,39 @@
+unit ItensOrcamento;
+
+interface
+
+uses
+Contnrs, ItemOrcamento;
+
+type
+
+  TItensOrcamento = Class( TObjectList )
+  private
+    function GetItems(Index: Integer): TItemOrcamento;
+    procedure SetItems(Index: Integer; const Value: TItemOrcamento);
+  public
+    function Add(AObject: TItemOrcamento): Integer;
+    property Items[Index: Integer]: TItemOrcamento read GetItems write SetItems; default;
+  End;
+
+implementation
+
+{TItensOrcamento}
+
+function TItensOrcamento.GetItems(Index: Integer): TItemOrcamento;
+begin
+Result := TItemOrcamento(inherited Items[Index]);
+end;
+
+procedure TItensOrcamento.SetItems(Index: Integer;
+const Value: TItemOrcamento);
+begin
+inherited Items[Index] := Value;
+end;
+
+function TItensOrcamento.Add(AObject: TItemOrcamento): Integer;
+begin
+Result := inherited Add(AObject);
+end;
+
+end.

@@ -1,0 +1,511 @@
+inherited FormEntradaDetalhes: TFormEntradaDetalhes
+  Caption = 'Entrada'
+  ClientHeight = 479
+  ClientWidth = 820
+  ExplicitWidth = 836
+  ExplicitHeight = 517
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 820
+    Height = 430
+    ExplicitWidth = 815
+    ExplicitHeight = 430
+    object lbData: TLabel
+      Left = 79
+      Top = 12
+      Width = 23
+      Height = 13
+      Caption = 'Data'
+    end
+    object lbCodigoFornecedor: TLabel
+      Left = 191
+      Top = 12
+      Width = 88
+      Height = 13
+      Caption = 'CodigoFornecedor'
+    end
+    object lbNumeroDocumento: TLabel
+      Left = 297
+      Top = 12
+      Width = 91
+      Height = 13
+      Caption = 'NumeroDocumento'
+    end
+    object lbCodigoFormaPagamento: TLabel
+      Left = 403
+      Top = 12
+      Width = 84
+      Height = 13
+      Caption = 'FormaPagamento'
+    end
+    object lbValorFrete: TLabel
+      Left = 8
+      Top = 58
+      Width = 50
+      Height = 13
+      Caption = 'ValorFrete'
+    end
+    object lbValorCustofinanceiro: TLabel
+      Left = 239
+      Top = 58
+      Width = 75
+      Height = 13
+      Caption = 'Custofinanceiro'
+    end
+    object lbValorDespesas: TLabel
+      Left = 161
+      Top = 58
+      Width = 70
+      Height = 13
+      Caption = 'ValorDespesas'
+    end
+    object lbTipoFrete: TLabel
+      Left = 509
+      Top = 11
+      Width = 46
+      Height = 13
+      Caption = 'TipoFrete'
+    end
+    object lbDataEmissao: TLabel
+      Left = 618
+      Top = 12
+      Width = 61
+      Height = 13
+      Caption = 'DataEmissao'
+    end
+    object lbValorDocumento: TLabel
+      Left = 724
+      Top = 55
+      Width = 78
+      Height = 13
+      Caption = 'ValorDocumento'
+    end
+    object lbValorSeguro: TLabel
+      Left = 81
+      Top = 58
+      Width = 58
+      Height = 13
+      Caption = 'ValorSeguro'
+    end
+    object lbValorIPI: TLabel
+      Left = 321
+      Top = 58
+      Width = 38
+      Height = 13
+      Caption = 'ValorIPI'
+    end
+    object lbValorPIS: TLabel
+      Left = 407
+      Top = 58
+      Width = 40
+      Height = 13
+      Caption = 'ValorPIS'
+    end
+    object lbValorCONFINS: TLabel
+      Left = 491
+      Top = 58
+      Width = 69
+      Height = 13
+      Caption = 'ValorCONFINS'
+    end
+    object lbValorICMS: TLabel
+      Left = 568
+      Top = 58
+      Width = 49
+      Height = 13
+      Caption = 'ValorICMS'
+    end
+    object lbValorICMSSubstituto: TLabel
+      Left = 643
+      Top = 58
+      Width = 74
+      Height = 13
+      Caption = 'ICMSSubstituto'
+    end
+    object lbValorDesconto: TLabel
+      Left = 724
+      Top = 12
+      Width = 69
+      Height = 13
+      Caption = 'ValorDesconto'
+    end
+    object Label1: TLabel
+      Left = 9
+      Top = 11
+      Width = 33
+      Height = 13
+      Caption = 'C'#243'digo'
+    end
+    object gpbItens: TGroupBox
+      Left = 6
+      Top = 101
+      Width = 796
+      Height = 70
+      Caption = 'Item'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 17
+      object Label6: TLabel
+        Left = 415
+        Top = 18
+        Width = 20
+        Height = 13
+        Caption = 'Qtd'
+      end
+      object Label10: TLabel
+        Left = 59
+        Top = 20
+        Width = 38
+        Height = 13
+        Caption = 'Codigo'
+      end
+      object Label11: TLabel
+        Left = 104
+        Top = 20
+        Width = 45
+        Height = 13
+        Caption = 'Produto'
+      end
+      object Label12: TLabel
+        Left = 464
+        Top = 18
+        Width = 29
+        Height = 13
+        Caption = 'Valor'
+      end
+      object Label9: TLabel
+        Left = 11
+        Top = 20
+        Width = 28
+        Height = 13
+        Caption = 'Item'
+      end
+      object Label2: TLabel
+        Left = 538
+        Top = 20
+        Width = 45
+        Height = 13
+        Caption = 'Estoque'
+      end
+      object edtCodigoItem: TEdit
+        Left = 56
+        Top = 38
+        Width = 41
+        Height = 21
+        TabStop = False
+        ReadOnly = True
+        TabOrder = 1
+      end
+      object edtQuantidade: TEdit
+        Left = 415
+        Top = 38
+        Width = 43
+        Height = 21
+        TabOrder = 3
+      end
+      object edtValor: TEdit
+        Left = 464
+        Top = 38
+        Width = 68
+        Height = 21
+        Cursor = crIBeam
+        TabOrder = 4
+      end
+      object BitBtn1: TButton
+        Left = 660
+        Top = 36
+        Width = 66
+        Height = 25
+        Caption = 'Confirmar'
+        TabOrder = 5
+        OnClick = BitBtn1Click
+      end
+      object CornerButton1: TButton
+        Left = 732
+        Top = 36
+        Width = 58
+        Height = 25
+        Caption = 'Remover'
+        TabOrder = 6
+      end
+      object edtOrdem: TEdit
+        Left = 8
+        Top = 38
+        Width = 41
+        Height = 21
+        TabStop = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+      object cboProduto: TDBLookupComboBox
+        Left = 104
+        Top = 38
+        Width = 305
+        Height = 21
+        DropDownRows = 15
+        DropDownWidth = 400
+        KeyField = 'Codigo'
+        ListField = 'Descricao'
+        ListSource = srcProdutos
+        TabOrder = 2
+        OnCloseUp = cboProdutoCloseUp
+      end
+      object cboEstoque: TDBLookupComboBox
+        Left = 538
+        Top = 38
+        Width = 116
+        Height = 21
+        DropDownRows = 15
+        DropDownWidth = 200
+        KeyField = 'Codigo'
+        ListField = 'Descricao'
+        ListSource = srcEstoque
+        TabOrder = 7
+        OnCloseUp = cboProdutoCloseUp
+      end
+    end
+    object dateData: TDateTimePicker
+      Left = 80
+      Top = 27
+      Width = 100
+      Height = 22
+      Cursor = crIBeam
+      Date = 41733.672745023150000000
+      Time = 41733.672745023150000000
+      TabOrder = 0
+    end
+    object cboCodigoFornecedor: TDBLookupComboBox
+      Left = 191
+      Top = 27
+      Width = 100
+      Height = 21
+      KeyField = 'Codigo'
+      ListField = 'Nome'
+      ListSource = srcfornecedores
+      TabOrder = 1
+    end
+    object edtNumeroDocumento: TEdit
+      Left = 297
+      Top = 27
+      Width = 100
+      Height = 21
+      TabOrder = 2
+    end
+    object cboCodigoFormaPagamento: TComboBox
+      Left = 403
+      Top = 27
+      Width = 100
+      Height = 21
+      TabOrder = 3
+    end
+    object cboTipoFrete: TComboBox
+      Left = 509
+      Top = 27
+      Width = 100
+      Height = 21
+      TabOrder = 4
+      Items.Strings = (
+        'CIF'
+        'FOP')
+    end
+    object edtValorFrete: TEdit
+      Left = 8
+      Top = 74
+      Width = 67
+      Height = 21
+      TabOrder = 5
+    end
+    object edtValorCustofinanceiro: TEdit
+      Left = 239
+      Top = 74
+      Width = 74
+      Height = 21
+      TabOrder = 6
+    end
+    object edtValorDespesas: TEdit
+      Left = 161
+      Top = 74
+      Width = 70
+      Height = 21
+      TabOrder = 7
+    end
+    object edtValorDocumento: TEdit
+      Left = 724
+      Top = 74
+      Width = 83
+      Height = 21
+      TabOrder = 8
+    end
+    object edtValorSeguro: TEdit
+      Left = 81
+      Top = 74
+      Width = 72
+      Height = 21
+      TabOrder = 9
+    end
+    object edtValorIPI: TEdit
+      Left = 321
+      Top = 74
+      Width = 79
+      Height = 21
+      TabOrder = 10
+    end
+    object edtValorPIS: TEdit
+      Left = 407
+      Top = 74
+      Width = 74
+      Height = 21
+      TabOrder = 11
+    end
+    object edtValorCONFINS: TEdit
+      Left = 491
+      Top = 74
+      Width = 69
+      Height = 21
+      TabOrder = 12
+    end
+    object edtValorICMS: TEdit
+      Left = 568
+      Top = 74
+      Width = 67
+      Height = 21
+      TabOrder = 13
+    end
+    object edtValorICMSSubstituto: TEdit
+      Left = 643
+      Top = 74
+      Width = 74
+      Height = 21
+      TabOrder = 14
+    end
+    object dateDataEmissao: TDateTimePicker
+      Left = 618
+      Top = 27
+      Width = 100
+      Height = 22
+      Cursor = crIBeam
+      Date = 41733.672745138890000000
+      Time = 41733.672745138890000000
+      TabOrder = 15
+    end
+    object grdItens: TDBGrid
+      Left = 7
+      Top = 101
+      Width = 799
+      Height = 320
+      DataSource = srcItens
+      TabOrder = 16
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      OnCellClick = grdItensCellClick
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'Ordem'
+          Title.Caption = 'Item'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Descricao'
+          Width = 405
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Quantidade'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Valor'
+          Width = 88
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Desconto'
+          Title.Caption = '%'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Total'
+          Visible = True
+        end>
+    end
+    object edtCodigo: TEdit
+      Left = 8
+      Top = 27
+      Width = 58
+      Height = 21
+      ReadOnly = True
+      TabOrder = 18
+    end
+    object edtValorDesconto: TEdit
+      Left = 724
+      Top = 28
+      Width = 83
+      Height = 21
+      TabOrder = 19
+    end
+  end
+  inherited Panel2: TPanel
+    Width = 820
+    ExplicitWidth = 815
+    inherited btnInserir: TBitBtn
+      Left = 9
+      Top = 2
+      ExplicitLeft = 9
+      ExplicitTop = 2
+    end
+    inherited btnAlterar: TBitBtn
+      Left = 98
+      ExplicitLeft = 98
+    end
+    inherited btnCancelar: TBitBtn
+      Left = 196
+      ExplicitLeft = 196
+    end
+    inherited btnExcluir: TBitBtn
+      Left = 301
+      ExplicitLeft = 301
+    end
+    inherited btnSair: TBitBtn
+      Left = 727
+      ExplicitLeft = 727
+    end
+  end
+  inherited srcEntidade: TDataSource
+    Left = 424
+    Top = 366
+  end
+  object srcItens: TDataSource
+    AutoEdit = False
+    Left = 496
+    Top = 366
+  end
+  object srcfornecedores: TDataSource
+    AutoEdit = False
+    Left = 576
+    Top = 366
+  end
+  object srcProdutos: TDataSource
+    AutoEdit = False
+    Left = 664
+    Top = 366
+  end
+  object srcEstoque: TDataSource
+    AutoEdit = False
+    Left = 736
+    Top = 366
+  end
+end

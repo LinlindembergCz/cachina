@@ -1,0 +1,42 @@
+unit FiltroFluxoCaixa;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.DBCtrls,
+  Vcl.ComCtrls;
+
+type
+  TFormFiltroFluxoCaixa = class(TForm)
+    GroupBox1: TGroupBox;
+    dateFim: TDateTimePicker;
+    dateInicio: TDateTimePicker;
+    Label1: TLabel;
+    Label2: TLabel;
+    cboCodigoCaixa: TDBLookupComboBox;
+    Label3: TLabel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormFiltroFluxoCaixa: TFormFiltroFluxoCaixa;
+
+implementation
+
+{$R *.dfm}
+
+uses DBUtils, EntidadeFactory;
+
+procedure TFormFiltroFluxoCaixa.FormCreate(Sender: TObject);
+begin
+   FillLookUpCombobox( tpCaixa, cboCodigoCaixa);
+end;
+
+end.

@@ -1,0 +1,107 @@
+unit ParametrosDetalhes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls,
+  Vcl.Buttons, Data.DB, Vcl.Grids, Vcl.DBGrids,ControllerTabelas, Vcl.DBCtrls;
+
+type
+  TFormParametrosDetalhes = class(TForm)
+    Panel1: TPanel;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
+    TabSheet5: TTabSheet;
+    Label1: TLabel;
+    CFOPPADRAOVENDA: TComboBox;
+    Label2: TLabel;
+    CFOPPADRAOVENDAFORAESTADO: TComboBox;
+    Label7: TLabel;
+    cboPlanoContaVenda: TComboBox;
+    Label3: TLabel;
+    CFOPPADRAOCOMPRA: TComboBox;
+    Label4: TLabel;
+    CFOPPADRAOCOMPRAFORAESTADO: TComboBox;
+    Label5: TLabel;
+    CFOPPADRAODEVOLUCAO: TComboBox;
+    Label6: TLabel;
+    CFOPPADRAODEVOLUCAOFORAESTADO: TComboBox;
+    Label9: TLabel;
+    cboPlanoContaCompra: TComboBox;
+    Panel2: TPanel;
+    Button1: TButton;
+    procedure FormActivate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    Controller: TControllerTabelas;
+  end;
+
+var
+  FormParametrosDetalhes: TFormParametrosDetalhes;
+
+implementation
+
+{$R *.dfm}
+
+uses DBUtils, EntidadeFactory, srvModBaseDados, strUtils;
+
+
+
+procedure TFormParametrosDetalhes.Button1Click(Sender: TObject);
+var
+  I: Integer;
+  valor: string;
+begin
+  for I := 0 to componentcount -1 do
+  begin
+     valor:= '';
+     if Components[i]is TCombobox then
+     begin
+        valor := copy( (Components[i] as TCombobox ).Text, 1, (Components[i] as TCombobox ).MaxLength);
+     end;
+
+     if Components[i]is TDBLookUpCombobox then
+     begin
+        valor :=  (Components[i] as TDBLookUpCombobox ).keyvalue;
+     end;
+
+     if Components[i]is TEdit then
+     begin
+        valor := copy( (Components[i] as TEdit ).Text, 1, (Components[i] as TEdit ).MaxLength);
+     end;
+
+     if Components[i]is TCheckbox then
+     begin
+        valor := ifthen( (Components[i] as  TCheckbox).Checked , 'S','N');
+     end;
+
+     if valor <> '' then
+        DSServerModuleBaseDados.ExecSql( Format('UPDATE Parametros  SET Valor = ''%s'' WHERE Parametro = ''%s'' ' ,[valor, Components[i].Name]));
+  end;
+  close;
+end;
+
+procedure TFormParametrosDetalhes.FormActivate(Sender: TObject);
+begin
+   FillCombobox( tpCFOP, CFOPPADRAOVENDA, 'Descricao like (''VENDA%'') AND CFOP < 6000 ',
+        'CFOP',' CFOP +''  '' +  Descricao as Descricao ','CFOP');
+   FillCombobox( tpCFOP, CFOPPADRAOVENDAFORAESTADO, 'Descricao like (''VENDA%'') AND CFOP >= 6000 ',
+        'CFOP',' CFOP +''  '' +  Descricao as Descricao ','CFOP');
+   FillCombobox( tpCFOP, CFOPPADRAOCOMPRA, 'Descricao like (''COMPRA%'') AND CFOP <= 2000 ',
+        'CFOP',' CFOP +''  '' +  Descricao as Descricao ','CFOP');
+   FillCombobox( tpCFOP, CFOPPADRAOCOMPRAFORAESTADO, 'Descricao like (''COMPRA%'') AND CFOP >= 2000 ',
+        'CFOP',' CFOP +''  '' +  Descricao as Descricao ','CFOP');
+   FillCombobox( tpCFOP, CFOPPADRAODEVOLUCAO, ' Descricao like (''DEVOLUÇÃO DE COMPRA%'') AND CFOP <= 6000 ',
+        'CFOP',' CFOP +''  '' +  Descricao as Descricao ','CFOP');
+   FillCombobox( tpCFOP, CFOPPADRAODEVOLUCAOFORAESTADO, 'Descricao like (''DEVOLUÇÃO DE COMPRA%'') AND CFOP >= 6000 ',
+        'CFOP',' CFOP +''  '' +  Descricao as Descricao ','CFOP');
+end;
+
+end.

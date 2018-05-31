@@ -1,0 +1,74 @@
+unit viewCliente;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Vcl.StdCtrls, RTTI, Data.DB, Datasnap.DBClient, Vcl.Grids, Vcl.DBGrids,
+  GenericEntidade, InterfaceController;
+
+type
+  TFormViewCLiente = class(TForm)
+    Button1: TButton;
+    Nome: TEdit;
+    Button2: TButton;
+    DBGrid1: TDBGrid;
+    DataSource1: TDataSource;
+    Button3: TButton;
+    Button4: TButton;
+    Button5: TButton;
+    CPF: TEdit;
+    Endereco: TEdit;
+    Button6: TButton;
+    ClientDataSet1: TClientDataSet;
+    ClientDataSet1Nome: TStringField;
+    ClientDataSet1CPF: TStringField;
+    ClientDataSet1Endereco: TStringField;
+    Button7: TButton;
+    Button8: TButton;
+    Button9: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
+    procedure Button8Click(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    Controller: IController;
+  end;
+
+var
+  FormViewCLiente: TFormViewCLiente;
+
+implementation
+
+{$R *.dfm}
+
+uses FactoryController;
+
+
+{ TPessoa }
+
+procedure TFormViewCLiente.Button7Click(Sender: TObject);
+begin
+  Controller.Inserir;
+end;
+
+procedure TFormViewCLiente.Button8Click(Sender: TObject);
+begin
+  Controller.Atualizar;
+end;
+
+procedure TFormViewCLiente.Button9Click(Sender: TObject);
+begin
+  Controller.Editar;
+end;
+
+procedure TFormViewCLiente.FormCreate(Sender: TObject);
+begin
+   Controller:= TFactoryController.CriarControllerCliente(self, ClientDataSet1 );
+end;
+
+end.

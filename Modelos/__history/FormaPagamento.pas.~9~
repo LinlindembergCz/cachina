@@ -1,0 +1,146 @@
+unit FormaPagamento;
+
+interface
+
+uses
+   CAtribEntity,  GenericEntidade;
+
+Type
+  [TableName('FormaPagamento')]
+  TFormaPagamento = class(TGenericEntidade)
+  private
+    FPercentualDesconto: Double;
+    FPercentualTaxaAdmin: Double;
+    FNumeroParcelas: integer;
+    FDescricao: string;
+    FCodigo: integer;
+    FCodigoFilial: integer;
+    FBaixaAutomatica: string;
+    FPadrao: string;
+    FDiasVencimento: integer;
+    FPercentualMulta: double;
+    FPercentualJuros: double;
+    FDiasAntecipacao: integer;
+    FPercentualTaxaCartao: double;
+    FPercentualTaxaAntecipacao: double;
+    procedure SetCodigo(const Value: integer);
+    procedure SetCodigoFilial(const Value: integer);
+    procedure SetDescricao(const Value: string);
+    procedure SetNumeroParcelas(const Value: integer);
+    procedure SetPercentualDesconto(const Value: Double);
+    procedure SetPercentualTaxaAdmin(const Value: Double);
+    procedure SetBaixaAutomatica(const Value: string);
+    procedure SetPadrao(const Value: string);
+    procedure SetDiasVencimento(const Value: integer);
+    procedure SetPercentualJuros(const Value: double);
+    procedure SetPercentualMulta(const Value: double);
+    procedure SetDiasAntecipacao(const Value: integer);
+    procedure SetPercentualTaxaAntecipacao(const Value: double);
+    procedure SetPercentualTaxaCartao(const Value: double);
+  public
+    [KeyField('Codigo')]
+    property  Codigo: integer read FCodigo write SetCodigo;
+    [FieldName('CodigoFilial')]
+    property  CodigoFilial: integer read FCodigoFilial write SetCodigoFilial;
+    [FieldName('Descricao')]
+    property  Descricao: string read FDescricao write SetDescricao;
+    [FieldName('NumeroParcelas')]
+   	property  NumeroParcelas:integer read FNumeroParcelas write SetNumeroParcelas;
+    [FieldName('PercentualDesconto')]
+  	property  PercentualDesconto: Double read FPercentualDesconto write SetPercentualDesconto;
+    [FieldName('PercentualTaxaAdmin')]
+  	property  PercentualTaxaAdmin: Double read FPercentualTaxaAdmin write SetPercentualTaxaAdmin;
+    [FieldName('BaixaAutomatica')]
+    property BaixaAutomatica: string read FBaixaAutomatica write SetBaixaAutomatica;
+    [FieldName('Padrao')]
+    property Padrao: string read FPadrao write SetPadrao;
+     [FieldName('DiasVencimento')]
+    property DiasVencimento: integer read FDiasVencimento write SetDiasVencimento;
+    [FieldName('PercentualJuros')]
+    property PercentualJuros: double read FPercentualJuros write SetPercentualJuros;
+    [FieldName('PercentualMulta')]
+    property PercentualMulta: double read FPercentualMulta write SetPercentualMulta;
+
+    [FieldName('PercentualTaxaCartao')]
+    property PercentualTaxaCartao: double read FPercentualTaxaCartao write SetPercentualTaxaCartao;
+    [FieldName('PercentualTaxaAntecipacao')]
+    property PercentualTaxaAntecipacao: double read FPercentualTaxaAntecipacao write SetPercentualTaxaAntecipacao;
+    [FieldName('DiasAntecipacao')]
+    property DiasAntecipacao: integer read FDiasAntecipacao write SetDiasAntecipacao;
+  end;
+
+implementation
+
+{ TFormaPagamento }
+
+procedure TFormaPagamento.SetBaixaAutomatica(const Value: string);
+begin
+  FBaixaAutomatica := Value;
+end;
+
+procedure TFormaPagamento.SetCodigo(const Value: integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TFormaPagamento.SetCodigoFilial(const Value: integer);
+begin
+  FCodigoFilial := Value;
+end;
+
+procedure TFormaPagamento.SetDescricao(const Value: string);
+begin
+  FDescricao := Value;
+end;
+
+procedure TFormaPagamento.SetDiasAntecipacao(const Value: integer);
+begin
+  FDiasAntecipacao := Value;
+end;
+
+procedure TFormaPagamento.SetDiasVencimento(const Value: integer);
+begin
+  FDiasVencimento := Value;
+end;
+
+procedure TFormaPagamento.SetNumeroParcelas(const Value: integer);
+begin
+  FNumeroParcelas := Value;
+end;
+
+procedure TFormaPagamento.SetPadrao(const Value: string);
+begin
+  FPadrao := Value;
+end;
+
+procedure TFormaPagamento.SetPercentualDesconto(const Value: Double);
+begin
+  FPercentualDesconto := Value;
+end;
+
+procedure TFormaPagamento.SetPercentualJuros(const Value: double);
+begin
+  FPercentualJuros := Value;
+end;
+
+procedure TFormaPagamento.SetPercentualMulta(const Value: double);
+begin
+  FPercentualMulta := Value;
+end;
+
+procedure TFormaPagamento.SetPercentualTaxaAdmin(const Value: Double);
+begin
+  FPercentualTaxaAdmin := Value;
+end;
+
+procedure TFormaPagamento.SetPercentualTaxaAntecipacao(const Value: double);
+begin
+  FPercentualTaxaAntecipacao := Value;
+end;
+
+procedure TFormaPagamento.SetPercentualTaxaCartao(const Value: double);
+begin
+  FPercentualTaxaCartao := Value;
+end;
+
+end.

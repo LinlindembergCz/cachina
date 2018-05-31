@@ -1,0 +1,559 @@
+object FormRelOrcamentoGeral: TFormRelOrcamentoGeral
+  Left = 0
+  Top = 0
+  Caption = 'FormRelOrcamentoGeral'
+  ClientHeight = 497
+  ClientWidth = 822
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Scaled = False
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object QuickRep1: TQuickRep
+    Left = 8
+    Top = 8
+    Width = 794
+    Height = 1123
+    DataSet = cdsOrcamento
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    Functions.Strings = (
+      'PAGENUMBER'
+      'COLUMNNUMBER'
+      'REPORTTITLE')
+    Functions.DATA = (
+      '0'
+      '0'
+      #39#39)
+    Options = [FirstPageHeader, LastPageFooter]
+    Page.Columns = 1
+    Page.Orientation = poPortrait
+    Page.PaperSize = A4
+    Page.Continuous = False
+    Page.Values = (
+      100.000000000000000000
+      2970.000000000000000000
+      100.000000000000000000
+      2100.000000000000000000
+      100.000000000000000000
+      100.000000000000000000
+      0.000000000000000000)
+    PrinterSettings.Copies = 1
+    PrinterSettings.OutputBin = Auto
+    PrinterSettings.Duplex = False
+    PrinterSettings.FirstPage = 0
+    PrinterSettings.LastPage = 0
+    PrinterSettings.UseStandardprinter = False
+    PrinterSettings.UseCustomBinCode = False
+    PrinterSettings.CustomBinCode = 0
+    PrinterSettings.ExtendedDuplex = 0
+    PrinterSettings.UseCustomPaperCode = False
+    PrinterSettings.CustomPaperCode = 0
+    PrinterSettings.PrintMetaFile = False
+    PrinterSettings.PrintQuality = 0
+    PrinterSettings.Collate = 0
+    PrinterSettings.ColorOption = 0
+    PrintIfEmpty = True
+    SnapToGrid = True
+    Units = MM
+    Zoom = 100
+    PrevFormStyle = fsNormal
+    PreviewInitialState = wsNormal
+    PrevInitialZoom = qrZoomToFit
+    PreviewDefaultSaveType = stQRP
+    PreviewLeft = 0
+    PreviewTop = 0
+    object PageHeaderBand1: TQRBand
+      Left = 38
+      Top = 38
+      Width = 718
+      Height = 137
+      Frame.DrawBottom = True
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        362.479166666666700000
+        1899.708333333333000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbPageHeader
+      object QRLabel1: TQRLabel
+        Left = 131
+        Top = 116
+        Width = 41
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          346.604166666666700000
+          306.916666666666700000
+          108.479166666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Ve'#237'culo'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 8
+      end
+      object QRLabel3: TQRLabel
+        Left = 307
+        Top = 116
+        Width = 40
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          812.270833333333300000
+          306.916666666666700000
+          105.833333333333300000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Cliente'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 8
+      end
+      object QRLabel4: TQRLabel
+        Left = 256
+        Top = 52
+        Width = 196
+        Height = 20
+        Size.Values = (
+          52.916666666666670000
+          677.333333333333300000
+          137.583333333333300000
+          518.583333333333300000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Relat'#243'rio de Or'#231'amento'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 12
+      end
+      object QRSysData1: TQRSysData
+        Left = 523
+        Top = 8
+        Width = 68
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1383.770833333333000000
+          21.166666666666670000
+          179.916666666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        Data = qrsDateTime
+        Transparent = False
+        ExportAs = exptText
+        FontSize = 10
+      end
+      object imgLogo: TQRImage
+        Left = 8
+        Top = 8
+        Width = 149
+        Height = 86
+        Size.Values = (
+          227.541666666666700000
+          21.166666666666670000
+          21.166666666666670000
+          394.229166666666700000)
+        XLColumn = 0
+        Stretch = True
+      end
+      object QRLabel7: TQRLabel
+        Left = 3
+        Top = 116
+        Width = 39
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          7.937500000000000000
+          306.916666666666700000
+          103.187500000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'C'#243'digo'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 8
+      end
+      object QRLabel2: TQRLabel
+        Left = 59
+        Top = 116
+        Width = 39
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          156.104166666666700000
+          306.916666666666700000
+          103.187500000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'C'#243'digo'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 8
+      end
+    end
+    object SummaryBand1: TQRBand
+      Left = 38
+      Top = 192
+      Width = 718
+      Height = 40
+      Frame.DrawTop = True
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        105.833333333333300000
+        1899.708333333333000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbSummary
+      object QRExpr1: TQRExpr
+        Left = 559
+        Top = 6
+        Width = 140
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1479.020833333333000000
+          15.875000000000000000
+          370.416666666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Color = clWhite
+        Master = QuickRep1
+        ParentFont = False
+        ResetAfterPrint = False
+        Transparent = False
+        Expression = 'SUM(TotalOrcamento)'
+        Mask = ',0.00;'
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+    end
+    object DetailBand2: TQRBand
+      Left = 38
+      Top = 175
+      Width = 718
+      Height = 17
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        44.979166666666670000
+        1899.708333333333000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbDetail
+      object QRDBText12: TQRDBText
+        Left = 3
+        Top = 0
+        Width = 50
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          7.937500000000000000
+          0.000000000000000000
+          132.291666666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = True
+        Color = clWhite
+        DataSet = cdsOrcamento
+        DataField = 'Codigo'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText1: TQRDBText
+        Left = 131
+        Top = 0
+        Width = 61
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          346.604166666666700000
+          0.000000000000000000
+          161.395833333333300000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = True
+        Color = clWhite
+        DataSet = cdsOrcamento
+        DataField = 'Placa'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText4: TQRDBText
+        Left = 195
+        Top = 0
+        Width = 106
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          515.937500000000000000
+          0.000000000000000000
+          280.458333333333300000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = True
+        Color = clWhite
+        DataSet = cdsOrcamento
+        DataField = 'Modelo'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText3: TQRDBText
+        Left = 306
+        Top = 0
+        Width = 234
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          809.625000000000000000
+          0.000000000000000000
+          619.125000000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        Color = clWhite
+        DataSet = cdsOrcamento
+        DataField = 'Nome'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText2: TQRDBText
+        Left = 543
+        Top = 0
+        Width = 82
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1436.687500000000000000
+          0.000000000000000000
+          216.958333333333300000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        Color = clWhite
+        DataSet = cdsOrcamento
+        DataField = 'TotalOrcamento'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Mask = ',0.00;'
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRDBText5: TQRDBText
+        Left = 59
+        Top = 0
+        Width = 50
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          156.104166666666700000
+          0.000000000000000000
+          132.291666666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = True
+        Color = clWhite
+        DataSet = cdsOrcamento
+        DataField = 'Data'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 8
+      end
+      object QRLabel5: TQRLabel
+        Left = 627
+        Top = 0
+        Width = 85
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1658.937500000000000000
+          0.000000000000000000
+          224.895833333333300000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = '____________'
+        Color = clWhite
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+    end
+  end
+  object QRExcelFilter1: TQRExcelFilter
+    TextEncoding = DefaultEncoding
+    UseXLColumns = False
+    Left = 384
+    Top = 352
+  end
+  object QRPDFFilter1: TQRPDFFilter
+    CompressionOn = False
+    TextEncoding = AnsiEncoding
+    Codepage = '1252'
+    Left = 496
+    Top = 352
+  end
+  object cdsOrcamento: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 384
+    Top = 296
+  end
+  object cdsItemOrcamento: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'CodigoOrcamento'
+    MasterSource = DataSource1
+    PacketRecords = 0
+    Params = <>
+    Left = 496
+    Top = 296
+  end
+  object DataSource1: TDataSource
+    DataSet = cdsOrcamento
+    Left = 384
+    Top = 408
+  end
+end

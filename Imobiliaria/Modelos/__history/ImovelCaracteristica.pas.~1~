@@ -1,0 +1,23 @@
+unit ImovelCaracteristica;
+
+interface
+
+uses
+ CAtribEntity,  GenericEntidade;
+
+type
+  [TableName('ImovelTipo')]
+  TImovelCaracteristica = class(TGenericEntidade)
+public
+  [FieldName('Codigo')]
+  property Codigo: Integer;
+  [FieldName('CodigoFilial')]
+  property CodigoFilial: Integer;
+  [FieldName('Descricao')]
+  property Descricao: string;
+end;
+
+implementation
+
+End.
+

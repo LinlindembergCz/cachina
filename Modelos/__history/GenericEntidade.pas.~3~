@@ -1,0 +1,18 @@
+unit GenericEntidade;
+
+interface
+  Uses Vcl.Controls, RTTI, System.Classes;
+
+
+type
+{$M+}
+  TGenericEntity = class(TObject)
+
+  end;
+{$M-}
+
+
+
+implementation
+
+end.

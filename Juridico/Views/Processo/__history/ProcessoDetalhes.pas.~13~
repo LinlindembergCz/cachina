@@ -1,0 +1,125 @@
+unit ProcessoDetalhes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, TemplateDetalhesComTabGrid, Data.DB,
+  Vcl.Buttons, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ExtCtrls,
+  Vcl.DBCtrls;
+
+type
+  TFormProcessoDetalhes = class(TTemplateFormComTabGridDetalhes)
+    edtValorCausa: TEdit;
+    edtValorPedido: TEdit;
+    edtValorProvisionado: TEdit;
+    edtValorFinal: TEdit;
+    lbValorFinal: TLabel;
+    lbValorProvisionado: TLabel;
+    lbValorCausa: TLabel;
+    lbValorPedido: TLabel;
+    edtNumero: TEdit;
+    lbCodigoContrario: TLabel;
+    lbCodigoAdvogado: TLabel;
+    lbCodigoCliente: TLabel;
+    lbNumero: TLabel;
+    lbCodigoFaseAtual: TLabel;
+    lbCodigoTipoAcao: TLabel;
+    lbCodigoObjeto: TLabel;
+    lbCodigoAreaJuridica: TLabel;
+    lbCodigoDistribuicao: TLabel;
+    lbDataInicio: TLabel;
+    lbObservacao: TLabel;
+    lbParticipacao: TLabel;
+    lbCodigoResultado: TLabel;
+    lbDataEncerramento: TLabel;
+    edtParticipacao: TEdit;
+    dateDataInicio: TDateTimePicker;
+    dateDataEncerramento: TDateTimePicker;
+    lbRiscoPerda: TLabel;
+    edtRiscoPerda: TEdit;
+    memoObservacao: TMemo;
+    TabSheet3: TTabSheet;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    SpeedButton6: TSpeedButton;
+    SpeedButton7: TSpeedButton;
+    SpeedButton8: TSpeedButton;
+    SpeedButton9: TSpeedButton;
+    cboCodigoAreaJuridica: TDBLookupComboBox;
+    cboCodigoDistribuicao: TDBLookupComboBox;
+    cboCodigoFaseAtual: TDBLookupComboBox;
+    cboCodigoTipoAcao: TDBLookupComboBox;
+    cboCodigoObjeto: TDBLookupComboBox;
+    cboCodigoAdvogado: TDBLookupComboBox;
+    cboCodigoCliente: TDBLookupComboBox;
+    cboCodigoContrario: TDBLookupComboBox;
+    cboCodigoResultado: TDBLookupComboBox;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormProcessoDetalhes: TFormProcessoDetalhes;
+
+implementation
+
+{$R *.dfm}
+
+uses EntidadeFactory, ControllerProcesso, DBUtils;
+
+procedure TFormProcessoDetalhes.FormCreate(Sender: TObject);
+begin
+  Entidade:= TEntidadeFactory.criar(tpProcesso);
+  Controller:= TControllerProcesso.create;
+  Campos := ControllerProcesso.CamposProcesso;
+  Tabela := ControllerProcesso.ConsultaTabela;
+  CampoPesquisa:= 'T1."Numero"';
+  inherited;
+  with MapperEntidade do
+  begin
+    associar('Codigo', nil);
+    associar('CodigoFilial', nil);
+    associar('Numero', edtNumero);
+    associar('CodigoCliente',  cboCodigoCliente);
+    associar('CodigoAdvogado',  cboCodigoAdvogado);
+    associar('CodigoContrario',  cboCodigoContrario);
+    associar('CodigoObjeto',  cboCodigoObjeto);
+    associar('CodigoTipoAcao',  cboCodigoTipoAcao);
+    associar('CodigoFaseAtual',  cboCodigoFaseAtual);
+    associar('CodigoDistribuicao',  cboCodigoDistribuicao);
+    associar('CodigoAreaJuridica',  cboCodigoAreaJuridica);
+    associar('DataInicio', dateDataInicio);
+    associar('Observacao', memoObservacao);
+    associar('Participacao', edtParticipacao);
+    associar('CodigoResultado',  cboCodigoResultado);
+    associar('DataEncerramento', dateDataEncerramento);
+    associar('ValorCausa', edtValorCausa);
+    associar('ValorPedido', edtValorPedido);
+    associar('ValorProvisionado', edtValorProvisionado);
+    associar('ValorFinal', edtValorFinal);
+    associar('RiscoPerda', edtRiscoPerda);
+  end;
+
+  DBUtils.FillLookUpCombobox(tpFuncionarios,  cboCodigoAdvogado, 'Codigo','Nome' );
+  DBUtils.FillLookUpCombobox(tpPessoa,  cboCodigoCliente, 'Codigo','Nome' );
+  DBUtils.FillLookUpCombobox(tpPessoa,  cboCodigoContrario, 'Codigo','Nome' );
+
+  DBUtils.FillLookUpCombobox(tpAreaJuridica, cboCodigoAreaJuridica);
+  DBUtils.FillLookUpCombobox(tpDistribuicao, cboCodigoDistribuicao);
+  DBUtils.FillLookUpCombobox(tpFaseAtual,    cboCodigoFaseAtual);
+  DBUtils.FillLookUpCombobox(tpTipoAcao,     cboCodigoTipoAcao);
+  DBUtils.FillLookUpCombobox(tpObjeto,       cboCodigoObjeto);
+  DBUtils.FillLookUpCombobox(tpResultado,    cboCodigoResultado);
+
+
+
+end;
+
+end.

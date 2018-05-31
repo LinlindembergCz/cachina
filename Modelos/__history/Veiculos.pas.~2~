@@ -1,0 +1,101 @@
+unit Veiculos;
+
+interface
+
+uses
+   CAtribEntity,  GenericEntidade;
+
+type
+  [TableName('Veiculos')]
+  TVeiculos = class(TGenericEntidade)
+  private
+    FObservacao: string;
+    FCor: string;
+    FChassi: string;
+    FCodigoFilial: integer;
+    FAno: integer;
+    FCodigoCliente: integer;
+    FCodigoModelo: integer;
+    FPlaca: string;
+    FData: TDatetime;
+    procedure SetAno(const Value: integer);
+    procedure SetChassi(const Value: string);
+    procedure SetCodigoCliente(const Value: integer);
+    procedure SetCodigoFilial(const Value: integer);
+    procedure SetCodigoModelo(const Value: integer);
+    procedure SetCor(const Value: string);
+    procedure SetData(const Value: TDatetime);
+    procedure SetObservacao(const Value: string);
+    procedure SetPlaca(const Value: string);
+  public
+    [KeyField('Placa')]
+    [FieldName('Placa')]
+    property Placa: string read FPlaca write SetPlaca;
+    [FieldName('CodigoCliente')]
+    property CodigoCliente:integer read FCodigoCliente write SetCodigoCliente;
+    [FieldName('CodigoFilial')]
+    property CodigoFilial:integer read FCodigoFilial write SetCodigoFilial;
+    [FieldName('CodigoModelo')]
+    property CodigoModelo:integer read FCodigoModelo write SetCodigoModelo;
+    [FieldName('Chassi')]
+    property Chassi: string read FChassi write SetChassi;
+    [FieldName('Ano')]
+    property Ano:integer read FAno write SetAno;
+    [FieldName('Cor')]
+    property Cor: string read FCor write SetCor;
+    [FieldName('Observacao')]
+    property Observacao: string read FObservacao write SetObservacao;
+    [FieldName('Data')]
+    property Data:TDatetime read FData write SetData;
+  end;
+
+implementation
+
+{ TVeiculos }
+
+procedure TVeiculos.SetAno(const Value: integer);
+begin
+  FAno := Value;
+end;
+
+procedure TVeiculos.SetChassi(const Value: string);
+begin
+  FChassi := Value;
+end;
+
+procedure TVeiculos.SetCodigoCliente(const Value: integer);
+begin
+  FCodigoCliente := Value;
+end;
+
+procedure TVeiculos.SetCodigoFilial(const Value: integer);
+begin
+  FCodigoFilial := Value;
+end;
+
+procedure TVeiculos.SetCodigoModelo(const Value: integer);
+begin
+  FCodigoModelo := Value;
+end;
+
+procedure TVeiculos.SetCor(const Value: string);
+begin
+  FCor := Value;
+end;
+
+procedure TVeiculos.SetData(const Value: TDatetime);
+begin
+  FData := Value;
+end;
+
+procedure TVeiculos.SetObservacao(const Value: string);
+begin
+  FObservacao := Value;
+end;
+
+procedure TVeiculos.SetPlaca(const Value: string);
+begin
+  FPlaca := Value;
+end;
+
+end.

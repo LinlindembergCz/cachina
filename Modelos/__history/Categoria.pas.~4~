@@ -1,0 +1,66 @@
+unit Categoria;
+
+interface
+
+uses
+ CAtribEntity,  GenericEntidade;
+
+type
+  [TableName('Categorias')]
+  [Modulo('9')]
+  TCategoria = class(TGenericEntidade)
+  private
+    FDescricao: string;
+    FCodigo: Integer;
+    FCodigoFilial: Integer;
+    FCodificacao: string;
+    FTipo: string;
+    procedure SetCodificacao(const Value: string);
+    procedure SetCodigo(const Value: Integer);
+    procedure SetCodigoFilial(const Value: Integer);
+    procedure SetDescricao(const Value: string);
+    procedure SetTipo(const Value: string);
+public
+  [KeyField('Codigo')]
+  property Codigo: Integer read FCodigo write SetCodigo;
+  [FieldName('CodigoFilial')]
+  property CodigoFilial: Integer read FCodigoFilial write SetCodigoFilial;
+  [FieldName('Descricao')]
+  property Descricao: string read FDescricao write SetDescricao;
+  [FieldName('Codificacao')]
+  property Codificacao: string read FCodificacao write SetCodificacao;
+  [FieldName('Tipo')]
+  property Tipo: string read FTipo write SetTipo;
+end;
+
+implementation
+
+{ TCategoria }
+
+procedure TCategoria.SetCodificacao(const Value: string);
+begin
+  FCodificacao := Value;
+end;
+
+procedure TCategoria.SetCodigo(const Value: Integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TCategoria.SetCodigoFilial(const Value: Integer);
+begin
+  FCodigoFilial := Value;
+end;
+
+procedure TCategoria.SetDescricao(const Value: string);
+begin
+  FDescricao := Value;
+end;
+
+procedure TCategoria.SetTipo(const Value: string);
+begin
+  FTipo := Value;
+end;
+
+End.
+

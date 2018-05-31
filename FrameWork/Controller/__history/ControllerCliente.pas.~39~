@@ -1,0 +1,80 @@
+unit ControllerCliente;
+
+interface
+
+uses GenericEntidade, viewCliente, Controller, Forms , DB, Mapper, Classes, DBClient;
+
+type
+  TControllerCliente = class(TController)
+  public
+    View: TFormViewCLiente;
+    DataSet:TClientDataSet;
+    procedure Editar;override;
+    procedure Inserir;override;
+    procedure Atualizar;override;
+    procedure Excluir;override;
+    function  GetDataSet(Condicao: string; Fields: string= ''):TDataSet;override;
+    procedure Inicializar(Sender:TStringList);override;
+    function  GetSelect(Select:String; Condicao: string; Fields: string= ''):TDataSet;
+    constructor Create(Sender: TForm; ClientDataSet:TClientDataSet);override;
+  end;
+
+implementation
+
+{ TControllerCliente }
+
+uses FactoryEntidade;
+
+procedure TControllerCliente.Inserir;
+begin
+  TMapper.Send_ComponentToObject( View , Entidade );
+  inherited;
+  TMapper.Send_ObjectToDataSet(Entidade, DataSet , dsinsert);
+end;
+
+procedure TControllerCliente.Atualizar;
+begin
+  TMapper.Send_ComponentToObject( View , Entidade );
+  inherited;
+  TMapper.Send_ObjectToDataSet(Entidade, DataSet , dsedit);
+end;
+
+constructor TControllerCliente.Create(Sender: TForm; ClientDataSet:TClientDataSet);
+begin
+  View := (Sender as TFormViewCLiente);
+  DataSet:= ClientDataSet;
+  Entidade := TFactoryEntidade.CriarCliente;
+  View.ClientDataSet1.CreateDataSet;
+end;
+
+procedure TControllerCliente.Editar;
+begin
+  TMapper.Send_DataSetToComponent( DataSet , View );
+  TMapper.Send_DataSetToObject( DataSet , Entidade);
+end;
+
+procedure TControllerCliente.Excluir;
+begin
+
+end;
+
+function TControllerCliente.GetDataSet( Condicao,
+  Fields: string): TDataSet;
+begin
+
+end;
+
+function TControllerCliente.GetSelect(Select, Condicao,
+  Fields: string): TDataSet;
+begin
+
+end;
+
+procedure TControllerCliente.Inicializar(Sender: TStringList);
+begin
+
+end;
+
+
+
+end.

@@ -1,0 +1,90 @@
+unit Conexao;
+
+interface
+
+uses
+//Data.SqlExpr,
+sysUtils, forms, ADODB, DB;
+
+Type
+   TConexao = class
+   private
+      //Connection : TSQLConnection;
+      Connection : TADOConnection;
+   public
+      constructor Create;
+      destructor Destroy;
+      procedure ExecSQL(SQL: string);
+   end;
+
+   TDataSet = class
+   private
+      //Connection : TSQLConnection;
+      Connection : TADOConnection;
+   public
+      constructor Create;
+      destructor Destroy;
+      procedure ExecSQL(SQL: string);
+   end;
+
+   TSingletonConexao = class
+   strict private
+     class var FConexao: TConexao;
+   public
+     class function GetConexao:TConexao;
+   end;
+
+{ TConexao }
+
+implementation
+
+constructor TConexao.Create;
+begin
+  {
+  Connection := TSQLConnection.Create(nil);
+  Connection.connectionName := 'MSSQLConnection';
+  Connection.DriverName := 'MSSQL';
+  Connection.LoginPrompt:= false;
+  Connection.Params.LoadFromFile( extractfilepath(application.exename)+'dbxconnections.ini');
+  Connection.Connected := true;
+  }
+  Connection := TADOConnection.Create(nil);
+  Connection.connectionString := 'Provider=SQLNCLI11.1;Integrated Security=SSPI;'+
+  ' Persist Security Info=False;User ID="";Initial Catalog=Berg;'+
+  'Data Source=.\sqlEXPRESS;Initial File Name="";Server SPN=""';
+  Connection.LoginPrompt:= false;
+  Connection.Connected := true;
+
+end;
+
+destructor TConexao.Destroy;
+begin
+  Connection.Connected := false;
+end;
+
+procedure TConexao.ExecSQL(SQL: string);
+begin
+   //Connection.ExecuteDirect(SQL);
+   Connection.Execute(SQL);
+end;
+
+procedure TConexao.GetDataSet(SQL: string);
+var
+   DataSet:TADODataSet;
+begin
+   DataSet:= TADODataSet.Create(nil);
+   DataSet.Connection := Connection;
+   DataSet.CommandText := SQL;
+   DataSet.Open;
+end;
+
+{ TSingletonConexao }
+
+class function TSingletonConexao.GetConexao: TConexao;
+begin
+  if FConexao = nil then
+     FConexao := TConexao.Create;
+  result := FConexao;
+end;
+
+end.

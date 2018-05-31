@@ -1,0 +1,44 @@
+unit FamiliaProdutosDetalhes;
+
+interface
+
+uses
+    System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  Graphics, Controls, Forms, Dialogs, StdCtrls,
+  TemplateDetalhesComTabGrid, System.Rtti,   Vcl.Grids,
+  Vcl.DBGrids, Vcl.ComCtrls,  Vcl.ExtCtrls, Vcl.Buttons, Data.DB;
+
+type
+  TFormFamiliaProdutosDetalhes = class(TTemplateFormComTabGridDetalhes)
+    edtDescricao: TEdit;
+    Label1: TLabel;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormFamiliaProdutosDetalhes: TFormFamiliaProdutosDetalhes;
+
+implementation
+
+{$R *.dfm}
+
+uses ControllerTabelas, EntidadeFactory;
+
+procedure TFormFamiliaProdutosDetalhes.FormCreate(Sender: TObject);
+begin
+  Controller := TControllerTabelas.Create;
+  Entidade   := TEntidadeFactory.Criar(tpFamilia);
+  inherited;
+  with MapperEntidade do
+  begin
+    associar('Codigo', nil);
+    associar('Descricao', edtDescricao);
+  end;
+
+end;
+
+end.
