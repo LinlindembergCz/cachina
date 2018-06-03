@@ -275,6 +275,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             Top = 30
             Width = 30
             Height = 21
+            NumbersOnly = True
             TabOrder = 3
           end
           object edtValor: TEdit
@@ -283,6 +284,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             Width = 72
             Height = 21
             Cursor = crIBeam
+            NumbersOnly = True
             TabOrder = 4
           end
           object edtOrdem: TEdit
@@ -300,6 +302,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             Width = 34
             Height = 21
             Cursor = crIBeam
+            NumbersOnly = True
             TabOrder = 5
             OnExit = edtDescontoItemExit
           end

@@ -349,6 +349,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
         Top = 38
         Width = 68
         Height = 21
+        NumbersOnly = True
         TabOrder = 3
       end
       object edtValor: TEdit
@@ -357,6 +358,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
         Width = 87
         Height = 21
         Cursor = crIBeam
+        NumbersOnly = True
         TabOrder = 6
       end
       object edtOrdem: TEdit
@@ -412,6 +414,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
         Top = 38
         Width = 41
         Height = 21
+        NumbersOnly = True
         TabOrder = 5
       end
       object edtCFOP: TEdit
@@ -495,6 +498,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
           Top = 41
           Width = 75
           Height = 21
+          NumbersOnly = True
           TabOrder = 1
         end
         object edtValorICMS: TEdit
@@ -502,6 +506,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
           Top = 67
           Width = 75
           Height = 21
+          NumbersOnly = True
           TabOrder = 2
         end
         object edtPercentualICMS: TEdit
@@ -509,6 +514,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
           Top = 91
           Width = 75
           Height = 21
+          NumbersOnly = True
           TabOrder = 3
         end
       end
@@ -575,6 +581,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
           Top = 41
           Width = 74
           Height = 21
+          NumbersOnly = True
           TabOrder = 1
         end
         object edtValorIPI: TEdit
@@ -582,6 +589,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
           Top = 67
           Width = 74
           Height = 21
+          NumbersOnly = True
           TabOrder = 2
         end
         object edtPercentualIPI: TEdit
@@ -589,6 +597,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
           Top = 94
           Width = 74
           Height = 21
+          NumbersOnly = True
           TabOrder = 3
         end
       end
@@ -674,6 +683,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
           Top = 41
           Width = 71
           Height = 21
+          NumbersOnly = True
           TabOrder = 1
         end
         object edtValorCofins: TEdit
@@ -681,6 +691,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
           Top = 67
           Width = 72
           Height = 21
+          NumbersOnly = True
           TabOrder = 2
         end
         object edtPercentualCOFINS: TEdit
@@ -688,6 +699,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
           Top = 91
           Width = 71
           Height = 21
+          NumbersOnly = True
           TabOrder = 3
         end
       end
@@ -773,6 +785,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
           Top = 41
           Width = 76
           Height = 21
+          NumbersOnly = True
           TabOrder = 1
         end
         object edtValorPIS: TEdit
@@ -780,6 +793,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
           Top = 67
           Width = 76
           Height = 21
+          NumbersOnly = True
           TabOrder = 2
         end
         object edtPercentualPIS: TEdit
@@ -787,6 +801,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
           Top = 91
           Width = 76
           Height = 21
+          NumbersOnly = True
           TabOrder = 3
         end
       end
@@ -1033,6 +1048,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
       Width = 46
       Height = 21
       MaxLength = 3
+      NumbersOnly = True
       TabOrder = 12
     end
     object edtSerie: TEdit
@@ -1041,6 +1057,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
       Width = 46
       Height = 21
       MaxLength = 3
+      NumbersOnly = True
       TabOrder = 13
     end
     object cboSituacao: TComboBox

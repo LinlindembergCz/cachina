@@ -164,6 +164,7 @@ inherited FormSaidaDetalhes: TFormSaidaDetalhes
         Top = 38
         Width = 65
         Height = 21
+        NumbersOnly = True
         TabOrder = 3
       end
       object edtOrdem: TEdit
@@ -207,6 +208,7 @@ inherited FormSaidaDetalhes: TFormSaidaDetalhes
         Width = 68
         Height = 21
         Cursor = crIBeam
+        NumbersOnly = True
         TabOrder = 6
         Visible = False
       end
@@ -228,6 +230,7 @@ inherited FormSaidaDetalhes: TFormSaidaDetalhes
         Top = 38
         Width = 41
         Height = 21
+        NumbersOnly = True
         TabOrder = 5
       end
     end

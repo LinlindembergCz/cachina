@@ -3201,7 +3201,6 @@ object FormPrincipal: TFormPrincipal
       end
       object Parametros1: TMenuItem
         Action = ActParametrosSistema
-        Caption = 'Parametros'
       end
       object SequenciaNF1: TMenuItem
         Caption = 'Sequencias'
