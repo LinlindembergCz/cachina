@@ -18,6 +18,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure edtSenhaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     procedure Entrar;
     { Private declarations }
@@ -61,6 +62,12 @@ begin
   ControllerFuncionarios     := TControllerFuncionarios.Create;
   FormPrincipal.CodigoPessoa := ControllerFuncionarios.VerificarLogin(edtLogin.Text, edtSenha.Text);
   FormPrincipal.login        := edtLogin.Text;
+end;
+
+procedure TFormLoginAcesso.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   if FormPrincipal.CodigoPessoa  = '' then
+      application.Terminate;
 end;
 
 end.

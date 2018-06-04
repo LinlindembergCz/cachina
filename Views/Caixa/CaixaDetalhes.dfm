@@ -30,7 +30,7 @@ inherited FormCaixaDetalhes: TFormCaixaDetalhes
         ExplicitLeft = 4
         ExplicitTop = 24
         ExplicitWidth = 922
-        ExplicitHeight = 399
+        ExplicitHeight = 464
         object lbDescricao: TLabel
           Left = 7
           Top = 20

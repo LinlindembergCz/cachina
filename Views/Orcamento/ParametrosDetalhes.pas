@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls,
-  Vcl.Buttons, Data.DB, Vcl.Grids, Vcl.DBGrids,ControllerTabelas, Vcl.DBCtrls;
+  Vcl.Buttons, Data.DB, Vcl.Grids, Vcl.DBGrids,ControllerTabelas, Vcl.DBCtrls, GenericEntidade;
 
 type
   TFormParametrosDetalhes = class(TForm)
@@ -35,6 +35,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+     Entidade: TGenericEntidade;
     Controller: TControllerTabelas;
   end;
 
@@ -46,8 +47,6 @@ implementation
 {$R *.dfm}
 
 uses DBUtils, EntidadeFactory, srvModBaseDados, strUtils;
-
-
 
 procedure TFormParametrosDetalhes.Button1Click(Sender: TObject);
 var
@@ -84,6 +83,9 @@ begin
 end;
 
 procedure TFormParametrosDetalhes.FormActivate(Sender: TObject);
+var
+   I:integer;
+   DataSet:TDataSet;
 begin
    FillCombobox( tpCFOP, CFOPPADRAOVENDA, 'Descricao like (''VENDA%'') AND CFOP < 6000 ',
         'CFOP',' CFOP +''  '' +  Descricao as Descricao ','CFOP');
@@ -97,6 +99,22 @@ begin
         'CFOP',' CFOP +''  '' +  Descricao as Descricao ','CFOP');
    FillCombobox( tpCFOP, CFOPPADRAODEVOLUCAOFORAESTADO, 'Descricao like (''DEVOLUÇÃO DE COMPRA%'') AND CFOP >= 6000 ',
         'CFOP',' CFOP +''  '' +  Descricao as Descricao ','CFOP');
+
+  Controller:= TControllerTabelas.create;
+
+  DataSet := Controller.GetSelect('select * from Parametros');
+
+  for I := 0 to componentCount - 1 do
+  begin
+    if DataSet.Locate( 'Parametro', Components[i].Name , [] ) then
+    begin
+       if (Components[i] is TEdit) then
+          (Components[i] as TEdit).text:= DataSet.FieldByName('Valor').Value
+       else
+       if (Components[i] is TCombobox) then
+          (Components[i] as TCombobox).text:= DataSet.FieldByName('Valor').Value;
+    end;
+  end;
 end;
 
 end.

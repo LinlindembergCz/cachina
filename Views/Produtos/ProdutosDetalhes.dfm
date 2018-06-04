@@ -18,6 +18,8 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
       ExplicitWidth = 727
       ExplicitHeight = 482
       inherited TabSheet1: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 24
         ExplicitWidth = 719
         ExplicitHeight = 454
         inherited grdEntidade: TDBGrid
@@ -778,6 +780,10 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
             Caption = 'Estoque'
             ImageIndex = 2
             OnShow = TabSheet3Show
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label33: TLabel
               Left = 16
               Top = 305
@@ -830,7 +836,6 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
           object TabSheet6: TTabSheet
             Caption = 'Fiscal'
             ImageIndex = 3
-            ExplicitTop = 19
             object Label29: TLabel
               Left = 12
               Top = 35

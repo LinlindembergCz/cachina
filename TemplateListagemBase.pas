@@ -31,10 +31,13 @@ implementation
 
 {$R *.dfm}
 
+uses Principal;
+
 procedure TTemplateFormListagemBase.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-   //Action:=  TCloseAction.caFree;
+   formPrincipal.UnRegisterForm(  ClassName );
+   Action:=  TCloseAction.caFree;
 end;
 
 procedure TTemplateFormListagemBase.Grid1DblClick(Sender: TObject);

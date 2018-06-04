@@ -215,7 +215,7 @@ begin
 
            with frmBoletoACBr do
            begin
-
+              ACBrBoleto1.Cedente.CNPJCPF:= '04.678.720/0001-61';
               ACBrBoleto1.Cedente.Nome  := 'GC AutoEletrica e Eletronica Av.atonio basilio 3288 '+
               'Lagoa N. Natal/RN 59056005';
               ACBrBoleto1.Cedente.Logradouro:='Av atonio basilio';

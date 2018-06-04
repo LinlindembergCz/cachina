@@ -1,7 +1,6 @@
 object TemplateFormBaseDetalhes: TTemplateFormBaseDetalhes
   Left = 0
   Top = 0
-  BorderIcons = [biSystemMenu]
   Caption = 'BlankForm'
   ClientHeight = 478
   ClientWidth = 653
@@ -11,10 +10,13 @@ object TemplateFormBaseDetalhes: TTemplateFormBaseDetalhes
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  FormStyle = fsMDIChild
   KeyPreview = True
   OldCreateOrder = True
   Position = poMainFormCenter
   Touch.InteractiveGestures = [igPan]
+  Visible = True
+  WindowState = wsMaximized
   OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown

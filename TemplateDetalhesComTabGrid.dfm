@@ -1,22 +1,28 @@
 inherited TemplateFormComTabGridDetalhes: TTemplateFormComTabGridDetalhes
   Caption = 'TemplateFormComTabDetalhes1'
+  ClientHeight = 543
+  ClientWidth = 803
+  ExplicitWidth = 819
+  ExplicitHeight = 581
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
+    Width = 803
+    Height = 494
+    ExplicitWidth = 116
     inherited tabPrincipal: TPageControl
-      ExplicitWidth = 725
+      Width = 801
+      Height = 492
+      ExplicitWidth = 114
       inherited TabSheet1: TTabSheet
         Caption = 'Pesquisa'
         OnShow = TabSheet1Show
-        ExplicitLeft = 4
-        ExplicitTop = 24
-        ExplicitWidth = 717
-        ExplicitHeight = 399
+        ExplicitWidth = 106
         object grdEntidade: TDBGrid
           Left = 0
           Top = 65
-          Width = 717
-          Height = 312
+          Width = 793
+          Height = 377
           Align = alClient
           DataSource = srcPesquisa
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -32,10 +38,11 @@ inherited TemplateFormComTabGridDetalhes: TTemplateFormComTabGridDetalhes
         object pnlSuperior: TPanel
           Left = 0
           Top = 0
-          Width = 717
+          Width = 793
           Height = 65
           Align = alTop
           TabOrder = 1
+          ExplicitWidth = 106
           object grpPesquisa: TGroupBox
             Left = 3
             Top = 0
@@ -70,13 +77,15 @@ inherited TemplateFormComTabGridDetalhes: TTemplateFormComTabGridDetalhes
         end
         object pnlInferior: TPanel
           Left = 0
-          Top = 377
-          Width = 717
+          Top = 442
+          Width = 793
           Height = 22
           Align = alBottom
           Color = clWhite
           ParentBackground = False
           TabOrder = 2
+          ExplicitTop = 377
+          ExplicitWidth = 106
           object lbregistros: TLabel
             Left = 4
             Top = 4
@@ -96,8 +105,16 @@ inherited TemplateFormComTabGridDetalhes: TTemplateFormComTabGridDetalhes
         Caption = 'Detalhes'
         ImageIndex = 1
         OnShow = TabSheet2Show
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
       end
     end
+  end
+  inherited Panel2: TPanel
+    Width = 803
+    ExplicitWidth = 116
   end
   object srcPesquisa: TDataSource [3]
     AutoEdit = False

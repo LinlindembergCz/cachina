@@ -1,32 +1,36 @@
 inherited FormModelosDetalhes: TFormModelosDetalhes
   Caption = 'Modelos de produtos'
-  ClientWidth = 642
-  FormStyle = fsStayOnTop
-  ExplicitWidth = 658
-  ExplicitHeight = 516
+  ClientHeight = 508
+  ClientWidth = 672
+  ExplicitWidth = 688
+  ExplicitHeight = 546
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Width = 642
+    Width = 672
+    Height = 459
     ExplicitWidth = 642
+    ExplicitHeight = 494
     inherited tabPrincipal: TPageControl
-      Width = 640
-      ActivePage = TabSheet1
+      Width = 670
+      Height = 457
       ExplicitWidth = 640
+      ExplicitHeight = 492
       inherited TabSheet1: TTabSheet
-        ExplicitLeft = 4
-        ExplicitTop = 24
         ExplicitWidth = 632
-        ExplicitHeight = 399
+        ExplicitHeight = 464
         inherited grdEntidade: TDBGrid
-          Width = 632
+          Width = 662
+          Height = 342
         end
         inherited pnlSuperior: TPanel
-          Width = 632
+          Width = 662
           ExplicitWidth = 632
         end
         inherited pnlInferior: TPanel
-          Width = 632
+          Top = 407
+          Width = 662
+          ExplicitTop = 442
           ExplicitWidth = 632
         end
       end
@@ -34,7 +38,7 @@ inherited FormModelosDetalhes: TFormModelosDetalhes
         ExplicitLeft = 4
         ExplicitTop = 24
         ExplicitWidth = 632
-        ExplicitHeight = 399
+        ExplicitHeight = 386
         object lbDescriacao: TLabel
           Left = 8
           Top = 32
@@ -69,7 +73,7 @@ inherited FormModelosDetalhes: TFormModelosDetalhes
     end
   end
   inherited Panel2: TPanel
-    Width = 642
+    Width = 672
     ExplicitWidth = 642
   end
 end

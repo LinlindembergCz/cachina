@@ -1,20 +1,20 @@
 inherited FormEntradaListagem: TFormEntradaListagem
   Caption = 'Entradas'
   ClientHeight = 514
-  ClientWidth = 681
-  FormStyle = fsStayOnTop
+  ClientWidth = 684
+  Visible = False
   OnCreate = FormCreate
-  ExplicitWidth = 697
+  ExplicitWidth = 700
   ExplicitHeight = 552
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Width = 681
+    Width = 684
     Height = 129
     ExplicitWidth = 681
     ExplicitHeight = 129
     inherited SpeedButton2: TSpeedButton
-      Left = 593
+      Left = 596
       Top = 101
       ExplicitLeft = 593
       ExplicitTop = 101
@@ -105,7 +105,7 @@ inherited FormEntradaListagem: TFormEntradaListagem
   end
   inherited Grid1: TDBGrid
     Top = 129
-    Width = 681
+    Width = 684
     Height = 385
     OnDblClick = SpeedButton2Click
     Columns = <

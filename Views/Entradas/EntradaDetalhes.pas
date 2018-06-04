@@ -96,6 +96,7 @@ type
     Label28: TLabel;
     edtPercentualPIS: TEdit;
     SpeedButton4: TSpeedButton;
+    SpeedButton5: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
@@ -112,6 +113,7 @@ type
     procedure CornerButton1Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
   private
     { Private declarations }
     ItemEntrada            : TGenericEntidade;
@@ -341,9 +343,10 @@ begin
      CodigoFonecedor        := TControllerEntrada(Controller).GetCodigoFornecedor;
 
      if CodigoFonecedor <> '' then
-        cboCodigoFornecedor.KeyValue := CodigoFonecedor
+       cboCodigoFornecedor.KeyValue := CodigoFonecedor
      else
         showmessage('Fornecedor nao cadastrado');
+
   end;
   CarregarProdutos;
 end;
@@ -384,6 +387,12 @@ begin
 
   FillLookUpCombobox( tpPessoa, cboCodigoFornecedor,'Codigo','Nome',
    'Tipo=''FORNECEDOR''' );
+end;
+
+procedure TFormEntradaDetalhes.SpeedButton5Click(Sender: TObject);
+begin
+  inherited;
+  FormPrincipal.ShowProdutosListagem('T1.Codigo='+ quotedstr(edtCodigoItem.text) );
 end;
 
 procedure TFormEntradaDetalhes.btnExcluirClick(Sender: TObject);
@@ -434,6 +443,7 @@ var
   CodigoEntrada: string;
 begin
   CodigoEntrada := FormPrincipal.ShowEntradaListagem;
+
   if CodigoEntrada <> '' then
   begin
     GetEntrada(CodigoEntrada);

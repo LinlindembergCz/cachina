@@ -34,9 +34,8 @@ uses  GenericDAO, EntidadeFactory,  Principal, UtilsNumeros,
 
 procedure TControllerfornecedores.Atualizar(Objecto: TGenericEntidade);
 begin
-   CodigoModulo := '2';
-  if Length( UtilsString.SoNumeros( PMapper.GetValueEntidade('CPFCNPJ') ) ) = 14 then
-     PMapper.IsRiquired(['Endereco','Bairro','RazaoSocial','Municipio','CEP','Telefone','UF']);
+  CodigoModulo := '2';
+  PMapper.IsRiquired(['CPFCNPJ','InscricaoEstadual','Endereco','Bairro','RazaoSocial','Municipio','CEP','Telefone','UF']);
   PMapper.SendValueToFieldEntidade('Tipo','FORNECEDOR');
   inherited  ;
 end;

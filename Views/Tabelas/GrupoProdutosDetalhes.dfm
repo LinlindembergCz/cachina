@@ -1,17 +1,33 @@
 inherited FormGrupoProdutosDetalhes: TFormGrupoProdutosDetalhes
   Caption = 'Grupo de produtos'
-  FormStyle = fsStayOnTop
-  ExplicitWidth = 656
-  ExplicitHeight = 516
+  ClientHeight = 518
+  ClientWidth = 735
+  ExplicitWidth = 751
+  ExplicitHeight = 556
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
+    Width = 735
+    Height = 469
+    ExplicitHeight = 494
     inherited tabPrincipal: TPageControl
+      Width = 733
+      Height = 467
+      ExplicitHeight = 492
       inherited TabSheet1: TTabSheet
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
+        ExplicitHeight = 464
+        inherited grdEntidade: TDBGrid
+          Width = 725
+          Height = 352
+        end
+        inherited pnlSuperior: TPanel
+          Width = 725
+        end
+        inherited pnlInferior: TPanel
+          Top = 417
+          Width = 725
+          ExplicitTop = 442
+        end
       end
       inherited TabSheet2: TTabSheet
         ExplicitLeft = 4
@@ -50,5 +66,8 @@ inherited FormGrupoProdutosDetalhes: TFormGrupoProdutosDetalhes
         end
       end
     end
+  end
+  inherited Panel2: TPanel
+    Width = 735
   end
 end

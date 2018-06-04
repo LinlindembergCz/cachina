@@ -12,6 +12,7 @@ object TemplateFormListagemBase: TTemplateFormListagemBase
   Font.Style = []
   OldCreateOrder = True
   Position = poMainFormCenter
+  Visible = True
   OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
@@ -45,7 +46,6 @@ object TemplateFormListagemBase: TTemplateFormListagemBase
       Top = 40
       Width = 80
       Height = 22
-      Anchors = [akTop, akRight]
       Caption = 'Visualizar'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText

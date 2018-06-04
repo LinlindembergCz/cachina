@@ -6,7 +6,7 @@ uses
     System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   Graphics, Controls, Forms, Dialogs, StdCtrls,
   TemplateDetalhesComTabGrid, System.Rtti,   Vcl.Grids,
-  Vcl.DBGrids, Vcl.ComCtrls,  Vcl.ExtCtrls, Vcl.Buttons, Data.DB;
+  Vcl.DBGrids, Vcl.ComCtrls,  Vcl.ExtCtrls, Vcl.Buttons, Data.DB, Vcl.Menus;
 
 type
   TFormSubGrupoProdutosDetalhes = class(TTemplateFormComTabGridDetalhes)

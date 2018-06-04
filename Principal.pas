@@ -6,7 +6,7 @@ uses
   SysUtils, Types, System.UITypes, System.Classes, System.Variants, DBClient,
   Graphics, Controls, Forms, Dialogs, StdCtrls, DB ,Menus, VCL.ActnList,
   EntidadeFactory, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.CategoryButtons,
-  Vcl.Imaging.jpeg, Vcl.AppEvnts, System.Actions;
+  Vcl.Imaging.jpeg, Vcl.AppEvnts, System.Actions, Windows;
 
 type
   TFormPrincipal = class(TForm)
@@ -24,8 +24,6 @@ type
     ActSubGrupoProduto: TAction;
     ActOrcamentoPesquisa: TAction;
     CategoryButtons1: TCategoryButtons;
-    Panel1: TPanel;
-    Image2: TImage;
     MainMenu1: TMainMenu;
     Cadastros1: TMenuItem;
     Funcionarios1: TMenuItem;
@@ -86,6 +84,7 @@ type
     SequenciaNF1: TMenuItem;
     Parametros1: TMenuItem;
     ActParametrosSistema: TAction;
+    Image2: TImage;
     procedure ActFuncionariosExecute(Sender: TObject);
     procedure ActProdutosExecute(Sender: TObject);
     procedure ActClientesExecute(Sender: TObject);
@@ -107,7 +106,6 @@ type
     procedure ActRecebimentosExecute(Sender: TObject);
     procedure ActCategoriasExecute(Sender: TObject);
     procedure ActCaixaExecute(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure Log1Click(Sender: TObject);
     procedure Fluxodecaixa1Click(Sender: TObject);
     procedure ActCaixaFinanceiroExecute(Sender: TObject);
@@ -125,12 +123,17 @@ type
     procedure Indicadores1Click(Sender: TObject);
     procedure SequenciaNF1Click(Sender: TObject);
     procedure ActParametrosSistemaExecute(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
+     FormList: TStringList;
   public
     { Public declarations }
     Login: string;
     CodigoPessoa: string;
+
+    procedure UnRegisterForm(ClassFormName: string);
     function ShowForm( FormClass:TFormClass;
                        Action:TAction;
                        Modal:boolean = false):TForm;
@@ -175,6 +178,42 @@ uses
   RelBalancoContabil, GenericDAO, UnidadeMedida, Indicadores,
   SequenciaNotaFiscal, ParametrosDetalhes;
 
+procedure TFormPrincipal.FormCreate(Sender: TObject);
+begin
+   FormList:= TStringList.Create;
+end;
+
+procedure TFormPrincipal.UnRegisterForm(ClassFormName: string);
+  var
+  i:integer;
+begin
+  i :=  formPrincipal.FormList.IndexOf(  ClassFormName );
+  if i > -1 then
+    FormList.Delete( i );
+end;
+
+function TFormPrincipal.ShowForm( FormClass:TFormClass;
+                                   Action:TAction; Modal:boolean = false):TForm;
+var
+  Form: Tform;
+  i:integer;
+begin
+  i :=  FormList.IndexOf( FormClass.ClassName );
+  if i = -1 then
+  begin
+    application.CreateForm( FormClass , Form );
+    FormList.AddObject( FormClass.ClassName ,  Form );
+    Form.Show;
+    result := Form;
+  end
+  else
+  begin
+    Tform( FormList.Objects[i] ).Show;
+
+    result := Tform( FormList.Objects[i] );
+  end;
+end;
+
 procedure TFormPrincipal.Acessos1Click(Sender: TObject);
 begin
    TControllerPermissoes.TemPermissao(formPrincipal.CodigoPessoa, '0', '4');
@@ -182,7 +221,6 @@ begin
    Application.CreateForm(TFormPermissoes, FormPermissoes);
    FormPermissoes.showmodal;
    FormPermissoes.Free;
-
 end;
 
 procedure TFormPrincipal.ActCaixaExecute(Sender: TObject);
@@ -220,20 +258,6 @@ begin
    ShowForm(TFormClientesDetalhes, ActClientes);
 end;
 
-function TFormPrincipal.ShowForm( FormClass:TFormClass;
-                                   Action:TAction; Modal:boolean = false):TForm;
-var
-  Form:Tform;
-begin
-  application.CreateForm( FormClass, Form );
-  if Modal then
-     Form.showmodal
-  else
-     Form.Show;
-
-  result := Form;
-end;
-
 procedure TFormPrincipal.ActEmpresaExecute(Sender: TObject);
 begin
    TControllerPermissoes.TemPermissao(formPrincipal.CodigoPessoa, '0', '4');
@@ -259,50 +283,41 @@ begin
 end;
 
 procedure TFormPrincipal.SelecionarOrcamentDetalhe(Operacao, Codigo: string);
+var
+  Form:Tform;
 begin
-  application.CreateForm(TFormOrcamentoDetalhes,FormOrcamentoDetalhes);
-  FormOrcamentoDetalhes.Operacao:= Operacao;
-  with FormOrcamentoDetalhes  do
+  Form:= showForm(TFormOrcamentoDetalhes,nil);
+  with TFormOrcamentoDetalhes(Form) do
   begin
-    if Operacao = 'Update' then
-    begin
-       GetOrcamentoPesquisa(Codigo);
-       btnAlterar.Click;
-    end
-    else
-    if Operacao = 'Insert' then
-       btnInserir.Click
-    else
-    if Operacao = 'Retornar' then
-    begin
-       btnInserir.Click;
-       GetOrcamentoPesquisa(Codigo);
-       RefreshDataSetItemOrcamento('0');
-       cboSituacao.ItemIndex:= 6;
-       edtCodigo.text:= '';
-       dateData.Date:= now;
-       lbdatahorainicio.caption:= datetimetostr(now);
-    end
-    else
-    if Codigo <> '' then    
-       GetOrcamentoPesquisa(Codigo);
-    Show;
+     Operacao:= Operacao;
+     if Operacao = 'Update' then
+     begin
+        GetOrcamentoPesquisa(Codigo);
+        btnAlterar.Click;
+     end
+     else
+     if Operacao = 'Insert' then
+        btnInserir.Click
+     else
+     if Operacao = 'Retornar' then
+     begin
+        btnInserir.Click;
+        GetOrcamentoPesquisa(Codigo);
+        RefreshDataSetItemOrcamento('0');
+        cboSituacao.ItemIndex:= 6;
+        edtCodigo.text:= '';
+        dateData.Date:= now;
+        lbdatahorainicio.caption:= datetimetostr(now);
+     end
+     else
+     if Codigo <> '' then
+        GetOrcamentoPesquisa(Codigo);
   end;
 end;
 
 procedure TFormPrincipal.ActOrcamentoPesquisaExecute(Sender: TObject);
 begin
-  application.createform(TFormOrcamentoListagem, FormOrcamentoListagem);
-  with FormOrcamentoListagem do
-  begin
-      Showmodal;
-      if (Operacao <> 'abort') then
-      begin
-        SelecionarOrcamentDetalhe(Operacao, codigo);
-      end;
-      Free;
-  end;
-  //SelectOrcamento;
+  showform(TFormOrcamentoListagem,  ActOrcamento);
 end;
 
 function TFormPrincipal.ShowComboEditDialgo(TipoEntidade: TTipoEntidade; Titulo: string): string;
@@ -337,9 +352,7 @@ function TFormPrincipal.ShowEntradaListagem: string;
 begin
   FormEntradaListagem:= TFormEntradaListagem.Create(application);
   FormEntradaListagem.Showmodal;
-
   result:= FormEntradaListagem.Codigo;
-  FormEntradaListagem.Free;
 end;
 
 function TFormPrincipal.ShowSaidaListagem: string;
@@ -352,17 +365,16 @@ begin
 end;
 
 procedure TFormPrincipal.ShowFormClienteDetlahes( CPF, Placa: string);
+var
+  form: Tform;
 begin
-  //FormPrincipal.ActClientes.Execute;
-  application.createform(TFormClientesDetalhes,FormClientesDetalhes);
-  with FormClientesDetalhes do
+  form:= ShowForm( TFormClientesDetalhes , nil );
+  with TFormClientesDetalhes( form ) do
   begin
      srcPesquisa.DataSet := Controller.GetDataset(Entidade,'CPFCNPJ='+quotedstr(CPF) , Campos);
      tabPrincipal.ActivePageIndex := 1;
      tabDetalhes.ActivePageIndex := 0;
-     FormClientesDetalhes.showmodal;
   end;
-  FormClientesDetalhes.free;
 end;
 
 procedure TFormPrincipal.ActFamiliaExecute(Sender: TObject);
@@ -537,11 +549,15 @@ begin
 end;
 
 procedure TFormPrincipal.ShowRecebimentosListagem(Condicao: string);
+var
+  Form:TForm;
 begin
-   application.createform(TFormRecebimentoDetalhes, FormRecebimentoDetalhes);
-   FormRecebimentoDetalhes.Condicao:= Condicao;
-   FormRecebimentoDetalhes.RefreshDataSet;
-   FormRecebimentoDetalhes.showmodal;
+   Form:= Showform( TFormRecebimentoDetalhes, nil);
+   with TFormRecebimentoDetalhes(Form) do
+   begin
+     Condicao:= Condicao;
+     RefreshDataSet;
+   end;
 end;
 
 procedure  TFormPrincipal.ShowRelOrcamento(DataSetOrcamento,DataSetItemOrcamento,DataSetFormaPagamento: TDataSet);
@@ -592,11 +608,15 @@ begin
 end;
 
 procedure TFormPrincipal.ShowProdutosListagem(Condicao: string);
+var
+  Form: TForm;
 begin
-   application.createform(TFormProdutosDetalhes, FormProdutosDetalhes);
-   FormProdutosDetalhes.Condicao:= Condicao;
-   FormProdutosDetalhes.RefreshDataSet;
-   FormProdutosDetalhes.showmodal;
+   Form := Showform( TFormProdutosDetalhes , nil );
+   with TFormProdutosDetalhes(Form) do
+   begin
+      Condicao:= Condicao;
+      RefreshDataSet;
+   end;
 end;
 
 //initialization

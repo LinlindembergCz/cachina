@@ -1,20 +1,27 @@
 inherited FormFuncionariosDetalhes: TFormFuncionariosDetalhes
   Caption = 'Funcion'#225'rios'
+  ClientHeight = 508
   ClientWidth = 709
   ExplicitWidth = 725
-  ExplicitHeight = 516
+  ExplicitHeight = 546
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
     Width = 709
-    ExplicitWidth = 638
+    Height = 459
+    ExplicitWidth = 709
     inherited tabPrincipal: TPageControl
       Width = 707
-      ExplicitWidth = 636
+      Height = 457
+      ExplicitWidth = 707
       inherited TabSheet1: TTabSheet
-        ExplicitWidth = 628
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitWidth = 699
+        ExplicitHeight = 464
         inherited grdEntidade: TDBGrid
           Width = 699
+          Height = 342
           Columns = <
             item
               Expanded = False
@@ -37,27 +44,36 @@ inherited FormFuncionariosDetalhes: TFormFuncionariosDetalhes
         end
         inherited pnlSuperior: TPanel
           Width = 699
-          ExplicitWidth = 628
+          ExplicitWidth = 699
+          inherited grpPesquisa: TGroupBox
+            Left = 4
+            Top = 2
+            ExplicitLeft = 4
+            ExplicitTop = 2
+          end
         end
         inherited pnlInferior: TPanel
+          Top = 407
           Width = 699
-          ExplicitWidth = 628
+          ExplicitTop = 442
+          ExplicitWidth = 699
         end
       end
       inherited TabSheet2: TTabSheet
         ExplicitLeft = 4
         ExplicitTop = 24
         ExplicitWidth = 699
-        ExplicitHeight = 399
+        ExplicitHeight = 429
         object TabControl1: TPageControl
-          Left = 9
-          Top = 8
-          Width = 616
+          Left = 3
+          Top = 3
+          Width = 686
           Height = 388
           ActivePage = TabSheet3
           TabOrder = 0
           object TabSheet3: TTabSheet
             Caption = 'Dados iniciais'
+            ExplicitWidth = 608
             object Label2: TLabel
               Left = 12
               Top = 23
@@ -406,6 +422,7 @@ inherited FormFuncionariosDetalhes: TFormFuncionariosDetalhes
           object TabSheet4: TTabSheet
             Caption = 'Comissionamento'
             OnShow = TabSheet4Show
+            ExplicitWidth = 608
             object Label1: TLabel
               Left = 8
               Top = 16
@@ -533,6 +550,7 @@ inherited FormFuncionariosDetalhes: TFormFuncionariosDetalhes
           end
           object TabSheet5: TTabSheet
             Caption = 'Login '
+            ExplicitWidth = 608
             object Label7: TLabel
               Left = 12
               Top = 23
@@ -567,6 +585,7 @@ inherited FormFuncionariosDetalhes: TFormFuncionariosDetalhes
             Caption = 'Faltas'
             ImageIndex = 3
             OnShow = TabSheet6Show
+            ExplicitWidth = 608
             object Label19: TLabel
               Left = 17
               Top = 15
@@ -690,7 +709,7 @@ inherited FormFuncionariosDetalhes: TFormFuncionariosDetalhes
   end
   inherited Panel2: TPanel
     Width = 709
-    ExplicitWidth = 638
+    ExplicitWidth = 709
     inherited btnAlterar: TSpeedButton
       Left = 104
       Top = 1

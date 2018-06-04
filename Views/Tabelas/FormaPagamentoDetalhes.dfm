@@ -2,7 +2,6 @@ inherited FormFormaPagamentoDetalhes: TFormFormaPagamentoDetalhes
   Caption = 'Formas Pagamento'
   ClientHeight = 538
   ClientWidth = 866
-  FormStyle = fsStayOnTop
   ExplicitWidth = 882
   ExplicitHeight = 576
   PixelsPerInch = 96
@@ -19,6 +18,8 @@ inherited FormFormaPagamentoDetalhes: TFormFormaPagamentoDetalhes
       ExplicitWidth = 864
       ExplicitHeight = 487
       inherited TabSheet1: TTabSheet
+        ExplicitLeft = 0
+        ExplicitTop = 0
         ExplicitWidth = 856
         ExplicitHeight = 459
         inherited grdEntidade: TDBGrid

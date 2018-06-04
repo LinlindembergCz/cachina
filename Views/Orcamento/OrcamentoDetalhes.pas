@@ -17,7 +17,6 @@ type
     Label7: TLabel;
     edtDesconto: TEdit;
     Label8: TLabel;
-    CornerButton2: TSpeedButton;
     lbVincularFuncionario: TLabel;
     TabControl1: TPageControl;
     TabSheet1: TTabSheet;
@@ -161,7 +160,6 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure edtCPFCNPJExit(Sender: TObject);
     procedure CornerButton1Click(Sender: TObject);
-    procedure CornerButton2Click(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -944,14 +942,6 @@ begin
        srcItens.Dataset.delete;
     TotalizarOrcamento;
   end;
-end;
-
-procedure TFormOrcamentoDetalhes.CornerButton2Click(Sender: TObject);
-begin
-  inherited;
-  GetOrcamentoPesquisa;
-  ConsultaOrcamentoFormaPagamento( srcEntidade.dataset.fieldbyname('Codigo').asstring );
-  VerificarPlaca( srcEntidade.dataset.fieldbyname('CodigoCliente').asstring , edtPlaca.text);
 end;
 
 procedure TFormOrcamentoDetalhes.FileListBox1Change(Sender: TObject);

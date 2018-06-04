@@ -334,6 +334,14 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
         Height = 13
         Caption = 'CFOP'
       end
+      object SpeedButton5: TSpeedButton
+        Left = 481
+        Top = 38
+        Width = 23
+        Height = 21
+        Caption = '...'
+        OnClick = SpeedButton5Click
+      end
       object edtCodigoItem: TEdit
         Left = 56
         Top = 38
@@ -371,7 +379,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
       object cboProduto: TDBLookupComboBox
         Left = 104
         Top = 38
-        Width = 394
+        Width = 377
         Height = 21
         DropDownRows = 15
         DropDownWidth = 400

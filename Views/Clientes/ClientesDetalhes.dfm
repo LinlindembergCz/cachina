@@ -14,10 +14,11 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
     inherited tabPrincipal: TPageControl
       Width = 752
       Height = 433
-      ActivePage = TabSheet2
       ExplicitWidth = 752
       ExplicitHeight = 433
       inherited TabSheet1: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 24
         ExplicitWidth = 744
         ExplicitHeight = 405
         inherited grdEntidade: TDBGrid
@@ -271,6 +272,10 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
             Caption = 'Outra Inform'#231#245'es'
             ImageIndex = 7
             TabVisible = False
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label11: TLabel
               Left = 7
               Top = 55
@@ -542,6 +547,10 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
           end
           object TabSheet3: TTabSheet
             Caption = 'Endere'#231'o'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label5: TLabel
               Left = 8
               Top = 24
@@ -733,6 +742,10 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
           object TabSheet4: TTabSheet
             Caption = 'Contatos'
             OnShow = TabSheet4Show
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label14: TLabel
               Left = 5
               Top = 17
@@ -887,6 +900,10 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
           object TabSheet5: TTabSheet
             Caption = 'Ve'#237'culos'
             OnShow = TabSheet5Show
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label17: TLabel
               Left = 6
               Top = 15
@@ -1072,6 +1089,10 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
             Caption = 'Hist'#243'rico'
             ImageIndex = 5
             OnShow = TabSheet8Show
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Grid1: TDBGrid
               Left = 0
               Top = 0
@@ -1191,6 +1212,10 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
             Caption = 'Formas de pagamentos'
             ImageIndex = 6
             OnShow = TabSheet9Show
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object SpeedButton5: TSpeedButton
               Left = 316
               Top = 22

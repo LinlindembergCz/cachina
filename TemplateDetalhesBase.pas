@@ -69,7 +69,7 @@ implementation
 
 {$R *.dfm}
 
-uses DialogsUtils, Windows, Constantes;
+uses DialogsUtils, Windows, Constantes, Principal;
 
 procedure TTemplateFormBaseDetalhes.AjustaComponentes;
 var
@@ -168,7 +168,8 @@ end;
 procedure TTemplateFormBaseDetalhes.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  Action := TCloseAction.caFree;
+   formPrincipal.UnRegisterForm(  ClassName );
+   Action:=  TCloseAction.caFree;
 end;
 
 procedure TTemplateFormBaseDetalhes.FormCreate(Sender: TObject);

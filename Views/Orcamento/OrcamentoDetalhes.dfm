@@ -1,9 +1,7 @@
 inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
-  BorderIcons = [biSystemMenu, biMinimize, biMaximize]
   Caption = 'Or'#231'amento'
   ClientHeight = 562
   ClientWidth = 1049
-  Visible = True
   OnActivate = FormActivate
   ExplicitWidth = 1065
   ExplicitHeight = 600
@@ -1591,22 +1589,6 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
       ExplicitLeft = 957
       ExplicitTop = 3
       ExplicitWidth = 68
-    end
-    object CornerButton2: TSpeedButton
-      Left = 553
-      Top = 3
-      Width = 83
-      Height = 42
-      Caption = '&Pesquisa'
-      Enabled = False
-      Flat = True
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold, fsUnderline]
-      ParentFont = False
-      OnClick = CornerButton2Click
     end
     object Button3: TSpeedButton
       Left = 642
