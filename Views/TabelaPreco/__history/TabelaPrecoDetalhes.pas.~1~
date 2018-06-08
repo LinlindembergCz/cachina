@@ -1,0 +1,47 @@
+unit TabelaPrecoDetalhes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, TemplateDetalhesBase, Vcl.DBCtrls,
+  Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Grids, Vcl.DBGrids, Data.DB, Vcl.Buttons,
+  Vcl.ExtCtrls;
+
+type
+  TTemplateFormBaseDetalhes1 = class(TTemplateFormBaseDetalhes)
+    grdItens: TDBGrid;
+    Edit1: TEdit;
+    lbDataEmissao: TLabel;
+    dateDataEmissao: TDateTimePicker;
+    Label4: TLabel;
+    cboFormaPagamento: TComboBox;
+    Label1: TLabel;
+    Label11: TLabel;
+    cboProduto: TDBLookupComboBox;
+    Label12: TLabel;
+    edtValor: TEdit;
+    SpeedButton3: TSpeedButton;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  TemplateFormBaseDetalhes1: TTemplateFormBaseDetalhes1;
+
+implementation
+
+{$R *.dfm}
+
+uses DBUtils;
+
+procedure TTemplateFormBaseDetalhes1.FormCreate(Sender: TObject);
+begin
+  inherited;
+  FillCombobox( tpFormaPagamento , cboFormaPagamento);
+end;
+
+end.

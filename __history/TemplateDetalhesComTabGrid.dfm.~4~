@@ -9,20 +9,15 @@ inherited TemplateFormComTabGridDetalhes: TTemplateFormComTabGridDetalhes
   inherited Panel1: TPanel
     Width = 803
     Height = 494
-    ExplicitWidth = 803
-    ExplicitHeight = 494
+    ExplicitWidth = 116
     inherited tabPrincipal: TPageControl
       Width = 801
       Height = 492
-      ExplicitWidth = 801
-      ExplicitHeight = 492
+      ExplicitWidth = 114
       inherited TabSheet1: TTabSheet
         Caption = 'Pesquisa'
         OnShow = TabSheet1Show
-        ExplicitLeft = 4
-        ExplicitTop = 24
-        ExplicitWidth = 793
-        ExplicitHeight = 464
+        ExplicitWidth = 106
         object grdEntidade: TDBGrid
           Left = 0
           Top = 65
@@ -47,6 +42,7 @@ inherited TemplateFormComTabGridDetalhes: TTemplateFormComTabGridDetalhes
           Height = 65
           Align = alTop
           TabOrder = 1
+          ExplicitWidth = 106
           object grpPesquisa: TGroupBox
             Left = 3
             Top = 0
@@ -88,6 +84,8 @@ inherited TemplateFormComTabGridDetalhes: TTemplateFormComTabGridDetalhes
           Color = clWhite
           ParentBackground = False
           TabOrder = 2
+          ExplicitTop = 377
+          ExplicitWidth = 106
           object lbregistros: TLabel
             Left = 4
             Top = 4
@@ -107,12 +105,16 @@ inherited TemplateFormComTabGridDetalhes: TTemplateFormComTabGridDetalhes
         Caption = 'Detalhes'
         ImageIndex = 1
         OnShow = TabSheet2Show
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
       end
     end
   end
   inherited Panel2: TPanel
     Width = 803
-    ExplicitWidth = 803
+    ExplicitWidth = 116
   end
   object srcPesquisa: TDataSource [3]
     AutoEdit = False
