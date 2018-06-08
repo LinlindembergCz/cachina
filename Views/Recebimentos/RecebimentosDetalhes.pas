@@ -345,10 +345,10 @@ begin
   FillCombobox( tpCaixa, cboCodigoCaixa);
   FillCombobox( tpCentroCusto, cboCentroCusto);
   FillCombobox( tpCentroCusto, cboCentroCustoPesquisa);
-  FillCombobox( tpCategoria, cboCodigoCategoria,' Tipo=''C'' ','Codigo',
+  FillCombobox( tpPlanoContas, cboCodigoCategoria,' Tipo=''C'' ','Codigo',
                                                 '(Codificacao+'' ''+Descricao) as Descricao ',
                                                 'Codificacao');
-  FillCombobox( tpCategoria, cboCategoriaPesquisa,' Tipo=''C'' ','Codigo',
+  FillCombobox( tpPlanoContas, cboCategoriaPesquisa,' Tipo=''C'' ','Codigo',
                                                 '(Codificacao+'' ''+Descricao) as Descricao ',
                                                 'Codificacao');
   FillCombobox( tpFormaPagamento, cboFormaPgtoPesquisa);

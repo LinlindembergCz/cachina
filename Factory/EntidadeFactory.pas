@@ -11,9 +11,10 @@ Type
                     tpFuncionarios,tpFuncionarioComissao, tpOrcamento,tpOrcamentoFormaPagamento,
                     tpItemOrcamento, tpParametrosPrecoVenda, tpFamilia, tpGrupo,
                     tpSubGrupo, tpItemEntrada, tpEntrada, tpItemSaida, tpSaida, tpRecebimento,
-                    tpPagamento, tpCategoria, tpCaixa,tpCaixaMovimentacao, tpLog, tpModulo,
+                    tpPagamento, tpPlanoContas, tpCaixa,tpCaixaMovimentacao, tpLog, tpModulo,
                     tpPedido, tpItemPedido, tpEmpresa , tpUnidadeMedida, tpCargo, tpSubFase , tpCentroCusto,
-                    tpFuncionarioFaltas, tpTabelaNCM, tpTabelaNFSe,tpSequenciaNF, tpCFOP );
+                    tpFuncionarioFaltas, tpTabelaNCM, tpTabelaNFSe,tpSequenciaNF, tpCFOP,
+                    tpTabelaPreco, tpItemTabelaPreco );
 
   TEntidadeFactory = class
   private
@@ -34,7 +35,7 @@ uses
   FuncionarioComissao, Mapper, Entrada, ItemEntrada, Saida, ItemSaida,
   Recebimentos, Pagamentos, Categoria, Caixa, Modulo, Log, CaixaMovimentacao,
   Pedido, ItemPedido, Empresa, UnidadeMedida, Cargo, CentroCusto, TabelaNCM,
-  TabelaNFSe, SequenciaNF, TabelaCFOP;
+  TabelaNFSe, SequenciaNF, TabelaCFOP, TabelaPreco;
 
 class function TEntidadeFactory.Criar( const TipoEntidade: TTipoEntidade): TGenericEntidade;
 begin
@@ -62,7 +63,7 @@ begin
     tpSaida                   : result := TSaida.Create;
     tpRecebimento             : result := TRecebimento.Create;
     tpPagamento               : result := TPagamento.Create;
-    tpCategoria               : result := TCategoria.Create;
+    tpPlanoContas             : result := TCategoria.Create;
     tpCaixa                   : result := TCaixa.Create;
     tpCaixaMovimentacao       : result := TCaixaMovimentacao.Create;
     tpLog                     : result := TCaixa.Create;
@@ -78,6 +79,8 @@ begin
     tpTabelaNFSe              : result := TTabelaNFSe.Create;
     tpSequenciaNF             : result := TSequenciaNF .Create;
     tpCFOP                    : result := TTabelaCFOP .Create;
+    tpTabelaPreco             : result := TTabelaPreco.Create;
+    tpItemTabelaPreco         : result := TItemTabelaPreco.Create;
   //tpSubFase              : result := TSubFase.Create;
   else
     showmessage('Tipo de classe nao implementada pela factory!');
@@ -110,7 +113,7 @@ begin
     tpSaida                   : result := TSaida.ClassInfo;
     tpRecebimento             : result := TRecebimento.ClassInfo;
     tpPagamento               : result := TPagamento.ClassInfo;
-    tpCategoria               : result := TCategoria.ClassInfo;
+    tpPlanoContas               : result := TCategoria.ClassInfo;
     tpCaixa                   : result := TCaixa.ClassInfo;
     tpCaixaMovimentacao       : result := TCaixaMovimentacao.ClassInfo;
     tpLog                     : result := TLog.ClassInfo;
@@ -125,6 +128,8 @@ begin
     tpTabelaNFSe              : result := TTabelaNFSe.ClassInfo;
     tpSequenciaNF             : result := TSequenciaNF .ClassInfo;
     tpCFOP                    : result := TTabelaCFOP.ClassInfo;
+    tpTabelaPreco             : result := TTabelaPreco.ClassInfo;
+    tpItemTabelaPreco         : result := TItemTabelaPreco.ClassInfo;
   else
     showmessage('Tipo de classe nao implementada pela factory!');
   end;

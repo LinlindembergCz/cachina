@@ -1,13 +1,24 @@
 inherited FormSequenciaNotaFiscal: TFormSequenciaNotaFiscal
   Caption = 'FormSequenciaNotaFiscal'
-  ExplicitWidth = 743
-  ExplicitHeight = 516
+  ClientHeight = 504
+  ClientWidth = 757
+  ExplicitWidth = 773
+  ExplicitHeight = 542
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
+    Width = 757
+    Height = 455
     inherited tabPrincipal: TPageControl
+      Width = 755
+      Height = 453
       inherited TabSheet1: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitHeight = 464
         inherited grdEntidade: TDBGrid
+          Width = 747
+          Height = 338
           Columns = <
             item
               Expanded = False
@@ -31,11 +42,20 @@ inherited FormSequenciaNotaFiscal: TFormSequenciaNotaFiscal
               Visible = True
             end>
         end
+        inherited pnlSuperior: TPanel
+          Width = 747
+        end
+        inherited pnlInferior: TPanel
+          Top = 403
+          Width = 747
+          ExplicitTop = 442
+        end
       end
       inherited TabSheet2: TTabSheet
-        ExplicitTop = 32
-        ExplicitWidth = 717
-        ExplicitHeight = 399
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitWidth = 747
+        ExplicitHeight = 425
         object Label2: TLabel
           Left = 19
           Top = 32
@@ -82,21 +102,28 @@ inherited FormSequenciaNotaFiscal: TFormSequenciaNotaFiscal
           Height = 21
           TabOrder = 0
         end
-        object Especie: TEdit
-          Left = 309
-          Top = 28
-          Width = 97
-          Height = 21
-          TabOrder = 1
-        end
         object Serie: TEdit
           Left = 509
           Top = 27
           Width = 97
           Height = 21
+          TabOrder = 1
+        end
+        object Especie: TComboBox
+          Left = 304
+          Top = 24
+          Width = 116
+          Height = 21
           TabOrder = 2
+          Items.Strings = (
+            'NFE'
+            'NFC'
+            'REB')
         end
       end
     end
+  end
+  inherited Panel2: TPanel
+    Width = 757
   end
 end

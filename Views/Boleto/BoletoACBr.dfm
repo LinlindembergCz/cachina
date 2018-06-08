@@ -609,9 +609,10 @@ object frmBoletoACBr: TfrmBoletoACBr
     Cedente.AgenciaDigito = '5'
     Cedente.Conta = '0000079489'
     Cedente.ContaDigito = '9'
-    Cedente.CNPJCPF = '05.481.336/0001-37'
+    Cedente.CNPJCPF = '04.678.720/0001-61'
     Cedente.TipoInscricao = pJuridica
     Cedente.Bairro = 'lagoa nova'
+    Cedente.Cidade = 'Natal'
     DirArqRemessa = 'D:\Cachina\Remessas'
     DirArqRetorno = 'D:\Cachina'
     NumeroArquivo = 0

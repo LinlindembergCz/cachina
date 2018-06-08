@@ -22,7 +22,6 @@ inherited FormPagamentoDetalhes: TFormPagamentoDetalhes
         inherited grdEntidade: TDBGrid
           Top = 113
           Width = 1087
-          Height = 377
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
           PopupMenu = PopupMenu1
           OnDrawColumnCell = grdEntidadeDrawColumnCell

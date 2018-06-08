@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, TemplateDetalhesComTabGrid,
   Vcl.ComCtrls, Vcl.StdCtrls, Data.DB, Vcl.Buttons, Vcl.Grids, Vcl.DBGrids,
-  Vcl.ExtCtrls, DateUtils;
+  Vcl.ExtCtrls, DateUtils, Vcl.Menus;
 
 type
   TFormCaixaFinanceiroDetalhes = class(TTemplateFormComTabGridDetalhes)
@@ -105,7 +105,7 @@ begin
 
   FillCombobox( tpCaixa, cboCaixa);
   FillCombobox( tpCaixa, cboCaixaPesquisa);
-  FillCombobox( tpCategoria, cboCategoria);
+  FillCombobox( tpPlanoContas, cboCategoria);
   FillCombobox( tpFuncionarios, cboFuncionario,'0=0','Codigo','Nome','Nome');
 
   TFloatField(srcPesquisa.DataSet.FieldByName('Valor')).DisplayFormat:= ',0.00;';

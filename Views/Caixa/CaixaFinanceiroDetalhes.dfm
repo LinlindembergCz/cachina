@@ -1,21 +1,15 @@
 inherited FormCaixaFinanceiroDetalhes: TFormCaixaFinanceiroDetalhes
   Caption = 'Caixa Financeiro'
-  ClientHeight = 543
   ClientWidth = 927
   ExplicitWidth = 943
-  ExplicitHeight = 581
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
     Width = 927
-    Height = 494
     ExplicitWidth = 927
-    ExplicitHeight = 494
     inherited tabPrincipal: TPageControl
       Width = 925
-      Height = 492
       ExplicitWidth = 925
-      ExplicitHeight = 492
       inherited TabSheet1: TTabSheet
         ExplicitWidth = 917
         ExplicitHeight = 464
@@ -212,7 +206,6 @@ inherited FormCaixaFinanceiroDetalhes: TFormCaixaFinanceiroDetalhes
           end
         end
         inherited pnlInferior: TPanel
-          Top = 442
           Width = 917
           ExplicitTop = 442
           ExplicitWidth = 917

@@ -15,6 +15,7 @@ type
     FCodigoFilial: Integer;
     FCodificacao: string;
     FTipo: string;
+    FNatureza: string;
   public
     [KeyField('Codigo')]
     property Codigo: Integer read FCodigo write FCodigo;
@@ -26,6 +27,8 @@ type
     property Codificacao: string read FCodificacao write FCodificacao;
     [FieldName('Tipo')]
     property Tipo: string read FTipo write FTipo;
+    [FieldName('Natureza')]
+    property Natureza: string read FNatureza write FNatureza;
   end;
 
 implementation

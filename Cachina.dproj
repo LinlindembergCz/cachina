@@ -246,8 +246,8 @@
         </DCCReference>
         <DCCReference Include="Modelos\Pagamentos.pas"/>
         <DCCReference Include="Modelos\Categoria.pas"/>
-        <DCCReference Include="Views\Tabelas\CategoriasDetalhes.pas">
-            <Form>FormCategoriasDetalhes</Form>
+        <DCCReference Include="Views\Tabelas\PlanoContasDetalhes.pas">
+            <Form>FormPlanoContasDetalhes</Form>
         </DCCReference>
         <DCCReference Include="Views\Caixa\CaixaDetalhes.pas">
             <Form>FormCaixaDetalhes</Form>
@@ -425,6 +425,15 @@
         </DCCReference>
         <DCCReference Include="Modelos\Parametros.pas"/>
         <DCCReference Include="Controller\ControllerParametros.pas"/>
+        <DCCReference Include="Modelos\TabelaPreco.pas"/>
+        <DCCReference Include="Views\TabelaPreco\TabelaPrecoDetalhes.pas">
+            <Form>FormTabelaPreco</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Views\Produtos\AlterarProdutos.pas">
+            <Form>FormAlterarProdutos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="Cachina.todo"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

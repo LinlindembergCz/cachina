@@ -9,24 +9,31 @@ inherited FormGrupoProdutosDetalhes: TFormGrupoProdutosDetalhes
   inherited Panel1: TPanel
     Width = 735
     Height = 469
-    ExplicitHeight = 494
+    ExplicitWidth = 735
+    ExplicitHeight = 469
     inherited tabPrincipal: TPageControl
       Width = 733
       Height = 467
-      ExplicitHeight = 492
+      ExplicitWidth = 733
+      ExplicitHeight = 467
       inherited TabSheet1: TTabSheet
-        ExplicitHeight = 464
+        ExplicitLeft = 4
+        ExplicitTop = 24
+        ExplicitWidth = 725
+        ExplicitHeight = 439
         inherited grdEntidade: TDBGrid
           Width = 725
           Height = 352
         end
         inherited pnlSuperior: TPanel
           Width = 725
+          ExplicitWidth = 725
         end
         inherited pnlInferior: TPanel
           Top = 417
           Width = 725
-          ExplicitTop = 442
+          ExplicitTop = 417
+          ExplicitWidth = 725
         end
       end
       inherited TabSheet2: TTabSheet
@@ -69,5 +76,6 @@ inherited FormGrupoProdutosDetalhes: TFormGrupoProdutosDetalhes
   end
   inherited Panel2: TPanel
     Width = 735
+    ExplicitWidth = 735
   end
 end

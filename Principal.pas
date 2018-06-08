@@ -169,14 +169,14 @@ uses
   SubGrupoProdutosDetalhes, OrcamentoListagem, TemplateComboEditDialog,
   ContatosClientesListagem, RelOrcamento, ClassificacaoDetalhes, Controller,
   FornecedoresDetalhes, EntradaDetalhes, EntradaListagem, SaidaDetalhes,
-  SaidaListagem, RecebimentosDetalhes, PagamentoDetalhes, CategoriasDetalhes,
+  SaidaListagem, RecebimentosDetalhes, PagamentoDetalhes,
   CaixaDetalhes, LoginAcesso, Log, LogListagem, FiltroFluxoCaixa,
   CaixaFinanceiroDetalhes, RelMovimentacaoCaixaFinanceiro, RelFluxoCaixa,
   PedidoDetalhes, PedidoListagem, PermissoesAcessos, EmpresaDetalhes,
   ControllerPermissoes, CargoDetalhes, FuncionariosComboboEditDialog,
   CentroCustoDetalhes, RelOrcamento2, TabelaNCMDetalhes, TabelaNFSeDetalhes,
   RelBalancoContabil, GenericDAO, UnidadeMedida, Indicadores,
-  SequenciaNotaFiscal, ParametrosDetalhes;
+  SequenciaNotaFiscal, ParametrosDetalhes, PlanoContasDetalhes;
 
 procedure TFormPrincipal.FormCreate(Sender: TObject);
 begin
@@ -240,7 +240,7 @@ end;
 
 procedure TFormPrincipal.ActCategoriasExecute(Sender: TObject);
 begin
-  ShowForm(TFormCategoriasDetalhes, ActCategorias, true);
+  ShowForm(TFormPlanoContasDetalhes, ActCategorias, true);
 end;
 
 procedure TFormPrincipal.ActCentroCustoExecute(Sender: TObject);

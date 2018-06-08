@@ -12,10 +12,10 @@ type
   TFormSequenciaNotaFiscal = class(TTemplateFormComTabGridDetalhes)
     Label2: TLabel;
     Sequencia: TEdit;
-    Especie: TEdit;
     Label1: TLabel;
     Label3: TLabel;
     Serie: TEdit;
+    Especie: TComboBox;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }

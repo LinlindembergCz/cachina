@@ -1,0 +1,45 @@
+unit TabelaPreco;
+
+interface
+
+uses
+  SysUtils, CAtribEntity, GenericEntidade;
+
+type
+  [TableName('TabelaPreco ')]
+  TTabelaPreco = class(TGenericEntidade)
+  private
+    FDescricao: string;
+    FCodigoFormaPagamento: integer;
+    FValidade: TDatetime;
+  public
+    property Descricao: string read FDescricao write FDescricao;
+    property Validade:TDatetime read FValidade write FValidade;
+    property CodigoFormaPagamento:integer read FCodigoFormaPagamento write FCodigoFormaPagamento;
+  end;
+
+  [TableName('TItemTabelaPreco ')]
+  TItemTabelaPreco = class(TGenericEntidade)
+  private
+    FCodigoTabelaPreco: integer;
+    FPreco: double;
+    FCodigoProduto: Integer;
+  public
+    property CodigoTabelaPreco: integer read FCodigoTabelaPreco write FCodigoTabelaPreco;
+    property CodigoProduto:Integer read FCodigoProduto write FCodigoProduto;
+    property Preco:double read FPreco write FPreco;
+  end;
+
+implementation
+
+{ TTabelaPreco }
+{ TItemTabelaPreco }
+uses
+  System.Classes;
+
+initialization
+  RegisterClass(TTabelaPreco);
+  RegisterClass(TItemTabelaPreco);
+
+
+end.

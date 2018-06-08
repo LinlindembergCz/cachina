@@ -301,12 +301,12 @@ begin
   FillCombobox( tpCaixa, cboCodigoCaixa);
   FillCombobox( tpCentroCusto, cboCentroCusto);
   FillCombobox( tpCentroCusto, cboCentroCustoPesquisa);
-  FillCombobox( tpCategoria, cboCodigoCategoria,' Tipo=''D'' or Tipo is Null ');
-  FillCombobox( tpCategoria, cboCategoriaPesquisa,' Tipo=''D'' or Tipo is Null ');
+  FillCombobox( tpPlanoContas, cboCodigoCategoria,' Tipo=''D'' or Tipo is Null ');
+  FillCombobox( tpPlanoContas, cboCategoriaPesquisa,' Tipo=''D'' or Tipo is Null ');
 
   FillCombobox( tpFormaPagamento, cboFormaPgtoPesquisa);
   FillCombobox( tpCaixa, cboCaixaPesquisa);
-  FillCombobox( tpCategoria, cboCodigoCategoria,' Tipo=''Saída'' or Tipo is Null ');
+  FillCombobox( tpPlanoContas, cboCodigoCategoria,' Tipo=''Saída'' or Tipo is Null ');
 
   TFloatField(srcPesquisa.DataSet.FieldByName('Valor')).DisplayFormat:= '0.00;';
   TFloatField(srcPesquisa.DataSet.FieldByName('ValorBaixado')).DisplayFormat:= '0.00;';
@@ -633,7 +633,7 @@ procedure TFormPagamentoDetalhes.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
   FormPrincipal.ActCategorias.Execute;
-  FillCombobox( tpCategoria, cboCodigoCategoria,' Tipo=''D'' or Tipo is Null ');
+  FillCombobox( tpPlanoContas, cboCodigoCategoria,' Tipo=''D'' or Tipo is Null ');
 end;
 
 procedure TFormPagamentoDetalhes.SpeedButton3Click(Sender: TObject);

@@ -12,16 +12,13 @@ Type
     FCodigoFiliar: integer;
     FDescricao: string;
     FCodigo: integer;
-    procedure SetCodigo(const Value: integer);
-    procedure SetCodigoFiliar(const Value: integer);
-    procedure SetDescricao(const Value: string);
   published
     [KeyField('Codigo')]
-    property Codigo:integer read FCodigo write SetCodigo;
+    property Codigo:integer read FCodigo write FCodigo;
     [FieldName('CodigoFilial')]
-    property CodigoFiliar:integer read FCodigoFiliar write SetCodigoFiliar;
+    property CodigoFiliar:integer read FCodigoFiliar write FCodigoFiliar;
     [FieldName('Descricao')]
-    property Descricao: string read FDescricao write SetDescricao;
+    property Descricao: string read FDescricao write FDescricao;
   end;
 
   [TableName('GrupoProdutos')]
@@ -31,19 +28,15 @@ Type
     FDescricao: string;
     FCodigo: integer;
     FCodigoFamilia: integer;
-    procedure SetCodigo(const Value: integer);
-    procedure SetCodigoFamilia(const Value: integer);
-    procedure SetCodigoFiliar(const Value: integer);
-    procedure SetDescricao(const Value: string);
   published
     [KeyField('Codigo')]
-    property Codigo:integer read FCodigo write SetCodigo;
+    property Codigo:integer read FCodigo write FCodigo;
     [FieldName('CodigoFilial')]
-    property CodigoFiliar:integer read FCodigoFiliar write SetCodigoFiliar;
+    property CodigoFiliar:integer read FCodigoFiliar write FCodigoFiliar;
     [FieldName('CodigoFamilia')]
-    property CodigoFamilia:integer read FCodigoFamilia write SetCodigoFamilia;
+    property CodigoFamilia:integer read FCodigoFamilia write FCodigoFamilia;
     [FieldName('Descricao')]
-    property Descricao: string read FDescricao write SetDescricao;
+    property Descricao: string read FDescricao write FDescricao;
   end;
 
   [TableName('SubGrupoProdutos')]
@@ -52,83 +45,21 @@ Type
     FCodigoFiliar: integer;
     FDescricao: string;
     FCodigo: integer;
-    FCodigoFamilia: integer;
-    procedure SetCodigo(const Value: integer);
-    procedure SetCodigoFamilia(const Value: integer);
-    procedure SetCodigoFiliar(const Value: integer);
-    procedure SetDescricao(const Value: string);
+    FCodigoGrupo: integer;
   published
     [KeyField('Codigo')]
-    property Codigo:integer read FCodigo write SetCodigo;
+    property Codigo:integer read FCodigo write FCodigo;
     [FieldName('CodigoFilial')]
-    property CodigoFiliar:integer read FCodigoFiliar write SetCodigoFiliar;
+    property CodigoFiliar:integer read FCodigoFiliar write FCodigoFiliar;
     [FieldName('CodigoGrupo')]
-    property CodigoFamilia:integer read FCodigoFamilia write SetCodigoFamilia;
+    property CodigoGrupo:integer read FCodigoGrupo write FCodigoGrupo;
     [FieldName('Descricao')]
-    property Descricao: string read FDescricao write SetDescricao;
+    property Descricao: string read FDescricao write FDescricao;
   end;
 
 implementation
 
 { TFamilia }
 
-procedure TFamiliaProdutos.SetCodigo(const Value: integer);
-begin
-  FCodigo := Value;
-end;
-
-procedure TFamiliaProdutos.SetCodigoFiliar(const Value: integer);
-begin
-  FCodigoFiliar := Value;
-end;
-
-procedure TFamiliaProdutos.SetDescricao(const Value: string);
-begin
-  FDescricao := Value;
-end;
-
-{ TGrupoProdutos }
-
-procedure TGrupoProdutos.SetCodigo(const Value: integer);
-begin
-  FCodigo := Value;
-end;
-
-procedure TGrupoProdutos.SetCodigoFamilia(const Value: integer);
-begin
-  FCodigoFamilia := Value;
-end;
-
-procedure TGrupoProdutos.SetCodigoFiliar(const Value: integer);
-begin
-  FCodigoFiliar := Value;
-end;
-
-procedure TGrupoProdutos.SetDescricao(const Value: string);
-begin
-  FDescricao := Value;
-end;
-
-{ TSubGrupoProdutos }
-
-procedure TSubGrupoProdutos.SetCodigo(const Value: integer);
-begin
-  FCodigo := Value;
-end;
-
-procedure TSubGrupoProdutos.SetCodigoFamilia(const Value: integer);
-begin
-  FCodigoFamilia := Value;
-end;
-
-procedure TSubGrupoProdutos.SetCodigoFiliar(const Value: integer);
-begin
-  FCodigoFiliar := Value;
-end;
-
-procedure TSubGrupoProdutos.SetDescricao(const Value: string);
-begin
-  FDescricao := Value;
-end;
 
 end.

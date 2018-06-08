@@ -76,7 +76,7 @@ uses
   RecebimentosDetalhes in 'Views\Recebimentos\RecebimentosDetalhes.pas' {FormRecebimentoDetalhes},
   Pagamentos in 'Modelos\Pagamentos.pas',
   Categoria in 'Modelos\Categoria.pas',
-  CategoriasDetalhes in 'Views\Tabelas\CategoriasDetalhes.pas' {FormCategoriasDetalhes},
+  PlanoContasDetalhes in 'Views\Tabelas\PlanoContasDetalhes.pas' {FormPlanoContasDetalhes},
   CaixaDetalhes in 'Views\Caixa\CaixaDetalhes.pas' {FormCaixaDetalhes},
   Caixa in 'Modelos\Caixa.pas',
   ControllerPagamento in 'Controller\ControllerPagamento.pas',
@@ -152,7 +152,10 @@ uses
   TabelaCFOP in 'Modelos\TabelaCFOP.pas',
   ParametrosDetalhes in 'Views\Orcamento\ParametrosDetalhes.pas' {FormParametrosDetalhes},
   Parametros in 'Modelos\Parametros.pas',
-  ControllerParametros in 'Controller\ControllerParametros.pas';
+  ControllerParametros in 'Controller\ControllerParametros.pas',
+  TabelaPreco in 'Modelos\TabelaPreco.pas',
+  TabelaPrecoDetalhes in 'Views\TabelaPreco\TabelaPrecoDetalhes.pas' {FormTabelaPreco},
+  AlterarProdutos in 'Views\Produtos\AlterarProdutos.pas' {FormAlterarProdutos};
 
 {$R *.res}
 

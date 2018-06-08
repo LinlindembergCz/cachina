@@ -14,17 +14,16 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
     inherited tabPrincipal: TPageControl
       Width = 727
       Height = 482
-      ActivePage = TabSheet2
       ExplicitWidth = 727
       ExplicitHeight = 482
       inherited TabSheet1: TTabSheet
-        ExplicitLeft = 4
-        ExplicitTop = 24
         ExplicitWidth = 719
         ExplicitHeight = 454
         inherited grdEntidade: TDBGrid
           Width = 719
           Height = 367
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
+          PopupMenu = PopupMenu1
           Columns = <
             item
               Expanded = False
@@ -62,8 +61,6 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
         end
       end
       inherited TabSheet2: TTabSheet
-        ExplicitLeft = 4
-        ExplicitTop = 24
         ExplicitWidth = 719
         ExplicitHeight = 454
         object TabControl1: TPageControl
@@ -119,8 +116,8 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
               OnClick = SpeedButton3Click
             end
             object SpeedButton2: TSpeedButton
-              Left = 591
-              Top = 94
+              Left = 592
+              Top = 86
               Width = 23
               Height = 22
               Caption = '...'
@@ -241,7 +238,7 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
             end
             object cboGrupo: TComboBox
               Left = 89
-              Top = 141
+              Top = 136
               Width = 496
               Height = 21
               TabOrder = 3
@@ -780,10 +777,6 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
             Caption = 'Estoque'
             ImageIndex = 2
             OnShow = TabSheet3Show
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label33: TLabel
               Left = 16
               Top = 305
@@ -1601,6 +1594,14 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
       Caption = 'Curva ABC Por Fam'#237'lia'
       Enabled = False
       OnClick = CurvaABCPorFamiliadeprodutos1Click
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 293
+    Top = 242
+    object AlterarFamlia1: TMenuItem
+      Caption = 'Alterar produtos'
+      OnClick = AlterarFamlia1Click
     end
   end
 end

@@ -469,7 +469,6 @@ end;
 
 procedure TFormEntradaDetalhes.FormCreate(Sender: TObject);
 var
-  ItemEntrada:TGenericEntidade;
   CodigEntrada: string;
 begin
   Controller         := TControllerEntrada.Create;

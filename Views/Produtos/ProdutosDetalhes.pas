@@ -102,6 +102,8 @@ type
     Label36: TLabel;
     cboCodigoProdutoServico: TComboBox;
     chkAtivo: TCheckBox;
+    PopupMenu1: TPopupMenu;
+    AlterarFamlia1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure edtCustoCompraChange(Sender: TObject);
     procedure edtParamComissaoChange(Sender: TObject);
@@ -125,6 +127,7 @@ type
     procedure SpeedButton6Click(Sender: TObject);
     procedure CurvaABC1Click(Sender: TObject);
     procedure CurvaABCPorFamiliadeprodutos1Click(Sender: TObject);
+    procedure AlterarFamlia1Click(Sender: TObject);
   private
     //ClassificacaoCliente: TGenericEntidade;
 
@@ -157,7 +160,7 @@ var
 implementation
 
 uses ControllerProdutos, EntidadeFactory, UtilsNumeros, DBUtils,
-  Principal, RelCurvaABC;
+  Principal, RelCurvaABC, AlterarProdutos;
 
 {$R *.dfm}
 
@@ -447,6 +450,23 @@ begin
             strtofloatdef(edtParamDesconto.text, 0) +
             strtofloatdef(edtParamTaxa.text, 0) +
             strtofloatdef(edtParamLucro.text, 0);
+end;
+
+procedure TFormProdutosDetalhes.AlterarFamlia1Click(Sender: TObject);
+var
+  Form:TForm;
+begin
+  inherited;
+  Form := FormPrincipal.ShowForm(TFormAlterarProdutos, nil, false);
+  with Form as TFormAlterarProdutos do
+  begin
+    srcPesquisa.DataSet.first;
+    while not srcPesquisa.DataSet.Eof do
+    begin
+       Produtos.Add(srcPesquisa.DataSet.FieldByName('Codigo').AsString);
+       srcPesquisa.DataSet.next;
+    end;
+  end;
 end;
 
 procedure TFormProdutosDetalhes.AtualizarMarKup;

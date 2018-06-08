@@ -517,6 +517,10 @@ inherited FormRecebimentoDetalhes: TFormRecebimentoDetalhes
           TabOrder = 0
           object TabSheet4: TTabSheet
             Caption = 'Dados'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object lbData: TLabel
               Left = 11
               Top = 3
@@ -894,6 +898,10 @@ inherited FormRecebimentoDetalhes: TFormRecebimentoDetalhes
             Caption = 'Or'#231'amento'
             ImageIndex = 1
             OnShow = TabSheet5Show
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Grid1: TDBGrid
               Left = 0
               Top = 0
