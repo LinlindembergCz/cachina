@@ -103,6 +103,7 @@ type
     procedure FormActivate(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     procedure ConsultaIndicadorPorSituacao(dataInicio, dataFim: TDatetime);
     procedure ConsultaIndicadorPorFormaPagamento(dataInicio,
@@ -141,6 +142,11 @@ begin
    ConsultarSituacaoFinanceira(DateTimePicker1.Date, DateTimePicker2.Date);
 
   FillCombobox(tpFuncionarios, cboFuncionario, '0=0', 'Codigo', 'Nome', 'Nome');
+end;
+
+procedure TFormIndicadores.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   Action:= cafree;
 end;
 
 procedure TFormIndicadores.SpeedButton1Click(Sender: TObject);

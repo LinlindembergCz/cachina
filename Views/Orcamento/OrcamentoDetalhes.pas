@@ -331,7 +331,7 @@ begin
   begin
     inherited;
     TotalizarOrcamento;
-    CarregarProdutos;
+    //CarregarProdutos;
     AjustaTamanhoGrid;
     ConsultaOrcamentoFormaPagamento(srcEntidade.dataset.fieldByName('Codigo').asstring);
     DataSetCliente  := TControllerClientes.GetCliente(srcEntidade.dataset.fieldByName('CodigoCliente').asstring);
@@ -487,7 +487,7 @@ procedure TFormOrcamentoDetalhes.btnInserirClick(Sender: TObject);
 begin
   inherited;
   RefreshDataSetItemOrcamento('0');
-  CarregarProdutos;
+  //CarregarProdutos;
   AjustaTamanhoGrid;
   cboSituacao.ItemIndex := 0;
   edtQuantidade.Text    := '1';
@@ -540,7 +540,7 @@ end;
 procedure TFormOrcamentoDetalhes.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
-  FormPrincipal.ShowFormClienteDetlahes( edtCPFCNPJ.text , '' );
+  FormPrincipal.ShowFormClienteDetlahes( edtCPFCNPJ.text );
 
   FillLookUpCombobox( tpPessoa,
                       cboClientes,
@@ -654,7 +654,8 @@ end;
 
 procedure  TFormOrcamentoDetalhes.CarregarProdutos;
 begin
-  srcProdutos.DataSet := ControllerProdutos.GetSelect('Produtos T1 ','Coalesce(Ativo,''S'')=''S'' Order By Descricao','Codigo, Descricao');
+  srcProdutos.DataSet := ControllerProdutos.GetSelect('Produtos T1 ',
+  'Coalesce(Ativo,''S'')=''S'' Order By Descricao','Codigo, Descricao');
 end;
 
 procedure TFormOrcamentoDetalhes.cboClientesExit(Sender: TObject);
@@ -782,7 +783,7 @@ begin
     else
     if TDialogs.ConfirmarMensagem('Este cliente não foi encontrado. Deseja cadastrar ?') then
     begin
-      FormPrincipal.ShowFormClienteDetlahes(CPFCNPJ, Placa);
+      FormPrincipal.ShowFormClienteDetlahes(CPFCNPJ );
     end;
     if DataSetClientes <> nil then
       DataSetClientes.Free;
@@ -984,6 +985,8 @@ begin
   TabControl1.ActivePageIndex := 0;
   FillLookUpCombobox( tpFuncionarios, cboFuncionarios,'Codigo','Nome', 'SITUACAO=''ATIVO''' );
   FillLookUpCombobox( tpPessoa, cboClientes,'Codigo','Nome', 'TIPO=''CLIENTE''' );
+
+  CarregarProdutos;
 end;
 
 procedure TFormOrcamentoDetalhes.FormKeyDown(Sender: TObject; var Key: Word;
@@ -1089,14 +1092,14 @@ procedure TFormOrcamentoDetalhes.lbMarcaDblClick(Sender: TObject);
 begin
   inherited;
   if edtCPFCNPJ.Text <> '' then
-  FormPrincipal.ShowFormClienteDetlahes(edtCPFCNPJ.Text, edtPlaca.Text);
+  FormPrincipal.ShowFormClienteDetlahes(edtCPFCNPJ.Text);
 end;
 
 procedure TFormOrcamentoDetalhes.lbNomeClienteDblClick(Sender: TObject);
 begin
   inherited;
     if edtCPFCNPJ.Text <> '' then
-  FormPrincipal.ShowFormClienteDetlahes(edtCPFCNPJ.Text, '');
+  FormPrincipal.ShowFormClienteDetlahes(edtCPFCNPJ.Text );
 end;
 
 procedure TFormOrcamentoDetalhes.MapearCamposItemOrcamento;

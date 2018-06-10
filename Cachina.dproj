@@ -413,8 +413,8 @@
         </DCCReference>
         <DCCReference Include="Persistencia\uCustomDatabaseManager.pas"/>
         <DCCReference Include="Persistencia\Mapper.pas"/>
-        <DCCReference Include="Views\Tabelas\SequenciaNotaFiscal.pas">
-            <Form>FormSequenciaNotaFiscal</Form>
+        <DCCReference Include="Views\Tabelas\Sequencias.pas">
+            <Form>FormSequencias</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Modelos\SequenciaNF.pas"/>
@@ -434,6 +434,7 @@
             <Form>FormAlterarProdutos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Controller\ControllerSequencias.pas"/>
         <None Include="Cachina.todo"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

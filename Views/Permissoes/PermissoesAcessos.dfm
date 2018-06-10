@@ -1,21 +1,24 @@
 object FormPermissoes: TFormPermissoes
   Left = 0
   Top = 0
-  BorderStyle = bsDialog
   Caption = 'Acessos'
   ClientHeight = 549
-  ClientWidth = 1014
+  ClientWidth = 1004
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  FormStyle = fsMDIChild
   OldCreateOrder = False
   Position = poDesktopCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
   OnCreate = FormCreate
   DesignSize = (
-    1014
+    1004
     549)
   PixelsPerInch = 96
   TextHeight = 13
@@ -64,11 +67,11 @@ object FormPermissoes: TFormPermissoes
       end>
   end
   object DBGrid3: TDBGrid
-    Left = 439
-    Top = 0
+    Left = 433
+    Top = 1
     Width = 563
     Height = 241
-    Anchors = [akTop, akRight]
+    Anchors = [akLeft, akTop, akRight]
     DataSource = srcAcessos
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
     TabOrder = 2
@@ -87,11 +90,11 @@ object FormPermissoes: TFormPermissoes
       end>
   end
   object DBGrid4: TDBGrid
-    Left = 439
+    Left = 433
     Top = 278
     Width = 563
     Height = 265
-    Anchors = [akTop, akRight]
+    Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = srcPermissoes
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
     TabOrder = 3

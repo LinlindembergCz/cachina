@@ -92,7 +92,6 @@ type
     procedure FormatarCamposMoedas;
     procedure ParcelarConta;
     procedure EstornarConta;
-    procedure AtivarConta;
     procedure GetContasSelecionadas(var Valor: Double; var Contas: string);
     procedure InserirEntrada(Contas,
                              FormaPagamentoEntrada: string;
@@ -232,11 +231,6 @@ begin
 end;
 
 procedure TFormPagamentoDetalhes.EstornarConta;
-var
-   I:integer;
-   Selecionados:TBookmarkList;
-   Data: TDatetime;
-   Valor: Double;
 begin
   Alterar;
   MapperEntidade.Associar('DataBaixa', nil, '01/01/1889');
@@ -244,23 +238,6 @@ begin
   MapperEntidade.Associar('Situacao', nil, 'Aberto');
   Persistir;
 end;
-
-
-procedure TFormPagamentoDetalhes.AtivarConta;
-var
-   I:integer;
-   Selecionados:TBookmarkList;
-   Data: TDatetime;
-   Valor: Double;
-begin
-  Alterar;
-  MapperEntidade.Associar('DataBaixa', nil, '01/01/1889');
-  MapperEntidade.Associar('ValorBaixado', nil, '0');
-  MapperEntidade.Associar('Situacao', nil, 'Aberto');
-  Persistir;
-end;
-
-
 
 procedure TFormPagamentoDetalhes.FormCreate(Sender: TObject);
 begin
@@ -421,11 +398,10 @@ procedure  TFormPagamentoDetalhes.InserirParcelas(Contas: string;
                                                   Parcelas :integer;
                                                   NumeroDocumento : string = '');
 var
-  I , Dia :integer;
+  I :integer;
 begin
   with MapperEntidade do
   begin
-      Dia := dayOf(DataVencimento);
       for I := 0 to Parcelas - 1 do
       begin
          Associar('CodigoFormaPagamento', nil , FormaPagamentoParcela );
@@ -453,9 +429,6 @@ end;
 
 procedure TFormPagamentoDetalhes.ParcelarConta;
 var
-   I:integer;
-   Selecionados:TBookmarkList;
-   Data: TDatetime;
    Valor: Double;
    ValorParcela: Double;
    DataVencimento: TDatetime;
@@ -487,7 +460,7 @@ begin
       MapperEntidade.SendDataSetToEntidade;
       MapperEntidade.EntidadeToComponent;
 
-      Valor  := Valor + srcEntidade.DataSet.FieldByName('Valor').AsFloat;
+      Valor  := srcEntidade.DataSet.FieldByName('Valor').AsFloat;
 
       application.Createform(TFormParcelar, FormParcelar);
       FormParcelar.edtValorParcelar.text := floattostr(Valor);

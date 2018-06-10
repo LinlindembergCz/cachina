@@ -169,6 +169,7 @@ inherited FormTabelaPreco: TFormTabelaPreco
   end
   inherited Panel2: TPanel
     Width = 687
+    ExplicitWidth = 687
   end
   inherited srcEntidade: TDataSource
     Left = 552

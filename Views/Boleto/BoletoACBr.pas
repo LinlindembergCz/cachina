@@ -109,7 +109,7 @@ var
 
 implementation
 
-Uses TypInfo,ControllerRecebimento, UtilsString, GenericDAO;
+Uses TypInfo,ControllerRecebimento, UtilsString,  ControllerSequencias;
 
 {$R *.dfm}
 
@@ -128,13 +128,11 @@ procedure TfrmBoletoACBr.Button6Click(Sender: TObject);
 var
   NumeroRemessa: string;
 begin
-  NumeroRemessa:= TGenericDAO.GetValue('SequenciaNF','Especie=''REB'' ','isNull( Sequencia , 0 ) + 1');
+  NumeroRemessa:= TControllerSequencias.GetSequenciaRemessa;
   if NumeroRemessa <> '' then
   begin
      ACBrBoleto1.GerarRemessa( strtoint( NumeroRemessa ) );
-     TGenericDAO.UpdateSQL( 'SequenciaNF',
-                            'Sequencia= Sequencia + 1',
-                            ' Especie= '+ quotedstr('REB') );
+     TControllerSequencias.IncrementarSequenciaRemessa;
      close;
   end;
 end;

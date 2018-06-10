@@ -173,7 +173,7 @@ begin
   ControllerTabelas    := TControllerTabelas.Create;
   Campos               := CamposProduto;
   Tabela               := Consultatabela;
-
+  Condicao := '0=1';
   inherited;
   MapearProduto;
   MapearParametrosPrecoVenda;

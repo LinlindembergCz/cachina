@@ -138,7 +138,7 @@ type
                        Action:TAction;
                        Modal:boolean = false):TForm;
 
-    procedure ShowFormClienteDetlahes(CPF, Placa: string);
+    procedure ShowFormClienteDetlahes(CPF: string);
     function ShowComboEditDialgo(TipoEntidade: TTipoEntidade; Titulo: string): string;
     function ShowFuncionariosComboEditDialgo(TipoEntidade: TTipoEntidade;
       Titulo: string): string;
@@ -151,7 +151,7 @@ type
 
     procedure ShowRecebimentosListagem(Condicao: string);
     function SelectOrcamento: string;
-    procedure ShowProdutosListagem(Condicao: string);
+    procedure ShowProdutosListagem(prsCondicao: string);
     procedure SelecionarOrcamentDetalhe(Operacao, Codigo: string);
   end;
 
@@ -176,7 +176,7 @@ uses
   ControllerPermissoes, CargoDetalhes, FuncionariosComboboEditDialog,
   CentroCustoDetalhes, RelOrcamento2, TabelaNCMDetalhes, TabelaNFSeDetalhes,
   RelBalancoContabil, GenericDAO, UnidadeMedida, Indicadores,
-  SequenciaNotaFiscal, ParametrosDetalhes, PlanoContasDetalhes;
+  ParametrosDetalhes, PlanoContasDetalhes, Sequencias;
 
 procedure TFormPrincipal.FormCreate(Sender: TObject);
 begin
@@ -202,14 +202,21 @@ begin
   if i = -1 then
   begin
     application.CreateForm( FormClass , Form );
-    FormList.AddObject( FormClass.ClassName ,  Form );
-    Form.Show;
+    if Modal then
+       Form.ShowModal
+    else
+    begin
+       FormList.AddObject( FormClass.ClassName ,  Form );
+       Form.Show;
+    end;
     result := Form;
   end
   else
   begin
-    Tform( FormList.Objects[i] ).Show;
-
+    if Modal then
+       Form.ShowModal
+    else
+       Tform( FormList.Objects[i] ).Show;
     result := Tform( FormList.Objects[i] );
   end;
 end;
@@ -217,10 +224,7 @@ end;
 procedure TFormPrincipal.Acessos1Click(Sender: TObject);
 begin
    TControllerPermissoes.TemPermissao(formPrincipal.CodigoPessoa, '0', '4');
-
-   Application.CreateForm(TFormPermissoes, FormPermissoes);
-   FormPermissoes.showmodal;
-   FormPermissoes.Free;
+   ShowForm(TFormPermissoes, nil);
 end;
 
 procedure TFormPrincipal.ActCaixaExecute(Sender: TObject);
@@ -364,16 +368,15 @@ begin
   FormSaidaListagem.Free;
 end;
 
-procedure TFormPrincipal.ShowFormClienteDetlahes( CPF, Placa: string);
+procedure TFormPrincipal.ShowFormClienteDetlahes( CPF: string);
 var
   form: Tform;
 begin
   form:= ShowForm( TFormClientesDetalhes , nil );
   with TFormClientesDetalhes( form ) do
   begin
-     srcPesquisa.DataSet := Controller.GetDataset(Entidade,'CPFCNPJ='+quotedstr(CPF) , Campos);
-     tabPrincipal.ActivePageIndex := 1;
-     tabDetalhes.ActivePageIndex := 0;
+     condicao:= 'CPFCNPJ='+quotedstr(CPF);
+     srcPesquisa.DataSet := Controller.GetDataset(Entidade, condicao , Campos);
   end;
 end;
 
@@ -469,18 +472,21 @@ begin
 end;
 
 procedure TFormPrincipal.FormShow(Sender: TObject);
+var
+ form:TForm;
 begin
-  ShowForm(TFormLoginAcesso, nil, true );
+  form:= ShowForm(TFormLoginAcesso, nil, true );
+  form.Free;
 end;
 
 procedure TFormPrincipal.Indicadores1Click(Sender: TObject);
 begin
-   ShowForm(TFormIndicadores, nil, true );
+   ShowForm(TFormIndicadores, nil, false );
 end;
 
 procedure TFormPrincipal.Log1Click(Sender: TObject);
 begin
-   ShowForm(TFormLogListagem, nil, true );
+  // ShowForm(TFormLogListagem, nil, true );
 end;
 
 procedure TFormPrincipal.ActFormaPagamentosExecute(Sender: TObject);
@@ -604,17 +610,17 @@ end;
 
 procedure TFormPrincipal.SequenciaNF1Click(Sender: TObject);
 begin
-    ShowForm(TFormSequenciaNotaFiscal, nil, true );
+    ShowForm(TFormSequencias, nil, false );
 end;
 
-procedure TFormPrincipal.ShowProdutosListagem(Condicao: string);
+procedure TFormPrincipal.ShowProdutosListagem(prsCondicao: string);
 var
   Form: TForm;
 begin
    Form := Showform( TFormProdutosDetalhes , nil );
    with TFormProdutosDetalhes(Form) do
    begin
-      Condicao:= Condicao;
+      Condicao:= prsCondicao;
       RefreshDataSet;
    end;
 end;

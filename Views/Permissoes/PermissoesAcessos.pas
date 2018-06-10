@@ -25,6 +25,7 @@ type
     procedure DBGrid4DblClick(Sender: TObject);
     procedure srcFuncionariosDataChange(Sender: TObject; Field: TField);
     procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     procedure RefreshPermissoes;
     { Private declarations }
@@ -40,7 +41,7 @@ implementation
 
 {$R *.dfm}
 
-uses  EntidadeFactory;
+uses  EntidadeFactory, Principal;
 
 procedure TFormPermissoes.Button1Click(Sender: TObject);
 begin
@@ -88,6 +89,12 @@ begin
     Controller.DeletePermissao( srcPermissoes.DataSet.FieldByName('CodigoFuncionario').AsString,
                                 srcPermissoes.DataSet.FieldByName('Codigo').AsString );
     RefreshPermissoes;
+end;
+
+procedure TFormPermissoes.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  FormPrincipal.UnRegisterForm('TFormPermissoes');
+  Action:= caFree;
 end;
 
 procedure TFormPermissoes.FormCreate(Sender: TObject);

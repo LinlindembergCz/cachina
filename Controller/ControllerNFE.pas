@@ -15,8 +15,6 @@ Type
   private
 
   public
-    class function GetMaxLoteNFE: string;
-    class function GetMaxLoteNFC: string;
     class procedure InserirLoteNFE( CodigoLote,
                               ChaveAcesso,
                               Protocolo,
@@ -39,19 +37,9 @@ Type
 
 implementation
 
-uses GenericDAO, EntidadeFactory, EmissorNfe;
+uses GenericDAO, EntidadeFactory, EmissorNfe, Principal, ControllerSequencias;
 
 { TContollerNFE }
-
-class function TContollerNFE.GetMaxLoteNFE: string;
-begin
-   result := TGenericDAO.GetValue('SequenciaNF','Especie=''NFE'' ','isNull( Sequencia , 0 ) + 1');//TGenericDAO.GetValue('LoteNFE','Especie=''NFE'' ','isNull( Max(CodigoLote) , 0 ) + 1');
-end;
-
-class function TContollerNFE.GetMaxLoteNFC: string;
-begin
-   result := TGenericDAO.GetValue('SequenciaNF','Especie=''NFC'' ','isNull( Sequencia , 0 ) + 1');//TGenericDAO.GetValue('LoteNFE','Especie=''NFC'' ','isNull( Max(CodigoLote) , 0 ) + 1');
-end;
 
 
 class procedure TContollerNFE.InserirLoteNFE(CodigoLote,
@@ -78,9 +66,10 @@ begin
                          quotedstr(Protocolo)+','+
                          quotedstr(Especie)  );
 
-  TGenericDAO.UpdateSQL( 'SequenciaNF',
-                         'Sequencia= Sequencia + 1',
-                         ' Especie= '+ quotedstr(Especie) );
+  if Especie = 'NFE' then
+     TControllerSequencias.IncrementarSequenciaNFE
+  else
+     TControllerSequencias.IncrementarSequenciaNFC;
 end;
 
 class function TContollerNFE.CriarNFE(Tipo: string; DataSetEntidade,

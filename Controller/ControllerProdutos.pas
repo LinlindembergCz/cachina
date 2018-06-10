@@ -139,7 +139,8 @@ end;
 
 function TControllerProdutos.EhServico(CodigoProduto: string): Boolean;
 begin
-  result:= TGenericDAO.GetValue('Produtos','Codigo='+CodigoProduto,'upper(Tipo)') = 'SERVIÇO';
+  result:= TGenericDAO.GetValue('Produtos','Codigo='+CodigoProduto+' and '+
+                                '(tipo = ''SERVIÇO'' or tipo= ''SERVICO'') ','Codigo') <> '';
 end;
 
 function TControllerProdutos.ProdutoExiste(Descricao: string): Boolean;

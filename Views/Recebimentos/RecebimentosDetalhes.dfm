@@ -18,6 +18,8 @@ inherited FormRecebimentoDetalhes: TFormRecebimentoDetalhes
       ExplicitWidth = 1250
       ExplicitHeight = 566
       inherited TabSheet1: TTabSheet
+        ExplicitLeft = 0
+        ExplicitTop = 0
         ExplicitWidth = 1242
         ExplicitHeight = 538
         inherited grdEntidade: TDBGrid

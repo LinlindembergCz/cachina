@@ -147,7 +147,7 @@ uses
   ProdutoListagem in 'Views\Produtos\ProdutoListagem.pas' {FormProdutoListagem},
   uCustomDatabaseManager in 'Persistencia\uCustomDatabaseManager.pas',
   Mapper in 'Persistencia\Mapper.pas',
-  SequenciaNotaFiscal in 'Views\Tabelas\SequenciaNotaFiscal.pas' {FormSequenciaNotaFiscal},
+  Sequencias in 'Views\Tabelas\Sequencias.pas' {FormSequencias},
   SequenciaNF in 'Modelos\SequenciaNF.pas',
   TabelaCFOP in 'Modelos\TabelaCFOP.pas',
   ParametrosDetalhes in 'Views\Orcamento\ParametrosDetalhes.pas' {FormParametrosDetalhes},
@@ -155,7 +155,8 @@ uses
   ControllerParametros in 'Controller\ControllerParametros.pas',
   TabelaPreco in 'Modelos\TabelaPreco.pas',
   TabelaPrecoDetalhes in 'Views\TabelaPreco\TabelaPrecoDetalhes.pas' {FormTabelaPreco},
-  AlterarProdutos in 'Views\Produtos\AlterarProdutos.pas' {FormAlterarProdutos};
+  AlterarProdutos in 'Views\Produtos\AlterarProdutos.pas' {FormAlterarProdutos},
+  ControllerSequencias in 'Controller\ControllerSequencias.pas';
 
 {$R *.res}
 

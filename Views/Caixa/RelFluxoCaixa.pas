@@ -106,9 +106,7 @@ procedure TFormRelFluxoCaixa.Consultar;
 var
   controller: TControllerTabelas;
   DataSet: TDataSet;
-  Periodo1,Periodo2, Caixa,Caixa2, Campos: string;
-  Valor, Saldo: double;
-  Campos2: string;
+  Periodo1,Periodo2, Caixa: string;
 begin
 
   Controller := TControllerTabelas.Create;

@@ -115,7 +115,6 @@ type
     procedure FormatarCamposMoedas;
     procedure SomaTotais;
     procedure ParcelarConta;
-    procedure AtivarConta;
     procedure EstornarConta;
     procedure GetContasSelecionadas(var Valor: Double; var Contas: string);
     procedure InserirEntrada(Contas, FormaPagamentoEntrada: string;
@@ -260,25 +259,6 @@ begin
 end;
 
 procedure TFormRecebimentoDetalhes.EstornarConta;
-var
-   I:integer;
-   Selecionados:TBookmarkList;
-   Data: TDatetime;
-   Valor: Double;
-begin
-  Alterar;
-  MapperEntidade.Associar('DataBaixa', nil, '01/01/1889');
-  MapperEntidade.Associar('ValorBaixado', nil, '0');
-  MapperEntidade.Associar('Situacao', nil, 'Aberto');
-  Persistir;
-end;
-
-procedure TFormRecebimentoDetalhes.AtivarConta;
-var
-   I:integer;
-   Selecionados:TBookmarkList;
-   Data: TDatetime;
-   Valor: Double;
 begin
   Alterar;
   MapperEntidade.Associar('DataBaixa', nil, '01/01/1889');
@@ -418,7 +398,6 @@ procedure TFormRecebimentoDetalhes.Individual1Click(Sender: TObject);
 Var
   ValorSelecionado: Double;
   I: Integer;
-  Book:Tbookmark;
   Codigo: string;
 begin
   inherited;
@@ -610,8 +589,7 @@ end;
 procedure TFormRecebimentoDetalhes.ParcelarConta;
 var
    I:integer;
-   Selecionados:TBookmarkList;
-   Data: TDatetime;
+
    Valor: Double;
    ValorParcela: Double;
    DataVencimento: TDatetime;

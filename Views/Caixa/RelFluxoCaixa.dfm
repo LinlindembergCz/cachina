@@ -59,6 +59,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
     PrinterSettings.UseCustomPaperCode = False
     PrinterSettings.CustomPaperCode = 0
     PrinterSettings.PrintMetaFile = False
+    PrinterSettings.MemoryLimit = 1000000
     PrinterSettings.PrintQuality = 0
     PrinterSettings.Collate = 0
     PrinterSettings.ColorOption = 0
@@ -102,6 +103,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           5.291666666666667000
           169.333333333333300000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -132,6 +134,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           5.291666666666667000
           198.437500000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -162,6 +165,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           5.291666666666667000
           134.937500000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -192,6 +196,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           5.291666666666667000
           156.104166666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -222,6 +227,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           5.291666666666667000
           169.333333333333300000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -252,6 +258,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           5.291666666666667000
           142.875000000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -282,6 +289,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           5.291666666666667000
           134.937500000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -312,6 +320,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           5.291666666666667000
           153.458333333333300000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -342,6 +351,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           5.291666666666667000
           206.375000000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -372,6 +382,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           5.291666666666667000
           179.916666666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -402,6 +413,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           5.291666666666667000
           198.437500000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -432,6 +444,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           5.291666666666667000
           206.375000000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -462,6 +475,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           5.291666666666667000
           764.645833333333300000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -493,6 +507,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           47.625000000000000000
           95.250000000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -523,6 +538,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           47.625000000000000000
           124.354166666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -553,6 +569,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           47.625000000000000000
           82.020833333333330000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -583,6 +600,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           47.625000000000000000
           60.854166666666670000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -613,6 +631,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           47.625000000000000000
           60.854166666666670000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -643,6 +662,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           47.625000000000000000
           79.375000000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -673,6 +693,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           47.625000000000000000
           68.791666666666670000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -703,6 +724,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           47.625000000000000000
           95.250000000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -733,6 +755,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           47.625000000000000000
           124.354166666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -763,6 +786,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           47.625000000000000000
           105.833333333333300000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -793,6 +817,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           47.625000000000000000
           132.291666666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -823,6 +848,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           47.625000000000000000
           132.291666666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -874,6 +900,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           288.395833333333300000
           277.812500000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Plano de Contas'
@@ -900,6 +927,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           288.395833333333300000
           63.500000000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Jan'
@@ -926,6 +954,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           288.395833333333300000
           63.500000000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Fev'
@@ -952,6 +981,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           288.395833333333300000
           71.437500000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Ma'#231
@@ -978,6 +1008,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           288.395833333333300000
           60.854166666666670000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         BiDiMode = bdRightToLeft
@@ -1006,6 +1037,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           288.395833333333300000
           63.500000000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Mai'
@@ -1032,6 +1064,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           288.395833333333300000
           63.500000000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Jun'
@@ -1058,6 +1091,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           288.395833333333300000
           52.916666666666670000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Jul'
@@ -1084,6 +1118,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           288.395833333333300000
           68.791666666666670000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Ago'
@@ -1110,6 +1145,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           288.395833333333300000
           58.208333333333330000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Set'
@@ -1136,6 +1172,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           288.395833333333300000
           60.854166666666670000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Out'
@@ -1162,6 +1199,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           288.395833333333300000
           66.145833333333330000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Nov'
@@ -1188,6 +1226,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           288.395833333333300000
           66.145833333333330000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Dez'
@@ -1214,6 +1253,7 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           52.916666666666670000
           301.625000000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Fluxo de Caixa'
@@ -1240,17 +1280,13 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
           21.166666666666670000
           394.229166666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
         Stretch = True
       end
     end
   end
   object ClientDataSet1: TClientDataSet
-    Active = True
-    Aggregates = <>
-    Params = <>
-    Left = 448
-    Top = 264
-    Data = {
+    PersistDataPacket.Data = {
       060200009619E0BD01000000180000001A00000000000300000006020B436F64
       696669636163616F010049000000010005574944544802000200140009446573
       63726963616F010049000000010005574944544802000200C800074A616E6569
@@ -1268,6 +1304,11 @@ object FormRelFluxoCaixa: TFormRelFluxoCaixa
       6E746108000400000000000D4E6F76656D62726F436F6E746108000400000000
       000D44657A656D62726F436F6E746108000400000000000844657A656D62726F
       08000400000000000000}
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 448
+    Top = 264
     object ClientDataSet1Codificacao: TStringField
       FieldName = 'Codificacao'
     end

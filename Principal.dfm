@@ -26,9 +26,9 @@ object FormPrincipal: TFormPrincipal
     Height = 105
   end
   object Image2: TImage
-    Left = 169
+    Left = 209
     Top = 0
-    Width = 728
+    Width = 688
     Height = 521
     Align = alClient
     Center = True
@@ -2860,7 +2860,7 @@ object FormPrincipal: TFormPrincipal
   object CategoryButtons1: TCategoryButtons
     Left = 0
     Top = 0
-    Width = 169
+    Width = 209
     Height = 521
     Align = alLeft
     ButtonFlow = cbfVertical
@@ -2868,7 +2868,7 @@ object FormPrincipal: TFormPrincipal
     ButtonOptions = [boFullSize, boGradientFill, boShowCaptions]
     Categories = <
       item
-        Caption = 'Principal'
+        Caption = 'Ger'#234'ncia'
         Color = 16771818
         Collapsed = False
         Items = <
@@ -2884,7 +2884,7 @@ object FormPrincipal: TFormPrincipal
         TextColor = clRed
       end
       item
-        Caption = 'Tabelas'
+        Caption = 'Estoque'
         Color = 15400959
         Collapsed = False
         Items = <
@@ -2896,6 +2896,7 @@ object FormPrincipal: TFormPrincipal
           end
           item
             Action = ActFamilia
+            Caption = 'Familia de produto'
           end
           item
             Action = ActGrupoProduto
@@ -2904,10 +2905,26 @@ object FormPrincipal: TFormPrincipal
             Action = ActSubGrupoProduto
           end
           item
-            Action = ActParametros
+            Action = ActProdutos
           end
           item
+            Action = ActParametros
+          end>
+        TextColor = clRed
+      end
+      item
+        Caption = 'Financeiro'
+        Color = 15395839
+        Collapsed = False
+        Items = <
+          item
             Action = ActFormaPagamentos
+          end
+          item
+            Action = ActRecebimentos
+          end
+          item
+            Action = ActPagamentos
           end>
         TextColor = clRed
       end
@@ -2924,26 +2941,17 @@ object FormPrincipal: TFormPrincipal
             Action = ActOrcamentoPesquisa
           end>
         TextColor = clRed
-      end
-      item
-        Caption = 'Suprimentos'
-        Color = 15395839
-        Collapsed = False
-        Items = <
-          item
-            Action = ActProdutos
-          end>
-        TextColor = clRed
       end>
     Color = clWhite
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
+    Font.Height = -16
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     RegularButtonColor = clWhite
     SelectedButtonColor = 15132390
     TabOrder = 0
+    StyleElements = [seBorder]
   end
   object ActionList1: TActionList
     Left = 552

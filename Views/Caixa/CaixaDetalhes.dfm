@@ -3,6 +3,7 @@ inherited FormCaixaDetalhes: TFormCaixaDetalhes
   ClientWidth = 932
   FormStyle = fsStayOnTop
   ExplicitWidth = 948
+  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
@@ -13,7 +14,10 @@ inherited FormCaixaDetalhes: TFormCaixaDetalhes
       ActivePage = TabSheet2
       ExplicitWidth = 930
       inherited TabSheet1: TTabSheet
+        ExplicitLeft = 0
+        ExplicitTop = 0
         ExplicitWidth = 922
+        ExplicitHeight = 0
         inherited grdEntidade: TDBGrid
           Width = 922
         end

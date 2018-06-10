@@ -41,7 +41,6 @@ uses DBUtils, EntidadeFactory, GenericEntidade;
 procedure TFormTabelaPreco.FormCreate(Sender: TObject);
 var
   ItemEntrada:TGenericEntidade;
-  CodigEntrada: string;
 begin
   //Controller         := TControllerTabelaPreco.Create;
   Entidade           := TEntidadeFactory.Criar(tpTabelaPreco);

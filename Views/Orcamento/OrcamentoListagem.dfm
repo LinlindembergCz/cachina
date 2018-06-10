@@ -100,7 +100,7 @@ inherited FormOrcamentoListagem: TFormOrcamentoListagem
       OnClick = SpeedButton3Click
     end
     object SpeedButton4: TSpeedButton
-      Left = 671
+      Left = 679
       Top = 100
       Width = 126
       Height = 30

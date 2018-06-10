@@ -175,7 +175,7 @@ begin
   Entidade   := TEntidadeFactory.Criar(tpPessoa);
   Contatos   := TEntidadeFactory.Criar(tpContatos);
   Veiculos   := TEntidadeFactory.Criar(tpVeiculos);
-  Condicao   := CondicaoTipo;
+  Condicao   := '0=1';
   inherited;
   MapearComponentes;
   MapearCampoContatos;

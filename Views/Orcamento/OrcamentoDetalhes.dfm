@@ -1551,7 +1551,9 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
     ExplicitWidth = 1049
     ExplicitHeight = 51
     inherited btnInserir: TSpeedButton
+      Left = 9
       Top = 3
+      ExplicitLeft = 9
       ExplicitTop = 3
     end
     inherited btnAlterar: TSpeedButton

@@ -9,13 +9,17 @@ inherited FormSequenciaNotaFiscal: TFormSequenciaNotaFiscal
   inherited Panel1: TPanel
     Width = 757
     Height = 455
+    ExplicitWidth = 757
+    ExplicitHeight = 455
     inherited tabPrincipal: TPageControl
       Width = 755
       Height = 453
+      ActivePage = TabSheet2
+      ExplicitWidth = 755
+      ExplicitHeight = 453
       inherited TabSheet1: TTabSheet
-        ExplicitLeft = 4
-        ExplicitTop = 24
-        ExplicitHeight = 464
+        ExplicitWidth = 747
+        ExplicitHeight = 425
         inherited grdEntidade: TDBGrid
           Width = 747
           Height = 338
@@ -44,11 +48,13 @@ inherited FormSequenciaNotaFiscal: TFormSequenciaNotaFiscal
         end
         inherited pnlSuperior: TPanel
           Width = 747
+          ExplicitWidth = 747
         end
         inherited pnlInferior: TPanel
           Top = 403
           Width = 747
-          ExplicitTop = 442
+          ExplicitTop = 403
+          ExplicitWidth = 747
         end
       end
       inherited TabSheet2: TTabSheet
@@ -118,12 +124,13 @@ inherited FormSequenciaNotaFiscal: TFormSequenciaNotaFiscal
           Items.Strings = (
             'NFE'
             'NFC'
-            'REB')
+            'REM')
         end
       end
     end
   end
   inherited Panel2: TPanel
     Width = 757
+    ExplicitWidth = 757
   end
 end

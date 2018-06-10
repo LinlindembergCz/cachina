@@ -55,8 +55,6 @@ implementation
 uses ControllerTabelas, EntidadeFactory;
 
 procedure TFormCaixaDetalhes.FormCreate(Sender: TObject);
-var
-  I: Integer;
 begin
   Entidade  := TEntidadeFactory.criar(tpCaixa);
   Controller:= TControllerTabelas.create;

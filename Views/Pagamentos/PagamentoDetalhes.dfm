@@ -17,6 +17,8 @@ inherited FormPagamentoDetalhes: TFormPagamentoDetalhes
       ExplicitWidth = 1095
       ExplicitHeight = 576
       inherited TabSheet1: TTabSheet
+        ExplicitLeft = 0
+        ExplicitTop = 0
         ExplicitWidth = 1087
         ExplicitHeight = 548
         inherited grdEntidade: TDBGrid

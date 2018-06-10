@@ -10,9 +10,13 @@ object FormIndicadores: TFormIndicadores
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  FormStyle = fsMDIChild
   OldCreateOrder = False
   Position = poMainFormCenter
+  Visible = True
+  WindowState = wsMaximized
   OnActivate = FormActivate
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -97,16 +101,16 @@ object FormIndicadores: TFormIndicadores
     Top = 46
     Width = 1113
     Height = 539
-    ActivePage = TabSheet3
+    ActivePage = TabSheet1
     TabOrder = 3
     object TabSheet1: TTabSheet
       Caption = 'Indicadores'
-      ExplicitHeight = 519
       object GroupBox1: TGroupBox
         Left = 9
         Top = 14
         Width = 321
         Height = 241
+        Caption = 'Situa'#231#227'o'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -19
@@ -156,7 +160,7 @@ object FormIndicadores: TFormIndicadores
         end
         object DBGrid1: TDBGrid
           Left = 16
-          Top = 23
+          Top = 27
           Width = 290
           Height = 178
           DataSource = DataSource1
@@ -198,6 +202,7 @@ object FormIndicadores: TFormIndicadores
         Top = 14
         Width = 321
         Height = 241
+        Caption = 'Tipo de pagamento'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -19
@@ -247,7 +252,7 @@ object FormIndicadores: TFormIndicadores
         end
         object DBGrid2: TDBGrid
           Left = 16
-          Top = 23
+          Top = 27
           Width = 284
           Height = 178
           DataSource = DataSource2
@@ -290,6 +295,7 @@ object FormIndicadores: TFormIndicadores
         Top = 256
         Width = 321
         Height = 241
+        Caption = 'Anual'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -19
@@ -339,7 +345,7 @@ object FormIndicadores: TFormIndicadores
         end
         object DBGrid3: TDBGrid
           Left = 16
-          Top = 19
+          Top = 25
           Width = 289
           Height = 178
           DataSource = DataSource3
@@ -381,6 +387,7 @@ object FormIndicadores: TFormIndicadores
         Top = 256
         Width = 321
         Height = 243
+        Caption = 'Funcion'#225'rio'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -19
@@ -430,7 +437,7 @@ object FormIndicadores: TFormIndicadores
         end
         object DBGrid4: TDBGrid
           Left = 16
-          Top = 19
+          Top = 25
           Width = 289
           Height = 178
           DataSource = DataSource4
@@ -471,7 +478,6 @@ object FormIndicadores: TFormIndicadores
     object TabSheet2: TTabSheet
       Caption = 'Gr'#225'ficos'
       ImageIndex = 1
-      ExplicitHeight = 519
       object DBChart1: TDBChart
         Left = 385
         Top = 21
@@ -611,8 +617,6 @@ object FormIndicadores: TFormIndicadores
     object TabSheet3: TTabSheet
       Caption = 'Financeiro'
       ImageIndex = 2
-      ExplicitLeft = 10
-      ExplicitHeight = 502
       object GroupBox5: TGroupBox
         Left = 18
         Top = 21
@@ -1043,6 +1047,6 @@ object FormIndicadores: TFormIndicadores
     Aggregates = <>
     Params = <>
     Left = 1041
-    Top = 485
+    Top = 477
   end
 end
