@@ -1,19 +1,19 @@
 inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
   Caption = 'Or'#231'amento'
   ClientHeight = 562
-  ClientWidth = 1049
+  ClientWidth = 874
   OnActivate = FormActivate
-  ExplicitWidth = 1065
+  ExplicitWidth = 890
   ExplicitHeight = 600
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
     Top = 51
-    Width = 1049
+    Width = 874
     Height = 511
     Anchors = [akLeft, akRight, akBottom]
     ExplicitTop = 51
-    ExplicitWidth = 1049
+    ExplicitWidth = 874
     ExplicitHeight = 511
     object Label7: TLabel
       Left = 15
@@ -29,7 +29,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
       ParentFont = False
     end
     object Label8: TLabel
-      Left = 590
+      Left = 338
       Top = 464
       Width = 79
       Height = 33
@@ -56,7 +56,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
       ParentFont = False
     end
     object lbTotal: TLabel
-      Left = 805
+      Left = 540
       Top = 464
       Width = 59
       Height = 33
@@ -80,7 +80,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
     object TabControl1: TPageControl
       Left = 1
       Top = 1
-      Width = 1047
+      Width = 872
       Height = 457
       ActivePage = TabSheet1
       Align = alTop
@@ -91,7 +91,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
       object TabSheet1: TTabSheet
         Caption = 'Dados do or'#231'amento'
         DesignSize = (
-          1039
+          864
           429)
         object Label13: TLabel
           Left = 3
@@ -120,8 +120,8 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
           ParentFont = False
         end
         object Label3: TLabel
-          Left = 341
-          Top = 1
+          Left = 206
+          Top = 3
           Width = 49
           Height = 13
           Caption = 'Situa'#231#227'o'
@@ -133,8 +133,8 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
           ParentFont = False
         end
         object Label42: TLabel
-          Left = 4
-          Top = 127
+          Left = 3
+          Top = 182
           Width = 77
           Height = 16
           Caption = 'Observa'#231#227'o'
@@ -146,8 +146,8 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
           ParentFont = False
         end
         object Label43: TLabel
-          Left = 280
-          Top = 127
+          Left = 209
+          Top = 181
           Width = 34
           Height = 16
           Caption = 'Itens'
@@ -159,8 +159,8 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
           ParentFont = False
         end
         object Label15: TLabel
-          Left = 514
-          Top = 2
+          Left = 373
+          Top = 4
           Width = 65
           Height = 13
           Caption = 'Funcion'#225'rio'
@@ -172,17 +172,17 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
           ParentFont = False
         end
         object lbdatahorainicio: TLabel
-          Left = 835
-          Top = 25
+          Left = 460
+          Top = 4
           Width = 75
           Height = 13
           Caption = 'lbdatahorainicio'
         end
         object gpbItens: TGroupBox
-          Left = 280
-          Top = 143
-          Width = 750
-          Height = 63
+          Left = 206
+          Top = 199
+          Width = 646
+          Height = 90
           Anchors = [akLeft, akTop, akRight]
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -192,7 +192,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
           ParentFont = False
           TabOrder = 5
           object Label6: TLabel
-            Left = 439
+            Left = 422
             Top = 11
             Width = 20
             Height = 13
@@ -206,7 +206,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             Caption = 'Descri'#231#227'o'
           end
           object Label12: TLabel
-            Left = 479
+            Left = 462
             Top = 11
             Width = 29
             Height = 13
@@ -220,37 +220,37 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             Caption = 'Item'
           end
           object Label16: TLabel
-            Left = 562
+            Left = 539
             Top = 11
             Width = 13
             Height = 13
             Caption = '%'
           end
           object Label10: TLabel
-            Left = 391
+            Left = 374
             Top = 11
             Width = 28
             Height = 13
             Caption = 'Unid.'
           end
           object BitBtn1: TSpeedButton
-            Left = 602
-            Top = 26
+            Left = 423
+            Top = 57
             Width = 67
             Height = 25
             Caption = '&Adicionar'
             OnClick = BitBtn1Click
           end
           object CornerButton1: TSpeedButton
-            Left = 672
-            Top = 26
+            Left = 496
+            Top = 57
             Width = 73
             Height = 25
             Caption = '&Remover'
             OnClick = CornerButton1Click
           end
           object SpeedButton3: TSpeedButton
-            Left = 363
+            Left = 348
             Top = 30
             Width = 23
             Height = 21
@@ -269,14 +269,14 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             OnChange = edtCodigoItemChange
           end
           object edtQuantidade: TEdit
-            Left = 441
+            Left = 424
             Top = 30
             Width = 30
             Height = 21
             TabOrder = 3
           end
           object edtValor: TEdit
-            Left = 477
+            Left = 460
             Top = 30
             Width = 72
             Height = 21
@@ -293,7 +293,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             TabOrder = 0
           end
           object edtDescontoItem: TEdit
-            Left = 562
+            Left = 536
             Top = 30
             Width = 34
             Height = 21
@@ -304,7 +304,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
           object cboProduto: TDBLookupComboBox
             Left = 42
             Top = 31
-            Width = 318
+            Width = 305
             Height = 21
             DropDownRows = 15
             DropDownWidth = 400
@@ -315,7 +315,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             OnCloseUp = cboProdutoCloseUp
           end
           object cboUnidadeMedida: TComboBox
-            Left = 391
+            Left = 374
             Top = 30
             Width = 43
             Height = 21
@@ -329,10 +329,10 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
           end
         end
         object grdItens: TDBGrid
-          Left = 280
-          Top = 212
-          Width = 750
-          Height = 203
+          Left = 206
+          Top = 304
+          Width = 646
+          Height = 111
           Anchors = [akLeft, akTop, akRight, akBottom]
           Color = clWhite
           DataSource = srcItens
@@ -365,7 +365,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
               Title.Font.Height = -11
               Title.Font.Name = 'Tahoma'
               Title.Font.Style = [fsBold]
-              Width = 321
+              Width = 221
               Visible = True
             end
             item
@@ -428,9 +428,9 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
         end
         object memoObservacao: TMemo
           Left = 3
-          Top = 147
-          Width = 271
-          Height = 271
+          Top = 204
+          Width = 197
+          Height = 211
           TabStop = False
           Anchors = [akLeft, akTop, akBottom]
           Font.Charset = DEFAULT_CHARSET
@@ -451,8 +451,8 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
           TabOrder = 0
         end
         object cboSituacao: TComboBox
-          Left = 350
-          Top = 17
+          Left = 209
+          Top = 19
           Width = 158
           Height = 21
           TabOrder = 2
@@ -476,10 +476,10 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
           TabOrder = 1
         end
         object GroupBox2: TGroupBox
-          Left = 683
-          Top = 44
-          Width = 347
-          Height = 81
+          Left = 3
+          Top = 113
+          Width = 849
+          Height = 50
           Caption = 'Dados do ve'#237'culo'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -502,8 +502,8 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             ParentFont = False
           end
           object Label39: TLabel
-            Left = 5
-            Top = 54
+            Left = 264
+            Top = 23
             Width = 41
             Height = 13
             Caption = 'Modelo'
@@ -515,7 +515,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             ParentFont = False
           end
           object Label40: TLabel
-            Left = 199
+            Left = 161
             Top = 23
             Width = 22
             Height = 13
@@ -528,8 +528,8 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             ParentFont = False
           end
           object Label41: TLabel
-            Left = 199
-            Top = 54
+            Left = 461
+            Top = 24
             Width = 19
             Height = 13
             Caption = 'Cor'
@@ -541,17 +541,17 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             ParentFont = False
           end
           object SpeedButton5: TSpeedButton
-            Left = 171
-            Top = 46
+            Left = 429
+            Top = 19
             Width = 23
             Height = 21
             Caption = '...'
             OnClick = SpeedButton5Click
           end
           object edtAno: TEdit
-            Left = 225
-            Top = 18
-            Width = 115
+            Left = 189
+            Top = 19
+            Width = 70
             Height = 21
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -563,9 +563,9 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             TabOrder = 2
           end
           object cboCor: TComboBox
-            Left = 225
-            Top = 46
-            Width = 115
+            Left = 490
+            Top = 19
+            Width = 88
             Height = 21
             CharCase = ecUpperCase
             DropDownCount = 20
@@ -597,7 +597,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
           object edtPlaca: TEdit
             Left = 52
             Top = 19
-            Width = 116
+            Width = 101
             Height = 21
             CharCase = ecUpperCase
             Font.Charset = DEFAULT_CHARSET
@@ -611,8 +611,8 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             OnKeyPress = edtPlacaKeyPress
           end
           object cboModelo: TComboBox
-            Left = 52
-            Top = 46
+            Left = 309
+            Top = 19
             Width = 116
             Height = 21
             CharCase = ecUpperCase
@@ -628,9 +628,9 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
         end
         object GroupBox3: TGroupBox
           Left = 3
-          Top = 44
-          Width = 674
-          Height = 81
+          Top = 46
+          Width = 849
+          Height = 64
           Caption = 'Cliente'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -653,8 +653,8 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             ParentFont = False
           end
           object SpeedButton2: TSpeedButton
-            Left = 648
-            Top = 14
+            Left = 563
+            Top = 13
             Width = 23
             Height = 21
             Caption = '...'
@@ -674,7 +674,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             ParentFont = False
           end
           object lbtelefone: TLabel
-            Left = 274
+            Left = 401
             Top = 41
             Width = 3
             Height = 13
@@ -687,7 +687,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             ParentFont = False
           end
           object lbContato: TLabel
-            Left = 402
+            Left = 529
             Top = 41
             Width = 3
             Height = 13
@@ -700,9 +700,9 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             ParentFont = False
           end
           object edtCPFCNPJ: TEdit
-            Left = 68
+            Left = 66
             Top = 14
-            Width = 149
+            Width = 142
             Height = 21
             TabOrder = 0
             OnExit = edtCPFCNPJExit
@@ -710,7 +710,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
           object cboClientes: TDBLookupComboBox
             Left = 223
             Top = 14
-            Width = 419
+            Width = 334
             Height = 21
             DropDownRows = 20
             TabOrder = 1
@@ -718,9 +718,9 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
           end
         end
         object cboFuncionarios: TDBLookupComboBox
-          Left = 514
-          Top = 19
-          Width = 315
+          Left = 373
+          Top = 21
+          Width = 228
           Height = 21
           DropDownRows = 20
           TabOrder = 8
@@ -816,7 +816,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             item
               Expanded = False
               FieldName = 'Descricao'
-              Width = 204
+              Width = 138
               Visible = True
             end
             item
@@ -835,7 +835,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
               Expanded = False
               FieldName = 'Percentualdesconto'
               Title.Caption = '%'
-              Width = 42
+              Width = 31
               Visible = True
             end
             item
@@ -854,11 +854,12 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
             item
               Expanded = False
               FieldName = 'Troco'
+              Width = 37
               Visible = True
             end>
         end
         object BitBtn2: TBitBtn
-          Left = 912
+          Left = 616
           Top = 215
           Width = 73
           Height = 25
@@ -1546,9 +1547,9 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
     end
   end
   inherited Panel2: TPanel
-    Width = 1049
+    Width = 874
     Height = 51
-    ExplicitWidth = 1049
+    ExplicitWidth = 874
     ExplicitHeight = 51
     inherited btnInserir: TSpeedButton
       Left = 9
@@ -1585,16 +1586,16 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
       ExplicitWidth = 106
     end
     inherited btnSair: TSpeedButton
-      Left = 957
-      Top = 3
+      Left = 758
+      Top = 4
       Width = 68
-      ExplicitLeft = 957
-      ExplicitTop = 3
+      ExplicitLeft = 758
+      ExplicitTop = 4
       ExplicitWidth = 68
     end
     object Button3: TSpeedButton
-      Left = 642
-      Top = 4
+      Left = 541
+      Top = 3
       Width = 91
       Height = 42
       Caption = '&Imprimir'
@@ -1626,8 +1627,8 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
     Top = 497
   end
   object PopupMenu1: TPopupMenu
-    Left = 544
-    Top = 152
+    Left = 456
+    Top = 160
     object VisualizarFatura1: TMenuItem
       Caption = 'Visualizar Fatura'
       OnClick = VisualizarFatura1Click

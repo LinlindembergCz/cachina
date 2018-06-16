@@ -3,7 +3,7 @@ inherited FormContatosClientesListagem: TFormContatosClientesListagem
   Caption = 'Contatos'
   ClientHeight = 382
   ClientWidth = 650
-  FormStyle = fsStayOnTop
+  Visible = False
   OnActivate = FormActivate
   ExplicitWidth = 656
   ExplicitHeight = 410

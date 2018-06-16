@@ -47,20 +47,19 @@ end;
 procedure TFormProdutoListagem.SpeedButton1Click(Sender: TObject);
 begin
   ModalResult:= mrNone;
-  inherited;
   close;
 end;
 
 procedure TFormProdutoListagem.SpeedButton3Click(Sender: TObject);
 begin
   inherited;
-  if edtdescricao.Text  <> '' then
-  begin
-      srcEntidade.DataSet.Close;
-      srcEntidade.DataSet:=TGenericDAO.GetAll<TProdutos>( TProdutos.Create ,
-                           'Descricao LIKE ' + quotedstr('%'+ edtdescricao.Text +'%'),
-                           'Codigo, Descricao');
-  end;
+    if edtdescricao.Text  <> '' then
+    begin
+        srcEntidade.DataSet.Close;
+        srcEntidade.DataSet:=TGenericDAO.GetAll<TProdutos>( TProdutos.Create ,
+                             'Descricao LIKE ' + quotedstr('%'+ edtdescricao.Text +'%'),
+                             'Codigo, Descricao');
+    end;
 end;
 
 end.

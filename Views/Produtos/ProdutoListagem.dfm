@@ -1,32 +1,35 @@
 inherited FormProdutoListagem: TFormProdutoListagem
   BorderStyle = bsDialog
   Caption = 'Produtos'
-  ClientHeight = 280
-  ClientWidth = 685
-  ExplicitWidth = 691
-  ExplicitHeight = 308
+  ClientHeight = 481
+  ClientWidth = 764
+  Position = poDesktopCenter
+  ExplicitWidth = 770
+  ExplicitHeight = 509
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Width = 685
+    Width = 764
     Height = 70
     ExplicitWidth = 685
     ExplicitHeight = 70
     inherited SpeedButton2: TSpeedButton
-      Left = 600
-      Top = 42
+      Left = 673
+      Top = 6
       Font.Height = -13
-      ExplicitLeft = 600
-      ExplicitTop = 42
+      ExplicitLeft = 673
+      ExplicitTop = 6
     end
     inherited btnSelecionar: TSpeedButton
-      Left = 428
-      Top = 42
-      Caption = 'Selecionar'
+      Left = 320
+      Top = 6
+      Width = 132
+      Caption = 'Incluir na entrada'
       Font.Height = -13
       OnClick = btnSelecionarClick
-      ExplicitLeft = 428
-      ExplicitTop = 42
+      ExplicitLeft = 320
+      ExplicitTop = 6
+      ExplicitWidth = 132
     end
     object lbdescricao: TLabel
       Left = 10
@@ -42,12 +45,12 @@ inherited FormProdutoListagem: TFormProdutoListagem
       ParentFont = False
     end
     object SpeedButton1: TSpeedButton
-      Left = 514
-      Top = 42
-      Width = 80
+      Left = 479
+      Top = 6
+      Width = 168
       Height = 22
       Anchors = [akTop, akRight]
-      Caption = 'Novo'
+      Caption = 'Cadastrar novo produto'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -57,7 +60,7 @@ inherited FormProdutoListagem: TFormProdutoListagem
       OnClick = SpeedButton1Click
     end
     object SpeedButton3: TSpeedButton
-      Left = 209
+      Left = 208
       Top = 6
       Width = 80
       Height = 22
@@ -81,7 +84,7 @@ inherited FormProdutoListagem: TFormProdutoListagem
   end
   inherited Grid1: TDBGrid
     Top = 70
-    Width = 685
-    Height = 210
+    Width = 764
+    Height = 411
   end
 end

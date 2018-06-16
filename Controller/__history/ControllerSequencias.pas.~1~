@@ -1,0 +1,25 @@
+unit ControllerSequencias;
+
+interface
+
+uses
+ControllerTabelas;
+
+type
+  TControllerSequencias = class( TControllerTabelas )
+  public
+    function GetSequenciaRemessa: string;
+  end;
+
+implementation
+
+{ TControllerSequencias }
+
+uses GenericDAO;
+
+function TControllerSequencias.GetSequenciaRemessa: string;
+begin
+  result:=  TGenericDAO.GetValue('SequenciaNF','Especie=''REM'' ','isNull( Sequencia , 0 ) + 1');
+end;
+
+end.

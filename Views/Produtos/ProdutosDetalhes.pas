@@ -7,7 +7,7 @@ uses
   Graphics, Controls, Forms, Dialogs,  TemplateDetalhesComTabGrid, System.Rtti, Data.DB,
   GenericEntidade, ControllerTabelas, Mapper, Vcl.Grids, Vcl.StdCtrls, Vcl.Buttons,
   Vcl.DBGrids, Vcl.ComCtrls, Vcl.ExtCtrls,
-  Vcl.Menus;
+  Vcl.Menus, Vcl.DBCtrls;
 
 type
   TFormProdutosDetalhes = class(TTemplateFormComTabGridDetalhes)
@@ -91,7 +91,6 @@ type
     CurvaABC1: TMenuItem;
     TabSheet6: TTabSheet;
     Label29: TLabel;
-    cboCodigoNCM: TComboBox;
     SpeedButton5: TSpeedButton;
     edtCodigoCEST: TEdit;
     Label34: TLabel;
@@ -104,6 +103,7 @@ type
     chkAtivo: TCheckBox;
     PopupMenu1: TPopupMenu;
     AlterarFamlia1: TMenuItem;
+    cboCodigoNCM: TDBLookupComboBox;
     procedure FormCreate(Sender: TObject);
     procedure edtCustoCompraChange(Sender: TObject);
     procedure edtParamComissaoChange(Sender: TObject);
@@ -128,6 +128,7 @@ type
     procedure CurvaABC1Click(Sender: TObject);
     procedure CurvaABCPorFamiliadeprodutos1Click(Sender: TObject);
     procedure AlterarFamlia1Click(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
   private
     //ClassificacaoCliente: TGenericEntidade;
 
@@ -184,12 +185,14 @@ begin
   FillCombobox( tpParametrosPrecoVenda, cboParametrosPrecoVenda);
   FillCombobox( tpUnidadeMedida, cboUnidadeMedida);
 
-  FillCombobox( tpTabelaNCM,
+  FillLookUpCombobox( tpTabelaNCM, cboCodigoNCM ,'CodigoNCM','(CodigoNCM+'' - ''+Descricao)');
+
+ { FillCombobox( tpTabelaNCM,
   cboCodigoNCM,
   '0=0',
   'Codigo',
   ' (CodigoNCM +''  '' +  Descricao) as Descricao ',
-  'CodigoNCM');
+  'CodigoNCM'); }
 
   FillCombobox( tpTabelaNFSe,
   cboCodigoServicoNFSe,
@@ -283,12 +286,12 @@ begin
   inherited;
   FormPrincipal.ActTabelaNCM.Execute;
 
-  FillCombobox( tpTabelaNCM,
+  {FillCombobox( tpTabelaNCM,
                 cboCodigoNCM,
                 '0=0',
                 'Codigo',
                 ' (CodigoNCM +''  '' +  Descricao) as Descricao',
-                'CodigoNCM');
+                'CodigoNCM'); }
 
 
 
@@ -466,6 +469,7 @@ begin
        Produtos.Add(srcPesquisa.DataSet.FieldByName('Codigo').AsString);
        srcPesquisa.DataSet.next;
     end;
+    showmodal;
   end;
 end;
 
@@ -573,7 +577,14 @@ begin
   inherited;
   cboTipo.itemIndex := 0;
   cboUnidadeMedida.itemindex:= cboUnidadeMedida.Items.IndexOf('UN');
+  chkAtivo.Checked:= true;
 
+end;
+
+procedure TFormProdutosDetalhes.btnPesquisarClick(Sender: TObject);
+begin
+  Condicao:= '0=0';
+  inherited;
 end;
 
 procedure TFormProdutosDetalhes.CalculaLucroSobrePrecoCartao;

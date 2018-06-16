@@ -1,0 +1,129 @@
+unit PermissoesAcessos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids, ControllerPermissoes,
+  Vcl.StdCtrls;
+
+type
+  TFormPermissoes = class(TForm)
+    DBGrid1: TDBGrid;
+    DBGrid2: TDBGrid;
+    DBGrid3: TDBGrid;
+    DBGrid4: TDBGrid;
+    srcFuncionarios: TDataSource;
+    srcModulos: TDataSource;
+    srcAcessos: TDataSource;
+    srcPermissoes: TDataSource;
+    chkTodos: TCheckBox;
+    Button1: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure srcModulosDataChange(Sender: TObject; Field: TField);
+    procedure DBGrid3DblClick(Sender: TObject);
+    procedure DBGrid4DblClick(Sender: TObject);
+    procedure srcFuncionariosDataChange(Sender: TObject; Field: TField);
+    procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    procedure RefreshPermissoes;
+    { Private declarations }
+  public
+    { Public declarations }
+      Controller: TControllerPermissoes;
+  end;
+
+var
+  FormPermissoes: TFormPermissoes;
+
+implementation
+
+{$R *.dfm}
+
+uses  EntidadeFactory;
+
+procedure TFormPermissoes.Button1Click(Sender: TObject);
+begin
+   if chkTodos.checked then
+   begin
+     srcAcessos.dataset.first;
+     while not srcAcessos.dataset.eof do
+     begin
+       Controller.InsertPermissao( srcFuncionarios.DataSet.FieldByName('Codigo').AsString,
+                                   srcAcessos.DataSet.FieldByName('Codigo').AsString );
+       srcAcessos.dataset.next;
+     end;
+   end
+   else
+      Controller.InsertPermissao( srcFuncionarios.DataSet.FieldByName('Codigo').AsString,
+                                   srcAcessos.DataSet.FieldByName('Codigo').AsString );
+    RefreshPermissoes;
+end;
+
+procedure TFormPermissoes.DBGrid3DblClick(Sender: TObject);
+begin
+   Controller.InsertPermissao( srcFuncionarios.DataSet.FieldByName('Codigo').AsString,
+                               srcAcessos.DataSet.FieldByName('Codigo').AsString );
+    RefreshPermissoes;
+end;
+
+procedure TFormPermissoes.RefreshPermissoes;
+begin
+  if (srcModulos.DataSet <> nil) and (srcModulos.DataSet.active) then
+  begin
+    srcAcessos.DataSet := Controller.GetSelect(consultaAcessos +
+    ' where moac.CodigoModulo=' + srcModulos.DataSet.FieldByName('Codigo').AsString + ' and ' +
+    ' moac.Codigo NOT IN ( Select CodigoModuloAcesso from PermissoesModuloAcesso perm '+
+    ' inner join Funcionarios func on func.Codigo = perm.CodigoFuncionario '+
+    ' where func.Codigo = '+ srcFuncionarios.DataSet.FieldByName('Codigo').AsString+' )');
+
+    srcPermissoes.DataSet := Controller.GetSelect(consultaPermissoes +
+    ' where CodigoFuncionario=' + srcFuncionarios.DataSet.FieldByName('Codigo').AsString + ' and ' +
+     ' moac.CodigoModulo=' + srcModulos.DataSet.FieldByName('Codigo').AsString);
+  end;
+end;
+
+procedure TFormPermissoes.DBGrid4DblClick(Sender: TObject);
+begin
+    Controller.DeletePermissao( srcPermissoes.DataSet.FieldByName('CodigoFuncionario').AsString,
+                                srcPermissoes.DataSet.FieldByName('Codigo').AsString );
+    RefreshPermissoes;
+end;
+
+procedure TFormPermissoes.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action:= caFree;
+end;
+
+procedure TFormPermissoes.FormCreate(Sender: TObject);
+begin
+    Controller:= TControllerPermissoes.Create;
+
+    srcFuncionarios.DataSet := Controller.GetSelect(
+                               TEntidadeFactory.GetNameEntidade(tpFuncionarios),
+                               '"Login" is not Null', '"Codigo","Nome"' );
+
+    srcModulos.DataSet := Controller.GetSelect(
+                          TEntidadeFactory.GetNameEntidade(tpModulo),
+                          '0=0', '"Codigo","Descricao"' );
+
+    //srcAcessos.DataSet := Controller.GetSelect(consultaAcessos);
+
+    //srcPermissoes.DataSet := Controller.GetSelect(consultaPermissoes);
+
+
+end;
+
+procedure TFormPermissoes.srcFuncionariosDataChange(Sender: TObject;
+  Field: TField);
+begin
+RefreshPermissoes;
+end;
+
+procedure TFormPermissoes.srcModulosDataChange(Sender: TObject; Field: TField);
+begin
+  RefreshPermissoes;
+end;
+
+end.

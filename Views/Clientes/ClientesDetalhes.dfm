@@ -14,7 +14,6 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
     inherited tabPrincipal: TPageControl
       Width = 752
       Height = 433
-      ActivePage = TabSheet2
       ExplicitWidth = 752
       ExplicitHeight = 433
       inherited TabSheet1: TTabSheet
@@ -652,6 +651,7 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
               Top = 21
               Width = 408
               Height = 21
+              MaxLength = 200
               TabOrder = 0
               OnKeyPress = EditPress
             end
@@ -660,6 +660,7 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
               Top = 58
               Width = 409
               Height = 21
+              MaxLength = 30
               TabOrder = 1
               OnKeyPress = EditPress
             end
@@ -668,6 +669,7 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
               Top = 98
               Width = 232
               Height = 21
+              MaxLength = 30
               TabOrder = 2
               OnKeyPress = EditPress
             end
@@ -676,6 +678,7 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
               Top = 136
               Width = 73
               Height = 21
+              MaxLength = 2
               TabOrder = 3
               Items.Strings = (
                 'AC'
@@ -719,6 +722,7 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
               Top = 216
               Width = 412
               Height = 21
+              MaxLength = 100
               TabOrder = 5
               OnKeyPress = EditPress
             end

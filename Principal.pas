@@ -128,15 +128,17 @@ type
   private
     { Private declarations }
      FormList: TStringList;
+    function SetScreenResolution(Width, Height: integer): Longint;
+
   public
     { Public declarations }
     Login: string;
     CodigoPessoa: string;
-
+    procedure AjustaForm(Form:TForm);
     procedure UnRegisterForm(ClassFormName: string);
     function ShowForm( FormClass:TFormClass;
                        Action:TAction;
-                       Modal:boolean = false):TForm;
+                       Modal:boolean = false; Showing:boolean = true):TForm;
 
     procedure ShowFormClienteDetlahes(CPF: string);
     function ShowComboEditDialgo(TipoEntidade: TTipoEntidade; Titulo: string): string;
@@ -152,11 +154,16 @@ type
     procedure ShowRecebimentosListagem(Condicao: string);
     function SelectOrcamento: string;
     procedure ShowProdutosListagem(prsCondicao: string);
-    procedure SelecionarOrcamentDetalhe(Operacao, Codigo: string);
+    procedure SelecionarOrcamentDetalhe(prsOperacao, Codigo: string);
   end;
 
 var
   FormPrincipal: TFormPrincipal;
+
+  Oldwidth:integer;
+  OldHeight :integer;
+  Auxwidth:integer;
+  Auxheight:integer ;
 
 implementation
 
@@ -181,6 +188,8 @@ uses
 procedure TFormPrincipal.FormCreate(Sender: TObject);
 begin
    FormList:= TStringList.Create;
+   AjustaForm(self);
+   //EnableMenuItem(GetSystemMenu(handle, False), SC_CLOSE, MF_BYCOMMAND or MF_GRAYED);
 end;
 
 procedure TFormPrincipal.UnRegisterForm(ClassFormName: string);
@@ -193,7 +202,7 @@ begin
 end;
 
 function TFormPrincipal.ShowForm( FormClass:TFormClass;
-                                   Action:TAction; Modal:boolean = false):TForm;
+                                   Action:TAction; Modal:boolean = false; Showing:boolean = true):TForm;
 var
   Form: Tform;
   i:integer;
@@ -203,19 +212,23 @@ begin
   begin
     application.CreateForm( FormClass , Form );
     if Modal then
-       Form.ShowModal
+       if Showing then
+          Form.ShowModal
     else
     begin
        FormList.AddObject( FormClass.ClassName ,  Form );
-       Form.Show;
+       if Showing then
+          Form.Show;
     end;
     result := Form;
   end
   else
   begin
     if Modal then
+      if Showing then
        Form.ShowModal
     else
+    if Showing then
        Tform( FormList.Objects[i] ).Show;
     result := Tform( FormList.Objects[i] );
   end;
@@ -286,14 +299,14 @@ begin
    FormContatosClientesListagem.Free;
 end;
 
-procedure TFormPrincipal.SelecionarOrcamentDetalhe(Operacao, Codigo: string);
+procedure TFormPrincipal.SelecionarOrcamentDetalhe(prsOperacao, Codigo: string);
 var
   Form:Tform;
 begin
   Form:= showForm(TFormOrcamentoDetalhes,nil);
   with TFormOrcamentoDetalhes(Form) do
   begin
-     Operacao:= Operacao;
+     Operacao:= prsOperacao;
      if Operacao = 'Update' then
      begin
         GetOrcamentoPesquisa(Codigo);
@@ -623,6 +636,42 @@ begin
       Condicao:= prsCondicao;
       RefreshDataSet;
    end;
+end;
+
+function TFormPrincipal.SetScreenResolution(Width, Height: integer): Longint;
+var
+DeviceMode: TDeviceMode;
+begin
+{
+  with DeviceMode do begin
+    dmSize := SizeOf(TDeviceMode);
+    dmPelsWidth := Width;
+    dmPelsHeight := Height;
+    dmFields := DM_PELSWIDTH or DM_PELSHEIGHT;
+  end;
+  Result := ChangeDisplaySettings(DeviceMode, CDS_UPDATEREGISTRY);
+  }
+end;
+
+
+procedure TFormPrincipal.AjustaForm(Form:TForm);
+Const
+nTamOriginal = 1280; // Será o 100% da escala
+Var
+nEscala : Double; // Vai me dar o percentual de Transformação escalar
+nPorcento : Integer; // Vai me dar em percentual inteiro o valor
+begin
+  {  With Form do
+    begin
+    if nTamOriginal <> Screen.Width then
+      begin
+        nEscala := ((Screen.Width-nTamOriginal)/nTamOriginal);
+        nPorcento := Round((nEscala*100) + 100);
+        Form.Width := Round(Form.Width * (nEscala+1));
+        Form.Height := Round(Form.Height * (nEscala+1));
+        Form.ScaleBy(nPorcento,100);
+      end;
+    end; }
 end;
 
 //initialization

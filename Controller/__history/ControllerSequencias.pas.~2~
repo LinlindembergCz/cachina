@@ -1,0 +1,34 @@
+unit ControllerSequencias;
+
+interface
+
+uses
+ControllerTabelas, sysUtils;
+
+type
+  TControllerSequencias = class( TControllerTabelas )
+  public
+    class function GetSequenciaRemessa: string;
+     class procedure IncrementarSequenciaRemessa;
+  end;
+
+implementation
+
+{ TControllerSequencias }
+
+uses GenericDAO;
+
+ class function TControllerSequencias.GetSequenciaRemessa: string;
+begin
+  result:=  TGenericDAO.GetValue('SequenciaNF','Especie=''REM'' ','isNull( Sequencia , 0 ) + 1');
+
+end;
+
+ class procedure TControllerSequencias.IncrementarSequenciaRemessa;
+begin
+    TGenericDAO.UpdateSQL( 'SequenciaNF',
+                            'Sequencia= Sequencia + 1',
+                            ' Especie= '+ quotedstr('REM') );
+end;
+
+end.

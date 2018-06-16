@@ -144,6 +144,20 @@ inherited FormOrcamentoListagem: TFormOrcamentoListagem
       ParentFont = False
       OnClick = SpeedButton5Click
     end
+    object lbregistros: TLabel
+      Left = 377
+      Top = 159
+      Width = 10
+      Height = 19
+      Anchors = [akTop, akRight]
+      Caption = '0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object GroupBox1: TGroupBox
       Left = 2
       Top = 5
@@ -157,9 +171,6 @@ inherited FormOrcamentoListagem: TFormOrcamentoListagem
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 0
-      DesignSize = (
-        896
-        89)
       object Label1: TLabel
         Left = 127
         Top = 21
@@ -215,20 +226,6 @@ inherited FormOrcamentoListagem: TFormOrcamentoListagem
         Width = 13
         Height = 13
         Caption = 'N'#186
-      end
-      object lbregistros: TLabel
-        Left = 813
-        Top = 58
-        Width = 10
-        Height = 19
-        Anchors = [akTop, akRight]
-        Caption = '0'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
       end
       object Label7: TLabel
         Left = 264
@@ -326,7 +323,7 @@ inherited FormOrcamentoListagem: TFormOrcamentoListagem
       end
     end
     object GroupBox4: TGroupBox
-      Left = 743
+      Left = 198
       Top = 136
       Width = 155
       Height = 43
@@ -353,8 +350,8 @@ inherited FormOrcamentoListagem: TFormOrcamentoListagem
       end
     end
     object GroupBox2: TGroupBox
-      Left = 552
-      Top = 136
+      Left = 7
+      Top = 135
       Width = 185
       Height = 43
       Caption = 'Total'

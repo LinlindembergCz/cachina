@@ -85,7 +85,7 @@ implementation
 { TControllerClientes }
 
 uses  GenericDAO, EntidadeFactory, Parcelar, ControllerPagamento, Produtos,
-  ProdutoListagem, ControllerParametros;//, EntradaListagem;
+  ProdutoListagem, ControllerParametros, ProdutosDetalhes, Principal;//, EntradaListagem;
 
 procedure TControllerEntrada.AlterarCompraParaBaixada(CodigoCompra: string);
 begin
@@ -306,6 +306,7 @@ var
   Count: Integer;
   DescricaoProduto: string;
   mResult: TModalResult;
+  Form:TForm;
 begin
    with ACBrNFe.NotasFiscais.Items[0].NFe do
    begin
@@ -317,100 +318,104 @@ begin
             CodigoProduto:= GetValue('Produtos', ' upper(Descricao)  = ' + quotedstr( uppercase( DescricaoProduto)) ,'Codigo');
             if CodigoProduto = '' then
             begin
-              application.CreateForm( TFormProdutoListagem, FormProdutoListagem );
-              FormProdutoListagem.lbdescricao.Caption:= DescricaoProduto;
+               application.CreateForm( TFormProdutoListagem, FormProdutoListagem );
+               FormProdutoListagem.lbdescricao.Caption:= DescricaoProduto;
 
-              if Pos( ' ', DescricaoProduto ) > 0 then
-                 DescricaoProduto:=  Copy( DescricaoProduto, 0 , Pos( ' ', DescricaoProduto ) - 1 );
+               if Pos( ' ', DescricaoProduto ) > 0 then
+                  DescricaoProduto:=  Copy( DescricaoProduto, 0 , Pos( ' ', DescricaoProduto ) - 1 );
 
-              FormProdutoListagem.srcEntidade.DataSet:= TGenericDAO.GetAll<TProdutos>( TProdutos.Create ,
-                                                       'Descricao LIKE ' + quotedstr( DescricaoProduto +'%'),
-                                                       'Codigo, Descricao');
-              mResult:= FormProdutoListagem.ShowModal;
+               FormProdutoListagem.srcEntidade.DataSet:= TGenericDAO.GetAll<TProdutos>( TProdutos.Create ,
+                                                        'Descricao LIKE ' + quotedstr( DescricaoProduto +'%'),
+                                                        'Codigo, Descricao');
+               mResult:= FormProdutoListagem.ShowModal;
 
-              if mResult = mrOk then
-              begin
-                CodigoProduto    := FormProdutoListagem.srcEntidade.DataSet.FieldByName('Codigo').AsString;
-                DescricaoProduto := FormProdutoListagem.srcEntidade.DataSet.FieldByName('Descricao').AsString;
-              end;
-              FormProdutoListagem.Close;
-              FormProdutoListagem.Free;
-              FormProdutoListagem := nil;
-
+               if mResult = mrOk then
+               begin
+                 CodigoProduto    := FormProdutoListagem.srcEntidade.DataSet.FieldByName('Codigo').AsString;
+                 DescricaoProduto := FormProdutoListagem.srcEntidade.DataSet.FieldByName('Descricao').AsString;
+               end;
+               FormProdutoListagem.Close;
+               FormProdutoListagem.Free;
+               FormProdutoListagem := nil;
             end;
 
-            if CodigoProduto = '' then
+            if (CodigoProduto = '') and (mResult <> mrOk) then
             begin
-               TGenericDAO.InsertSQL('Produtos',
+               Form := FormPrincipal.ShowForm(TFormProdutosDetalhes, nil, true, false );
+               with Form as TFormProdutosDetalhes do
+               begin
+                  btnInserir.Click;
 
-                           'CodigoFilial,'+
-                           'Tipo,'+
-                           'Descricao,'+
-                           'CodigoNCM,'+
-                           'CodigoCEST,'+
-                           'CodigoUnidade,'+
-                           'CustoCompra, '+
-                           'Ativo',
-                           '1 , '+
-                           ' ''MATERIAL'' , '+
-                           QuotedStr( Prod.xProd )+','+
-                           ' ( Select Codigo from TabelaNCM where CodigoNCM ='+ quotedstr(Prod.NCM) +')'+','+
-                           QuotedStr( Prod.CEST )+','+
-                           ' ( Select Codigo from UnidadeMedida where Descricao ='+ quotedstr(Prod.uCom) +')'+','+
-                           stringreplace( FloatToStr(Prod.vUnCom), ',','.',[])+' , '+
-                           quotedstr('S') );
+                  edtDescricao.Text     := Prod.xProd;
+                  edtCodigoCEST.Text    := Prod.CEST;
+                  cboCodigoNCM.KeyValue :=  Prod.NCM;
 
-               DescricaoProduto := Prod.xProd;
+                  Form.FormStyle:= fsNormal;
+                  Form.WindowState:= wsNormal;
+                  Form.Visible:= false;
+
+                  Form.ShowModal;
+
+                  DescricaoProduto := edtDescricao.Text;
+
+                  if Form<> nil then
+                     Form.Free;
+               end;
+
                CodigoProduto    := GetValue('Produtos', ' upper(Descricao)  = ' +
                                    quotedstr( uppercase( DescricaoProduto)) ,'Codigo');
 
-               showmessage( 'Produto "'+ Prod.xProd +'" cadastrado com sucesso!');
+               if CodigoProduto <> '' then
+                  showmessage( 'Produto "'+ DescricaoProduto +'" cadastrado com sucesso!');
             end;
 
-            FDataSetitems.append;
+            if CodigoProduto <> '' then
+            begin
+                FDataSetitems.append;
 
-            Count := FDataSetitems.RecordCount + 1;
+                Count := FDataSetitems.RecordCount + 1;
 
-            FDataSetitems.fieldByName('Ordem').Value            := Count;
-            FDataSetitems.fieldByName('Codigo').readonly        := false;
-            FDataSetitems.fieldByName('Codigo').Value           := Count;
-            FDataSetitems.fieldByName('CodigoFilial').asstring  := '1';
-            FDataSetitems.fieldByName('CodigoProduto').asstring := CodigoProduto;
-            FDataSetitems.fieldByName('CodigoEstoque').asstring := '1';
-            FDataSetitems.fieldByName('Quantidade').asstring    := FloatToStr(Prod.qCom);
-            FDataSetitems.fieldByName('Valor').asstring         := FloatToStr(Prod.vUnCom);
-            FDataSetitems.fieldByName('Desconto').asstring      := FloatToStr(Prod.vDesc);
-            FDataSetitems.fieldByName('Total').asstring         := FloatToStr(Prod.vProd);
+                FDataSetitems.fieldByName('Ordem').Value      := Count;
+                FDataSetitems.fieldByName('Codigo').readonly  := false;
+                FDataSetitems.fieldByName('Codigo').Value     := Count;
+                FDataSetitems.fieldByName('CodigoFilial').asstring  := '1';
+                FDataSetitems.fieldByName('CodigoProduto').asstring := CodigoProduto;
+                FDataSetitems.fieldByName('CodigoEstoque').asstring := '1';
+                FDataSetitems.fieldByName('Quantidade').asstring  := FloatToStr(Prod.qCom);
+                FDataSetitems.fieldByName('Valor').asstring       := FloatToStr(Prod.vUnCom);
+                FDataSetitems.fieldByName('Desconto').asstring    := FloatToStr(Prod.vDesc);
+                FDataSetitems.fieldByName('Total').asstring       := FloatToStr(Prod.vProd);
 
-            if ACBrNFe.NotasFiscais.Items[0].NFe.Emit.EnderEmit.UF <> 'RN' then
-               FDataSetitems.fieldByName('CFOP').asstring       := TControllerParametros.GetCFOPPadraoCompraForaEstado
-            else
-               FDataSetitems.fieldByName('CFOP').asstring       := TControllerParametros.GetCFOPPadraoCompra;
+                if ACBrNFe.NotasFiscais.Items[0].NFe.Emit.EnderEmit.UF <> 'RN' then
+                   FDataSetitems.fieldByName('CFOP').asstring     := TControllerParametros.GetCFOPPadraoCompraForaEstado
+                else
+                   FDataSetitems.fieldByName('CFOP').asstring     := TControllerParametros.GetCFOPPadraoCompra;
 
-            FDataSetitems.fieldByName('Descricao').asstring     := DescricaoProduto;
-            FDataSetitems.fieldByName('Fator').asstring         := '1';
+                FDataSetitems.fieldByName('Descricao').asstring   := DescricaoProduto;
+                FDataSetitems.fieldByName('Fator').asstring       := '1';
 
-            FDataSetitems.fieldByName('BaseICMS').asstring      := FloatToStr(Imposto.ICMS.vBC);
-            FDataSetitems.fieldByName('BaseIPI').asstring       := FloatToStr(Imposto.IPI.vBC);
-            FDataSetitems.fieldByName('BasePIS').asstring       := FloatToStr(Imposto.PIS.vBC);
-            FDataSetitems.fieldByName('BaseCOFINS').asstring    := FloatToStr(Imposto.COFINS.vBC);
+                FDataSetitems.fieldByName('BaseICMS').asstring    := FloatToStr(Imposto.ICMS.vBC);
+                FDataSetitems.fieldByName('BaseIPI').asstring     := FloatToStr(Imposto.IPI.vBC);
+                FDataSetitems.fieldByName('BasePIS').asstring     := FloatToStr(Imposto.PIS.vBC);
+                FDataSetitems.fieldByName('BaseCOFINS').asstring  := FloatToStr(Imposto.COFINS.vBC);
 
-            FDataSetitems.fieldByName('ValorICMS').asstring     := FloatToStr(Imposto.ICMS.vICMS);
-            FDataSetitems.fieldByName('ValorIPI').asstring      := FloatToStr(Imposto.IPI.vIPI);
-            FDataSetitems.fieldByName('ValorPIS').asstring      := FloatToStr(Imposto.PIS.vPIS);
-            FDataSetitems.fieldByName('ValorCOFINS').asstring   := FloatToStr(Imposto.COFINS.vCOFINS);
+                FDataSetitems.fieldByName('ValorICMS').asstring   := FloatToStr(Imposto.ICMS.vICMS);
+                FDataSetitems.fieldByName('ValorIPI').asstring    := FloatToStr(Imposto.IPI.vIPI);
+                FDataSetitems.fieldByName('ValorPIS').asstring    := FloatToStr(Imposto.PIS.vPIS);
+                FDataSetitems.fieldByName('ValorCOFINS').asstring := FloatToStr(Imposto.COFINS.vCOFINS);
 
-            FDataSetitems.fieldByName('PercentualICMS').asstring     := FloatToStr(Imposto.ICMS.pICMS);
-            FDataSetitems.fieldByName('PercentualIPI').asstring      := FloatToStr(Imposto.IPI.pIPI);
-            FDataSetitems.fieldByName('PercentualPIS').asstring      := FloatToStr(Imposto.PIS.pPIS);
-            FDataSetitems.fieldByName('PercentualCOFINS').asstring   := FloatToStr(Imposto.COFINS.pCOFINS);
+                FDataSetitems.fieldByName('PercentualICMS').asstring   := FloatToStr(Imposto.ICMS.pICMS);
+                FDataSetitems.fieldByName('PercentualIPI').asstring    := FloatToStr(Imposto.IPI.pIPI);
+                FDataSetitems.fieldByName('PercentualPIS').asstring    := FloatToStr(Imposto.PIS.pPIS);
+                FDataSetitems.fieldByName('PercentualCOFINS').asstring := FloatToStr(Imposto.COFINS.pCOFINS);
 
-            FDataSetitems.fieldByName('CST').asstring        := CSTICMSToString(Imposto.ICMS.CST);
-            FDataSetitems.fieldByName('CSTIPI').asstring        := CSTIPIToString(Imposto.IPI.CST);
-            FDataSetitems.fieldByName('CSTPIS').asstring        := CSTPISToString(Imposto.PIS.CST);
-            FDataSetitems.fieldByName('CSTCOFINS').asstring     := CSTCOFINSToString(Imposto.COFINS.CST);
+                FDataSetitems.fieldByName('CST').asstring       := CSTICMSToString(Imposto.ICMS.CST);
+                FDataSetitems.fieldByName('CSTIPI').asstring    := CSTIPIToString(Imposto.IPI.CST);
+                FDataSetitems.fieldByName('CSTPIS').asstring    := CSTPISToString(Imposto.PIS.CST);
+                FDataSetitems.fieldByName('CSTCOFINS').asstring := CSTCOFINSToString(Imposto.COFINS.CST);
 
-            FDataSetitems.post;
+                FDataSetitems.post;
+            end;
 
          end;
       end;

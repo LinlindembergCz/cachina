@@ -339,9 +339,9 @@
     <Transaction>2018/06/07 19:52:13.000.447,C:\Users\berg\Google Drive\Sistema\Unit1.pas=C:\Users\berg\Google Drive\Sistema\Views\Produtos\Alterar.pas</Transaction>
     <Transaction>2018/06/07 19:53:38.000.443,C:\Users\berg\Google Drive\Sistema\Views\Produtos\Alterar.pas=C:\Users\berg\Google Drive\Sistema\Views\Produtos\AlterarProdutos.pas</Transaction>
     <Transaction>2018/06/07 19:53:38.000.443,C:\Users\berg\Google Drive\Sistema\Views\Produtos\Alterar.dfm=C:\Users\berg\Google Drive\Sistema\Views\Produtos\AlterarProdutos.dfm</Transaction>
-    <Transaction>2018/06/10 10:58:49.775,C:\Users\berg\Google Drive\Sistema\Views\Tabelas\Sequencias.dfm=C:\Users\berg\Google Drive\Sistema\Views\Tabelas\SequenciaNotaFiscal.dfm</Transaction>
-    <Transaction>2018/06/10 10:58:49.775,C:\Users\berg\Google Drive\Sistema\Views\Tabelas\Sequencias.pas=C:\Users\berg\Google Drive\Sistema\Views\Tabelas\SequenciaNotaFiscal.pas</Transaction>
-    <Transaction>2018/06/10 11:00:26.314,=C:\Users\berg\Google Drive\Sistema\Unit1.pas</Transaction>
-    <Transaction>2018/06/10 11:02:36.106,C:\Users\berg\Google Drive\Sistema\Controller\ControllerSequencias.pas=C:\Users\berg\Google Drive\Sistema\Unit1.pas</Transaction>
+    <Transaction>2018/06/10 10:58:49.000.775,C:\Users\berg\Google Drive\Sistema\Views\Tabelas\Sequencias.dfm=C:\Users\berg\Google Drive\Sistema\Views\Tabelas\SequenciaNotaFiscal.dfm</Transaction>
+    <Transaction>2018/06/10 10:58:49.000.775,C:\Users\berg\Google Drive\Sistema\Views\Tabelas\Sequencias.pas=C:\Users\berg\Google Drive\Sistema\Views\Tabelas\SequenciaNotaFiscal.pas</Transaction>
+    <Transaction>2018/06/10 11:00:26.000.314,=C:\Users\berg\Google Drive\Sistema\Unit1.pas</Transaction>
+    <Transaction>2018/06/10 11:02:36.000.106,C:\Users\berg\Google Drive\Sistema\Controller\ControllerSequencias.pas=C:\Users\berg\Google Drive\Sistema\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

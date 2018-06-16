@@ -55,12 +55,12 @@ type
     lbSelecionado: TLabel;
     GroupBox2: TGroupBox;
     lbTotal: TLabel;
-    lbregistros: TLabel;
     Label7: TLabel;
     edtModelo: TEdit;
     Produto1: TMenuItem;
     Servios1: TMenuItem;
     chkSefaz: TCheckBox;
+    lbregistros: TLabel;
     procedure btnconsultarClick(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure btnSelecionarClick(Sender: TObject);
@@ -481,6 +481,8 @@ begin
 
    SomaTotal;
    TfloatField(srcEntidade.dataset.fieldbyname('TotalEntidade')).DisplayFormat := ',0.00;';
+
+   // Formprincipal.AjustaForm(self);
 end;
 
 procedure TFormOrcamentoListagem.Garantia1Click(Sender: TObject);

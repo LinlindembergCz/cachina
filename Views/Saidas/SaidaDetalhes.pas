@@ -247,7 +247,7 @@ begin
   CarregarProdutos;
   CarregarEstoques;
   AjustaTamanhoGrid;
-  MapperEntidade.EntidadeToComponent;
+ // MapperEntidade.EntidadeToComponent;
   edtQuantidade.Text := '1';
   edtFator.Text := '1';
   dateData.Date      := date;

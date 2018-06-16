@@ -174,8 +174,8 @@ begin
   DataSource.DataSet:= DataSet;
 
   Combobox.ListSource := DataSource;
-  Combobox.KeyField   := KeyField;
-  Combobox.ListField  := ListField;
+  Combobox.KeyField   := DataSet.Fields[0].FieldName;
+  Combobox.ListField  := DataSet.Fields[1].FieldName;
 end;
 
 {

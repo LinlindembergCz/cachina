@@ -749,36 +749,38 @@ begin
     DataSetClientes := TControllerClientes.GetClienteContatoCPF(CPFCNPJ);
     if (DataSetClientes <> nil) and (not DataSetClientes.IsEmpty) then
     begin
+      try
+         if length(SoNumeros(CPFCNPJ)) = 14 then
+            FormPrincipal.SelecionarContato( DataSetClientes.FieldByName('Codigo').AsString,
+                                             CPFContato,
+                                             NomeContato );
 
-      if length(SoNumeros(CPFCNPJ)) = 14 then
-         FormPrincipal.SelecionarContato( DataSetClientes.FieldByName('Codigo').AsString,
-                                          CPFContato,
-                                          NomeContato );
+         if (NomeContato <> '') and (CPFContato <> '') then
+         begin
+           lbContato.Caption := NomeContato +'  '+ CPFContato;
+           MapperEntidade.SendValueToFieldEntidade('Contato', lbContato.Caption  );
+         end;
 
-      if (NomeContato <> '') and (CPFContato <> '') then
-      begin
-        lbContato.Caption := NomeContato +'  '+ CPFContato;
-        MapperEntidade.SendValueToFieldEntidade('Contato', lbContato.Caption  );
+      finally
+          if DataSetClientes.fieldByName('Autorizado').AsString = 'SIM' then
+          begin
+             MapperEntidade.SendValueToFieldEntidade('CodigoCliente', DataSetClientes.FieldByName('Codigo').AsString);
+
+             edtCPFCNPJ.text       := DataSetClientes.FieldByName('CPFCNPJ').AsString;
+             cboClientes.KeyValue  := DataSetClientes.FieldByName('Codigo').AsString;
+             lbtelefone.caption    := DataSetClientes.FieldByName('Telefone').AsString;
+             lbrazao.caption       := DataSetClientes.FieldByName('RazaoSocial').AsString;
+             if DataSetClientes.fieldbyname('ContaAtrasada').asInteger > 0 then
+             begin
+                lbCNPJ.font.color := clred;
+                showmessage('Cliente possui conta em atraso!');
+             end
+             else
+                lbCNPJ.font.color := clblue;
+          end
+          else
+             TDialogs.MensagemAtencao('Cliente ou Contato não autorizado!');
       end;
-
-      if DataSetClientes.fieldByName('Autorizado').AsString = 'SIM' then
-      begin
-        MapperEntidade.SendValueToFieldEntidade('CodigoCliente', DataSetClientes.FieldByName('Codigo').AsString);
-
-        edtCPFCNPJ.text       := DataSetClientes.FieldByName('CPFCNPJ').AsString;
-        cboClientes.KeyValue  := DataSetClientes.FieldByName('Codigo').AsString;
-        lbtelefone.caption    := DataSetClientes.FieldByName('Telefone').AsString;
-        lbrazao.caption       := DataSetClientes.FieldByName('RazaoSocial').AsString;
-        if DataSetClientes.fieldbyname('ContaAtrasada').asInteger > 0 then
-        begin
-           lbCNPJ.font.color := clred;
-           showmessage('Cliente possui conta em atraso!');
-        end
-        else
-           lbCNPJ.font.color := clblue;
-      end
-      else
-        TDialogs.MensagemAtencao('Cliente ou Contato não autorizado!');
     end
     else
     if TDialogs.ConfirmarMensagem('Este cliente não foi encontrado. Deseja cadastrar ?') then
@@ -954,7 +956,8 @@ end;
 procedure TFormOrcamentoDetalhes.FormActivate(Sender: TObject);
 begin
   inherited;
-  ConsultaOrcamentoFormaPagamento(srcEntidade.DataSet.fieldByname('Codigo').asstring)
+  ConsultaOrcamentoFormaPagamento(srcEntidade.DataSet.fieldByname('Codigo').asstring);
+
 end;
 
 procedure TFormOrcamentoDetalhes.FormCreate(Sender: TObject);
@@ -987,6 +990,7 @@ begin
   FillLookUpCombobox( tpPessoa, cboClientes,'Codigo','Nome', 'TIPO=''CLIENTE''' );
 
   CarregarProdutos;
+  //Formprincipal.AjustaForm(self);
 end;
 
 procedure TFormOrcamentoDetalhes.FormKeyDown(Sender: TObject; var Key: Word;
@@ -1216,7 +1220,8 @@ begin
   inherited;
   cpfcnpj := SoNumeros(edtCPFCNPJ.text);
 
-  if (edtCPFCNPJ.text <> '') and (cpfcnpj <> '00000000000') then
+  if (edtCPFCNPJ.text <> '') //and (cpfcnpj <> '00000000000')
+  then
   begin
      if length(cpfcnpj) = 11 then
      begin
@@ -1228,7 +1233,6 @@ begin
         end;
      end
      else
-     if length(cpfcnpj) = 14 then
      begin
          if not UtilsString.cnpj(cpfcnpj) then
         begin
@@ -1238,9 +1242,8 @@ begin
 
         edtCPFCNPJ.text:=copy(cpfcnpj,0,2)+'.'+copy(cpfcnpj,3,3)+'.'+copy(cpfcnpj,6,3)+'/'+copy(cpfcnpj,9,4)+'-'+copy(cpfcnpj,13,2);
      end;
+     VerificarCPFCNPJ(edtCPFCNPJ.text, edtPlaca.text);
   end;
-  if (cpfcnpj <> '00000000000') then
-      VerificarCPFCNPJ(edtCPFCNPJ.text, edtPlaca.text);
 end;
 
 procedure TFormOrcamentoDetalhes.edtDescontoItemExit(Sender: TObject);

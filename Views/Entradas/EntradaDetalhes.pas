@@ -46,12 +46,12 @@ type
     edtFator: TEdit;
     edtCFOP: TEdit;
     Label14: TLabel;
-    SpeedButton1: TSpeedButton;
+    btnImportar: TSpeedButton;
     OpenDialog1: TOpenDialog;
-    SpeedButton2: TSpeedButton;
+    btpPagamento: TSpeedButton;
     Label20: TLabel;
     edtChaveAcesso: TEdit;
-    SpeedButton3: TSpeedButton;
+    btnDevolver: TSpeedButton;
     srcPagamentos: TDataSource;
     edtEspecie: TEdit;
     Label21: TLabel;
@@ -108,10 +108,10 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure CornerButton2Click(Sender: TObject);
     procedure edtCodigoItemChange(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
+    procedure btnImportarClick(Sender: TObject);
+    procedure btpPagamentoClick(Sender: TObject);
     procedure CornerButton1Click(Sender: TObject);
-    procedure SpeedButton3Click(Sender: TObject);
+    procedure btnDevolverClick(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
   private
@@ -130,6 +130,7 @@ type
     procedure CarregarEstoques;
     procedure SalvarItens(CodigoEntrada: string);
     procedure MapearCamposEntrada;
+    procedure Habilitarbotoes;
   public
     { Public declarations }
   end;
@@ -292,6 +293,8 @@ begin
   SalvarItens(CodigoEntrada);
   GetEntrada(CodigoEntrada);
   AjustaTamanhoGrid;
+  btnImportar.Enabled:= false;
+  Habilitarbotoes;
 end;
 
 procedure TFormEntradaDetalhes.SalvarItens(CodigoEntrada: string);
@@ -313,7 +316,7 @@ begin
 end;
 
 
-procedure TFormEntradaDetalhes.SpeedButton1Click(Sender: TObject);
+procedure TFormEntradaDetalhes.btnImportarClick(Sender: TObject);
 var
   Arquivo, CodigoFonecedor: string;
 begin
@@ -351,7 +354,7 @@ begin
   CarregarProdutos;
 end;
 
-procedure TFormEntradaDetalhes.SpeedButton2Click(Sender: TObject);
+procedure TFormEntradaDetalhes.btpPagamentoClick(Sender: TObject);
 begin
   inherited;
   if edtCodigo.Text <> '' then
@@ -367,7 +370,7 @@ begin
   end;
 end;
 
-procedure TFormEntradaDetalhes.SpeedButton3Click(Sender: TObject);
+procedure TFormEntradaDetalhes.btnDevolverClick(Sender: TObject);
 begin
   inherited;
   if ( edtCodigo.Text<> '') and (edtChaveAcesso.Text <> '') then
@@ -406,12 +409,14 @@ begin
   ConsultarDataSetItemEntrada('0');
   inherited;
   AjustaTamanhoGrid;
-  MapperEntidade.EntidadeToComponent;
+  //MapperEntidade.EntidadeToComponent;
   edtQuantidade.Text  := '1';
   edtFator.Text       := '1';
   dateData.Date       := date;
   dateDataEmissao.Date:= date;
   cboSituacao.ItemIndex := 0;
+  btnImportar.Enabled:= true;
+  Habilitarbotoes;
 end;
 
 procedure  TFormEntradaDetalhes.CarregarProdutos;
@@ -438,6 +443,13 @@ begin
   srcItens.DataSet.Delete;
 end;
 
+procedure TFormEntradaDetalhes.Habilitarbotoes;
+begin
+    btpPagamento.Enabled := (cboSituacao.Text = 'ABERTA') and (edtCodigo.Text<> '');
+    btnDevolver.Enabled  := btpPagamento.Enabled;
+
+end;
+
 procedure TFormEntradaDetalhes.CornerButton2Click(Sender: TObject);
 var
   CodigoEntrada: string;
@@ -453,7 +465,11 @@ begin
     ConsultarDataSetItemEntrada(CodigoEntrada);
     ConsultarDataSetPagamento(CodigoEntrada);
     Alterar;
+    Habilitarbotoes;
+
   end;
+
+
 end;
 
 procedure TFormEntradaDetalhes.edtCodigoItemChange(Sender: TObject);
@@ -538,7 +554,6 @@ begin
 
 end;
 
-
 procedure TFormEntradaDetalhes.MapearCamposEntrada;
 begin
   with MapperEntidade do
@@ -547,20 +562,20 @@ begin
     associar('Data', dateData);
     associar('CodigoFornecedor', cboCodigoFornecedor);
     associar('NumeroDocumento', edtNumeroDocumento);
-    //associar('CodigoFormaPagamento', cboCodigoFormaPagamento);
+  //associar('CodigoFormaPagamento', cboCodigoFormaPagamento);
     associar('ValorFrete', edtValorFrete);
-    //associar('ValorCustofinanceiro', edtValorCustofinanceiro);
-    //associar('ValorDespesas', edtValorDespesas);
+  //associar('ValorCustofinanceiro', edtValorCustofinanceiro);
+  //associar('ValorDespesas', edtValorDespesas);
     associar('TipoFrete', cboTipoFrete);
     associar('DataEmissao', dateDataEmissao);
     associar('ValorDocumento', edtValorDocumento);
     associar('ChaveAcesso', edtChaveAcesso);
-    //associar('ValorSeguro', edtValorSeguro);
-    //associar('ValorIPI', edtValorIPI);
-    //associar('ValorPIS', edtValorPIS);
-    //associar('ValorCONFINS', edtValorCONFINS);
-    //associar('ValorICMS', edtValorICMS);
-    //associar('ValorICMSSubstituto', edtValorICMSSubstituto);
+  //associar('ValorSeguro', edtValorSeguro);
+  //associar('ValorIPI', edtValorIPI);
+  //associar('ValorPIS', edtValorPIS);
+  //associar('ValorCONFINS', edtValorCONFINS);
+  //associar('ValorICMS', edtValorICMS);
+  //associar('ValorICMSSubstituto', edtValorICMSSubstituto);
     associar('ValorDesconto', edtValorDesconto);
     associar('Situacao', cboSituacao);
     associar('Especie', edtEspecie);
