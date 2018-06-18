@@ -96,7 +96,7 @@ begin
     Controller.Inserir(MapperItemTabelaPreco.Entidade);
     srcItens.dataSet.next;
   end;
- //ConsultarDataSetItemEntrada(CodigoEntrada);
+  //ConsultarDataSetItemEntrada(CodigoEntrada);
 end;
 
 procedure TFormTabelaPrecoDetalhes.FormCreate(Sender: TObject);
@@ -143,12 +143,9 @@ var
 begin
   with MapperItemTabelaPreco do
   begin
-     Entidade := TEntidadeFactory.Criar(tpItemTabelaPreco);
-
+     Entidade := TEntidadeFactory.Criar(tpItemEntrada);
      DataSet := srcItens.DataSet;
-
      ComponentToEntidade;
-
      srcItens.DataSet.append;
      SendValueToFieldDataSet('Descricao', cboProduto.text);
      SendEntidadeToDataSet;
@@ -195,7 +192,7 @@ begin
                         ' inner join Produtos prod on prod.codigo = T1.CodigoProduto',
                       '"CodigoTabelaPreco"=' +
                       ifthen(CodigoTabelaPreco <> '',CodigoTabelaPreco,'0') ,
-                      'T1.*, prod."Descricao"');
+                      '*');
 
   MapperItemTabelaPreco.Dataset:= srcItens.Dataset;
 

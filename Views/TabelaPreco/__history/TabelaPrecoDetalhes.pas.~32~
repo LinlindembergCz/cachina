@@ -195,7 +195,7 @@ begin
                         ' inner join Produtos prod on prod.codigo = T1.CodigoProduto',
                       '"CodigoTabelaPreco"=' +
                       ifthen(CodigoTabelaPreco <> '',CodigoTabelaPreco,'0') ,
-                      'T1.*, prod."Descricao"');
+                      'T1.*, prod.Descricao ');
 
   MapperItemTabelaPreco.Dataset:= srcItens.Dataset;
 

@@ -12,36 +12,18 @@ type
     FDescricao: string;
     FCodigo: Integer;
     FCodigoFilial: Integer;
-    procedure SetCodigo(const Value: Integer);
-    procedure SetCodigoFilial(const Value: Integer);
-    procedure SetDescricao(const Value: string);
   public
     [KeyField('Codigo')]
-    property Codigo: Integer read FCodigo write SetCodigo;
+    property Codigo: Integer read FCodigo write FCodigo;
     [FieldName('CodigoFilial')]
-    property CodigoFilial: Integer read FCodigoFilial write SetCodigoFilial;
+    property CodigoFilial: Integer read FCodigoFilial write FCodigoFilial;
     [FieldName('Descricao')]
-    property Descricao: string read FDescricao write SetDescricao;
+    property Descricao: string read FDescricao write FDescricao;
   end;
 
 implementation
 
 { TCentroCusto }
-
-procedure TCentroCusto.SetCodigo(const Value: Integer);
-begin
-  FCodigo := Value;
-end;
-
-procedure TCentroCusto.SetCodigoFilial(const Value: Integer);
-begin
-  FCodigoFilial := Value;
-end;
-
-procedure TCentroCusto.SetDescricao(const Value: string);
-begin
-  FDescricao := Value;
-end;
 
 End.
 

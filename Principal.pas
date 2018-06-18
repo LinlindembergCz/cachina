@@ -85,6 +85,7 @@ type
     Parametros1: TMenuItem;
     ActParametrosSistema: TAction;
     Image2: TImage;
+    ActTabelaPreco: TAction;
     procedure ActFuncionariosExecute(Sender: TObject);
     procedure ActProdutosExecute(Sender: TObject);
     procedure ActClientesExecute(Sender: TObject);
@@ -125,6 +126,7 @@ type
     procedure ActParametrosSistemaExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure ActTabelaPrecoExecute(Sender: TObject);
   private
     { Private declarations }
      FormList: TStringList;
@@ -183,7 +185,7 @@ uses
   ControllerPermissoes, CargoDetalhes, FuncionariosComboboEditDialog,
   CentroCustoDetalhes, RelOrcamento2, TabelaNCMDetalhes, TabelaNFSeDetalhes,
   RelBalancoContabil, GenericDAO, UnidadeMedida, Indicadores,
-  ParametrosDetalhes, PlanoContasDetalhes, Sequencias;
+  ParametrosDetalhes, PlanoContasDetalhes, Sequencias, TabelaPrecoDetalhes;
 
 procedure TFormPrincipal.FormCreate(Sender: TObject);
 begin
@@ -421,6 +423,11 @@ end;
 procedure TFormPrincipal.ActTabelaNFSeExecute(Sender: TObject);
 begin
   ShowForm(TFormTabelaNFSeDetalhes, ActTabelaNFSe, true);
+end;
+
+procedure TFormPrincipal.ActTabelaPrecoExecute(Sender: TObject);
+begin
+  ShowForm(TFormTabelaPrecoDetalhes, ActTabelaPreco );
 end;
 
 procedure TFormPrincipal.ActUnidadeMedidaExecute(Sender: TObject);

@@ -16,7 +16,6 @@ type
     FValidade: TDatetime;
   public
     [KeyField('Codigo')]
-    [FieldName('Codigo')]
     property Codigo: Integer read FCodigo write FCodigo;
     [FieldName('CodigoFilial')]
     property CodigoFilial: Integer read FCodigoFilial write FCodigoFilial;
@@ -28,7 +27,7 @@ type
     property CodigoFormaPagamento:integer read FCodigoFormaPagamento write FCodigoFormaPagamento;
   end;
 
-  [TableName('ItemTabelaPreco ')]
+  [TableName('TItemTabelaPreco ')]
   TItemTabelaPreco = class(TGenericEntidade)
   private
     FCodigo: integer;

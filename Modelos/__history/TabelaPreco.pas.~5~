@@ -16,36 +16,23 @@ type
     FValidade: TDatetime;
   public
     [KeyField('Codigo')]
-    [FieldName('Codigo')]
     property Codigo: Integer read FCodigo write FCodigo;
     [FieldName('CodigoFilial')]
     property CodigoFilial: Integer read FCodigoFilial write FCodigoFilial;
-    [FieldName('Descricao')]
     property Descricao: string read FDescricao write FDescricao;
-    [FieldName('Validade')]
     property Validade:TDatetime read FValidade write FValidade;
-    [FieldName('CodigoFormaPagamento')]
     property CodigoFormaPagamento:integer read FCodigoFormaPagamento write FCodigoFormaPagamento;
   end;
 
-  [TableName('ItemTabelaPreco ')]
+  [TableName('TItemTabelaPreco ')]
   TItemTabelaPreco = class(TGenericEntidade)
   private
-    FCodigo: integer;
-    FCodigoFilial:integer;
     FCodigoTabelaPreco: integer;
     FPreco: double;
     FCodigoProduto: Integer;
   public
-    [KeyField('Codigo')]
-    property Codigo :integer read FCodigo write FCodigo;
-    [FieldName('CodigoFilial')]
-    property CodigoFilial:integer read FCodigoFilial write FCodigoFilial;
-    [FieldName('CodigoTabelaPreco')]
     property CodigoTabelaPreco: integer read FCodigoTabelaPreco write FCodigoTabelaPreco;
-    [FieldName('CodigoProduto')]
     property CodigoProduto:Integer read FCodigoProduto write FCodigoProduto;
-    [FieldName('Preco')]
     property Preco:double read FPreco write FPreco;
   end;
 

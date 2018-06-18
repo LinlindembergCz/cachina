@@ -408,7 +408,6 @@ procedure TFormEntradaDetalhes.btnInserirClick(Sender: TObject);
 begin
   ConsultarDataSetItemEntrada('0');
   inherited;
-  AjustaTamanhoGrid;
   //MapperEntidade.EntidadeToComponent;
   edtQuantidade.Text  := '1';
   edtFator.Text       := '1';
@@ -484,8 +483,6 @@ begin
 end;
 
 procedure TFormEntradaDetalhes.FormCreate(Sender: TObject);
-var
-  CodigEntrada: string;
 begin
   Controller         := TControllerEntrada.Create;
   ControllerProdutos := TControllerProdutos.Create;

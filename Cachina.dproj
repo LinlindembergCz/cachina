@@ -427,7 +427,7 @@
         <DCCReference Include="Controller\ControllerParametros.pas"/>
         <DCCReference Include="Modelos\TabelaPreco.pas"/>
         <DCCReference Include="Views\TabelaPreco\TabelaPrecoDetalhes.pas">
-            <Form>FormTabelaPreco</Form>
+            <Form>FormTabelaPrecoDetalhes</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Views\Produtos\AlterarProdutos.pas">

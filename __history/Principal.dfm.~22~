@@ -2880,9 +2880,6 @@ object FormPrincipal: TFormPrincipal
           end
           item
             Action = ActFornecedores
-          end
-          item
-            Action = ActTabelaPreco
           end>
         TextColor = clRed
       end
@@ -2891,6 +2888,12 @@ object FormPrincipal: TFormPrincipal
         Color = 15400959
         Collapsed = False
         Items = <
+          item
+            Action = ActMarcas
+          end
+          item
+            Action = ActModelos
+          end
           item
             Action = ActFamilia
             Caption = 'Familia de produto'
@@ -2903,6 +2906,9 @@ object FormPrincipal: TFormPrincipal
           end
           item
             Action = ActProdutos
+          end
+          item
+            Action = ActParametros
           end>
         TextColor = clRed
       end
@@ -2946,7 +2952,6 @@ object FormPrincipal: TFormPrincipal
     SelectedButtonColor = 15132390
     TabOrder = 0
     StyleElements = [seBorder]
-    ExplicitLeft = -6
   end
   object ActionList1: TActionList
     Left = 552
@@ -3068,10 +3073,6 @@ object FormPrincipal: TFormPrincipal
     object ActParametrosSistema: TAction
       Caption = 'ActParametrosSistema'
       OnExecute = ActParametrosSistemaExecute
-    end
-    object ActTabelaPreco: TAction
-      Caption = 'Tabela de Pre'#231'o'
-      OnExecute = ActTabelaPrecoExecute
     end
   end
   object MainMenu1: TMainMenu

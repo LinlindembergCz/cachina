@@ -92,7 +92,7 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
     end
     object grdItens: TDBGrid
       Left = 8
-      Top = 180
+      Top = 184
       Width = 663
       Height = 290
       DataSource = srcItens

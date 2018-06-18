@@ -1,15 +1,14 @@
 inherited FormTabelaPreco: TFormTabelaPreco
   Caption = 'FormTabelaPreco'
   ClientHeight = 531
-  ClientWidth = 687
-  ExplicitWidth = 703
+  ClientWidth = 684
+  ExplicitWidth = 700
   ExplicitHeight = 569
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Width = 687
+    Width = 684
     Height = 482
-    ExplicitTop = 50
     ExplicitWidth = 687
     ExplicitHeight = 482
     object lbDataEmissao: TLabel
@@ -26,7 +25,7 @@ inherited FormTabelaPreco: TFormTabelaPreco
       ParentFont = False
     end
     object Label4: TLabel
-      Left = 280
+      Left = 392
       Top = 23
       Width = 121
       Height = 13
@@ -39,7 +38,7 @@ inherited FormTabelaPreco: TFormTabelaPreco
       ParentFont = False
     end
     object Label1: TLabel
-      Left = 8
+      Left = 80
       Top = 23
       Width = 55
       Height = 13
@@ -53,7 +52,7 @@ inherited FormTabelaPreco: TFormTabelaPreco
     end
     object Label11: TLabel
       Left = 8
-      Top = 84
+      Top = 71
       Width = 45
       Height = 13
       Caption = 'Produto'
@@ -65,8 +64,8 @@ inherited FormTabelaPreco: TFormTabelaPreco
       ParentFont = False
     end
     object Label12: TLabel
-      Left = 456
-      Top = 84
+      Left = 563
+      Top = 72
       Width = 32
       Height = 13
       Caption = 'Pre'#231'o'
@@ -78,17 +77,30 @@ inherited FormTabelaPreco: TFormTabelaPreco
       ParentFont = False
     end
     object SpeedButton3: TSpeedButton
-      Left = 427
-      Top = 103
+      Left = 522
+      Top = 87
       Width = 23
       Height = 21
       Caption = '...'
     end
+    object Label2: TLabel
+      Left = 8
+      Top = 23
+      Width = 38
+      Height = 13
+      Caption = 'Codigo'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object grdItens: TDBGrid
       Left = 8
-      Top = 144
-      Width = 777
-      Height = 330
+      Top = 117
+      Width = 663
+      Height = 357
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -115,15 +127,14 @@ inherited FormTabelaPreco: TFormTabelaPreco
           Visible = True
         end>
     end
-    object Edit1: TEdit
-      Left = 8
+    object edtDescricao: TEdit
+      Left = 80
       Top = 42
-      Width = 257
+      Width = 297
       Height = 21
       TabOrder = 1
-      Text = 'Edit1'
     end
-    object dateDataEmissao: TDateTimePicker
+    object dateValidade: TDateTimePicker
       Left = 576
       Top = 41
       Width = 95
@@ -134,9 +145,9 @@ inherited FormTabelaPreco: TFormTabelaPreco
       TabOrder = 2
     end
     object cboFormaPagamento: TComboBox
-      Left = 280
+      Left = 392
       Top = 42
-      Width = 273
+      Width = 170
       Height = 21
       Style = csDropDownList
       DropDownCount = 20
@@ -150,8 +161,8 @@ inherited FormTabelaPreco: TFormTabelaPreco
     end
     object cboProduto: TDBLookupComboBox
       Left = 8
-      Top = 103
-      Width = 417
+      Top = 90
+      Width = 508
       Height = 21
       DropDownRows = 15
       DropDownWidth = 400
@@ -160,16 +171,28 @@ inherited FormTabelaPreco: TFormTabelaPreco
       TabOrder = 4
     end
     object edtValor: TEdit
-      Left = 453
-      Top = 102
-      Width = 72
+      Left = 560
+      Top = 90
+      Width = 111
       Height = 21
       Cursor = crIBeam
       TabOrder = 5
     end
+    object edtCodigo: TEdit
+      Left = 8
+      Top = 42
+      Width = 55
+      Height = 21
+      TabOrder = 6
+    end
   end
   inherited Panel2: TPanel
-    Width = 687
+    Width = 684
+    ExplicitWidth = 687
+    inherited btnSair: TSpeedButton
+      Left = 600
+      ExplicitLeft = 600
+    end
   end
   inherited srcEntidade: TDataSource
     Left = 552

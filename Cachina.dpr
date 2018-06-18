@@ -154,7 +154,7 @@ uses
   Parametros in 'Modelos\Parametros.pas',
   ControllerParametros in 'Controller\ControllerParametros.pas',
   TabelaPreco in 'Modelos\TabelaPreco.pas',
-  TabelaPrecoDetalhes in 'Views\TabelaPreco\TabelaPrecoDetalhes.pas' {FormTabelaPreco},
+  TabelaPrecoDetalhes in 'Views\TabelaPreco\TabelaPrecoDetalhes.pas' {FormTabelaPrecoDetalhes},
   AlterarProdutos in 'Views\Produtos\AlterarProdutos.pas' {FormAlterarProdutos},
   ControllerSequencias in 'Controller\ControllerSequencias.pas';
 
