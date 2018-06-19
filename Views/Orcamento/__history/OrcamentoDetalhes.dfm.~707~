@@ -3,7 +3,6 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
   ClientHeight = 562
   ClientWidth = 874
   OnActivate = FormActivate
-  ExplicitTop = -13
   ExplicitWidth = 890
   ExplicitHeight = 600
   PixelsPerInch = 96
@@ -13,9 +12,22 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
     Width = 874
     Height = 511
     Anchors = [akLeft, akRight, akBottom]
-    ExplicitTop = 52
+    ExplicitTop = 51
     ExplicitWidth = 874
     ExplicitHeight = 511
+    object Label7: TLabel
+      Left = 15
+      Top = 487
+      Width = 13
+      Height = 13
+      Caption = '%'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object Label8: TLabel
       Left = 338
       Top = 464
@@ -29,26 +41,60 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object lbVincularFuncionario: TLabel
+      Left = 15
+      Top = 463
+      Width = 203
+      Height = 13
+      Caption = 'F10 - Vincular funcion'#225'rio ao servi'#231'o'
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lbTotal: TLabel
+      Left = 540
+      Top = 464
+      Width = 59
+      Height = 33
+      Alignment = taRightJustify
+      Caption = '0,00'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -27
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object edtDesconto: TEdit
+      Left = 34
+      Top = 482
+      Width = 52
+      Height = 21
+      Cursor = crIBeam
+      TabOrder = 0
+    end
     object TabControl1: TPageControl
       Left = 1
       Top = 1
       Width = 872
-      Height = 509
-      ActivePage = TabSheet2
-      Align = alClient
+      Height = 457
+      ActivePage = TabSheet1
+      Align = alTop
+      Anchors = [akLeft, akTop, akRight, akBottom]
       DoubleBuffered = True
       ParentDoubleBuffered = False
-      TabOrder = 0
-      ExplicitLeft = 2
-      ExplicitHeight = 457
+      TabOrder = 1
       object TabSheet1: TTabSheet
         Caption = 'Dados do or'#231'amento'
         ExplicitLeft = 5
         ExplicitTop = 27
-        ExplicitHeight = 429
         DesignSize = (
           864
-          481)
+          429)
         object Label13: TLabel
           Left = 3
           Top = 4
@@ -89,8 +135,8 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
           ParentFont = False
         end
         object Label42: TLabel
-          Left = 10
-          Top = 189
+          Left = 3
+          Top = 182
           Width = 77
           Height = 16
           Caption = 'Observa'#231#227'o'
@@ -143,20 +189,6 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object lbTotal: TLabel
-          Left = 699
-          Top = 166
-          Width = 59
-          Height = 33
-          Alignment = taRightJustify
-          Caption = '0,00'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -27
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           ParentFont = False
@@ -313,9 +345,9 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
         end
         object grdItens: TDBGrid
           Left = 206
-          Top = 297
+          Top = 304
           Width = 646
-          Height = 181
+          Height = 111
           Anchors = [akLeft, akTop, akRight, akBottom]
           Color = clWhite
           DataSource = srcItens
@@ -411,9 +443,9 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
         end
         object memoObservacao: TMemo
           Left = 3
-          Top = 211
+          Top = 204
           Width = 197
-          Height = 268
+          Height = 211
           TabStop = False
           Anchors = [akLeft, akTop, akBottom]
           Font.Charset = DEFAULT_CHARSET
@@ -720,7 +752,6 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
       object TabSheet2: TTabSheet
         Caption = 'Faturamento'
         OnShow = TabSheet2Show
-        ExplicitHeight = 429
         object Label18: TLabel
           Left = 333
           Top = 215
@@ -963,7 +994,6 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
         Caption = 'Vistoria'
         ImageIndex = 2
         OnShow = TabSheet3Show
-        ExplicitHeight = 429
         object Label20: TLabel
           Left = 1
           Top = 17

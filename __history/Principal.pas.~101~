@@ -214,36 +214,24 @@ begin
   begin
     application.CreateForm( FormClass , Form );
     if Modal then
-    begin
        if Showing then
-       begin
-          Form.ShowModal;
-       end;
-    end
+          Form.ShowModal
     else
     begin
        FormList.AddObject( FormClass.ClassName ,  Form );
        if Showing then
-       begin
           Form.Show;
-       end;
     end;
     result := Form;
   end
   else
   begin
     if Modal then
-    begin
       if Showing then
-      begin
-         Form.ShowModal;
-      end;
-    end
+       Form.ShowModal
     else
     if Showing then
-    begin
        Tform( FormList.Objects[i] ).Show;
-    end;
     result := Tform( FormList.Objects[i] );
   end;
 end;

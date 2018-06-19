@@ -3,7 +3,6 @@ inherited FormRecebimentoDetalhes: TFormRecebimentoDetalhes
   ClientHeight = 617
   ClientWidth = 1252
   OnActivate = FormActivate
-  ExplicitLeft = -202
   ExplicitWidth = 1268
   ExplicitHeight = 655
   PixelsPerInch = 96
@@ -19,6 +18,8 @@ inherited FormRecebimentoDetalhes: TFormRecebimentoDetalhes
       ExplicitWidth = 1250
       ExplicitHeight = 566
       inherited TabSheet1: TTabSheet
+        ExplicitLeft = 0
+        ExplicitTop = 0
         ExplicitWidth = 1242
         ExplicitHeight = 538
         inherited grdEntidade: TDBGrid
@@ -518,6 +519,10 @@ inherited FormRecebimentoDetalhes: TFormRecebimentoDetalhes
           TabOrder = 0
           object TabSheet4: TTabSheet
             Caption = 'Dados'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object lbData: TLabel
               Left = 11
               Top = 3
@@ -895,6 +900,10 @@ inherited FormRecebimentoDetalhes: TFormRecebimentoDetalhes
             Caption = 'Or'#231'amento'
             ImageIndex = 1
             OnShow = TabSheet5Show
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Grid1: TDBGrid
               Left = 0
               Top = 0
@@ -1025,8 +1034,8 @@ inherited FormRecebimentoDetalhes: TFormRecebimentoDetalhes
       ExplicitLeft = 932
     end
     object BitBtn2: TSpeedButton
-      Left = 717
-      Top = 1
+      Left = 568
+      Top = 2
       Width = 105
       Height = 42
       Caption = 'Imprimir'

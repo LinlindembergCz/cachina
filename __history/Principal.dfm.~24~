@@ -2946,6 +2946,7 @@ object FormPrincipal: TFormPrincipal
     SelectedButtonColor = 15132390
     TabOrder = 0
     StyleElements = [seBorder]
+    ExplicitLeft = -6
   end
   object ActionList1: TActionList
     Left = 552

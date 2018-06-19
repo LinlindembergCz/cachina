@@ -216,9 +216,7 @@ begin
     if Modal then
     begin
        if Showing then
-       begin
-          Form.ShowModal;
-       end;
+          Form.ShowModal
     end
     else
     begin

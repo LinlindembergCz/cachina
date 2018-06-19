@@ -20,7 +20,7 @@ type
     Label2: TLabel;
     edtCodigo: TEdit;
     srcItens: TDataSource;
-    btnAdicionaProduto: TSpeedButton;
+    BitBtn1: TSpeedButton;
     CornerButton1: TSpeedButton;
     GroupBox1: TGroupBox;
     Label11: TLabel;
@@ -33,7 +33,7 @@ type
     edtDesconto: TEdit;
     SpeedButton1: TSpeedButton;
     procedure FormCreate(Sender: TObject);
-    procedure btnAdicionaProdutoClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
     procedure cboProdutoCloseUp(Sender: TObject);
@@ -62,7 +62,7 @@ implementation
 
 uses DBUtils, EntidadeFactory, ControllerTabelas;
 
-procedure TFormTabelaPrecoDetalhes.btnAdicionaProdutoClick(Sender: TObject);
+procedure TFormTabelaPrecoDetalhes.BitBtn1Click(Sender: TObject);
 begin
   if cboProduto.Text<> '' then
   begin
@@ -112,25 +112,12 @@ var
 DatasetProduto: Tdataset;
 begin
   inherited;
-  try
-     DatasetProduto := cboProduto.ListSource.DataSet;
-     DatasetProduto.DisableControls;
-     DatasetProduto.first;
-     while not DatasetProduto.Eof do
-     begin
-        if DatasetProduto.FieldByName('Descricao').AsString <> '' then
-        begin
-           edtCodigoProduto.Text:= DatasetProduto.FieldByName('Codigo').AsString;
-           if edtPreco.text <> '0' then
-           begin
-              btnAdicionaProduto.Click;
-           end;
-        end;
-        DatasetProduto.next;
-     end;
-  finally
-      DatasetProduto.first;
-      DatasetProduto.enableControls;
+  DatasetProduto := cboProduto.DataSource.DataSet;
+  DatasetProduto.first;
+  while not DatasetProduto.Eof do
+  begin
+     edtCodigoProduto.Text:= DatasetProduto.FieldByName('Codigo').AsString;
+     DatasetProduto.next;
   end;
 end;
 
@@ -187,11 +174,7 @@ begin
 
      ComponentToEntidade;
 
-     if not srcItens.DataSet.Locate('CodigoProduto',edtCodigoProduto.Text,[] ) then
-        srcItens.DataSet.append
-     else
-        srcItens.DataSet.edit;
-
+     srcItens.DataSet.append;
      SendValueToFieldDataSet('Descricao', cboProduto.text);
      SendEntidadeToDataSet;
      srcItens.DataSet.Post;

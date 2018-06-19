@@ -732,7 +732,10 @@ begin
       srcItens.DataSet.fieldbyname('Selecionado').asstring :='X';
       srcItens.DataSet.Post;
     end;
+
+    lbVincularFuncionario.Enabled:= false;
   end;
+
 end;
 
 procedure TFormOrcamentoDetalhes.VerificarCPFCNPJ(CPFCNPJ, Placa: string);
@@ -827,6 +830,8 @@ begin
   MapperItemOrcamento.Dataset := srcItens.DataSet;
   MapperItemOrcamento.SendDataSetToEntidade;
   MapperItemOrcamento.EntidadeToComponent;
+
+  lbVincularFuncionario.Enabled:= true;
 end;
 
 procedure TFormOrcamentoDetalhes.GetOrcamentoPesquisa(Codigo: string = '');
@@ -1279,7 +1284,7 @@ begin
    TotalResto   := TotalOrcamento - Total;
 
    lbTotalCobrado.caption := FormatFloat(',0.00;', TotalCobrado );
-   lbResto.caption        := FormatFloat(',0.00;', TotalResto * -1);
+   lbResto.caption        := FormatFloat(',0.00;', TotalResto );
 end;
 
 end.

@@ -113,23 +113,24 @@ DatasetProduto: Tdataset;
 begin
   inherited;
   try
-     DatasetProduto := cboProduto.ListSource.DataSet;
-     DatasetProduto.DisableControls;
-     DatasetProduto.first;
-     while not DatasetProduto.Eof do
-     begin
-        if DatasetProduto.FieldByName('Descricao').AsString <> '' then
-        begin
+      DatasetProduto := cboProduto.ListSource.DataSet;
+
+      DatasetProduto.DisableControls;
+
+      DatasetProduto.first;
+      while not DatasetProduto.Eof do
+      begin
+         if DatasetProduto.FieldByName('Descricao').AsString <> '' then
+         begin
            edtCodigoProduto.Text:= DatasetProduto.FieldByName('Codigo').AsString;
            if edtPreco.text <> '0' then
            begin
               btnAdicionaProduto.Click;
            end;
-        end;
-        DatasetProduto.next;
-     end;
+         end;
+         DatasetProduto.next;
+      end;
   finally
-      DatasetProduto.first;
       DatasetProduto.enableControls;
   end;
 end;
@@ -187,11 +188,7 @@ begin
 
      ComponentToEntidade;
 
-     if not srcItens.DataSet.Locate('CodigoProduto',edtCodigoProduto.Text,[] ) then
-        srcItens.DataSet.append
-     else
-        srcItens.DataSet.edit;
-
+     srcItens.DataSet.append;
      SendValueToFieldDataSet('Descricao', cboProduto.text);
      SendEntidadeToDataSet;
      srcItens.DataSet.Post;

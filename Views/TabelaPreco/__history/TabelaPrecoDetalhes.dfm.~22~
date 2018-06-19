@@ -1,20 +1,19 @@
 inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
   Caption = 'FormTabelaPrecoDetalhes'
-  ClientHeight = 549
+  ClientHeight = 531
   ClientWidth = 684
-  ExplicitTop = 0
   ExplicitWidth = 700
-  ExplicitHeight = 587
+  ExplicitHeight = 569
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
     Width = 684
-    Height = 500
+    Height = 482
     ExplicitWidth = 684
     ExplicitHeight = 482
     object lbDataEmissao: TLabel
       Left = 578
-      Top = 23
+      Top = 22
       Width = 93
       Height = 13
       Caption = 'Data de Emiss'#227'o'
@@ -26,7 +25,7 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
       ParentFont = False
     end
     object Label4: TLabel
-      Left = 385
+      Left = 392
       Top = 23
       Width = 121
       Height = 13
@@ -39,7 +38,7 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
       ParentFont = False
     end
     object Label1: TLabel
-      Left = 75
+      Left = 80
       Top = 23
       Width = 55
       Height = 13
@@ -64,9 +63,9 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object btnAdicionaProduto: TSpeedButton
+    object BitBtn1: TSpeedButton
       Left = 476
-      Top = 167
+      Top = 146
       Width = 94
       Height = 28
       Caption = 'Adicionar'
@@ -76,11 +75,11 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      OnClick = btnAdicionaProdutoClick
+      OnClick = BitBtn1Click
     end
     object CornerButton1: TSpeedButton
       Left = 576
-      Top = 168
+      Top = 146
       Width = 95
       Height = 28
       Caption = 'Remover'
@@ -91,39 +90,11 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Label3: TLabel
-      Left = 80
-      Top = 64
-      Width = 63
-      Height = 13
-      Caption = '% Deconto'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object SpeedButton1: TSpeedButton
-      Left = 8
-      Top = 171
-      Width = 127
-      Height = 28
-      Caption = 'Adicionar Todos'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      OnClick = SpeedButton1Click
-    end
     object grdItens: TDBGrid
       Left = 8
-      Top = 202
+      Top = 180
       Width = 663
       Height = 290
-      Anchors = [akLeft, akTop, akBottom]
       DataSource = srcItens
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -147,12 +118,12 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
         item
           Expanded = False
           FieldName = 'Preco'
-          Width = 117
+          Width = 125
           Visible = True
         end>
     end
     object edtDescricao: TEdit
-      Left = 75
+      Left = 80
       Top = 42
       Width = 297
       Height = 21
@@ -169,7 +140,7 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
       TabOrder = 2
     end
     object cboFormaPagamento: TComboBox
-      Left = 385
+      Left = 392
       Top = 42
       Width = 170
       Height = 21
@@ -192,9 +163,9 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
     end
     object GroupBox1: TGroupBox
       Left = 8
-      Top = 103
+      Top = 70
       Width = 663
-      Height = 62
+      Height = 70
       Caption = 'Item'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -204,8 +175,8 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
       ParentFont = False
       TabOrder = 5
       object Label11: TLabel
-        Left = 74
-        Top = 18
+        Left = 72
+        Top = 15
         Width = 45
         Height = 13
         Caption = 'Produto'
@@ -217,8 +188,8 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
         ParentFont = False
       end
       object SpeedButton3: TSpeedButton
-        Left = 482
-        Top = 33
+        Left = 415
+        Top = 34
         Width = 23
         Height = 21
         Caption = '...'
@@ -236,10 +207,23 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
         Font.Style = [fsBold]
         ParentFont = False
       end
+      object Label3: TLabel
+        Left = 459
+        Top = 18
+        Width = 13
+        Height = 13
+        Caption = '%'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
       object cboProduto: TDBLookupComboBox
-        Left = 75
-        Top = 37
-        Width = 401
+        Left = 72
+        Top = 34
+        Width = 337
         Height = 21
         DropDownRows = 15
         DropDownWidth = 400
@@ -267,30 +251,29 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
         Font.Style = []
         ParentFont = False
         TabOrder = 1
-        Text = '0'
+      end
+      object edtDesconto: TEdit
+        Left = 458
+        Top = 34
+        Width = 62
+        Height = 21
+        Cursor = crIBeam
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
       end
       object edtCodigoProduto: TEdit
-        Left = 7
+        Left = 11
         Top = 33
         Width = 55
         Height = 21
-        TabOrder = 2
+        TabOrder = 3
         OnChange = edtCodigoProdutoChange
       end
-    end
-    object edtDesconto: TEdit
-      Left = 80
-      Top = 83
-      Width = 62
-      Height = 21
-      Cursor = crIBeam
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 6
     end
   end
   inherited Panel2: TPanel
@@ -302,10 +285,11 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
     end
   end
   inherited srcEntidade: TDataSource
-    Left = 288
-    Top = 118
+    Left = 320
+    Top = 54
   end
   object srcItens: TDataSource
+    AutoEdit = False
     Left = 288
     Top = 326
   end

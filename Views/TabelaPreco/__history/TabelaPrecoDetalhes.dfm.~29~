@@ -123,7 +123,6 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
       Top = 202
       Width = 663
       Height = 290
-      Anchors = [akLeft, akTop, akBottom]
       DataSource = srcItens
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -267,7 +266,6 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
         Font.Style = []
         ParentFont = False
         TabOrder = 1
-        Text = '0'
       end
       object edtCodigoProduto: TEdit
         Left = 7

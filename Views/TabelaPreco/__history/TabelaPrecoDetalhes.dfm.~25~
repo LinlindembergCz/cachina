@@ -2,7 +2,6 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
   Caption = 'FormTabelaPrecoDetalhes'
   ClientHeight = 549
   ClientWidth = 684
-  ExplicitTop = 0
   ExplicitWidth = 700
   ExplicitHeight = 587
   PixelsPerInch = 96
@@ -64,9 +63,9 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object btnAdicionaProduto: TSpeedButton
+    object BitBtn1: TSpeedButton
       Left = 476
-      Top = 167
+      Top = 168
       Width = 94
       Height = 28
       Caption = 'Adicionar'
@@ -76,7 +75,7 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      OnClick = btnAdicionaProdutoClick
+      OnClick = BitBtn1Click
     end
     object CornerButton1: TSpeedButton
       Left = 576
@@ -123,7 +122,6 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
       Top = 202
       Width = 663
       Height = 290
-      Anchors = [akLeft, akTop, akBottom]
       DataSource = srcItens
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -237,8 +235,8 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
         ParentFont = False
       end
       object cboProduto: TDBLookupComboBox
-        Left = 75
-        Top = 37
+        Left = 72
+        Top = 34
         Width = 401
         Height = 21
         DropDownRows = 15
@@ -267,7 +265,6 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
         Font.Style = []
         ParentFont = False
         TabOrder = 1
-        Text = '0'
       end
       object edtCodigoProduto: TEdit
         Left = 7

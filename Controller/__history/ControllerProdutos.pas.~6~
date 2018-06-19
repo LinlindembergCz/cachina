@@ -118,23 +118,18 @@ var
   Entidade :TGenericEntidade;
   DataSetProduto: TDataSet;
 begin
-  try
-      if CodigoTabelaPreco = '' then
-      begin
-        Entidade:= TEntidadeFactory.Criar(tpProduto);
-        DataSetProduto:= GetDataSet( Entidade , 'Codigo='+  quotedstr( CodigoProduto ), 'ValorVenda' );
-      end
-      else
-      begin
-        Entidade:= TEntidadeFactory.Criar(tpItemTabelaPreco);
-        DataSetProduto:= GetDataSet( Entidade , 'CodigoProduto='+  quotedstr( CodigoProduto )+
-                                                ' and CodigoTabelaPreco='+ CodigoTabelaPreco , 'Preco as ValorVenda' );
-      end;
-      result:= DataSetProduto.FieldByName('ValorVenda').AsFloat;
-  finally
-     DataSetProduto.Free;
+  if CodigoTabelaPreco = '' then
+  begin
+    Entidade:= TEntidadeFactory.Criar(tpProduto);
+    DataSetProduto:= GetDataSet( Entidade , 'Codigo='+  quotedstr( CodigoProduto ), 'ValorVenda' );
+  end
+  else
+  begin
+    Entidade:= TEntidadeFactory.Criar(tpItemTabelaPreco);
+    DataSetProduto:= GetDataSet( Entidade , 'CodigoProduto='+  quotedstr( CodigoProduto )+
+                                            ' and CodigoTabelaPreco='+ CodigoTabelaPreco , 'Preco as ValorVenda' );
   end;
-
+  result:= DataSetProduto.FieldByName('ValorVenda').AsFloat;
 end;
 
 function TControllerProdutos.GetProdutoEstoque(CodigoProduto: string): TDataset;

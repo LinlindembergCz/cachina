@@ -128,6 +128,7 @@ begin
         end;
         DatasetProduto.next;
      end;
+
   finally
       DatasetProduto.first;
       DatasetProduto.enableControls;
@@ -187,11 +188,7 @@ begin
 
      ComponentToEntidade;
 
-     if not srcItens.DataSet.Locate('CodigoProduto',edtCodigoProduto.Text,[] ) then
-        srcItens.DataSet.append
-     else
-        srcItens.DataSet.edit;
-
+     srcItens.DataSet.append;
      SendValueToFieldDataSet('Descricao', cboProduto.text);
      SendEntidadeToDataSet;
      srcItens.DataSet.Post;

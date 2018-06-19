@@ -66,191 +66,136 @@ Type
     FEmitiuNFSe: string;
     FEmitiuNFe: string;
     FDataHoraInicio: TDatetime;
-
-
-    procedure SetCodigo(const Value: integer);
-    procedure SetCodigoCliente(const Value: integer);
-    procedure SetCodigoFilial(const Value: integer);
-    procedure SetCodigoFormaPagamento(const Value: integer);
-    procedure SetCodigoFuncionario(const Value: integer);
-    procedure SetData(const Value: TDatetime);
-    procedure SetDesconto(const Value: Double);
-    procedure SetObservacao(const Value: string);
-    procedure SetPlaca(const Value: string);
-    procedure SetSituacao(const Value: string);
-    procedure SetValidade(const Value: TDatetime);
-    procedure SetCPFCNPJ(const Value: string);
-    procedure SetNome(const Value: string);
-    procedure SetRazaoSocial(const Value: string);
-    procedure SetTelefone(const Value: string);
-
-    procedure SetopcaoAcendendor(const Value: string);
-    procedure SetopcaoAutoFalantes(const Value: string);
-    procedure SetopcaoBateria(const Value: string);
-    procedure SetopcaoCalotas(const Value: string);
-    procedure SetopcaoCdPlayer(const Value: string);
-    procedure SetopcaoChave(const Value: string);
-    procedure SetopcaoChaveRoda(const Value: string);
-    procedure SetopcaoEstepe(const Value: string);
-    procedure SetopcaoExtintor(const Value: string);
-    procedure SetopcaofarolMilha(const Value: string);
-    procedure SetopcaoMacaco(const Value: string);
-    procedure SetopcaoManual(const Value: string);
-    procedure SetopcaoPneusDianteiro(const Value: string);
-    procedure SetopcaoPneusTraseiros(const Value: string);
-    procedure SetopcaoRodas(const Value: string);
-    procedure SetopcaoTapete(const Value: string);
-    procedure SetopcaoTriangulo(const Value: string);
-    procedure SetTextAcendedor(const Value: string);
-    procedure SetTextAutoFalantes(const Value: string);
-    procedure SetTextBateria(const Value: string);
-    procedure SetTextCalotas(const Value: string);
-    procedure SetTextCDPlayer(const Value: string);
-    procedure SetTextChave(const Value: string);
-    procedure SetTextChaveRoda(const Value: string);
-    procedure SetTextEstepe(const Value: string);
-    procedure SetTextExtintor(const Value: string);
-    procedure SetTextFarolMilha(const Value: string);
-    procedure SetTextMacaco(const Value: string);
-    procedure SetTextManual(const Value: string);
-    procedure SetTextObjetos(const Value: string);
-    procedure SetTextPneusDianteiro(const Value: string);
-    procedure SetTextPneusTraseiros(const Value: string);
-    procedure SetTextRodas(const Value: string);
-    procedure SetTextTapete(const Value: string);
-    procedure SetTextTriangulo(const Value: string);
-    procedure SetContato(const Value: string);
-    procedure SetOrdem(const Value: string);
-    procedure SetObservacaoVistoria(const Value: string);
-    procedure SetEmitiuNFe(const Value: string);
-    procedure SetEmitiuNFSe(const Value: string);
+    FCodigoTabelaPreco :integer;
   public
     [KeyField('Codigo')]
     [FieldName('Codigo')]
-    property Codigo: integer read FCodigo write SetCodigo;
+    property Codigo: integer read FCodigo write FCodigo;
     [FieldName('CodigoFilial')]
-    property CodigoFilial: integer read FCodigoFilial write SetCodigoFilial;
+    property CodigoFilial: integer read FCodigoFilial write FCodigoFilial;
     [FieldName('Data')]
-    property Data: TDatetime read FData write SetData;
+    property Data: TDatetime read FData write FData;
     [FieldName('Placa')]
-    property Placa: string read FPlaca write SetPlaca;
+    property Placa: string read FPlaca write FPlaca;
     [FieldName('Observacao')]
-    property Observacao: string read FObservacao write SetObservacao;
+    property Observacao: string read FObservacao write FObservacao;
     [FieldName('CodigoFuncionario')]
     property CodigoFuncionario: integer read FCodigoFuncionario
-      write SetCodigoFuncionario;
+      write FCodigoFuncionario;
     [FieldName('Desconto')]
-    property Desconto: Double read FDesconto write SetDesconto;
+    property Desconto: Double read FDesconto write FDesconto;
     [FieldName('CodigoFormaPagamento')]
     property CodigoFormaPagamento: integer read FCodigoFormaPagamento
-      write SetCodigoFormaPagamento;
+      write FCodigoFormaPagamento;
     [FieldName('CodigoCliente')]
-    property CodigoCliente: integer read FCodigoCliente write SetCodigoCliente;
+    property CodigoCliente: integer read FCodigoCliente write FCodigoCliente;
     [FieldName('Validade')]
-    property Validade: TDatetime read FValidade write SetValidade;
+    property Validade: TDatetime read FValidade write FValidade;
     [FieldName('Situacao')]
-    property Situacao: string read FSituacao write SetSituacao;
+    property Situacao: string read FSituacao write FSituacao;
 
-    property Nome: string read FNome write SetNome;
-    property CPFCNPJ: string read FCPFCNPJ write SetCPFCNPJ;
-    property RazaoSocial: string read FRazaoSocial write SetRazaoSocial;
-    property Telefone: string read FTelefone write SetTelefone;
+    property Nome: string read FNome write FNome;
+    property CPFCNPJ: string read FCPFCNPJ write FCPFCNPJ;
+    property RazaoSocial: string read FRazaoSocial write FRazaoSocial;
+    property Telefone: string read FTelefone write FTelefone;
 
     [FieldName('opcaoExtintor')]
-    property opcaoExtintor: string read FopcaoExtintor write SetopcaoExtintor;
+    property opcaoExtintor: string read FopcaoExtintor write FopcaoExtintor;
     [FieldName('opcaoMacaco')]
-    property opcaoMacaco: string read FopcaoMacaco write SetopcaoMacaco;
+    property opcaoMacaco: string read FopcaoMacaco write FopcaoMacaco;
     [FieldName('opcaoChaveRoda')]
     property opcaoChaveRoda: string read FopcaoChaveRoda
-      write SetopcaoChaveRoda;
+      write FopcaoChaveRoda;
     [FieldName('opcaoBateria')]
-    property opcaoBateria: string read FopcaoBateria write SetopcaoBateria;
+    property opcaoBateria: string read FopcaoBateria write FopcaoBateria;
     [FieldName('opcaoTriangulo')]
     property opcaoTriangulo: string read FopcaoTriangulo
-      write SetopcaoTriangulo;
+      write FopcaoTriangulo;
     [FieldName('opcaoCalotas')]
-    property opcaoCalotas: string read FopcaoCalotas write SetopcaoCalotas;
+    property opcaoCalotas: string read FopcaoCalotas write FopcaoCalotas;
     [FieldName('opcaoAcendendor')]
     property opcaoAcendendor: string read FopcaoAcendendor
-      write SetopcaoAcendendor;
+      write FopcaoAcendendor;
     [FieldName('opcaofarolMilha')]
     property opcaofarolMilha: string read FopcaofarolMilha
-      write SetopcaofarolMilha;
+      write FopcaofarolMilha;
     [FieldName('opcaoTapete')]
-    property opcaoTapete: string read FopcaoTapete write SetopcaoTapete;
+    property opcaoTapete: string read FopcaoTapete write FopcaoTapete;
     [FieldName('opcaoRodas')]
-    property opcaoRodas: string read FopcaoRodas write SetopcaoRodas;
+    property opcaoRodas: string read FopcaoRodas write FopcaoRodas;
     [FieldName('opcaoCdPlayer')]
-    property opcaoCdPlayer: string read FopcaoCdPlayer write SetopcaoCdPlayer;
+    property opcaoCdPlayer: string read FopcaoCdPlayer write FopcaoCdPlayer;
     [FieldName('opcaoEstepe')]
-    property opcaoEstepe: string read FopcaoEstepe write SetopcaoEstepe;
+    property opcaoEstepe: string read FopcaoEstepe write FopcaoEstepe;
     [FieldName('opcaoPneusTraseiros')]
     property opcaoPneusTraseiros: string read FopcaoPneusTraseiros
-      write SetopcaoPneusTraseiros;
+      write FopcaoPneusTraseiros;
     [FieldName('opcaoPneusDianteiro')]
     property opcaoPneusDianteiro: string read FopcaoPneusDianteiro
-      write SetopcaoPneusDianteiro;
+      write FopcaoPneusDianteiro;
     [FieldName('opcaoChave')]
-    property opcaoChave: string read FopcaoChave write SetopcaoChave;
+    property opcaoChave: string read FopcaoChave write FopcaoChave;
     [FieldName('opcaoManual')]
-    property opcaoManual: string read FopcaoManual write SetopcaoManual;
+    property opcaoManual: string read FopcaoManual write FopcaoManual;
     [FieldName('opcaoAutoFalantes')]
     property opcaoAutoFalantes: string read FopcaoAutoFalantes
-      write SetopcaoAutoFalantes;
+      write FopcaoAutoFalantes;
     [FieldName('TextExtintor')]
-    property TextExtintor: string read FTextExtintor write SetTextExtintor;
+    property TextExtintor: string read FTextExtintor write FTextExtintor;
     [FieldName('TextMacaco')]
-    property TextMacaco: string read FTextMacaco write SetTextMacaco;
+    property TextMacaco: string read FTextMacaco write FTextMacaco;
     [FieldName('TextChaveRoda')]
-    property TextChaveRoda: string read FTextChaveRoda write SetTextChaveRoda;
+    property TextChaveRoda: string read FTextChaveRoda write FTextChaveRoda;
     [FieldName('TextTriangulo')]
-    property TextTriangulo: string read FTextTriangulo write SetTextTriangulo;
+    property TextTriangulo: string read FTextTriangulo write FTextTriangulo;
     [FieldName('TextCalotas')]
-    property TextCalotas: string read FTextCalotas write SetTextCalotas;
+    property TextCalotas: string read FTextCalotas write FTextCalotas;
     [FieldName('TextBateria')]
-    property TextBateria: string read FTextBateria write SetTextBateria;
+    property TextBateria: string read FTextBateria write FTextBateria;
     [FieldName('TextAutoFalantes')]
     property TextAutoFalantes: string read FTextAutoFalantes
-      write SetTextAutoFalantes;
+      write FTextAutoFalantes;
     [FieldName('TextCDPlayer')]
-    property TextCDPlayer: string read FTextCDPlayer write SetTextCDPlayer;
+    property TextCDPlayer: string read FTextCDPlayer write FTextCDPlayer;
     [FieldName('TextRodas')]
-    property TextRodas: string read FTextRodas write SetTextRodas;
+    property TextRodas: string read FTextRodas write FTextRodas;
     [FieldName('TextTapete')]
-    property TextTapete: string read FTextTapete write SetTextTapete;
+    property TextTapete: string read FTextTapete write FTextTapete;
     [FieldName('TextFarolMilha')]
     property TextFarolMilha: string read FTextFarolMilha
-      write SetTextFarolMilha;
+      write FTextFarolMilha;
     [FieldName('TextAcendedor')]
-    property TextAcendedor: string read FTextAcendedor write SetTextAcendedor;
+    property TextAcendedor: string read FTextAcendedor write FTextAcendedor;
     [FieldName('TextEstepe')]
-    property TextEstepe: string read FTextEstepe write SetTextEstepe;
+    property TextEstepe: string read FTextEstepe write FTextEstepe;
     [FieldName('TextPneusTraseiros')]
     property TextPneusTraseiros: string read FTextPneusTraseiros
-      write SetTextPneusTraseiros;
+      write FTextPneusTraseiros;
     [FieldName('TextPneusDianteiro')]
     property TextPneusDianteiro: string read FTextPneusDianteiro
-      write SetTextPneusDianteiro;
+      write FTextPneusDianteiro;
     [FieldName('TextChave')]
-    property TextChave: string read FTextChave write SetTextChave;
+    property TextChave: string read FTextChave write FTextChave;
     [FieldName('TextManual')]
-    property TextManual: string read FTextManual write SetTextManual;
+    property TextManual: string read FTextManual write FTextManual;
     [FieldName('TextObjetos')]
-    property TextObjetos: string read FTextObjetos write SetTextObjetos;
+    property TextObjetos: string read FTextObjetos write FTextObjetos;
     [FieldName('Ordem')]
-    property Ordem: string read FOrdem write SetOrdem;
+    property Ordem: string read FOrdem write FOrdem;
     [FieldName('Contato')]
-    property Contato: string read FContato write SetContato;
+    property Contato: string read FContato write FContato;
     [FieldName('ObservacaoVistoria')]
     property ObservacaoVistoria: string read FObservacaoVistoria
-      write SetObservacaoVistoria;
+      write FObservacaoVistoria;
     //[FieldName('EmitiuNFSe')]
-    property EmitiuNFSe: string read FEmitiuNFSe write SetEmitiuNFSe;
+    property EmitiuNFSe: string read FEmitiuNFSe write FEmitiuNFSe;
     //[FieldName('EmitiuNFe')]
-    property EmitiuNFe: string read FEmitiuNFe write SetEmitiuNFe;
+    property EmitiuNFe: string read FEmitiuNFe write FEmitiuNFe;
 
     [FieldName('DataInicio')]
     property DataHoraInicio: Tdatetime read FDataHoraInicio write FDataHoraInicio;
+    [FieldName('CodigoTabelaPreco')]
+    property CodigoTabelaPreco :integer read FCodigoTabelaPreco write FCodigoTabelaPreco;
 
     //property CodigoLoteRecebimento: integer;
   end;
@@ -270,377 +215,32 @@ Type
     FCodigoLoteRecebimento: integer;
     FCodigoFilial: integer;
     FValorPago: double;
-    procedure SetCodigo(const Value: integer);
-    procedure SetCodigoFormaPagamento(const Value: Integer);
-    procedure SetCodigoOrcamento(const Value: integer);
-    procedure SetPercentualDesconto(const Value: Double);
-    procedure SetQuantidadePercelas(const Value: Integer);
-    procedure SetValor(const Value: Double);
-    procedure SetVencimento(const Value: Tdatetime);
-    procedure SetOpcao(const Value: string);
-    procedure SetCodigoLoteRecebimento(const Value: integer);
-    procedure SetCodigoFilial(const Value: integer);
-    procedure SetValorPago(const Value: double);
   public
     [KeyField('Codigo')]
-    property Codigo:integer read FCodigo write SetCodigo;
+    property Codigo:integer read FCodigo write FCodigo;
     [FieldName('CodigoFilial')]
-    property CodigoFilial:integer read FCodigoFilial write SetCodigoFilial;
+    property CodigoFilial:integer read FCodigoFilial write FCodigoFilial;
 
     [FieldName('CodigoOrcamento')]
-    property CodigoOrcamento:integer read FCodigoOrcamento write SetCodigoOrcamento;
+    property CodigoOrcamento:integer read FCodigoOrcamento write FCodigoOrcamento;
     [FieldName('CodigoFormaPagamento')]
-    property CodigoFormaPagamento:Integer read FCodigoFormaPagamento write SetCodigoFormaPagamento;
+    property CodigoFormaPagamento:Integer read FCodigoFormaPagamento write FCodigoFormaPagamento;
     [FieldName('Valor')]
-    property Valor:Double read FValor write SetValor;
+    property Valor:Double read FValor write FValor;
     [FieldName('PercentualDesconto')]
-    property PercentualDesconto:Double read FPercentualDesconto write SetPercentualDesconto;
+    property PercentualDesconto:Double read FPercentualDesconto write FPercentualDesconto;
     [FieldName('QuantidadePercelas')]
-    property QuantidadePercelas:Integer read FQuantidadePercelas write SetQuantidadePercelas;
+    property QuantidadePercelas:Integer read FQuantidadePercelas write FQuantidadePercelas;
     [FieldName('Vencimento')]
-    property Vencimento:TDatetime read FVencimento write SetVencimento;
+    property Vencimento:TDatetime read FVencimento write FVencimento;
     [FieldName('Opcao')]
-    property Opcao: string read FOpcao write SetOpcao;
+    property Opcao: string read FOpcao write FOpcao;
     [FieldName('ValorPago')]
-    property ValorPago: double read FValorPago write SetValorPago;
+    property ValorPago: double read FValorPago write FValorPago;
   end;
 implementation
 
 { TOrcamento }
-
-procedure TOrcamento.SetCodigo(const Value: integer);
-begin
-  FCodigo := Value;
-end;
-
-procedure TOrcamento.SetCodigoCliente(const Value: integer);
-begin
-  FCodigoCliente := Value;
-end;
-
-procedure TOrcamento.SetCodigoFilial(const Value: integer);
-begin
-  FCodigoFilial := Value;
-end;
-
-procedure TOrcamento.SetCodigoFormaPagamento(const Value: integer);
-begin
-  FCodigoFormaPagamento := Value;
-end;
-
-procedure TOrcamento.SetCodigoFuncionario(const Value: integer);
-begin
-  FCodigoFuncionario := Value;
-end;
-
-procedure TOrcamento.SetContato(const Value: string);
-begin
-  FContato := Value;
-end;
-
-procedure TOrcamento.SetCPFCNPJ(const Value: string);
-begin
-  FCPFCNPJ := Value;
-end;
-
-procedure TOrcamento.SetData(const Value: TDatetime);
-begin
-  FData := Value;
-end;
-
-procedure TOrcamento.SetDesconto(const Value: Double);
-begin
-  FDesconto := Value;
-end;
-
-procedure TOrcamento.SetEmitiuNFe(const Value: string);
-begin
-  FEmitiuNFe := Value;
-end;
-
-procedure TOrcamento.SetEmitiuNFSe(const Value: string);
-begin
-  FEmitiuNFSe := Value;
-end;
-
-procedure TOrcamento.SetNome(const Value: string);
-begin
-  FNome := Value;
-end;
-
-procedure TOrcamento.SetObservacao(const Value: string);
-begin
-  FObservacao := Value;
-end;
-
-procedure TOrcamento.SetObservacaoVistoria(const Value: string);
-begin
-  FObservacaoVistoria := Value;
-end;
-
-procedure TOrcamento.SetPlaca(const Value: string);
-begin
-  FPlaca := Value;
-end;
-
-procedure TOrcamento.SetRazaoSocial(const Value: string);
-begin
-  FRazaoSocial := Value;
-end;
-
-procedure TOrcamento.SetSituacao(const Value: string);
-begin
-  FSituacao := Value;
-end;
-
-procedure TOrcamento.SetTelefone(const Value: string);
-begin
-  FTelefone := Value;
-end;
-
-procedure TOrcamento.SetValidade(const Value: TDatetime);
-begin
-  FValidade := Value;
-end;
-
-{ TOrcamentoFormaPagamento }
-
-procedure TOrcamentoFormaPagamento.SetCodigo(const Value: integer);
-begin
-  FCodigo := Value;
-end;
-
-procedure TOrcamentoFormaPagamento.SetCodigoFilial(const Value: integer);
-begin
-  FCodigoFilial := Value;
-end;
-
-procedure TOrcamentoFormaPagamento.SetCodigoFormaPagamento(
-  const Value: Integer);
-begin
-  FCodigoFormaPagamento := Value;
-end;
-
-procedure TOrcamentoFormaPagamento.SetCodigoLoteRecebimento(
-  const Value: integer);
-begin
-  FCodigoLoteRecebimento := Value;
-end;
-
-procedure TOrcamentoFormaPagamento.SetCodigoOrcamento(const Value: integer);
-begin
-  FCodigoOrcamento := Value;
-end;
-
-procedure TOrcamentoFormaPagamento.SetOpcao(const Value: string);
-begin
-  FOpcao := Value;
-end;
-
-procedure TOrcamentoFormaPagamento.SetPercentualDesconto(const Value: Double);
-begin
-  FPercentualDesconto := Value;
-end;
-
-procedure TOrcamentoFormaPagamento.SetQuantidadePercelas(const Value: Integer);
-begin
-  FQuantidadePercelas := Value;
-end;
-
-procedure TOrcamentoFormaPagamento.SetValor(const Value: Double);
-begin
-  FValor := Value;
-end;
-
-procedure TOrcamentoFormaPagamento.SetValorPago(const Value: double);
-begin
-  FValorPago := Value;
-end;
-
-procedure TOrcamentoFormaPagamento.SetVencimento(const Value: Tdatetime);
-begin
-  FVencimento := Value;
-end;
-
-procedure TOrcamento.SetopcaoAcendendor(const Value: string);
-begin
-  FopcaoAcendendor := Value;
-end;
-
-procedure TOrcamento.SetopcaoAutoFalantes(const Value: string);
-begin
-  FopcaoAutoFalantes := Value;
-end;
-
-procedure TOrcamento.SetopcaoBateria(const Value: string);
-begin
-  FopcaoBateria := Value;
-end;
-
-procedure TOrcamento.SetopcaoCalotas(const Value: string);
-begin
-  FopcaoCalotas := Value;
-end;
-
-procedure TOrcamento.SetopcaoCdPlayer(const Value: string);
-begin
-  FopcaoCdPlayer := Value;
-end;
-
-procedure TOrcamento.SetopcaoChave(const Value: string);
-begin
-  FopcaoChave := Value;
-end;
-
-procedure TOrcamento.SetopcaoChaveRoda(const Value: string);
-begin
-  FopcaoChaveRoda := Value;
-end;
-
-procedure TOrcamento.SetopcaoEstepe(const Value: string);
-begin
-  FopcaoEstepe := Value;
-end;
-
-procedure TOrcamento.SetopcaoExtintor(const Value: string);
-begin
-  FopcaoExtintor := Value;
-end;
-
-procedure TOrcamento.SetopcaofarolMilha(const Value: string);
-begin
-  FopcaofarolMilha := Value;
-end;
-
-procedure TOrcamento.SetopcaoMacaco(const Value: string);
-begin
-  FopcaoMacaco := Value;
-end;
-
-procedure TOrcamento.SetopcaoManual(const Value: string);
-begin
-  FopcaoManual := Value;
-end;
-
-procedure TOrcamento.SetopcaoPneusDianteiro(const Value: string);
-begin
-  FopcaoPneusDianteiro := Value;
-end;
-
-procedure TOrcamento.SetopcaoPneusTraseiros(const Value: string);
-begin
-  FopcaoPneusTraseiros := Value;
-end;
-
-procedure TOrcamento.SetopcaoRodas(const Value: string);
-begin
-  FopcaoRodas := Value;
-end;
-
-procedure TOrcamento.SetopcaoTapete(const Value: string);
-begin
-  FopcaoTapete := Value;
-end;
-
-procedure TOrcamento.SetopcaoTriangulo(const Value: string);
-begin
-  FopcaoTriangulo := Value;
-end;
-
-procedure TOrcamento.SetOrdem(const Value: string);
-begin
-  FOrdem := Value;
-end;
-
-procedure TOrcamento.SetTextAcendedor(const Value: string);
-begin
-  FTextAcendedor := Value;
-end;
-
-procedure TOrcamento.SetTextAutoFalantes(const Value: string);
-begin
-  FTextAutoFalantes := Value;
-end;
-
-procedure TOrcamento.SetTextBateria(const Value: string);
-begin
-  FTextBateria := Value;
-end;
-
-procedure TOrcamento.SetTextCalotas(const Value: string);
-begin
-  FTextCalotas := Value;
-end;
-
-procedure TOrcamento.SetTextCDPlayer(const Value: string);
-begin
-  FTextCDPlayer := Value;
-end;
-
-procedure TOrcamento.SetTextChave(const Value: string);
-begin
-  FTextChave := Value;
-end;
-
-procedure TOrcamento.SetTextChaveRoda(const Value: string);
-begin
-  FTextChaveRoda := Value;
-end;
-
-procedure TOrcamento.SetTextEstepe(const Value: string);
-begin
-  FTextEstepe := Value;
-end;
-
-procedure TOrcamento.SetTextExtintor(const Value: string);
-begin
-  FTextExtintor := Value;
-end;
-
-procedure TOrcamento.SetTextFarolMilha(const Value: string);
-begin
-  FTextFarolMilha := Value;
-end;
-
-procedure TOrcamento.SetTextMacaco(const Value: string);
-begin
-  FTextMacaco := Value;
-end;
-
-procedure TOrcamento.SetTextManual(const Value: string);
-begin
-  FTextManual := Value;
-end;
-
-procedure TOrcamento.SetTextObjetos(const Value: string);
-begin
-  FTextObjetos := Value;
-end;
-
-procedure TOrcamento.SetTextPneusDianteiro(const Value: string);
-begin
-  FTextPneusDianteiro := Value;
-end;
-
-procedure TOrcamento.SetTextPneusTraseiros(const Value: string);
-begin
-  FTextPneusTraseiros := Value;
-end;
-
-procedure TOrcamento.SetTextRodas(const Value: string);
-begin
-  FTextRodas := Value;
-end;
-
-procedure TOrcamento.SetTextTapete(const Value: string);
-begin
-  FTextTapete := Value;
-end;
-
-procedure TOrcamento.SetTextTriangulo(const Value: string);
-begin
-  FTextTriangulo := Value;
-end;
 
 
 

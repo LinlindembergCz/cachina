@@ -37,7 +37,7 @@ type
     function GetDataSet(Objecto: TGenericEntidade;Condicao: string;  Fields: string= ''):TDataset;
     function GetSelect(Tabela, Condicao:string; Fields: string= ''):TDataset;
 
-    function GetPrecoVenda(CodigoProduto, CodigoCliente: string; CodigoTabelaPreco: string ):Double;
+    function GetPrecoVenda(CodigoProduto, CodigoCliente: string):Double;
     function EhServico(CodigoProduto : string):Boolean;
     function GetProdutoEstoque(CodigoProduto: string):TDataset;
     function GetCurvaAbc(condicao: string):TDataSet;
@@ -113,28 +113,14 @@ begin
 end;
 
 function TControllerProdutos.GetPrecoVenda(CodigoProduto,
-  CodigoCliente: string; CodigoTabelaPreco: string ): Double;
+  CodigoCliente: string): Double;
 var
-  Entidade :TGenericEntidade;
+  Produto:TGenericEntidade;
   DataSetProduto: TDataSet;
 begin
-  try
-      if CodigoTabelaPreco = '' then
-      begin
-        Entidade:= TEntidadeFactory.Criar(tpProduto);
-        DataSetProduto:= GetDataSet( Entidade , 'Codigo='+  quotedstr( CodigoProduto ), 'ValorVenda' );
-      end
-      else
-      begin
-        Entidade:= TEntidadeFactory.Criar(tpItemTabelaPreco);
-        DataSetProduto:= GetDataSet( Entidade , 'CodigoProduto='+  quotedstr( CodigoProduto )+
-                                                ' and CodigoTabelaPreco='+ CodigoTabelaPreco , 'Preco as ValorVenda' );
-      end;
-      result:= DataSetProduto.FieldByName('ValorVenda').AsFloat;
-  finally
-     DataSetProduto.Free;
-  end;
-
+  Produto:= TEntidadeFactory.Criar(tpProduto);
+  DataSetProduto:= GetDataSet( Produto , 'Codigo='+  quotedstr( CodigoProduto ), 'ValorVenda' );
+  result:= DataSetProduto.FieldByName('ValorVenda').AsFloat;
 end;
 
 function TControllerProdutos.GetProdutoEstoque(CodigoProduto: string): TDataset;

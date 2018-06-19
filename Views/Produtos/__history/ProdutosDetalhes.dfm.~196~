@@ -249,8 +249,8 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
               TabOrder = 3
             end
             object cboFamilia: TComboBox
-              Left = 90
-              Top = 96
+              Left = 89
+              Top = 94
               Width = 496
               Height = 21
               TabOrder = 2

@@ -2,7 +2,6 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
   Caption = 'Entrada'
   ClientHeight = 619
   ClientWidth = 978
-  ExplicitTop = -70
   ExplicitWidth = 994
   ExplicitHeight = 657
   PixelsPerInch = 96
@@ -131,7 +130,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
     end
     object btnImportar: TSpeedButton
       Left = 10
-      Top = 303
+      Top = 535
       Width = 102
       Height = 25
       Caption = 'Importar NF-e'
@@ -146,7 +145,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
     end
     object btpPagamento: TSpeedButton
       Left = 118
-      Top = 303
+      Top = 535
       Width = 94
       Height = 25
       Caption = 'Pagamento'
@@ -174,7 +173,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
     end
     object btnDevolver: TSpeedButton
       Left = 220
-      Top = 303
+      Top = 535
       Width = 94
       Height = 25
       Caption = 'Devolver'
@@ -870,10 +869,9 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
     end
     object grdItens: TDBGrid
       Left = 6
-      Top = 334
+      Top = 303
       Width = 963
       Height = 226
-      Anchors = [akLeft, akTop, akBottom]
       DataSource = srcItens
       TabOrder = 9
       TitleFont.Charset = DEFAULT_CHARSET
