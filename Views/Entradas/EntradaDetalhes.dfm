@@ -2,7 +2,6 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
   Caption = 'Entrada'
   ClientHeight = 619
   ClientWidth = 978
-  ExplicitTop = -70
   ExplicitWidth = 994
   ExplicitHeight = 657
   PixelsPerInch = 96

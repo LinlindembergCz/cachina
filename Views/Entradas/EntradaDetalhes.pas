@@ -465,7 +465,6 @@ begin
     ConsultarDataSetPagamento(CodigoEntrada);
     Alterar;
     Habilitarbotoes;
-
   end;
 
 

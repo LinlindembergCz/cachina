@@ -1,0 +1,28 @@
+inherited FormTabelaPrecoListagem: TFormTabelaPrecoListagem
+  Caption = 'FormTabelaPrecoListagem'
+  Visible = False
+  OnCreate = FormCreate
+  ExplicitWidth = 656
+  ExplicitHeight = 518
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Height = 49
+    ExplicitHeight = 49
+    inherited SpeedButton2: TSpeedButton
+      Top = 12
+      ExplicitTop = 12
+    end
+    inherited btnSelecionar: TSpeedButton
+      Left = 466
+      Top = 12
+      ExplicitLeft = 466
+      ExplicitTop = 12
+    end
+  end
+  inherited Grid1: TDBGrid
+    Top = 49
+    Height = 431
+    OnDblClick = SpeedButton2Click
+  end
+end

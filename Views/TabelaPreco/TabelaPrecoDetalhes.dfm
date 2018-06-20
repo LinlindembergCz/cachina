@@ -1,17 +1,16 @@
 inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
   Caption = 'FormTabelaPrecoDetalhes'
   ClientHeight = 549
-  ClientWidth = 684
-  ExplicitTop = 0
-  ExplicitWidth = 700
+  ClientWidth = 756
+  ExplicitWidth = 772
   ExplicitHeight = 587
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Width = 684
+    Width = 756
     Height = 500
     ExplicitWidth = 684
-    ExplicitHeight = 482
+    ExplicitHeight = 500
     object lbDataEmissao: TLabel
       Left = 578
       Top = 23
@@ -66,7 +65,7 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
     end
     object btnAdicionaProduto: TSpeedButton
       Left = 476
-      Top = 167
+      Top = 168
       Width = 94
       Height = 28
       Caption = 'Adicionar'
@@ -107,9 +106,9 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
     object SpeedButton1: TSpeedButton
       Left = 8
       Top = 171
-      Width = 127
+      Width = 209
       Height = 28
-      Caption = 'Adicionar Todos'
+      Caption = 'Adicionar Todos os produtos'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -133,14 +132,18 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
       TitleFont.Style = []
       Columns = <
         item
+          Color = clSilver
           Expanded = False
           FieldName = 'CodigoProduto'
+          ReadOnly = True
           Width = 85
           Visible = True
         end
         item
+          Color = clSilver
           Expanded = False
           FieldName = 'Descricao'
+          ReadOnly = True
           Width = 418
           Visible = True
         end
@@ -273,7 +276,7 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
         Left = 7
         Top = 33
         Width = 55
-        Height = 21
+        Height = 24
         TabOrder = 2
         OnChange = edtCodigoProdutoChange
       end
@@ -294,11 +297,26 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
     end
   end
   inherited Panel2: TPanel
-    Width = 684
+    Width = 756
     ExplicitWidth = 684
     inherited btnSair: TSpeedButton
-      Left = 600
-      ExplicitLeft = 600
+      Left = 680
+      ExplicitLeft = 680
+    end
+    object CornerButton2: TSpeedButton
+      Left = 576
+      Top = 0
+      Width = 83
+      Height = 43
+      Caption = 'Pesquisa'
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = CornerButton2Click
     end
   end
   inherited srcEntidade: TDataSource

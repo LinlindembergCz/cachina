@@ -26,9 +26,9 @@ object FormPrincipal: TFormPrincipal
     Height = 105
   end
   object Image2: TImage
-    Left = 209
+    Left = 33
     Top = 0
-    Width = 688
+    Width = 864
     Height = 521
     Align = alClient
     Center = True
@@ -2860,12 +2860,13 @@ object FormPrincipal: TFormPrincipal
   object CategoryButtons1: TCategoryButtons
     Left = 0
     Top = 0
-    Width = 209
+    Width = 33
     Height = 521
     Align = alLeft
+    BorderStyle = bsNone
     ButtonFlow = cbfVertical
     ButtonWidth = 100
-    ButtonOptions = [boFullSize, boGradientFill, boShowCaptions]
+    ButtonOptions = [boAllowReorder, boAllowCopyingButtons, boFullSize, boGradientFill, boShowCaptions, boVerticalCategoryCaptions, boUsePlusMinus, boCaptionOnlyBorder]
     Categories = <
       item
         Caption = 'Ger'#234'ncia'
@@ -2946,12 +2947,14 @@ object FormPrincipal: TFormPrincipal
     SelectedButtonColor = 15132390
     TabOrder = 0
     StyleElements = [seBorder]
+    OnMouseLeave = CategoryButtons1MouseLeave
+    OnMouseMove = CategoryButtons1MouseMove
   end
   object ActionList1: TActionList
     Left = 552
     Top = 216
     object ActFuncionarios: TAction
-      Caption = 'Funcionarios'
+      Caption = 'Funcion'#225'rios'
       OnExecute = ActFuncionariosExecute
     end
     object ActClientes: TAction

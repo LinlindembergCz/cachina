@@ -156,7 +156,8 @@ uses
   TabelaPreco in 'Modelos\TabelaPreco.pas',
   TabelaPrecoDetalhes in 'Views\TabelaPreco\TabelaPrecoDetalhes.pas' {FormTabelaPrecoDetalhes},
   AlterarProdutos in 'Views\Produtos\AlterarProdutos.pas' {FormAlterarProdutos},
-  ControllerSequencias in 'Controller\ControllerSequencias.pas';
+  ControllerSequencias in 'Controller\ControllerSequencias.pas',
+  TabelaPrecoListagem in 'Views\TabelaPreco\TabelaPrecoListagem.pas' {FormTabelaPrecoListagem};
 
 {$R *.res}
 

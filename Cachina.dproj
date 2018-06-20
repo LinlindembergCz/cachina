@@ -435,6 +435,10 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Controller\ControllerSequencias.pas"/>
+        <DCCReference Include="Views\TabelaPreco\TabelaPrecoListagem.pas">
+            <Form>FormTabelaPrecoListagem</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="Cachina.todo"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

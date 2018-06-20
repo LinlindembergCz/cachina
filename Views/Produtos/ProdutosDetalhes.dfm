@@ -2,7 +2,6 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
   Caption = 'Insumos'
   ClientHeight = 533
   ClientWidth = 729
-  FormStyle = fsNormal
   Position = poDesktopCenter
   ExplicitWidth = 745
   ExplicitHeight = 571
@@ -16,7 +15,6 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
     inherited tabPrincipal: TPageControl
       Width = 727
       Height = 482
-      ActivePage = TabSheet2
       ExplicitWidth = 727
       ExplicitHeight = 482
       inherited TabSheet1: TTabSheet

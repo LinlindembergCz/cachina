@@ -123,12 +123,19 @@ begin
       begin
         Entidade:= TEntidadeFactory.Criar(tpProduto);
         DataSetProduto:= GetDataSet( Entidade , 'Codigo='+  quotedstr( CodigoProduto ), 'ValorVenda' );
+        if DataSetProduto.FieldByName('ValorVenda').AsFloat = 0 then
       end
       else
       begin
         Entidade:= TEntidadeFactory.Criar(tpItemTabelaPreco);
         DataSetProduto:= GetDataSet( Entidade , 'CodigoProduto='+  quotedstr( CodigoProduto )+
                                                 ' and CodigoTabelaPreco='+ CodigoTabelaPreco , 'Preco as ValorVenda' );
+        if DataSetProduto.FieldByName('ValorVenda').AsFloat = 0 then
+        begin
+           Entidade:= TEntidadeFactory.Criar(tpProduto);
+           DataSetProduto.Free;
+           DataSetProduto:= GetDataSet( Entidade , 'Codigo='+  quotedstr( CodigoProduto ), 'ValorVenda' );
+        end;
       end;
       result:= DataSetProduto.FieldByName('ValorVenda').AsFloat;
   finally

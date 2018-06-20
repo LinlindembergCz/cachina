@@ -127,11 +127,13 @@ type
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure ActTabelaPrecoExecute(Sender: TObject);
+    procedure CategoryButtons1MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure CategoryButtons1MouseLeave(Sender: TObject);
   private
     { Private declarations }
      FormList: TStringList;
-    function SetScreenResolution(Width, Height: integer): Longint;
-
+     function SetScreenResolution(Width, Height: integer): Longint;
   public
     { Public declarations }
     Login: string;
@@ -152,10 +154,11 @@ type
       DataSetFormaPagamento: TDataSet);
     function ShowEntradaListagem: string;
     function ShowSaidaListagem: string;
-
     procedure ShowRecebimentosListagem(Condicao: string);
-    function SelectOrcamento: string;
+    function ShowTabelaPrecoListagem: string;
     procedure ShowProdutosListagem(prsCondicao: string);
+
+    function SelectOrcamento: string;
     procedure SelecionarOrcamentDetalhe(prsOperacao, Codigo: string);
   end;
 
@@ -185,7 +188,8 @@ uses
   ControllerPermissoes, CargoDetalhes, FuncionariosComboboEditDialog,
   CentroCustoDetalhes, RelOrcamento2, TabelaNCMDetalhes, TabelaNFSeDetalhes,
   RelBalancoContabil, GenericDAO, UnidadeMedida, Indicadores,
-  ParametrosDetalhes, PlanoContasDetalhes, Sequencias, TabelaPrecoDetalhes;
+  ParametrosDetalhes, PlanoContasDetalhes, Sequencias, TabelaPrecoDetalhes,
+  TabelaPrecoListagem;
 
 procedure TFormPrincipal.FormCreate(Sender: TObject);
 begin
@@ -348,7 +352,10 @@ end;
 
 procedure TFormPrincipal.ActOrcamentoPesquisaExecute(Sender: TObject);
 begin
-  showform(TFormOrcamentoListagem,  ActOrcamento);
+  if FormList.IndexOf(  'TFormOrcamentoDetalhes' ) = - 1 then
+     showform(TFormOrcamentoListagem,  ActOrcamento)
+  else
+     ShowForm(TFormOrcamentoDetalhes, ActOrcamento )
 end;
 
 function TFormPrincipal.ShowComboEditDialgo(TipoEntidade: TTipoEntidade; Titulo: string): string;
@@ -384,6 +391,13 @@ begin
   FormEntradaListagem:= TFormEntradaListagem.Create(application);
   FormEntradaListagem.Showmodal;
   result:= FormEntradaListagem.Codigo;
+end;
+
+function TFormPrincipal.ShowTabelaPrecoListagem: string;
+begin
+  FormTabelaPrecoListagem:= TFormTabelaPrecoListagem.Create(application);
+  FormTabelaPrecoListagem.Showmodal;
+  result:= FormTabelaPrecoListagem.Codigo;
 end;
 
 function TFormPrincipal.ShowSaidaListagem: string;
@@ -458,6 +472,17 @@ begin
   application.CreateForm(TFormRelBalancoContabil,FormRelBalancoContabil );
   FormRelBalancoContabil.QuickRep1.PreviewModal;
   FormRelBalancoContabil.FreeOnRelease;
+end;
+
+procedure TFormPrincipal.CategoryButtons1MouseLeave(Sender: TObject);
+begin
+ CategoryButtons1.Width:= 33;
+end;
+
+procedure TFormPrincipal.CategoryButtons1MouseMove(Sender: TObject;
+  Shift: TShiftState; X, Y: Integer);
+begin
+ CategoryButtons1.Width:= 225;
 end;
 
 procedure TFormPrincipal.Fluxodecaixa1Click(Sender: TObject);
@@ -548,6 +573,7 @@ end;
 
 procedure TFormPrincipal.ActOrcamentoExecute(Sender: TObject);
 begin
+
    ShowForm(TFormOrcamentoDetalhes, ActOrcamento );
 end;
 

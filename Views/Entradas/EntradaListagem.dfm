@@ -11,7 +11,7 @@ inherited FormEntradaListagem: TFormEntradaListagem
   inherited Panel1: TPanel
     Width = 684
     Height = 129
-    ExplicitWidth = 681
+    ExplicitWidth = 684
     ExplicitHeight = 129
     inherited SpeedButton2: TSpeedButton
       Left = 596

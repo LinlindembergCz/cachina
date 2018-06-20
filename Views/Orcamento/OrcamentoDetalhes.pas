@@ -150,6 +150,10 @@ type
     cboCodigoTabelaPreco: TDBLookupComboBox;
     Label5: TLabel;
     lbTotal: TLabel;
+    edtdesconto: TEdit;
+    Label7: TLabel;
+    edtValorDesconto: TEdit;
+    Label14: TLabel;
     procedure BitBtn1Click(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
@@ -647,6 +651,7 @@ begin
     edtValor.Text := '0';
     edtDescontoItem.Text := '0';
     cboUnidadeMedida.itemindex := -1;
+    edtValorDesconto.Text:= '0';
     TotalizarOrcamento;
   end;
 end;
@@ -692,6 +697,7 @@ var
   DescricaoProduto: string;
   Update: Boolean;
   Count: Integer;
+  total:double;
 begin
   with MapperItemOrcamento do
   begin
@@ -704,6 +710,18 @@ begin
     else
     if srcItens.Dataset.fieldbyname('CodigoFuncionario').asinteger <= 0 then
        SelecionarComissao;
+
+    if strtofloatDef( edtValorDesconto.Text ,0) > 0 then
+    begin
+       if strtofloatDef( edtQuantidade.Text,0) * strtofloatDef( edtValor.Text,0) > 0 then
+       begin
+         total:= strtofloatDef( edtValorDesconto.Text ,0) * 100 /
+                                                      ( strtofloatDef( edtQuantidade.Text,0) *
+                                                        strtofloatDef( edtValor.Text,0) );
+          edtDescontoItem.Text:= FormatFloat(',0.00', total );
+       end;
+    end;
+
 
     ComponentToEntidade;
 
@@ -893,10 +911,9 @@ begin
             SendValueToFieldDataSet('CodigoFormaPagamento',CodigoFormaPagameto);
             SendValueToFieldDataSet('Valor', edtValorFormaPagamento.text);
             SendValueToFieldDataSet('ValorPago', edtValorFormaPagamento.text);
-            SendValueToFieldDataSet('PercentualDesconto' , '0');
+            SendValueToFieldDataSet('PercentualDesconto' , edtdesconto.Text );
             SendValueToFieldDataSet('QuantidadePercelas' , '0');
             SendValueToFieldDataSet('Vencimento', datetostr(dateVencimento.date) );
-            //SendValueToFieldDataSet('Opcao', cboOpcao.text);
             SendValueToFieldDataSet('CodigoOrcamento', '1');
             DataSet.fieldByName('Descricao').asstring := cboFormaPagamento.text;
         end;
@@ -1202,7 +1219,7 @@ begin
   if edtCodigoItem.text <> '' then
   begin
     edtValor.text       := FormatFloat('0.00;',
-    ControllerProdutos.GetPrecoVenda(edtCodigoItem.text,'',cboCodigoTabelaPreco.KeyValue ));
+    ControllerProdutos.GetPrecoVenda(edtCodigoItem.text,'', VarToStr(cboCodigoTabelaPreco.KeyValue) ));
     cboProduto.KeyValue := edtCodigoItem.Text;
     cboUnidadeMedida.ItemIndex := cboUnidadeMedida.Items.IndexOf('UN');
   end;

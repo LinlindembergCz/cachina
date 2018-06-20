@@ -32,6 +32,7 @@ type
     Label3: TLabel;
     edtDesconto: TEdit;
     SpeedButton1: TSpeedButton;
+    CornerButton2: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure btnAdicionaProdutoClick(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
@@ -39,6 +40,7 @@ type
     procedure cboProdutoCloseUp(Sender: TObject);
     procedure edtCodigoProdutoChange(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure CornerButton2Click(Sender: TObject);
   private
     { Private declarations }
     ItemTabelaPreco            : TGenericEntidade;
@@ -49,6 +51,8 @@ type
     procedure PersistirItemTabelaPreco;
     procedure SalvarItens(CodigoTabelaPreco: string);
     procedure ConsultarDataSetItemTabelaPreco(Codigo: string = '');
+    procedure GetTabelaPreco(CodigoTabelaPreco: string);
+    procedure GetItemTabelaPreco;
   public
     { Public declarations }
   end;
@@ -60,7 +64,7 @@ implementation
 
 {$R *.dfm}
 
-uses DBUtils, EntidadeFactory, ControllerTabelas;
+uses DBUtils, EntidadeFactory, ControllerTabelas, Principal;
 
 procedure TFormTabelaPrecoDetalhes.btnAdicionaProdutoClick(Sender: TObject);
 begin
@@ -93,17 +97,29 @@ procedure TFormTabelaPrecoDetalhes.SalvarItens(CodigoTabelaPreco: string);
 begin
   //TControllerEntrada(Controller).ExcluirItens(CodigoEntrada);
 
-  if MapperItemTabelaPreco.Entidade = nil then
+   if MapperItemTabelaPreco.Entidade = nil then
      MapperItemTabelaPreco.Entidade := TEntidadeFactory.Criar(tpItemTabelaPreco);
 
-  srcItens.dataSet.first;
-  while not srcItens.dataSet.eof do
-  begin
-    MapperItemTabelaPreco.SendDataSetToEntidade;
-    MapperItemTabelaPreco.SendValueToFieldEntidade('CodigoTabelaPreco', CodigoTabelaPreco);
-    Controller.Inserir(MapperItemTabelaPreco.Entidade);
-    srcItens.dataSet.next;
-  end;
+   try
+      srcItens.dataSet.DisableControls;
+
+      srcItens.dataSet.first;
+      while not srcItens.dataSet.eof do
+      begin
+        MapperItemTabelaPreco.SendDataSetToEntidade;
+        if  srcItens.dataSet.fieldbyname('CodigoTabelaPreco').AsString = '' then
+        begin
+          MapperItemTabelaPreco.SendValueToFieldEntidade('CodigoTabelaPreco', CodigoTabelaPreco);
+          Controller.Inserir(MapperItemTabelaPreco.Entidade);
+        end
+        else
+          Controller.Atualizar(MapperItemTabelaPreco.Entidade);
+
+        srcItens.dataSet.next;
+      end;
+   finally
+      srcItens.dataSet.enableControls;
+   end;
  //ConsultarDataSetItemEntrada(CodigoEntrada);
 end;
 
@@ -188,11 +204,12 @@ begin
      ComponentToEntidade;
 
      if not srcItens.DataSet.Locate('CodigoProduto',edtCodigoProduto.Text,[] ) then
-        srcItens.DataSet.append
+     begin
+        srcItens.DataSet.append;
+        SendValueToFieldDataSet('Descricao', cboProduto.text);
+     end
      else
         srcItens.DataSet.edit;
-
-     SendValueToFieldDataSet('Descricao', cboProduto.text);
      SendEntidadeToDataSet;
      srcItens.DataSet.Post;
   end;
@@ -248,6 +265,38 @@ begin
   MapperItemTabelaPreco.Dataset:= srcItens.Dataset;
 
 end;
+procedure TFormTabelaPrecoDetalhes.CornerButton2Click(Sender: TObject);
+var
+  CodigoTabelaPreco: string;
+begin
+  CodigoTabelaPreco := FormPrincipal.ShowTabelaPrecoListagem;
+  if CodigoTabelaPreco <> '' then
+  begin
+     GetTabelaPreco(CodigoTabelaPreco);
+     MapperEntidade.EntidadeToComponent;
+     ConsultarDataSetItemTabelaPreco(CodigoTabelaPreco);
+     Alterar;
+  end;
+end;
+
+procedure TFormTabelaPrecoDetalhes.GetTabelaPreco(CodigoTabelaPreco: string);
+begin
+  Condicao := 'T1.Codigo=' + CodigoTabelaPreco;
+  srcEntidade.Dataset := Controller.GetSelect('TabelaPreco T1 ', Condicao, '*');
+  MapperEntidade.Dataset := srcEntidade.Dataset;
+end;
+
+procedure TFormTabelaPrecoDetalhes.GetItemTabelaPreco;
+begin
+  if ItemTabelaPreco <> nil then
+    FreeandNil(ItemTabelaPreco);
+  ItemTabelaPreco := TEntidadeFactory.Criar(tpItemTabelaPreco);
+  MapperItemTabelaPreco.Entidade := ItemTabelaPreco;
+  MapperItemTabelaPreco.Dataset := srcItens.DataSet;
+  MapperItemTabelaPreco.SendDataSetToEntidade;
+  MapperItemTabelaPreco.EntidadeToComponent;
+end;
+
 procedure TFormTabelaPrecoDetalhes.edtCodigoProdutoChange(Sender: TObject);
 var
   valordesconto: double;
