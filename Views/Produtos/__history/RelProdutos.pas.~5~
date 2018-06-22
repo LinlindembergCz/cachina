@@ -1,0 +1,47 @@
+unit RelProdutos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, QRCtrls, QuickRpt, Vcl.ExtCtrls;
+
+type
+  TFormRelProdutos = class(TForm)
+    QuickRep1: TQuickRep;
+    DetailBand1: TQRBand;
+    PageHeaderBand1: TQRBand;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    procedure QuickRep1BeforePrint(Sender: TCustomQuickRep;
+      var PrintReport: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormRelProdutos: TFormRelProdutos;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFormRelProdutos.QuickRep1BeforePrint(Sender: TCustomQuickRep;
+  var PrintReport: Boolean);
+begin
+    QRDBText1.DataSet := QuickRep1.DataSet;
+    QRDBText2.DataSet := QuickRep1.DataSet;
+    QRDBText3.DataSet := QuickRep1.DataSet;
+    QRDBText4.DataSet := QuickRep1.DataSet;
+end;
+
+end.

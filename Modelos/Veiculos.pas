@@ -35,220 +35,66 @@ type
     FPotencia: string;
     FDataVenda: TDatetime;
     FDataCompra: TDatetime;
-    procedure SetAno(const Value: integer);
-    procedure SetChassi(const Value: string);
-    procedure SetCodigoCliente(const Value: integer);
-    procedure SetCodigoFilial(const Value: integer);
-    procedure SetCodigoModelo(const Value: integer);
-    procedure SetCor(const Value: string);
-    procedure SetData(const Value: TDatetime);
-    procedure SetObservacao(const Value: string);
-    procedure SetPlaca(const Value: string);
-    procedure SetAnoFabricacao(const Value: integer);
-    procedure SetAnoModelo(const Value: integer);
-    procedure SetCilindrada(const Value: string);
-    procedure SetCMT(const Value: string);
-    procedure SetKilometragem(const Value: integer);
-    procedure SetNumeroMotor(const Value: string);
-    procedure SetNumeroSerie(const Value: string);
-    procedure SetPesoBruto(const Value: Double);
-    procedure SetPesoLiquido(const Value: Double);
-    procedure SetPotencia(const Value: string);
-    procedure SetPrecoCompra(const Value: Double);
-    procedure SetPrecoVenda(const Value: Double);
-    procedure SetRenavan(const Value: string);
-    procedure SetTipoCombustivel(const Value: string);
-    procedure SetTipoVeiculo(const Value: string);
-    procedure SetDataCompra(const Value: TDatetime);
-    procedure SetDataVenda(const Value: TDatetime);
   public
     [KeyField('Placa')]
     [FieldName('Placa')]
-    property Placa: string read FPlaca write SetPlaca;
+    property Placa: string read FPlaca write FPlaca;
+    [KeyField('CodigoCliente')]
     [FieldName('CodigoCliente')]
-    property CodigoCliente:integer read FCodigoCliente write SetCodigoCliente;
+    property CodigoCliente:integer read FCodigoCliente write FCodigoCliente;
     [FieldName('CodigoFilial')]
-    property CodigoFilial:integer read FCodigoFilial write SetCodigoFilial;
+    property CodigoFilial:integer read FCodigoFilial write FCodigoFilial;
     [FieldName('CodigoModelo')]
-    property CodigoModelo:integer read FCodigoModelo write SetCodigoModelo;
+    property CodigoModelo:integer read FCodigoModelo write FCodigoModelo;
     [FieldName('Chassi')]
-    property Chassi: string read FChassi write SetChassi;
+    property Chassi: string read FChassi write FChassi;
     [FieldName('Ano')]
-    property Ano:integer read FAno write SetAno;
+    property Ano:integer read FAno write FAno;
     [FieldName('Cor')]
-    property Cor: string read FCor write SetCor;
+    property Cor: string read FCor write FCor;
     [FieldName('Observacao')]
-    property Observacao: string read FObservacao write SetObservacao;
+    property Observacao: string read FObservacao write FObservacao;
     [FieldName('Data')]
-    property Data:TDatetime read FData write SetData;
+    property Data:TDatetime read FData write FData;
     //[FieldName('Potencia')]
-    property Potencia : string read FPotencia write SetPotencia;
+    property Potencia : string read FPotencia write FPotencia;
     //[FieldName('Cilindrada')]
-    property Cilindrada: string read FCilindrada write SetCilindrada;
+    property Cilindrada: string read FCilindrada write FCilindrada;
     //[FieldName('PesoLiquido')]
-    property PesoLiquido: Double read FPesoLiquido write SetPesoLiquido;
+    property PesoLiquido: Double read FPesoLiquido write FPesoLiquido;
     //[FieldName('PesoBruto')]
-    property PesoBruto: Double read FPesoBruto write SetPesoBruto;
+    property PesoBruto: Double read FPesoBruto write FPesoBruto;
     //[FieldName('NumeroSerie')]
-    property NumeroSerie: string read FNumeroSerie write SetNumeroSerie;
+    property NumeroSerie: string read FNumeroSerie write FNumeroSerie;
     //[FieldName('TipoCombustivel')]
-    property TipoCombustivel: string read FTipoCombustivel write SetTipoCombustivel;
+    property TipoCombustivel: string read FTipoCombustivel write FTipoCombustivel;
     //[FieldName('NumeroMotor')]
-    property NumeroMotor: string read FNumeroMotor write SetNumeroMotor;
+    property NumeroMotor: string read FNumeroMotor write FNumeroMotor;
     //[FieldName('CMT')]
-    property CMT: string read FCMT write SetCMT;
+    property CMT: string read FCMT write FCMT;
     //[FieldName('Kilometragem')]
-    property Kilometragem:integer read FKilometragem write SetKilometragem;
+    property Kilometragem:integer read FKilometragem write FKilometragem;
     //[FieldName('Renavan')]
-    property Renavan : string read FRenavan write SetRenavan;
+    property Renavan : string read FRenavan write FRenavan;
     //[FieldName('AnoModelo')]
-    property AnoModelo :integer read FAnoModelo write SetAnoModelo;
+    property AnoModelo :integer read FAnoModelo write FAnoModelo;
     //[FieldName('AnoFabricacao')]
-    property AnoFabricacao:integer read FAnoFabricacao write SetAnoFabricacao;
+    property AnoFabricacao:integer read FAnoFabricacao write FAnoFabricacao;
     //[FieldName('TipoVeiculo')]
-    property  TipoVeiculo: string read FTipoVeiculo write SetTipoVeiculo;
+    property  TipoVeiculo: string read FTipoVeiculo write FTipoVeiculo;
     //[FieldName('DataCompra')]
-    property DataCompra:TDatetime read FDataCompra write SetDataCompra;
+    property DataCompra:TDatetime read FDataCompra write FDataCompra;
     //[FieldName('DataVenda')]
-    property DataVenda:TDatetime read FDataVenda write SetDataVenda;
+    property DataVenda:TDatetime read FDataVenda write FDataVenda;
     //[FieldName('PrecoCompra')]
-    property PrecoCompra:Double read FPrecoCompra write SetPrecoCompra;
+    property PrecoCompra:Double read FPrecoCompra write FPrecoCompra;
     //[FieldName('PrecoVenda')]
-    property PrecoVenda:Double read FPrecoVenda write SetPrecoVenda;
+    property PrecoVenda:Double read FPrecoVenda write FPrecoVenda;
   end;
 
 implementation
 
 { TVeiculos }
 
-procedure TVeiculos.SetAno(const Value: integer);
-begin
-  FAno := Value;
-end;
-
-procedure TVeiculos.SetAnoFabricacao(const Value: integer);
-begin
-  FAnoFabricacao := Value;
-end;
-
-procedure TVeiculos.SetAnoModelo(const Value: integer);
-begin
-  FAnoModelo := Value;
-end;
-
-procedure TVeiculos.SetChassi(const Value: string);
-begin
-  FChassi := Value;
-end;
-
-procedure TVeiculos.SetCilindrada(const Value: string);
-begin
-  FCilindrada := Value;
-end;
-
-procedure TVeiculos.SetCMT(const Value: string);
-begin
-  FCMT := Value;
-end;
-
-procedure TVeiculos.SetCodigoCliente(const Value: integer);
-begin
-  FCodigoCliente := Value;
-end;
-
-procedure TVeiculos.SetCodigoFilial(const Value: integer);
-begin
-  FCodigoFilial := Value;
-end;
-
-procedure TVeiculos.SetCodigoModelo(const Value: integer);
-begin
-  FCodigoModelo := Value;
-end;
-
-procedure TVeiculos.SetCor(const Value: string);
-begin
-  FCor := Value;
-end;
-
-procedure TVeiculos.SetData(const Value: TDatetime);
-begin
-  FData := Value;
-end;
-
-procedure TVeiculos.SetDataCompra(const Value: TDatetime);
-begin
-  FDataCompra := Value;
-end;
-
-procedure TVeiculos.SetDataVenda(const Value: TDatetime);
-begin
-  FDataVenda := Value;
-end;
-
-procedure TVeiculos.SetKilometragem(const Value: integer);
-begin
-  FKilometragem := Value;
-end;
-
-procedure TVeiculos.SetNumeroMotor(const Value: string);
-begin
-  FNumeroMotor := Value;
-end;
-
-procedure TVeiculos.SetNumeroSerie(const Value: string);
-begin
-  FNumeroSerie := Value;
-end;
-
-procedure TVeiculos.SetObservacao(const Value: string);
-begin
-  FObservacao := Value;
-end;
-
-procedure TVeiculos.SetPesoBruto(const Value: Double);
-begin
-  FPesoBruto := Value;
-end;
-
-procedure TVeiculos.SetPesoLiquido(const Value: Double);
-begin
-  FPesoLiquido := Value;
-end;
-
-procedure TVeiculos.SetPlaca(const Value: string);
-begin
-  FPlaca := Value;
-end;
-
-procedure TVeiculos.SetPotencia(const Value: string);
-begin
-  FPotencia := Value;
-end;
-
-procedure TVeiculos.SetPrecoCompra(const Value: Double);
-begin
-  FPrecoCompra := Value;
-end;
-
-procedure TVeiculos.SetPrecoVenda(const Value: Double);
-begin
-  FPrecoVenda := Value;
-end;
-
-procedure TVeiculos.SetRenavan(const Value: string);
-begin
-  FRenavan := Value;
-end;
-
-procedure TVeiculos.SetTipoCombustivel(const Value: string);
-begin
-  FTipoCombustivel := Value;
-end;
-
-procedure TVeiculos.SetTipoVeiculo(const Value: string);
-begin
-  FTipoVeiculo := Value;
-end;
 
 end.

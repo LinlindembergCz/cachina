@@ -14,6 +14,7 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
     inherited tabPrincipal: TPageControl
       Width = 752
       Height = 433
+      ActivePage = TabSheet2
       ExplicitWidth = 752
       ExplicitHeight = 433
       inherited TabSheet1: TTabSheet
@@ -56,7 +57,7 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
           Top = 0
           Width = 744
           Height = 405
-          ActivePage = TabSheet7
+          ActivePage = TabSheet5
           Align = alClient
           TabOrder = 0
           object TabSheet7: TTabSheet

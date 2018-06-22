@@ -525,6 +525,8 @@ procedure TFormOrcamentoListagem.Grid1DrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   inherited;
+  if active then
+  begin
       if ( srcEntidade.dataset.FieldByName('Situacao').asstring = 'A Faturar') then
          Grid1.Canvas.Font.Color := clPurple
       else
@@ -537,6 +539,7 @@ begin
       if ( srcEntidade.dataset.FieldByName('Situacao').asstring = 'Cancelado')   then
          Grid1.Canvas.Font.Color := clgray;
   Grid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  end;
 end;
 
 procedure TFormOrcamentoListagem.Setcodigo(const Value: string);

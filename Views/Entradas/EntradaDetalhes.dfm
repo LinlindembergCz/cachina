@@ -1,14 +1,14 @@
 inherited FormEntradaDetalhes: TFormEntradaDetalhes
   Caption = 'Entrada'
-  ClientHeight = 619
+  ClientHeight = 566
   ClientWidth = 978
   ExplicitWidth = 994
-  ExplicitHeight = 657
+  ExplicitHeight = 604
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
     Width = 978
-    Height = 570
+    Height = 517
     ExplicitWidth = 978
     ExplicitHeight = 570
     object lbData: TLabel
@@ -351,7 +351,6 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
         Width = 41
         Height = 21
         TabStop = False
-        ReadOnly = True
         TabOrder = 1
         OnChange = edtCodigoItemChange
       end
@@ -871,7 +870,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
       Left = 6
       Top = 334
       Width = 963
-      Height = 226
+      Height = 173
       Anchors = [akLeft, akTop, akBottom]
       DataSource = srcItens
       TabOrder = 9

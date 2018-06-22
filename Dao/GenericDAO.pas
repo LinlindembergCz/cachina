@@ -325,7 +325,7 @@ begin
            else
               Codigo := IntToStr(Prop.GetValue(TObject(Obj)).AsInteger);
 
-           strWhere := strWhere + Aspas + KeyField(Atributo).Name +Aspas  +' = '+ quotedstr(Codigo);
+           strWhere := strWhere +ifthen(strWhere<>'',' and ','')+ Aspas + KeyField(Atributo).Name +Aspas  +' = '+ quotedstr(Codigo);
         end;
 
      end;

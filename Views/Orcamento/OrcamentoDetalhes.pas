@@ -181,7 +181,6 @@ type
     procedure edtDescontoItemExit(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure cboFormaPagamentoSelect(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
     procedure cboClientesExit(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
@@ -964,12 +963,6 @@ begin
   Image5.Picture.LoadFromFile(FileListBox1.FileName);
 end;
 
-procedure TFormOrcamentoDetalhes.FormActivate(Sender: TObject);
-begin
-  inherited;
-  ConsultaOrcamentoFormaPagamento(srcEntidade.DataSet.fieldByname('Codigo').asstring);
-end;
-
 procedure TFormOrcamentoDetalhes.FormCreate(Sender: TObject);
 var
 //ItemOrcamento:TGenericEntidade;
@@ -1001,6 +994,7 @@ begin
   FillLookUpCombobox( tpTabelaPreco, cboCodigoTabelaPreco,'Codigo','Descricao', 'Validade >= GetDate() ' );
 
   CarregarProdutos;
+  ConsultaOrcamentoFormaPagamento(srcEntidade.DataSet.fieldByname('Codigo').asstring);
   //Formprincipal.AjustaForm(self);
 end;
 

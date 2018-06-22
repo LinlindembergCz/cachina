@@ -439,6 +439,10 @@
             <Form>FormTabelaPrecoListagem</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Views\Produtos\RelProdutos.pas">
+            <Form>FormRelProdutos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="Cachina.todo"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

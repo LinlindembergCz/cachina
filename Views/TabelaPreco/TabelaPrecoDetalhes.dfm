@@ -9,7 +9,7 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
   inherited Panel1: TPanel
     Width = 756
     Height = 500
-    ExplicitWidth = 684
+    ExplicitWidth = 756
     ExplicitHeight = 500
     object lbDataEmissao: TLabel
       Left = 578
@@ -241,7 +241,7 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
       end
       object cboProduto: TDBLookupComboBox
         Left = 75
-        Top = 37
+        Top = 34
         Width = 401
         Height = 21
         DropDownRows = 15
@@ -298,7 +298,7 @@ inherited FormTabelaPrecoDetalhes: TFormTabelaPrecoDetalhes
   end
   inherited Panel2: TPanel
     Width = 756
-    ExplicitWidth = 684
+    ExplicitWidth = 756
     inherited btnSair: TSpeedButton
       Left = 680
       ExplicitLeft = 680

@@ -45,9 +45,12 @@ type
 
 
   const
-
   Consultatabela = 'Produtos T1 left join tabelaNCM on T1.CodigoNCM = tabelaNCM.Codigo';
-  CamposProduto  = 'T1.*, ( TabelaNCM.CodigoNCM ) as CodificacaoNCM';
+  CamposProduto  = 'T1.*, ( TabelaNCM.CodigoNCM ) as CodificacaoNCM,'+
+                   ' (Select SUM(Est.Quantidade) from '+
+                   ' EstoqueProduto est where est.CodigoProduto = '+
+                   ' t1.Codigo and t1.CodigoFilial = est.CodigoFilial ) as Quantidade';
+
 
 
 implementation

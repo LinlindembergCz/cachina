@@ -38,6 +38,7 @@ type
   public
      CampoPesquisa: string;
      OrderBy: string;
+     GroupBy: string;
      procedure RefreshDataSet;virtual;
      procedure PosicionaPageIndex;
   end;
@@ -128,19 +129,24 @@ begin
      if Tabela <> '' then
         srcPesquisa.Dataset := Controller.GetSelect(Tabela, ifthen(Condicao <> '', Condicao+' and ', '')+
         CampoPesquisa+' COLLATE Latin1_General_CI_AI like '+
-        quotedstr('%'+edtValorPesquisa.Text+'%')+ ifthen( OrderBy <> '', 'Order by '+OrderBy , ''), Campos)
+        quotedstr('%'+edtValorPesquisa.Text+'%')+ifthen( GroupBy <> '', 'Group by '+GroupBy , '')+
+         ifthen( OrderBy <> '', 'Order by '+OrderBy , ''), Campos)
      else
         srcPesquisa.Dataset := Controller.GetDataset(Entidade,ifthen(Condicao <> '', Condicao+' and ', '')+
         CampoPesquisa+' COLLATE Latin1_General_CI_AI like '+
-        quotedstr('%'+edtValorPesquisa.Text+'%')+ ifthen( OrderBy <> '', 'Order by '+OrderBy , '')  , Campos)
+        quotedstr('%'+edtValorPesquisa.Text+'%')+
+        ifthen( GroupBy <> '', 'Group by '+GroupBy , '')+
+        ifthen( OrderBy <> '', 'Order by '+OrderBy , '')  , Campos)
   end
   else
   begin
      if Tabela <> '' then
        srcPesquisa.Dataset := Controller.GetSelect(Tabela, ifthen(Condicao <> '', Condicao+' and ', '')+'0=0'+
+       ifthen( GroupBy <> '', 'Group by '+GroupBy , '')+
        ifthen( OrderBy <> '', 'Order by '+OrderBy , '')  , Campos)
      else
         srcPesquisa.Dataset := Controller.GetDataset(Entidade,ifthen(Condicao <> '', Condicao+' and ', '')+'0=0'+
+        ifthen( GroupBy <> '', 'Group by '+GroupBy , '')+
         ifthen( OrderBy <> '', 'Order by '+OrderBy , '')  , Campos);
   end;
   MapperEntidade.Dataset := srcPesquisa.DataSet;
