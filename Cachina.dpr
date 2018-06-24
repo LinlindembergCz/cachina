@@ -158,7 +158,8 @@ uses
   AlterarProdutos in 'Views\Produtos\AlterarProdutos.pas' {FormAlterarProdutos},
   ControllerSequencias in 'Controller\ControllerSequencias.pas',
   TabelaPrecoListagem in 'Views\TabelaPreco\TabelaPrecoListagem.pas' {FormTabelaPrecoListagem},
-  RelProdutos in 'Views\Produtos\RelProdutos.pas' {FormRelProdutos};
+  RelProdutos in 'Views\Produtos\RelProdutos.pas' {FormRelProdutos},
+  RelProdutosFamiliaGrupo in 'Views\Produtos\RelProdutosFamiliaGrupo.pas' {FormRelProdutosFamiliaGrupo};
 
 {$R *.res}
 
@@ -168,5 +169,6 @@ begin
   TStyleManager.TrySetStyle('Amethyst Kamri');
   Application.CreateForm(TDSServerModuleBaseDados, DSServerModuleBaseDados);
   Application.CreateForm(TFormPrincipal, FormPrincipal);
+  Application.CreateForm(TFormRelProdutosFamiliaGrupo, FormRelProdutosFamiliaGrupo);
   Application.Run;
 end.

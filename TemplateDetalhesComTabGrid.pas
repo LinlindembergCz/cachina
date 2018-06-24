@@ -193,7 +193,11 @@ procedure TTemplateFormComTabGridDetalhes.TabSheet1Show(Sender: TObject);
 begin
   inherited;
   if Operacao = '' then
-     RefreshDataSet;
+  begin
+     srcPesquisa.DataSet.close;
+     srcPesquisa.DataSet.open;
+  end;
+  //RefreshDataSet;
 end;
 
 procedure TTemplateFormComTabGridDetalhes.TabSheet2Show(Sender: TObject);

@@ -41,7 +41,6 @@ procedure TFormProdutoListagem.Grid1DblClick(Sender: TObject);
 begin
   ModalResult:= mrOk;
   inherited;
-
 end;
 
 procedure TFormProdutoListagem.SpeedButton1Click(Sender: TObject);
@@ -53,13 +52,13 @@ end;
 procedure TFormProdutoListagem.SpeedButton3Click(Sender: TObject);
 begin
   inherited;
-    if edtdescricao.Text  <> '' then
-    begin
-        srcEntidade.DataSet.Close;
-        srcEntidade.DataSet:=TGenericDAO.GetAll<TProdutos>( TProdutos.Create ,
-                             'Descricao LIKE ' + quotedstr('%'+ edtdescricao.Text +'%'),
-                             'Codigo, Descricao');
-    end;
+  if edtdescricao.Text  <> '' then
+  begin
+    srcEntidade.DataSet.Close;
+    srcEntidade.DataSet:=TGenericDAO.GetAll<TProdutos>( TProdutos.Create ,
+                         'Descricao LIKE ' + quotedstr('%'+ edtdescricao.Text +'%')+' and Tipo=''MATERIAL'' ',
+                         'Codigo, Descricao, Referencia, CodigoBarras');
+  end;
 end;
 
 end.

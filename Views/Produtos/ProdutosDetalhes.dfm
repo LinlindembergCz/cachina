@@ -1,5 +1,5 @@
 inherited FormProdutosDetalhes: TFormProdutosDetalhes
-  Caption = 'Insumos'
+  Caption = 'Produtos'
   ClientHeight = 533
   ClientWidth = 729
   Position = poDesktopCenter
@@ -64,9 +64,17 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
           inherited grpPesquisa: TGroupBox
             Width = 710
             ExplicitWidth = 710
+            inherited edtValorPesquisa: TEdit
+              Top = 25
+              Width = 313
+              ExplicitTop = 25
+              ExplicitWidth = 313
+            end
             inherited btnPesquisar: TButton
-              Top = 17
-              ExplicitTop = 17
+              Left = 328
+              Top = 22
+              ExplicitLeft = 328
+              ExplicitTop = 22
             end
           end
         end
@@ -78,8 +86,6 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
         end
       end
       inherited TabSheet2: TTabSheet
-        ExplicitLeft = 4
-        ExplicitTop = 24
         ExplicitWidth = 719
         ExplicitHeight = 454
         object TabControl1: TPageControl
@@ -93,8 +99,8 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
           object TabSheet4: TTabSheet
             Caption = 'Dados iniciais'
             object Label11: TLabel
-              Left = 5
-              Top = 305
+              Left = 12
+              Top = 294
               Width = 67
               Height = 13
               Caption = 'Observa'#231#227'o'
@@ -107,7 +113,7 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
             end
             object Label4: TLabel
               Left = 11
-              Top = 190
+              Top = 184
               Width = 54
               Height = 13
               Caption = 'Subgrupo'
@@ -120,7 +126,7 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
             end
             object SpeedButton4: TSpeedButton
               Left = 591
-              Top = 181
+              Top = 175
               Width = 23
               Height = 22
               Caption = '...'
@@ -209,7 +215,7 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
             end
             object Label32: TLabel
               Left = 11
-              Top = 225
+              Top = 218
               Width = 46
               Height = 13
               Caption = 'Unidade'
@@ -222,7 +228,7 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
             end
             object SpeedButton1: TSpeedButton
               Left = 211
-              Top = 221
+              Top = 214
               Width = 23
               Height = 22
               Caption = '...'
@@ -230,7 +236,7 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
             end
             object Label36: TLabel
               Left = 11
-              Top = 266
+              Top = 259
               Width = 42
               Height = 13
               Caption = 'Servi'#231'o'
@@ -241,33 +247,48 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
               Font.Style = [fsBold]
               ParentFont = False
             end
-            object MemoObservacao: TMemo
-              Left = 3
-              Top = 324
-              Width = 662
-              Height = 81
-              TabOrder = 5
+            object Label37: TLabel
+              Left = 211
+              Top = 17
+              Width = 95
+              Height = 13
+              Caption = 'Codigo de barras'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
             end
-            object cboSubGrupo: TComboBox
+            object MemoObservacao: TMemo
+              Left = 11
+              Top = 313
+              Width = 574
+              Height = 81
+              TabOrder = 6
+            end
+            object cboSubGrupo: TDBLookupComboBox
               Left = 89
-              Top = 182
+              Top = 176
               Width = 496
               Height = 21
-              TabOrder = 4
+              TabOrder = 5
             end
-            object cboGrupo: TComboBox
+            object cboGrupo: TDBLookupComboBox
               Left = 89
               Top = 136
               Width = 496
               Height = 21
-              TabOrder = 3
+              TabOrder = 4
+              OnCloseUp = cboGrupoCloseUp
             end
-            object cboFamilia: TComboBox
+            object cboFamilia: TDBLookupComboBox
               Left = 90
-              Top = 96
+              Top = 95
               Width = 496
               Height = 21
-              TabOrder = 2
+              TabOrder = 3
+              OnCloseUp = cboFamiliaCloseUp
             end
             object edtDescricao: TEdit
               Tag = 1
@@ -275,43 +296,43 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
               Top = 53
               Width = 496
               Height = 21
-              TabOrder = 1
+              TabOrder = 2
             end
             object edtReferencia: TEdit
               Left = 89
               Top = 13
-              Width = 136
+              Width = 116
               Height = 21
               TabOrder = 0
             end
             object cboTipo: TComboBox
               Left = 485
-              Top = 13
+              Top = 14
               Width = 100
               Height = 21
-              TabOrder = 6
+              TabOrder = 7
               Items.Strings = (
                 'MATERIAL'
                 'SERVI'#199'O')
             end
             object cboUnidadeMedida: TComboBox
               Left = 89
-              Top = 222
+              Top = 215
               Width = 116
-              Height = 21
-              TabOrder = 7
-            end
-            object cboCodigoProdutoServico: TComboBox
-              Left = 89
-              Top = 263
-              Width = 496
               Height = 21
               TabOrder = 8
             end
+            object cboCodigoProdutoServico: TComboBox
+              Left = 89
+              Top = 256
+              Width = 496
+              Height = 21
+              TabOrder = 9
+            end
             object chkAtivo: TCheckBox
-              Left = 264
-              Top = 16
-              Width = 97
+              Left = 592
+              Top = 15
+              Width = 65
               Height = 17
               Caption = 'Ativo'
               Font.Charset = DEFAULT_CHARSET
@@ -320,7 +341,14 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
               Font.Name = 'Tahoma'
               Font.Style = [fsBold]
               ParentFont = False
-              TabOrder = 9
+              TabOrder = 10
+            end
+            object edtCodigoBarras: TEdit
+              Left = 312
+              Top = 14
+              Width = 136
+              Height = 21
+              TabOrder = 1
             end
           end
           object TabSheet5: TTabSheet
@@ -1577,27 +1605,27 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
     end
   end
   inherited srcEntidade: TDataSource
-    Left = 600
-    Top = 382
+    Left = 592
+    Top = 458
   end
   inherited srcPesquisa: TDataSource
-    Left = 592
-    Top = 480
+    Left = 344
+    Top = 456
   end
   object srcParametrosPrecoVenda: TDataSource [4]
     AutoEdit = False
-    Left = 608
-    Top = 430
+    Left = 456
+    Top = 457
   end
   object srcClassificacaoCliente: TDataSource [5]
     AutoEdit = False
-    Left = 464
-    Top = 478
+    Left = 224
+    Top = 454
   end
   object srcEstoqueProduto: TDataSource [6]
     AutoEdit = False
-    Left = 312
-    Top = 478
+    Left = 104
+    Top = 454
   end
   inherited PopupRelatorio: TPopupMenu
     Left = 293
@@ -1605,6 +1633,10 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
     object Produtos1: TMenuItem
       Caption = 'Produtos'
       OnClick = Produtos1Click
+    end
+    object ProdutosporFamiliaGrupoSubGrupo1: TMenuItem
+      Caption = 'Produtos por Familia / Grupo / SubGrupo'
+      OnClick = ProdutosporFamiliaGrupoSubGrupo1Click
     end
     object N1: TMenuItem
       Caption = '-'

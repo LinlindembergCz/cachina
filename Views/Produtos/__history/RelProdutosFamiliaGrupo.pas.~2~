@@ -1,0 +1,36 @@
+unit RelProdutosFamiliaGrupo;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, QRCtrls, QuickRpt, Vcl.ExtCtrls,
+  Data.DB, Datasnap.DBClient;
+
+type
+  TFormRelProdutosFamiliaGrupo = class(TForm)
+    ClientDataSet1: TClientDataSet;
+    QuickRep1: TQuickRep;
+    DetailBand1: TQRBand;
+    PageHeaderBand1: TQRBand;
+    QRGroup1: TQRGroup;
+    QRGroup2: TQRGroup;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormRelProdutosFamiliaGrupo: TFormRelProdutosFamiliaGrupo;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -443,6 +443,10 @@
             <Form>FormRelProdutos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Views\Produtos\RelProdutosFamiliaGrupo.pas">
+            <Form>FormRelProdutosFamiliaGrupo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="Cachina.todo"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

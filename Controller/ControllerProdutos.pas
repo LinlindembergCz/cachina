@@ -43,15 +43,18 @@ type
     function GetCurvaAbc(condicao: string):TDataSet;
   end;
 
-
   const
-  Consultatabela = 'Produtos T1 left join tabelaNCM on T1.CodigoNCM = tabelaNCM.Codigo';
-  CamposProduto  = 'T1.*, ( TabelaNCM.CodigoNCM ) as CodificacaoNCM,'+
-                   ' (Select SUM(Est.Quantidade) from '+
-                   ' EstoqueProduto est where est.CodigoProduto = '+
-                   ' t1.Codigo and t1.CodigoFilial = est.CodigoFilial ) as Quantidade';
+    Consultatabela = 'Produtos T1 left join tabelaNCM on T1.CodigoNCM = tabelaNCM.Codigo'+
+                     ' LEFT JOIN FamiliaProdutos fam on t1.codigoFamilia = fam.Codigo '+
+                     ' LEFT JOIN GrupoProdutos gru on t1.codigogrupo = gru.Codigo '+
+                     ' LEFT JOIN SubGrupoProdutos sub on  t1.codigosubgrupo = sub.Codigo ';
 
-
+    CamposProduto  = 'T1.*, ( TabelaNCM.CodigoNCM ) as CodificacaoNCM,'+
+                     ' (Select SUM(Est.Quantidade) from '+
+                     ' EstoqueProduto est where est.CodigoProduto = '+
+                     ' t1.Codigo and t1.CodigoFilial = est.CodigoFilial ) as Quantidade, '+
+                     ' fam.Descricao as FamiliaProduto, gru.Descricao as GrupoProduto , '+
+                     ' sub.Descricao as SubGrupoProduto ';
 
 implementation
 

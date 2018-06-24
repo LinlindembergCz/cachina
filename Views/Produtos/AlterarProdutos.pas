@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, strUtils;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, strUtils,
+  Vcl.Buttons;
 
 type
   TFormAlterarProdutos = class(TForm)
@@ -20,12 +21,19 @@ type
     cboCodigoProdutoServico: TComboBox;
     Button1: TButton;
     Button2: TButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
     procedure Button2Click(Sender: TObject);
     procedure cboFamiliaChange(Sender: TObject);
     procedure cboGrupoChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
   private
+
     { Private declarations }
   public
     { Public declarations }
@@ -39,7 +47,7 @@ implementation
 
 {$R *.dfm}
 
-uses EntidadeFactory, DBUtils, srvModBaseDados;
+uses EntidadeFactory, DBUtils, srvModBaseDados, Principal;
 
 procedure TFormAlterarProdutos.Button1Click(Sender: TObject);
 var
@@ -63,6 +71,7 @@ begin
    DSServerModuleBaseDados.ExecSQL('Update Produtos Set '+  Values +
    ' where Codigo IN ( '+ Produtos.DelimitedText +')' );
 
+  showmessage('Operação finalizada com sucesso!');
    close;
 end;
 
@@ -104,6 +113,24 @@ begin
    'Tipo=''SERVICO''', 'Codigo', 'Descricao');
 
    Produtos.Delimiter:= ',';
+end;
+
+procedure TFormAlterarProdutos.SpeedButton2Click(Sender: TObject);
+begin
+  inherited;
+  FormPrincipal.ActFamilia.Execute;
+end;
+
+procedure TFormAlterarProdutos.SpeedButton3Click(Sender: TObject);
+begin
+  inherited;
+  FormPrincipal.Actgrupoproduto.Execute;
+end;
+
+procedure TFormAlterarProdutos.SpeedButton4Click(Sender: TObject);
+begin
+  inherited;
+  FormPrincipal.ActSubgrupoProduto.Execute;
 end;
 
 end.

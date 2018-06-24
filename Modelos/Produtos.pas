@@ -52,6 +52,7 @@ Type
     FCodigoCEST: string;
     FCodigoProdutoServico:integer;
     FAtivo: string;
+    FCodigoBarras: string;
   public
     [KeyField('Codigo')]
     property  Codigo: integer read FCodigo write FCodigo;
@@ -138,6 +139,7 @@ Type
     property CodigoProdutoServico: integer read FCodigoProdutoServico write FCodigoProdutoServico;
     [FieldName('Ativo',1)]
     property Ativo: string  read FAtivo write FAtivo;
+    property CodigoBarras: string read FCodigoBarras write FCodigoBarras;
   end;
 
 implementation

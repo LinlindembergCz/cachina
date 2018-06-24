@@ -325,8 +325,8 @@ begin
                   DescricaoProduto:=  Copy( DescricaoProduto, 0 , Pos( ' ', DescricaoProduto ) - 1 );
 
                FormProdutoListagem.srcEntidade.DataSet:= TGenericDAO.GetAll<TProdutos>( TProdutos.Create ,
-                                                        'Descricao LIKE ' + quotedstr( DescricaoProduto +'%'),
-                                                        'Codigo, Descricao');
+                                                        'Descricao LIKE ' + quotedstr( DescricaoProduto +'%')+' and Tipo=''MATERIAL'' ',
+                                                        'Codigo, Descricao, Referencia, CodigoBarras');
                mResult:= FormProdutoListagem.ShowModal;
 
                if mResult = mrOk then
@@ -348,7 +348,8 @@ begin
 
                   edtDescricao.Text     := Prod.xProd;
                   edtCodigoCEST.Text    := Prod.CEST;
-                  cboCodigoNCM.KeyValue :=  Prod.NCM;
+                  cboCodigoNCM.KeyValue := Prod.NCM;
+                  edtCodigoBarras.Text  := Prod.cEAN;
 
                   Form.FormStyle:= fsNormal;
                   Form.WindowState:= wsNormal;

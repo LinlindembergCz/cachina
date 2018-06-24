@@ -4,7 +4,7 @@ object FormAlterarProdutos: TFormAlterarProdutos
   BorderStyle = bsDialog
   Caption = 'Alterar produtos'
   ClientHeight = 251
-  ClientWidth = 469
+  ClientWidth = 518
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,18 +19,15 @@ object FormAlterarProdutos: TFormAlterarProdutos
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 469
+    Width = 518
     Height = 251
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = 112
-    ExplicitTop = 112
-    ExplicitWidth = 185
-    ExplicitHeight = 41
+    ExplicitWidth = 469
     object GroupBox1: TGroupBox
-      Left = 16
+      Left = 17
       Top = 8
-      Width = 437
+      Width = 480
       Height = 201
       TabOrder = 0
       object Label2: TLabel
@@ -85,6 +82,30 @@ object FormAlterarProdutos: TFormAlterarProdutos
         Font.Style = [fsBold]
         ParentFont = False
       end
+      object SpeedButton2: TSpeedButton
+        Left = 434
+        Top = 22
+        Width = 23
+        Height = 22
+        Caption = '...'
+        OnClick = SpeedButton2Click
+      end
+      object SpeedButton3: TSpeedButton
+        Left = 434
+        Top = 69
+        Width = 23
+        Height = 22
+        Caption = '...'
+        OnClick = SpeedButton3Click
+      end
+      object SpeedButton4: TSpeedButton
+        Left = 434
+        Top = 112
+        Width = 23
+        Height = 22
+        Caption = '...'
+        OnClick = SpeedButton4Click
+      end
       object cboFamilia: TComboBox
         Left = 64
         Top = 24
@@ -119,9 +140,9 @@ object FormAlterarProdutos: TFormAlterarProdutos
       end
     end
     object Button1: TButton
-      Left = 274
+      Left = 293
       Top = 215
-      Width = 75
+      Width = 101
       Height = 25
       Caption = 'Confirmar'
       Font.Charset = DEFAULT_CHARSET
@@ -134,9 +155,9 @@ object FormAlterarProdutos: TFormAlterarProdutos
       OnClick = Button1Click
     end
     object Button2: TButton
-      Left = 379
+      Left = 400
       Top = 215
-      Width = 75
+      Width = 97
       Height = 25
       Caption = 'Sair'
       Font.Charset = DEFAULT_CHARSET

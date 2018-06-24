@@ -19,11 +19,11 @@ type
     MemoObservacao: TMemo;
     Label11: TLabel;
     Label4: TLabel;
-    cboSubGrupo: TComboBox;
+    cboSubGrupo: TDBLookupComboBox;
     SpeedButton4: TSpeedButton;
     SpeedButton3: TSpeedButton;
-    cboGrupo: TComboBox;
-    cboFamilia: TComboBox;
+    cboGrupo: TDBLookupComboBox;
+    cboFamilia: TDBLookupComboBox;
     SpeedButton2: TSpeedButton;
     edtDescricao: TEdit;
     Label2: TLabel;
@@ -106,6 +106,9 @@ type
     cboCodigoNCM: TDBLookupComboBox;
     Produtos1: TMenuItem;
     N1: TMenuItem;
+    ProdutosporFamiliaGrupoSubGrupo1: TMenuItem;
+    Label37: TLabel;
+    edtCodigoBarras: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure edtCustoCompraChange(Sender: TObject);
     procedure edtParamComissaoChange(Sender: TObject);
@@ -132,6 +135,9 @@ type
     procedure AlterarFamlia1Click(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
     procedure Produtos1Click(Sender: TObject);
+    procedure cboFamiliaCloseUp(Sender: TObject);
+    procedure cboGrupoCloseUp(Sender: TObject);
+    procedure ProdutosporFamiliaGrupoSubGrupo1Click(Sender: TObject);
   private
     //ClassificacaoCliente: TGenericEntidade;
 
@@ -164,7 +170,7 @@ var
 implementation
 
 uses ControllerProdutos, EntidadeFactory, UtilsNumeros, DBUtils,
-  Principal, RelCurvaABC, AlterarProdutos, RelProdutos;
+  Principal, RelCurvaABC, AlterarProdutos, RelProdutos, RelProdutosFamiliaGrupo;
 
 {$R *.dfm}
 
@@ -182,9 +188,10 @@ begin
   MapearProduto;
   MapearParametrosPrecoVenda;
 
-  FillCombobox( tpFamilia,  cboFamilia);
-  FillCombobox( tpGrupo, cboGrupo);
-  FillCombobox( tpSubGrupo, cboSubGrupo);
+  FillLookUpCombobox( tpFamilia,  cboFamilia);
+  FillLookUpCombobox( tpGrupo, cboGrupo);
+  FillLookUpCombobox( tpSubGrupo, cboSubGrupo);
+
   FillCombobox( tpParametrosPrecoVenda, cboParametrosPrecoVenda);
   FillCombobox( tpUnidadeMedida, cboUnidadeMedida);
 
@@ -257,6 +264,8 @@ begin
     Associar('CodigoCEST', edtCodigoCEST);
     Associar('CodigoProdutoServico', cboCodigoProdutoServico);
     Associar('Ativo', chkAtivo);
+    Associar('CodigoBarras', edtCodigoBarras);
+
   end;
 end;
 
@@ -268,6 +277,23 @@ begin
   FormRelProdutos.QuickRep1.PreviewModal;
   FormRelProdutos.FreeOnRelease;
   inherited;
+end;
+
+procedure TFormProdutosDetalhes.ProdutosporFamiliaGrupoSubGrupo1Click(
+  Sender: TObject);
+begin
+  inherited;
+  try
+    application.CreateForm(TFormRelProdutosFamiliaGrupo, FormRelProdutosFamiliaGrupo );
+    FormRelProdutosFamiliaGrupo.ClientDataSet1.Data := TClientDataSet(srcPesquisa.DataSet).data;
+    FormRelProdutosFamiliaGrupo.ClientDataSet1.IndexFieldNames:='CodigoFamilia;GrupoProduto';
+    FormRelProdutosFamiliaGrupo.ClientDataSet1.Filter :='CodigoFamilia is not null and CodigoFamilia > 0 ';
+    FormRelProdutosFamiliaGrupo.ClientDataSet1.Filtered:= true;
+    FormRelProdutosFamiliaGrupo.QuickRep1.PreviewModal;
+  finally
+    FormRelProdutosFamiliaGrupo.ClientDataSet1.Filtered:= false;
+    FormRelProdutosFamiliaGrupo.FreeOnRelease;
+  end;
 end;
 
 procedure TFormProdutosDetalhes.SpeedButton1Click(Sender: TObject);
@@ -336,6 +362,26 @@ begin
     Associar('PercentualLucro', edtParamLucro);
   end;
   MapperParametrosPrecoVenda.EntidadeToComponent;
+end;
+
+procedure TFormProdutosDetalhes.cboFamiliaCloseUp(Sender: TObject);
+begin
+  inherited;
+  cboGrupo.Enabled:= cboFamilia.Text <> '';
+  if cboGrupo.Enabled  then
+  begin
+     FillLookUpCombobox( tpGrupo,  cboGrupo, 'Codigo', ' Descricao ', 'CodigoFamilia In (Select Codigo From FamiliaProdutos where Descricao ='+ quotedstr(cboFamilia.Text)+')');
+  end;
+end;
+
+procedure TFormProdutosDetalhes.cboGrupoCloseUp(Sender: TObject);
+begin
+  inherited;
+  cboSubGrupo.Enabled:= cboGrupo.Text <> '';
+  if cboSubGrupo.Enabled  then
+  begin
+     FillLookUpCombobox( tpSubGrupo, cboSubGrupo, 'Codigo', ' Descricao ','CodigoGrupo IN (Select Codigo From GrupoProdutos where Descricao ='+ quotedstr(cboGrupo.Text)+')');
+  end;
 end;
 
 procedure TFormProdutosDetalhes.cboParametrosPrecoVendaExit(Sender: TObject);
