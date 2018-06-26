@@ -10,7 +10,7 @@ uses
   Buttons, ComCtrls, OleCtrls, SHDocVw,ACBrNFe, pcnConversao, ACBrNFeDANFEClass,
   ACBrUtil, pcnNFeW, pcnNFeRTXT, pcnAuxiliar, ACBrDFeUtil,  DB, XMLIntf, XMLDoc,
   Vcl.Grids, Vcl.DBGrids, ACBrNFeDANFEFRDM, ACBrNFeDANFEFR, ACBrBase, ACBrDFe,
-  ACBrNFeNotasFiscais,strUtils, frxClass, Vcl.Menus, blcksock;
+  ACBrNFeNotasFiscais,strUtils, frxClass, Vcl.Menus, blcksock, ACBrDFeSSL;
 
 type
   TFormEmissorNfe = class(TForm)
@@ -209,7 +209,7 @@ implementation
 uses FileCtrl, pcnNFe, ufrmStatus, DateUtils,
   Orcamento, Pessoa, Mapper, ControllerClientes, UtilsNumeros,
   Diretorios, Principal, ControllerNFE, System.TypInfo, pcnConversaoNFe,ACBrDFeWinCrypt,
-  uDataModuleTEF, ControllerTabelas, UtilsString,ACBrDFeSSL, DBUtils,
+  uDataModuleTEF, ControllerTabelas, UtilsString, DBUtils,
   EntidadeFactory, ControllerParametros, ControllerSequencias;
 
 {$R *.dfm}

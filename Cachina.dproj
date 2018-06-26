@@ -447,6 +447,15 @@
             <Form>FormRelProdutosFamiliaGrupo</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="NFSe\EmissorNFSe.pas">
+            <Form>FormEmissorNFSe</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Modelos\Lembrete.pas"/>
+        <DCCReference Include="Views\LembretesExibir.pas">
+            <Form>FormLembretesExibir</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="Cachina.todo"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

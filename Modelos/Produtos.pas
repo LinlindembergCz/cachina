@@ -139,6 +139,7 @@ Type
     property CodigoProdutoServico: integer read FCodigoProdutoServico write FCodigoProdutoServico;
     [FieldName('Ativo',1)]
     property Ativo: string  read FAtivo write FAtivo;
+    [FieldName('CodigoBarras',20)]
     property CodigoBarras: string read FCodigoBarras write FCodigoBarras;
   end;
 

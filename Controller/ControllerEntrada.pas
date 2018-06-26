@@ -23,6 +23,7 @@ type
 
 
 
+
   public
     function SelectEntrada: string;
     procedure Inserir(Objecto: TGenericEntidade);override;
@@ -45,6 +46,7 @@ type
                             CodigoEntrada: string): boolean;
 
     function GetCodigoFornecedor: string;
+    function GetNomeFornecedor: string;
     function GetChaveAcesso: string;
     function GetNumeroDocumento: string;
     function GetEspecie: string;
@@ -297,6 +299,11 @@ var
 begin
    cpfcnpj := ACBrNFe.NotasFiscais.Items[0].NFe.Emit.CNPJCPF;
    result  := TGenericDAO.GetValue('Pessoa','CPFCNPJ='+ quotedstr( cpfcnpj ),'Codigo');
+end;
+
+function TControllerEntrada.GetNomeFornecedor: string;
+begin
+   result  := ACBrNFe.NotasFiscais.Items[0].NFe.Emit.xNome;
 end;
 
 function TControllerEntrada.ImportarItensNFe: string;

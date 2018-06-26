@@ -159,7 +159,10 @@ uses
   ControllerSequencias in 'Controller\ControllerSequencias.pas',
   TabelaPrecoListagem in 'Views\TabelaPreco\TabelaPrecoListagem.pas' {FormTabelaPrecoListagem},
   RelProdutos in 'Views\Produtos\RelProdutos.pas' {FormRelProdutos},
-  RelProdutosFamiliaGrupo in 'Views\Produtos\RelProdutosFamiliaGrupo.pas' {FormRelProdutosFamiliaGrupo};
+  RelProdutosFamiliaGrupo in 'Views\Produtos\RelProdutosFamiliaGrupo.pas' {FormRelProdutosFamiliaGrupo},
+  EmissorNFSe in 'NFSe\EmissorNFSe.pas' {FormEmissorNFSe},
+  Lembrete in 'Modelos\Lembrete.pas',
+  LembretesExibir in 'Views\LembretesExibir.pas' {FormLembretesExibir};
 
 {$R *.res}
 
@@ -169,6 +172,5 @@ begin
   TStyleManager.TrySetStyle('Amethyst Kamri');
   Application.CreateForm(TDSServerModuleBaseDados, DSServerModuleBaseDados);
   Application.CreateForm(TFormPrincipal, FormPrincipal);
-  Application.CreateForm(TFormRelProdutosFamiliaGrupo, FormRelProdutosFamiliaGrupo);
   Application.Run;
 end.

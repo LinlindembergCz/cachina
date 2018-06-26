@@ -2,6 +2,7 @@ inherited FormFornecedoresDetalhes: TFormFornecedoresDetalhes
   Caption = 'Fornecedores'
   ClientHeight = 521
   ClientWidth = 710
+  Visible = False
   ExplicitWidth = 726
   ExplicitHeight = 559
   PixelsPerInch = 96
@@ -10,14 +11,14 @@ inherited FormFornecedoresDetalhes: TFormFornecedoresDetalhes
     Width = 710
     Height = 472
     ExplicitWidth = 710
+    ExplicitHeight = 472
     inherited tabPrincipal: TPageControl
       Width = 708
       Height = 470
       ActivePage = TabSheet2
       ExplicitWidth = 708
+      ExplicitHeight = 470
       inherited TabSheet1: TTabSheet
-        ExplicitLeft = 4
-        ExplicitTop = 24
         ExplicitWidth = 700
         ExplicitHeight = 442
         inherited grdEntidade: TDBGrid
@@ -71,7 +72,7 @@ inherited FormFornecedoresDetalhes: TFormFornecedoresDetalhes
         ExplicitLeft = 4
         ExplicitTop = 24
         ExplicitWidth = 700
-        ExplicitHeight = 464
+        ExplicitHeight = 442
         object tabProdutoDetalhes: TPageControl
           Left = 0
           Top = 0
@@ -80,7 +81,6 @@ inherited FormFornecedoresDetalhes: TFormFornecedoresDetalhes
           ActivePage = TabSheet7
           Align = alClient
           TabOrder = 0
-          ExplicitHeight = 464
           object TabSheet7: TTabSheet
             Caption = 'Dados Iniciais'
             object Label1: TLabel
@@ -223,7 +223,6 @@ inherited FormFornecedoresDetalhes: TFormFornecedoresDetalhes
           end
           object TabSheet3: TTabSheet
             Caption = 'Endere'#231'o'
-            ExplicitHeight = 436
             object Label5: TLabel
               Left = 8
               Top = 24

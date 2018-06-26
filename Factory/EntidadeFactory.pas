@@ -14,7 +14,7 @@ Type
                     tpPagamento, tpPlanoContas, tpCaixa,tpCaixaMovimentacao, tpLog, tpModulo,
                     tpPedido, tpItemPedido, tpEmpresa , tpUnidadeMedida, tpCargo, tpSubFase , tpCentroCusto,
                     tpFuncionarioFaltas, tpTabelaNCM, tpTabelaNFSe,tpSequenciaNF, tpCFOP,
-                    tpTabelaPreco, tpItemTabelaPreco );
+                    tpTabelaPreco, tpItemTabelaPreco, tpLembretes );
 
   TEntidadeFactory = class
   private
@@ -35,7 +35,7 @@ uses
   FuncionarioComissao, Mapper, Entrada, ItemEntrada, Saida, ItemSaida,
   Recebimentos, Pagamentos, Categoria, Caixa, Modulo, Log, CaixaMovimentacao,
   Pedido, ItemPedido, Empresa, UnidadeMedida, Cargo, CentroCusto, TabelaNCM,
-  TabelaNFSe, SequenciaNF, TabelaCFOP, TabelaPreco;
+  TabelaNFSe, SequenciaNF, TabelaCFOP, TabelaPreco, Lembrete;
 
 class function TEntidadeFactory.Criar( const TipoEntidade: TTipoEntidade): TGenericEntidade;
 begin
@@ -81,6 +81,7 @@ begin
     tpCFOP                    : result := TTabelaCFOP .Create;
     tpTabelaPreco             : result := TTabelaPreco.Create;
     tpItemTabelaPreco         : result := TItemTabelaPreco.Create;
+    tpLembretes               : result := TLembrete.Create;
   //tpSubFase              : result := TSubFase.Create;
   else
     showmessage('Tipo de classe nao implementada pela factory!');
@@ -130,6 +131,7 @@ begin
     tpCFOP                    : result := TTabelaCFOP.ClassInfo;
     tpTabelaPreco             : result := TTabelaPreco.ClassInfo;
     tpItemTabelaPreco         : result := TItemTabelaPreco.ClassInfo;
+    tpLembretes               : result := TLembrete.ClassInfo;
   else
     showmessage('Tipo de classe nao implementada pela factory!');
   end;

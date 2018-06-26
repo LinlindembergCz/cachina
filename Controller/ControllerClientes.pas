@@ -149,7 +149,7 @@ function TControllerClientes.GetClienteFormaPagamento(
   CodigoCliente: string): TDataset;
 begin
    result := GetSelect(' PessoaFormaPagamento T1 inner join FormaPagamento on '+
-                       ' FormaPagamento.Codigo = CodigoFormaPagamento',
+                       ' FormaPagamento.Codigo = T1.CodigoFormaPagamento',
                        ' T1.CodigoPessoa= '+ CodigoCliente,
                        ' T1."CodigoPessoa", FormaPagamento."Codigo", '+
                        ' FormaPagamento."Descricao", T1."CodigoFormaPagamento"');

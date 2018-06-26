@@ -86,6 +86,8 @@ inherited FormProdutosDetalhes: TFormProdutosDetalhes
         end
       end
       inherited TabSheet2: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 24
         ExplicitWidth = 719
         ExplicitHeight = 454
         object TabControl1: TPageControl

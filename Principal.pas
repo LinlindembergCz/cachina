@@ -275,7 +275,7 @@ end;
 
 procedure TFormPrincipal.ActCategoriasExecute(Sender: TObject);
 begin
-  ShowForm(TFormPlanoContasDetalhes, ActCategorias, true);
+  ShowForm(TFormPlanoContasDetalhes, ActCategorias, false);
 end;
 
 procedure TFormPrincipal.ActCentroCustoExecute(Sender: TObject);
@@ -443,7 +443,7 @@ end;
 
 procedure TFormPrincipal.ActTabelaNCMExecute(Sender: TObject);
 begin
-  ShowForm(TFormTabelaNCMDetalhes, ActTabelaNCM, true);
+  ShowForm(TFormTabelaNCMDetalhes, ActTabelaNCM);
 end;
 
 procedure TFormPrincipal.ActTabelaNFSeExecute(Sender: TObject);
@@ -548,12 +548,12 @@ end;
 
 procedure TFormPrincipal.ActFormaPagamentosExecute(Sender: TObject);
 begin
-  ShowForm(TFormFormaPagamentoDetalhes, ActFormaPagamentos, true );
+  ShowForm(TFormFormaPagamentoDetalhes, ActFormaPagamentos );
 end;
 
 procedure TFormPrincipal.ActFornecedoresExecute(Sender: TObject);
 begin
-  ShowForm(TFormFornecedoresDetalhes, ActFornecedores , true );
+  ShowForm(TFormFornecedoresDetalhes, ActFornecedores  );
 end;
 
 procedure TFormPrincipal.ActFuncionariosExecute(Sender: TObject);

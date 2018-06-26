@@ -348,7 +348,7 @@ begin
      if CodigoFonecedor <> '' then
        cboCodigoFornecedor.KeyValue := CodigoFonecedor
      else
-        showmessage('Fornecedor nao cadastrado');
+        showmessage('Fornecedor "'+ TControllerEntrada(Controller).GetNomeFornecedor +'" não cadastrado');
 
   end;
   CarregarProdutos;

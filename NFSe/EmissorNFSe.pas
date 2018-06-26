@@ -7,90 +7,12 @@ interface
 uses IniFiles, ShellAPI,
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, OleCtrls, SHDocVw, StdCtrls, Buttons, ExtCtrls,
-  pcnConversao, pnfsConversao,  DB,
-  ACBrNFSe, ACBrNFSeDANFSeClass, ACBrNFSeDANFSeQRClass, pnfsNFSe;
+  pcnConversao, pnfsConversao,  DB, ACBrDFeSSL,
+  ACBrNFSe, ACBrNFSeDANFSeClass, pnfsNFSe, ACBrBase,
+  ACBrDFe, blcksock;
 
 type
   TFormEmissorNFSe = class(TForm)
-    Panel1: TPanel;
-    lblColaborador: TLabel;
-    lblPatrocinador: TLabel;
-    lblDoar1: TLabel;
-    lblDoar2: TLabel;
-    gbConfiguracoes: TGroupBox;
-    PageControl1: TPageControl;
-    TabSheet1: TTabSheet;
-    gbCertificado: TGroupBox;
-    Label1: TLabel;
-    Label2: TLabel;
-    sbtnCaminhoCert: TSpeedButton;
-    Label25: TLabel;
-    sbtnGetCert: TSpeedButton;
-    edtCaminho: TEdit;
-    edtSenha: TEdit;
-    edtNumSerie: TEdit;
-    TabSheet2: TTabSheet;
-    gbGeral: TGroupBox;
-    Label7: TLabel;
-    sbtnLogoMarca: TSpeedButton;
-    sbtnPathSalvar: TSpeedButton;
-    edtLogoMarca: TEdit;
-    edtPathLogs: TEdit;
-    ckSalvar: TCheckBox;
-    TabSheet3: TTabSheet;
-    gbWebService: TGroupBox;
-    ckVisualizar: TCheckBox;
-    rgTipoAmb: TRadioGroup;
-    gbProxy: TGroupBox;
-    Label8: TLabel;
-    Label9: TLabel;
-    Label10: TLabel;
-    Label11: TLabel;
-    edtProxyHost: TEdit;
-    edtProxyPorta: TEdit;
-    edtProxyUser: TEdit;
-    edtProxySenha: TEdit;
-    TabSheet4: TTabSheet;
-    Label12: TLabel;
-    Label13: TLabel;
-    Label14: TLabel;
-    Label15: TLabel;
-    Label16: TLabel;
-    Label17: TLabel;
-    Label18: TLabel;
-    Label19: TLabel;
-    Label21: TLabel;
-    Label22: TLabel;
-    Label23: TLabel;
-    Label24: TLabel;
-    edtEmitCNPJ: TEdit;
-    edtEmitIM: TEdit;
-    edtEmitRazao: TEdit;
-    edtEmitFantasia: TEdit;
-    edtEmitFone: TEdit;
-    edtEmitCEP: TEdit;
-    edtEmitLogradouro: TEdit;
-    edtEmitNumero: TEdit;
-    edtEmitComp: TEdit;
-    edtEmitBairro: TEdit;
-    edtEmitCidade: TEdit;
-    edtEmitUF: TEdit;
-    TabSheet7: TTabSheet;
-    gbEmail: TGroupBox;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label26: TLabel;
-    Label27: TLabel;
-    Label28: TLabel;
-    edtSmtpHost: TEdit;
-    edtSmtpPort: TEdit;
-    edtSmtpUser: TEdit;
-    edtSmtpPass: TEdit;
-    edtEmailAssunto: TEdit;
-    cbEmailSSL: TCheckBox;
-    mmEmailMsg: TMemo;
-    btnSalvarConfig: TBitBtn;
     Panel2: TPanel;
     Panel3: TPanel;
     btnImprimir: TButton;
@@ -113,43 +35,17 @@ type
     Dados: TTabSheet;
     MemoDados: TMemo;
     OpenDialog1: TOpenDialog;
-    lblSchemas: TLabel;
-    edtSchemas: TEdit;
-    sbtSchemas: TSpeedButton;
-    Label32: TLabel;
-    edtPrestLogo: TEdit;
-    sbtnPrestLogo: TSpeedButton;
-    Label33: TLabel;
-    edtPrefeitura: TEdit;
     btnConsultarNFSeRPS: TButton;
     btnConsultarNFSePeriodo: TButton;
-    cbCidades: TComboBox;
-    Label6: TLabel;
-    edtSenhaWeb: TEdit;
-    edtCodCidade: TEdit;
-    Label29: TLabel;
     ACBrNFSe1: TACBrNFSe;
-    ACBrNFSeDANFSeQR1: TACBrNFSeDANFSeQR;
-    Label20: TLabel;
-    edtUserWeb: TEdit;
     btnGerarEnviarNFSe: TButton;
     btnEnviaremail: TButton;
-    Label31: TLabel;
-    edtEmailRemetente: TEdit;
-    Label30: TLabel;
     btnLinkNFSe: TButton;
     btnGerarLoteRPS: TButton;
     btnGerarEnviarSincrono: TButton;
     Button1: TButton;
-    procedure sbtnCaminhoCertClick(Sender: TObject);
-    procedure sbtnGetCertClick(Sender: TObject);
-    procedure sbtnLogoMarcaClick(Sender: TObject);
-    procedure sbtnPathSalvarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnSalvarConfigClick(Sender: TObject);
-    procedure lblColaboradorClick(Sender: TObject);
-    procedure lblPatrocinadorClick(Sender: TObject);
-    procedure lblDoar1Click(Sender: TObject);
     procedure btnGerarEnviarLoteClick(Sender: TObject);
     procedure btnConsultarLoteClick(Sender: TObject);
     procedure btnCancNFSeClick(Sender: TObject);
@@ -158,14 +54,11 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure ACBrNFSe1StatusChange(Sender: TObject);
     procedure ACBrNFSe1GerarLog(const Mensagem: String);
-    procedure sbtSchemasClick(Sender: TObject);
-    procedure sbtnPrestLogoClick(Sender: TObject);
     procedure btnConsultarNFSeRPSClick(Sender: TObject);
     procedure btnConsultarNFSePeriodoClick(Sender: TObject);
     procedure cbCidadesChange(Sender: TObject);
     function RoundTo5(Valor: Double; Casas: Integer): Double;
     procedure btnGerarEnviarNFSeClick(Sender: TObject);
-    procedure btnEnviaremailClick(Sender: TObject);
     procedure btnLinkNFSeClick(Sender: TObject);
     procedure btnGerarLoteRPSClick(Sender: TObject);
     procedure btnGerarEnviarSincronoClick(Sender: TObject);
@@ -174,15 +67,77 @@ type
     procedure lblMouseEnter(Sender: TObject);
     procedure lblMouseLeave(Sender: TObject);
     }
+  strict private
+    liFormaEmissao      : integer;
+    lbSalvar            : boolean;
+    edtPathNfe          : string;
+    edtPathCancelamento : string;
+    edtPathDPEC         : string;
+    edtPathCCe          : string;
+    edtPathMDe          : string;
+    edtPathInutilizacao : string;
+    edtPathSalvar       : string;
+    edtPathSquemas      : string;
+    cbModeloDF          : integer;
+    cbVersaoDF          : integer;
+    edtIdToken          : string;
+    edtToken            : string;
+    cboSSLCryptLib      : integer;
+    cboSSLHTTPLib       : integer;
+    cboSSLLib           : integer;
+    cboSSLXMLLib        : integer;
+
+    cbUF                : string;
+    rgTipoAmb           : integer;
+    ckxVisualizar       : boolean;
+    cbxSalvarSOAP       : boolean;
+    cbxAjustarAut       : boolean;
+    edtAguardar         : string;
+    edtTentativas       : string;
+    edtIntervalo        : string;
+    cboSSLType          : integer;
+    edtProxyHost        : string;
+    edtProxyPorta       : string;
+    edtProxyUser        : string;
+    edtProxySenha       : string;
+
+    rgTipoDanfe       : integer;
+    edtLogoMarca      : string;
+    edtEmitCNPJ       : String;
+    edtEmitIE         : String;
+    edtEmitRazao      : String;
+    edtEmitFantasia   : String;
+    edtEmitFone       : String;
+    edtEmitCEP        : String;
+    edtEmitLogradouro : String;
+    edtEmitNumero     : String;
+    edtEmitComp       : String;
+    edtEmitBairro     : String;
+    edtEmitCodCidade  : String;
+    edtEmitCidade     : String;
+    edtEmitUF         : String;
+    edtCNAE           : String;
+
+    edtSmtpHost       : String;
+    edtSmtpPort       : String;
+    edtSmtpUser       : String;
+    edtSmtpPass       : String;
+    edtEmailAssunto   : String;
+    cbEmailSSL        : Boolean;
+
+    edtChaveAcessoRef           : String;
+    edtUFReferenciada           : String;
+    edtCNPJReferenciada         : String;
+    edtNotaFiscal               : String;
+    edtMesAnoEmissaoReferenciada: String;
+    edtSerie: string;
   private
     { Private declarations }
     Ok : Boolean;
     FDataSetVenda: TDataSet;
     FDataSetCobranca: TDataSet;
     FDataSetProdutos: TDataSet;
-    procedure GravarConfiguracao;
     procedure LerConfiguracao;
-    procedure ConfiguraComponente;
     procedure LoadXML(MyMemo: TMemo; MyWebBrowser: TWebBrowser);
     procedure GerarNFSe(NumNFSe : String);
     procedure SetDataSetCobranca(const Value: TDataSet);
@@ -203,7 +158,7 @@ implementation
 uses
  FileCtrl, DateUtils, Math,
  ufrmStatus,
- ACBrNFSeNotasFiscais, ACBrDFeUtil, ACBrNFSeUtil, Pessoa, ControllerClientes,
+ ACBrNFSeNotasFiscais, ACBrDFeUtil, Pessoa, ControllerClientes,
   Mapper, UtilsString;
 
 const
@@ -211,214 +166,141 @@ const
 
 {$R *.dfm}
 
-(*
-procedure TForm1.lblMouseEnter(Sender: TObject);
-begin
- TLabel(Sender).Font.Style := [fsBold,fsUnderline];
-end;
-
-procedure TForm1.lblMouseLeave(Sender: TObject);
-begin
- TLabel(Sender).Font.Style := [fsBold];
-end;
-*)
-
-procedure TFormEmissorNFSe.GravarConfiguracao;
-var
- IniFile    : String;
- Ini        : TIniFile;
- StreamMemo : TMemoryStream;
-begin
- IniFile := ChangeFileExt( Application.ExeName, '.ini');
-
- Ini := TIniFile.Create( IniFile );
- try
-  Ini.WriteString( 'Emitente', 'CNPJ'       , edtEmitCNPJ.Text);
-  Ini.WriteString( 'Emitente', 'IM'         , edtEmitIM.Text);
-  Ini.WriteString( 'Emitente', 'RazaoSocial', edtEmitRazao.Text);
-  Ini.WriteString( 'Emitente', 'Fantasia'   , edtEmitFantasia.Text);
-  Ini.WriteString( 'Emitente', 'Fone'       , edtEmitFone.Text);
-  Ini.WriteString( 'Emitente', 'CEP'        , edtEmitCEP.Text);
-  Ini.WriteString( 'Emitente', 'Logradouro' , edtEmitLogradouro.Text);
-  Ini.WriteString( 'Emitente', 'Numero'     , edtEmitNumero.Text);
-  Ini.WriteString( 'Emitente', 'Complemento', edtEmitComp.Text);
-  Ini.WriteString( 'Emitente', 'Bairro'     , edtEmitBairro.Text);
-  Ini.WriteString( 'Emitente', 'CodCidade'  , edtCodCidade.Text);
-  Ini.WriteString( 'Emitente', 'Cidade'     , edtEmitCidade.Text);
-  Ini.WriteString( 'Emitente', 'UF'         , edtEmitUF.Text);
-
-  Ini.WriteString( 'Certificado', 'Caminho'    , edtCaminho.Text);
-  Ini.WriteString( 'Certificado', 'Senha'      , edtSenha.Text);
-  Ini.WriteString( 'Certificado', 'NumSerie'   , edtNumSerie.Text);
-
-  Ini.WriteString( 'Geral', 'Schemas'   , edtSchemas.Text);
-  Ini.WriteString( 'Geral', 'LogoMarca' , edtLogoMarca.Text);
-  Ini.WriteString( 'Geral', 'PrestLogo' , edtPrestLogo.Text);
-  Ini.WriteBool(   'Geral', 'Salvar'    , ckSalvar.Checked);
-  Ini.WriteString( 'Geral', 'PathSalvar', edtPathLogs.Text);
-  Ini.WriteString( 'Geral', 'Prefeitura', edtPrefeitura.Text);
-
-  Ini.WriteInteger( 'WebService', 'Ambiente'  , rgTipoAmb.ItemIndex);
-  Ini.WriteBool(    'WebService', 'Visualizar', ckVisualizar.Checked);
-  Ini.WriteString(  'WebService', 'SenhaWeb'  , edtSenhaWeb.Text);
-  Ini.WriteString(  'WebService', 'UserWeb'   , edtUserWeb.Text);
-
-  Ini.WriteString( 'Proxy', 'Host' , edtProxyHost.Text);
-  Ini.WriteString( 'Proxy', 'Porta', edtProxyPorta.Text);
-  Ini.WriteString( 'Proxy', 'User' , edtProxyUser.Text);
-  Ini.WriteString( 'Proxy', 'Pass' , edtProxySenha.Text);
-
-  Ini.WriteString( 'Email', 'Host'     , edtSmtpHost.Text);
-  Ini.WriteString( 'Email', 'Port'     , edtSmtpPort.Text);
-  Ini.WriteString( 'Email', 'User'     , edtSmtpUser.Text);
-  Ini.WriteString( 'Email', 'Pass'     , edtSmtpPass.Text);
-  Ini.WriteString( 'Email', 'Assunto'  , edtEmailAssunto.Text);
-  Ini.WriteBool(   'Email', 'SSL'      , cbEmailSSL.Checked );
-  Ini.WriteString( 'Email', 'Remetente', edtEmailRemetente.Text);
-
-  StreamMemo := TMemoryStream.Create;
-  mmEmailMsg.Lines.SaveToStream(StreamMemo);
-  StreamMemo.Seek(0, soFromBeginning);
-  Ini.WriteBinaryStream( 'Email', 'Mensagem', StreamMemo);
-
-  StreamMemo.Free;
- finally
-  Ini.Free;
- end;
-end;
-
 procedure TFormEmissorNFSe.LerConfiguracao;
-var
- IniFile    : String;
- Ini        : TIniFile;
- StreamMemo : TMemoryStream;
+Var IniFile  : String ;
+    Ini     : TIniFile ;
+    Ok : Boolean;
 begin
- IniFile := ChangeFileExt( Application.ExeName, '.ini');
+  ACBrNFSe1.SSL.DescarregarCertificado;
 
- Ini := TIniFile.Create( IniFile );
- try
-  {$IFDEF ACBrNFSeOpenSSL}
-   edtCaminho.Text  := Ini.ReadString( 'Certificado', 'Caminho' , '');
-   edtSenha.Text    := Ini.ReadString( 'Certificado', 'Senha'   , '');
-   edtNumSerie.Visible := False;
-   Label25.Visible     := False;
-   sbtnGetCert.Visible := False;
-  {$ELSE}
-   edtNumSerie.Text := Ini.ReadString( 'Certificado', 'NumSerie', '');
-   Label1.Caption := 'Informe o número de série do certificado'#13+
-                     'Disponível no Internet Explorer no menu'#13+
-                     'Ferramentas - Opções da Internet - Conteúdo '#13+
-                     'Certificados - Exibir - Detalhes - '#13+
-                     'Número do certificado';
-   Label2.Visible     := False;
-   edtCaminho.Visible := False;
-   edtSenha.Visible   := False;
-   sbtnCaminhoCert.Visible := False;
-  {$ENDIF}
+  IniFile := ChangeFileExt( Application.ExeName, '.ini') ;
+  Ini := TIniFile.Create( IniFile );
+  try
+      ACBrNFSe1.Configuracoes.Certificados.NumeroSerie :=  Ini.ReadString( 'Certificado','NumSerie','') ;
 
-  edtEmitCNPJ.Text       := Ini.ReadString( 'Emitente', 'CNPJ'       , '');
-  edtEmitIM.Text         := Ini.ReadString( 'Emitente', 'IM'         , '');
-  edtEmitRazao.Text      := Ini.ReadString( 'Emitente', 'RazaoSocial', '');
-  edtEmitFantasia.Text   := Ini.ReadString( 'Emitente', 'Fantasia'   , '');
-  edtEmitFone.Text       := Ini.ReadString( 'Emitente', 'Fone'       , '');
-  edtEmitCEP.Text        := Ini.ReadString( 'Emitente', 'CEP'        , '');
-  edtEmitLogradouro.Text := Ini.ReadString( 'Emitente', 'Logradouro' , '');
-  edtEmitNumero.Text     := Ini.ReadString( 'Emitente', 'Numero'     , '');
-  edtEmitComp.Text       := Ini.ReadString( 'Emitente', 'Complemento', '');
-  edtEmitBairro.Text     := Ini.ReadString( 'Emitente', 'Bairro'     , '');
-  edtEmitCidade.Text     := Ini.ReadString( 'Emitente', 'Cidade'     , '');
-  edtEmitUF.Text         := Ini.ReadString( 'Emitente', 'UF'         , '');
-  edtCodCidade.Text      := Ini.ReadString( 'Emitente', 'CodCidade'  , '');
-  cbCidades.ItemIndex    := cbCidades.Items.IndexOf(edtEmitCidade.Text + '/' +
-                                                    edtCodCidade.Text + '/' +
-                                                    edtEmitUF.Text);
+      liFormaEmissao      := Ini.ReadInteger( 'Geral','FormaEmissao'  ,0);
+      lbSalvar            := Ini.ReadBool(   'Geral','Salvar'         ,True);
+      edtPathNfe          := Ini.ReadString( 'Geral','PathNfe'         ,'');
+      edtPathCancelamento := Ini.ReadString( 'Geral','PathCancelamento','');
+      edtPathDPEC         := Ini.ReadString( 'Geral','PathDPEC'        ,'');
+      edtPathCCe          := Ini.ReadString( 'Geral','PathCCe'         ,'');
+      edtPathMDe          := Ini.ReadString( 'Geral','PathMDe'         ,'');
+      edtPathInutilizacao := Ini.ReadString( 'Geral','PathInutilizacao','');
+      edtPathSalvar       := Ini.ReadString( 'Geral','PathSalvar'      ,'');
+      edtPathSquemas      := Ini.ReadString( 'Geral','PathSquemas'     ,'');
 
-  edtSchemas.Text       := Ini.ReadString( 'Geral', 'Schemas'   , '');
-  edtLogoMarca.Text     := Ini.ReadString( 'Geral', 'LogoMarca' , '');
-  edtPrestLogo.Text     := Ini.ReadString( 'Geral', 'PrestLogo' , '');
-  ckSalvar.Checked      := Ini.ReadBool(   'Geral', 'Salvar'    , True);
-  edtPathLogs.Text      := Ini.ReadString( 'Geral', 'PathSalvar', '');
-  edtPrefeitura.Text    := Ini.ReadString( 'Geral', 'Prefeitura', '');
+      cbModeloDF          := Ini.ReadInteger( 'Geral','ModeloDF',0);
+      cbVersaoDF          := Ini.ReadInteger( 'Geral','VersaoDF',0);
+      edtIdToken          := Ini.ReadString( 'Geral','IdToken'  ,'');
+      edtToken            := Ini.ReadString( 'Geral','Token'  ,'');
 
-  rgTipoAmb.ItemIndex  := Ini.ReadInteger( 'WebService', 'Ambiente'  , 0);
-  ckVisualizar.Checked := Ini.ReadBool(    'WebService', 'Visualizar', False);
-  edtSenhaWeb.Text     := Ini.ReadString(  'WebService', 'SenhaWeb'  , '');
-  edtUserWeb.Text      := Ini.ReadString(  'WebService', 'UserWeb'  , '');
+      cboSSLCryptLib      := Ini.ReadInteger( 'Geral','SSLCryptLib',0);
+      cboSSLHTTPLib       := Ini.ReadInteger( 'Geral','SSLHTTPLib',0);
+      cboSSLLib           := Ini.ReadInteger( 'Geral','SSLLib',0);
+      cboSSLXMLLib        := Ini.ReadInteger( 'Geral','SSLXMLLib',0);
 
-  edtProxyHost.Text  := Ini.ReadString( 'Proxy', 'Host' , '');
-  edtProxyPorta.Text := Ini.ReadString( 'Proxy', 'Porta', '');
-  edtProxyUser.Text  := Ini.ReadString( 'Proxy', 'User' , '');
-  edtProxySenha.Text := Ini.ReadString( 'Proxy', 'Pass' , '');
+      ACBrNFSe1.Configuracoes.Arquivos.PathSalvar   := edtPathSalvar;
+      with ACBrNFSe1.Configuracoes.Geral do
+      begin
+         if liFormaEmissao >-1 then
+            FormaEmissao          := TpcnTipoEmissao(liFormaEmissao);
+         Salvar        := lbSalvar;
+         SSLCryptLib   := TSSLCryptLib(cboSSLCryptLib);
+         SSLHTTPLib    := TSSLHTTPLib(cboSSLHTTPLib);
+         SSLLib        := TSSLLib(cboSSLLib);
+         SSLXMLSignLib := TSSLXMLSignLib(cboSSLXMLLib);
+      end;
 
-  edtSmtpHost.Text       := Ini.ReadString( 'Email', 'Host'   , '');
-  edtSmtpPort.Text       := Ini.ReadString( 'Email', 'Port'   , '');
-  edtSmtpUser.Text       := Ini.ReadString( 'Email', 'User'   , '');
-  edtSmtpPass.Text       := Ini.ReadString( 'Email', 'Pass'   , '');
-  edtEmailAssunto.Text   := Ini.ReadString( 'Email', 'Assunto', '');
-  cbEmailSSL.Checked     := Ini.ReadBool(   'Email', 'SSL'    , False);
-  edtEmailRemetente.Text := Ini.ReadString( 'Email', 'Remetente', '');
+      with ACBrNFSe1.Configuracoes.arquivos do
+      begin
+         PathSalvar   := edtPathSalvar;
+         PathSchemas  := edtPathSquemas;
+      end;
 
-  StreamMemo := TMemoryStream.Create;
-  Ini.ReadBinaryStream( 'Email', 'Mensagem', StreamMemo);
-  mmEmailMsg.Lines.LoadFromStream(StreamMemo);
-  StreamMemo.Free;
- finally
-  Ini.Free;
- end;
-end;
+      cbUF             := Ini.ReadString( 'WebService','UF','RN') ;
+      rgTipoAmb        := Ini.ReadInteger( 'WebService','Ambiente'  ,0) ;
+      ckxVisualizar    := Ini.ReadBool(    'WebService','Visualizar',False) ;
+      cbxSalvarSOAP    := Ini.ReadBool(  'WebService','SalvarSOAP',False) ;
+      cbxAjustarAut    := Ini.ReadBool(  'WebService','AjustarAut',False) ;
+      edtAguardar      := Ini.ReadString( 'WebService','Aguardar'  ,'0') ;
+      edtTentativas    := Ini.ReadString( 'WebService','Tentativas','3') ;
+      edtIntervalo     := Ini.ReadString( 'WebService','Intervalo' ,'0') ;
+      cboSSLType       := Ini.ReadInteger( 'WebService','SSLType' ,0 ) ;
+      edtProxyHost     := Ini.ReadString( 'Proxy','Host'   ,'') ;
+      edtProxyPorta    := Ini.ReadString( 'Proxy','Porta'  ,'') ;
+      edtProxyUser     := Ini.ReadString( 'Proxy','User'   ,'') ;
+      edtProxySenha    := Ini.ReadString( 'Proxy','Pass'   ,'') ;
 
-procedure TFormEmissorNFSe.ConfiguraComponente;
-var
- PathMensal: String;
-begin
- {$IFDEF ACBrNFSeOpenSSL}
-   ACBrNFSe1.Configuracoes.Certificados.Certificado := edtCaminho.Text;
-   ACBrNFSe1.Configuracoes.Certificados.Senha       := edtSenha.Text;
- {$ELSE}
-   ACBrNFSe1.Configuracoes.Certificados.NumeroSerie := edtNumSerie.Text;
- {$ENDIF}
+      with ACBrNFSe1.Configuracoes.WebServices do
+      begin
+          UF         := cbUF;
+          Ambiente   := StrToTpAmb(Ok,IntToStr(rgTipoAmb+1));
+          Visualizar := ckxVisualizar;
+          Salvar     := cbxSalvarSOAP;
+         { AjustaAguardaConsultaRet := cbxAjustarAut;
+          if (edtAguardar <> '') and (edtAguardar <> '0') then
+             AguardarConsultaRet := ifthen(StrToInt(edtAguardar)<1000,StrToInt(edtAguardar)*1000,StrToInt(edtAguardar))
+          else
+             edtAguardar := IntToStr(AguardarConsultaRet);
 
- ACBrNFSe1.Configuracoes.Arquivos.AdicionarLiteral:=True;
- ACBrNFSe1.Configuracoes.Arquivos.EmissaoPathNFSe:=True;
- ACBrNFSe1.Configuracoes.Arquivos.PastaMensal:=True;
- ACBrNFSe1.Configuracoes.Arquivos.PathCan:=edtPathLogs.Text;
- ACBrNFSe1.Configuracoes.Arquivos.PathNFSe:=edtPathLogs.Text;
- ACBrNFSe1.Configuracoes.Arquivos.Salvar:=True;
+          if edtTentativas<>'' then
+             Tentativas          := StrToInt(edtTentativas)
+          else
+             edtTentativas := IntToStr(Tentativas);
 
- PathMensal:=ACBrNFSe1.Configuracoes.Arquivos.GetPathNFSe(0);
+          if edtIntervalo<>'' then
+             IntervaloTentativas := ifthen(StrToInt(edtIntervalo)<1000,StrToInt(edtIntervalo)*1000,StrToInt(edtIntervalo))
+          else
+             edtIntervalo := IntToStr(ACBrNFe1.Configuracoes.WebServices.IntervaloTentativas);
+          }
 
- ACBrNFSe1.Configuracoes.Geral.PathSchemas := edtSchemas.Text;
- ACBrNFSe1.Configuracoes.Geral.Salvar      := ckSalvar.Checked;
- ACBrNFSe1.Configuracoes.Geral.PathSalvar  := edtPathLogs.Text;
+          SSLType := TSSLType( cboSSLType  );
 
- ACBrNFSe1.Configuracoes.WebServices.CodigoMunicipio := StrToIntDef(edtCodCidade.Text, 0);
- ACBrNFSe1.Configuracoes.WebServices.Ambiente        := StrToTpAmb(Ok, IntToStr(rgTipoAmb.ItemIndex+1));
- ACBrNFSe1.Configuracoes.WebServices.Visualizar      := ckVisualizar.Checked;
- ACBrNFSe1.Configuracoes.WebServices.SenhaWeb        := edtSenhaWeb.Text;
- ACBrNFSe1.Configuracoes.WebServices.UserWeb         := edtUserWeb.Text;
+      end;
 
- ACBrNFSe1.Configuracoes.WebServices.ProxyHost := edtProxyHost.Text;
- ACBrNFSe1.Configuracoes.WebServices.ProxyPort := edtProxyPorta.Text;
- ACBrNFSe1.Configuracoes.WebServices.ProxyUser := edtProxyUser.Text;
- ACBrNFSe1.Configuracoes.WebServices.ProxyPass := edtProxySenha.Text;
+      rgTipoDanfe    := Ini.ReadInteger( 'Geral','DANFE'       ,0) ;
+      edtLogoMarca   := Ini.ReadString( 'Geral','LogoMarca'   ,'') ;
 
- ACBrNFSe1.Configuracoes.WebServices.SetConfigMunicipio(ACBrNFSe1.Configuracoes.Geral.PathSchemas);
+      if ACBrNFSe1.DANFSE <> nil then
+      begin
+         if rgTipoDanfe > -1 then
 
- if ACBrNFSe1.DANFSe <> nil then
-  begin
-   ACBrNFSe1.DANFSe.Logo       := edtLogoMarca.Text;
-   ACBrNFSe1.DANFSe.PrestLogo  := edtPrestLogo.Text;
-   ACBrNFSe1.DANFSe.Prefeitura := edtPrefeitura.Text;
+         //ACBrNFSe1.DANFSE.TipoDANFE  := StrToTpImp(OK,IntToStr(rgTipoDanfe));
+         ACBrNFSe1.DANFSE.Logo       := edtLogoMarca;
+      end;
+
+      edtEmitCNPJ       := Ini.ReadString( 'Emitente','CNPJ'       ,'') ;
+      edtEmitIE         := Ini.ReadString( 'Emitente','IE'         ,'') ;
+      edtEmitRazao      := Ini.ReadString( 'Emitente','RazaoSocial','') ;
+      edtEmitFantasia   := Ini.ReadString( 'Emitente','Fantasia'   ,'') ;
+      edtEmitFone       := Ini.ReadString( 'Emitente','Fone'       ,'') ;
+      edtEmitCEP        := Ini.ReadString( 'Emitente','CEP'        ,'') ;
+      edtEmitLogradouro := Ini.ReadString( 'Emitente','Logradouro' ,'') ;
+      edtEmitNumero     := Ini.ReadString( 'Emitente','Numero'     ,'') ;
+      edtEmitComp       := Ini.ReadString( 'Emitente','Complemento','') ;
+      edtEmitBairro     := Ini.ReadString( 'Emitente','Bairro'     ,'') ;
+      edtEmitCodCidade  := Ini.ReadString( 'Emitente','CodCidade'  ,'') ;
+      edtEmitCidade     := Ini.ReadString( 'Emitente','Cidade'     ,'') ;
+      edtEmitUF         := Ini.ReadString( 'Emitente','UF'         ,'') ;
+      edtCNAE           := Ini.ReadString( 'Emitente','CNAE'       ,'') ;
+
+      edtSmtpHost       := Ini.ReadString( 'Email','Host'   ,'') ;
+      edtSmtpPort       := Ini.ReadString( 'Email','Port'   ,'') ;
+      edtSmtpUser       := Ini.ReadString( 'Email','User'   ,'') ;
+      edtSmtpPass       := Ini.ReadString( 'Email','Pass'   ,'') ;
+      edtEmailAssunto   := Ini.ReadString( 'Email','Assunto','') ;
+      cbEmailSSL        := Ini.ReadBool(   'Email','SSL'    ,False) ;
+
+  finally
+     Ini.Free ;
   end;
 
- lblSchemas.Caption := ACBrNFSe1.Configuracoes.WebServices.xProvedor;
 end;
 
 procedure TFormEmissorNFSe.LoadXML(MyMemo: TMemo;
   MyWebBrowser: TWebBrowser);
 begin
- MyMemo.Lines.SaveToFile(ExtractFileDir(application.ExeName)+'temp.xml');
- MyWebBrowser.Navigate(ExtractFileDir(application.ExeName)+'temp.xml');
+
 end;
 
 procedure TFormEmissorNFSe.GerarNFSe(NumNFSe: String);
@@ -444,7 +326,7 @@ begin
      IdentificacaoRps.Tipo := trRPS;
      DataEmissao := Date;
    //TnfseNaturezaOperacao = ( noTributacaoNoMunicipio, noTributacaoForaMunicipio, noIsencao, noImune, noSuspensaDecisaoJudicial, noSuspensaProcedimentoAdministrativo );
-     NaturezaOperacao := noIsencao;
+     NaturezaOperacao := no0;
      //NaturezaOperacao := noTributacaoNoMunicipio51;
    //TnfseRegimeEspecialTributacao = ( retNenhum, retMicroempresaMunicipal, retEstimativa, retSociedadeProfissionais, retCooperativa, retMicroempresarioIndividual, retMicroempresarioEmpresaPP );
    //RegimeEspecialTributacao := retNenhum;
@@ -470,7 +352,7 @@ begin
      // TnfseTipoRPS = ( trRPS, trNFConjugada, trCupom );
      RpsSubstituido.Tipo   := trRPS;
      *)
-     Servico.Valores.ValorServicos          := FDataSetVenda.fieldByname('TotalOrcamento').asFloat;
+     Servico.Valores.ValorServicos          := FDataSetVenda.fieldByname('TotalEntidade').asFloat;
      Servico.Valores.ValorDeducoes          := 0.00;
      Servico.Valores.ValorPis               := 0.00;
      Servico.Valores.ValorCofins            := 0.00;
@@ -526,12 +408,12 @@ begin
                                           FDataSetProdutos.fieldByname('DescricaoServicoNFSe').asstring;
    //Para o provedor ISS.NET em ambiente de Homologação
    //o Codigo do Municipio tem que ser '999'
-     Servico.CodigoMunicipio := edtCodCidade.Text;
+     Servico.CodigoMunicipio := edtEmitCodCidade;
    //Informar A Exigibilidade ISS para fintelISS [1/2/3/4/5/6/7]
      Servico.ExigibilidadeISS := exiExigivel;
    //Informar para Saatri
      Servico.CodigoPais := 1058; // Brasil
-     Servico.MunicipioIncidencia := StrToIntDef(edtCodCidade.Text, 0);
+     Servico.MunicipioIncidencia := StrToIntDef(edtEmitCodCidade, 0);
 
      // Somente o provedor SimplISS permite infomar mais de 1 serviço
 
@@ -551,26 +433,26 @@ begin
      }
 
 
-     Prestador.Cnpj               := edtEmitCNPJ.Text;
-     Prestador.InscricaoMunicipal := edtEmitIM.Text;
+     Prestador.Cnpj               := edtEmitCNPJ;
+     //Prestador.InscricaoMunicipal := edtEmitIM;
      // Para o provedor ISSDigital deve-se informar também:
      //Prestador.Senha        := 'senha';
      //Prestador.FraseSecreta := 'frase secreta';
      Prestador.cUF  := 24;
 
 
-     PrestadorServico.RazaoSocial                 := edtEmitRazao.Text;
-     PrestadorServico.NomeFantasia                := edtEmitFantasia.text;
-     PrestadorServico.IdentificacaoPrestador.Cnpj := edtEmitCNPJ.text;
-     PrestadorServico.IdentificacaoPrestador.InscricaoMunicipal := edtEmitIM.text;
+     PrestadorServico.RazaoSocial                 := edtEmitRazao;
+     PrestadorServico.NomeFantasia                := edtEmitFantasia;
+     PrestadorServico.IdentificacaoPrestador.Cnpj := edtEmitCNPJ;
+     //PrestadorServico.IdentificacaoPrestador.InscricaoMunicipal := edtEmitIM;
      PrestadorServico.Contato.Email               := 'lindemberg.cortez@gmail.com';
-     PrestadorServico.Contato.Telefone            := edtEmitFone.text;
-     PrestadorServico.Endereco.Endereco           := edtEmitLogradouro.text;
-     PrestadorServico.Endereco.UF                 := edtEmitUF.text;
-     PrestadorServico.Endereco.Bairro             := edtEmitBairro.text;
-     PrestadorServico.Endereco.CEP                := edtEmitCEP.text;
-     PrestadorServico.Endereco.Complemento        := edtEmitComp.text;
-     PrestadorServico.Endereco.CodigoMunicipio    := edtCodCidade.Text;
+     PrestadorServico.Contato.Telefone            := edtEmitFone;
+     PrestadorServico.Endereco.Endereco           := edtEmitLogradouro;
+     PrestadorServico.Endereco.UF                 := edtEmitUF;
+     PrestadorServico.Endereco.Bairro             := edtEmitBairro;
+     PrestadorServico.Endereco.CEP                := edtEmitCEP;
+     PrestadorServico.Endereco.Complemento        := edtEmitComp;
+     PrestadorServico.Endereco.CodigoMunicipio    := edtEmitCodCidade;
 
 
      Cliente           := TPessoa.create;
@@ -606,7 +488,7 @@ begin
    //Tomador.Endereco.Numero              := '100';
      Tomador.Endereco.Complemento         := Cliente.Complemento;
      Tomador.Endereco.Bairro              := Cliente.Bairro;
-     Tomador.Endereco.CodigoMunicipio     := edtCodCidade.Text;
+     Tomador.Endereco.CodigoMunicipio     := Cliente.CodigoIBGE;
      Tomador.Endereco.UF                  := Cliente.UF;
      Tomador.Endereco.CEP                 := UtilsString.SoNumeros(Cliente.CEP);
    //Provedor Equiplano é obrigatório o pais e IE
@@ -630,79 +512,15 @@ begin
 
 end;
 
-procedure TFormEmissorNFSe.sbtnCaminhoCertClick(Sender: TObject);
-begin
- OpenDialog1.Title := 'Selecione o Certificado';
- OpenDialog1.DefaultExt := '*.pfx';
- OpenDialog1.Filter := 'Arquivos PFX (*.pfx)|*.pfx|Todos os Arquivos (*.*)|*.*';
- OpenDialog1.InitialDir := ExtractFileDir(application.ExeName);
-
- if OpenDialog1.Execute then
-  begin
-   edtCaminho.Text := OpenDialog1.FileName;
-  end;
-end;
-
-procedure TFormEmissorNFSe.sbtnGetCertClick(Sender: TObject);
-begin
- {$IFNDEF ACBrNFSeOpenSSL}
-  edtNumSerie.Text := ACBrNFSe1.Configuracoes.Certificados.SelecionarCertificado;
- {$ENDIF}
-end;
-
-procedure TFormEmissorNFSe.sbtnLogoMarcaClick(Sender: TObject);
-begin
- OpenDialog1.Title := 'Selecione o Logo';
- OpenDialog1.DefaultExt := '*.bmp';
- OpenDialog1.Filter := 'Arquivos BMP (*.bmp)|*.bmp|Todos os Arquivos (*.*)|*.*';
- OpenDialog1.InitialDir := ExtractFileDir(application.ExeName);
-
- if OpenDialog1.Execute then
- begin
-  edtLogoMarca.Text := OpenDialog1.FileName;
- end;
-end;
-
-procedure TFormEmissorNFSe.sbtnPathSalvarClick(Sender: TObject);
-var
- Dir : string;
-begin
- if Length(edtPathLogs.Text) <= 0
-  then Dir := ExtractFileDir(application.ExeName)
-  else Dir := edtPathLogs.Text;
-
- if SelectDirectory(Dir, [sdAllowCreate, sdPerformCreate, sdPrompt],SELDIRHELP)
-  then edtPathLogs.Text := Dir;
-end;
-
 procedure TFormEmissorNFSe.FormCreate(Sender: TObject);
 begin
- PageControl1.ActivePageIndex:=0;
-
  LerConfiguracao;
- ConfiguraComponente;
+
 end;
 
 procedure TFormEmissorNFSe.btnSalvarConfigClick(Sender: TObject);
 begin
- GravarConfiguracao;
- LerConfiguracao;
- ConfiguraComponente;
-end;
-
-procedure TFormEmissorNFSe.lblColaboradorClick(Sender: TObject);
-begin
- ShellExecute(0, Nil, 'http://acbr.sourceforge.net/drupal/?q=node/5', Nil, Nil, SW_NORMAL);
-end;
-
-procedure TFormEmissorNFSe.lblPatrocinadorClick(Sender: TObject);
-begin
- ShellExecute(0, Nil, 'http://acbr.sourceforge.net/drupal/?q=node/35', Nil, Nil, SW_NORMAL);
-end;
-
-procedure TFormEmissorNFSe.lblDoar1Click(Sender: TObject);
-begin
- ShellExecute(0, Nil, 'http://acbr.sourceforge.net/drupal/?q=node/14', Nil, Nil, SW_NORMAL);
+   LerConfiguracao;
 end;
 
 procedure TFormEmissorNFSe.btnGerarEnviarLoteClick(Sender: TObject);
@@ -742,7 +560,7 @@ procedure TFormEmissorNFSe.btnCancNFSeClick(Sender: TObject);
 var
  Codigo, Motivo : String; 
 begin
-
+  {
  OpenDialog1.Title := 'Selecione a NFSe';
  OpenDialog1.DefaultExt := '*-NFSe.xml';
  OpenDialog1.Filter := 'Arquivos NFSe (*-NFSe.xml)|*-NFSe.xml|Arquivos XML (*.xml)|*.xml|Todos os Arquivos (*.*)|*.*';
@@ -779,6 +597,7 @@ begin
    LoadXML(MemoResp, WBResposta);
    PageControl2.ActivePageIndex := 1;
   end;
+  }
 
 end;
 
@@ -786,6 +605,7 @@ procedure TFormEmissorNFSe.btnConsultarSitLoteClick(Sender: TObject);
 var
  Protocolo : String;
 begin
+{
  if not(InputQuery('Consultar Situação do Lote', 'Número do Protocolo', Protocolo))
   then exit;
 
@@ -794,6 +614,7 @@ begin
  MemoResp.Lines.Text   := UTF8Encode(ACBrNFSe1.WebServices.ConsSitLote.RetWS);
  memoRespWS.Lines.Text := UTF8Encode(ACBrNFSe1.WebServices.ConsSitLote.RetWS);
  LoadXML(MemoResp, WBResposta);
+ }
 end;
 
 procedure TFormEmissorNFSe.btnGerarRPSClick(Sender: TObject);
@@ -804,7 +625,8 @@ begin
 
    ACBrNFSe1.NotasFiscais.Clear;
    GerarNFSe(vAux);
-   ACBrNFSe1.NotasFiscais.Items[0].SaveToFile;
+
+   //ACBrNFSe1.NotasFiscais.Items[0].SaveToFile;
 
    ShowMessage('Arquivo gerado em: '+ACBrNFSe1.NotasFiscais.Items[0].NomeArq);
    MemoDados.Lines.Add('Arquivo gerado em: '+ACBrNFSe1.NotasFiscais.Items[0].NomeArq);
@@ -815,6 +637,7 @@ end;
 
 procedure TFormEmissorNFSe.btnImprimirClick(Sender: TObject);
 begin
+{
  OpenDialog1.Title := 'Selecione a NFSe';
  OpenDialog1.DefaultExt := '*-NFSe.xml';
  OpenDialog1.Filter := 'Arquivos NFSe (*-NFSe.xml)|*-NFSe.xml|Arquivos XML (*.xml)|*.xml|Todos os Arquivos (*.*)|*.*';
@@ -834,6 +657,7 @@ begin
    LoadXML(MemoResp, WBResposta);
    PageControl2.ActivePageIndex := 1;
   end;
+  }
 end;
 
 procedure TFormEmissorNFSe.ACBrNFSe1StatusChange(Sender: TObject);
@@ -879,18 +703,6 @@ begin
  memoLog.Lines.Add(Mensagem);
 end;
 
-procedure TFormEmissorNFSe.sbtSchemasClick(Sender: TObject);
-var
- Dir : string;
-begin
- if Length(edtSchemas.Text) <= 0
-  then Dir := ExtractFileDir(application.ExeName)
-  else Dir := edtSchemas.Text;
-
- if SelectDirectory(Dir, [sdAllowCreate, sdPerformCreate, sdPrompt],SELDIRHELP)
-  then edtSchemas.Text := Dir;
-end;
-
 procedure TFormEmissorNFSe.SetDataSetCobranca(const Value: TDataSet);
 begin
   FDataSetCobranca := Value;
@@ -906,25 +718,13 @@ begin
   FDataSetVenda := Value;
 end;
 
-procedure TFormEmissorNFSe.sbtnPrestLogoClick(Sender: TObject);
-begin
- OpenDialog1.Title := 'Selecione o Logo';
- OpenDialog1.DefaultExt := '*.bmp';
- OpenDialog1.Filter := 'Arquivos BMP (*.bmp)|*.bmp|Todos os Arquivos (*.*)|*.*';
- OpenDialog1.InitialDir := ExtractFileDir(application.ExeName);
-
- if OpenDialog1.Execute then
- begin
-  edtPrestLogo.Text := OpenDialog1.FileName;
- end;
-end;
-
 procedure TFormEmissorNFSe.btnConsultarNFSeRPSClick(Sender: TObject);
 begin
+ {
  OpenDialog1.Title := 'Selecione o Rps';
  OpenDialog1.DefaultExt := '*-Rps.xml';
  OpenDialog1.Filter := 'Arquivos Rps (*-Rps.xml)|*-Rps.xml|Arquivos XML (*.xml)|*.xml|Todos os Arquivos (*.*)|*.*';
- OpenDialog1.InitialDir := ACBrNFSe1.Configuracoes.Geral.PathSalvar;
+ //OpenDialog1.InitialDir := ACBrNFSe1.Configuracoes.Geral.PathSalvar;
 
  if OpenDialog1.Execute then
   begin
@@ -941,6 +741,7 @@ begin
    memoRespWS.Lines.Text := UTF8Encode(ACBrNFSe1.WebServices.ConsNfseRps.RetWS);
    LoadXML(MemoResp, WBResposta);
   end;
+  }
 end;
 
 procedure TFormEmissorNFSe.btnConsultarNFSePeriodoClick(Sender: TObject);
@@ -952,7 +753,7 @@ begin
  if not(InputQuery('Consultar NFSe por Período', 'Data Final (DD/MM/AAAA):', DataFinal))
   then exit;
 
- ACBrNFSe1.ConsultarNFSe(edtEmitCNPJ.Text, edtEmitIM.Text, StrToDate(DataInicial), StrToDate(DataFinal));
+ //ACBrNFSe1.ConsultarNFSe(edtEmitCNPJ.Text, edtEmitIM.Text, StrToDate(DataInicial), StrToDate(DataFinal));
 
  MemoResp.Lines.Text   := UTF8Encode(ACBrNFSe1.WebServices.ConsNfse.RetWS);
  memoRespWS.Lines.Text := UTF8Encode(ACBrNFSe1.WebServices.ConsNfse.RetWS);
@@ -960,14 +761,9 @@ begin
 end;
 
 procedure TFormEmissorNFSe.cbCidadesChange(Sender: TObject);
-var
- Tamanho: Integer;
-begin
- Tamanho   := Length(Trim(cbCidades.Text));
 
- edtEmitCidade.Text := Copy(cbCidades.Text, 1, Tamanho - 11);
- edtEmitUF.Text     := Copy(cbCidades.Text, Tamanho - 1, 2);
- edtCodCidade.Text  := Copy(cbCidades.Text, Tamanho - 9, 7);
+begin
+
 end;
 
 // Função criada para arredondar valores quando a n Casa for maior ou igual a 5
@@ -1022,119 +818,71 @@ begin
  PageControl2.ActivePageIndex := 1;
 end;
 
-procedure TFormEmissorNFSe.btnEnviaremailClick(Sender: TObject);
-var
- vAux: String;
- sCC: TStrings;
-begin
- OpenDialog1.Title := 'Selecione a NFSe';
- OpenDialog1.DefaultExt := '*-NFSe.xml';
- OpenDialog1.Filter := 'Arquivos NFSe (*-NFSe.xml)|*-NFSe.xml|Arquivos XML (*.xml)|*.xml|Todos os Arquivos (*.*)|*.*';
- OpenDialog1.InitialDir := ACBrNFSe1.Configuracoes.Geral.PathSalvar;
-
- if OpenDialog1.Execute then
-  begin
-   ACBrNFSe1.NotasFiscais.Clear;
-   ACBrNFSe1.NotasFiscais.LoadFromFile(OpenDialog1.FileName);
-
-   if not(InputQuery('Enviar e-mail', 'Destinatário', vAux))
-    then exit;
-
-   sCC:=TStringList.Create;
-   sCC.Clear;  // Usando para add outros e-mail como Com-Cópia
-
-   ACBrNFSe1.NotasFiscais.Items[0].EnviarEmail(edtSmtpHost.Text,
-                                               edtSmtpPort.Text,
-                                               edtSmtpUser.Text,
-                                               edtSmtpPass.Text,
-                                               edtEmailRemetente.Text,
-                                               vAux,                 // e-mail do destinatário
-                                               edtEmailAssunto.Text, // Assunto
-                                               mmEmailMsg.Lines,     // Mensagem
-                                               cbEmailSSL.Checked,   // SSL
-                                               True,                 // Enviar em PDF
-                                               sCC,                  // sCC
-                                               nil,                  // Anexos
-                                               True,                 // Pede Confirmação de Recebimento
-                                               True,                 // Aguarda o Envio
-                                               edtEmitRazao.Text,    // Nome do remetente
-                                               True,                 // TLS
-                                               True);                // Usar Thread
-
-   sCC.Free;
-
-   MemoDados.Lines.Add('Arquivo Carregado de: '+ACBrNFSe1.NotasFiscais.Items[0].NomeArq);
-   MemoResp.Lines.LoadFromFile(ACBrNFSe1.NotasFiscais.Items[0].NomeArq);
-   LoadXML(MemoResp, WBResposta);
-   PageControl2.ActivePageIndex := 1;
-  end;
-end;
-
 procedure TFormEmissorNFSe.btnLinkNFSeClick(Sender: TObject);
 var
- vNumNFSe, sCodVerif, sIM, sLink : String;
+   vNumNFSe, sCodVerif, sIM, sLink : String;
 begin
- if not(InputQuery('Gerar o Link da NFSe', 'Numero da NFSe', vNumNFSe))
-  then exit;
- if not(InputQuery('Gerar o Link da NFSe', 'Codigo de Verificacao', sCodVerif))
-  then exit;
- if not(InputQuery('Gerar o Link da NFSe', 'Inscrição Municipal', sIM))
-  then exit;
+   if not(InputQuery('Gerar o Link da NFSe', 'Numero da NFSe', vNumNFSe))
+    then exit;
+   if not(InputQuery('Gerar o Link da NFSe', 'Codigo de Verificacao', sCodVerif))
+    then exit;
+   if not(InputQuery('Gerar o Link da NFSe', 'Inscrição Municipal', sIM))
+    then exit;
 
- sLink := ACBrNFSe1.LinkNFSe(StrToIntDef(vNumNFSe, 0), sCodVerif, sIM);
+   sLink := ACBrNFSe1.LinkNFSe(StrToIntDef(vNumNFSe, 0), sCodVerif, sIM);
 
- MemoResp.Lines.Add('Link Gerado: ' + sLink);
- PageControl2.ActivePageIndex := 0;
+   MemoResp.Lines.Add('Link Gerado: ' + sLink);
+   PageControl2.ActivePageIndex := 0;
 end;
 
 procedure TFormEmissorNFSe.btnGerarLoteRPSClick(Sender: TObject);
 var
- vAux, vNumLote : String;
+   vAux, vNumLote : String;
 begin
- //**************************************************************************
- //
- // A function GerarLote apenas gera o XML do lote, assina se necessário
- // e valida, salvando o arquivo com o nome: <lote>-lot-rps.xml na pasta Ger
- // Não ocorre o envio para nenhum webservice.
- //
- //**************************************************************************
+   //**************************************************************************
+   //
+   // A function GerarLote apenas gera o XML do lote, assina se necessário
+   // e valida, salvando o arquivo com o nome: <lote>-lot-rps.xml na pasta Ger
+   // Não ocorre o envio para nenhum webservice.
+   //
+   //**************************************************************************
 
- if not(InputQuery('Gerar e Enviar Lote', 'Numero do RPS', vAux))
-  then exit;
+   if not(InputQuery('Gerar e Enviar Lote', 'Numero do RPS', vAux))
+    then exit;
 
- if not(InputQuery('Gerar e Enviar Lote', 'Numero do Lote', vNumLote))
-  then exit;
+   if not(InputQuery('Gerar e Enviar Lote', 'Numero do Lote', vNumLote))
+    then exit;
 
- ACBrNFSe1.NotasFiscais.Clear;
- GerarNFSe(vAux);
- ACBrNFSe1.GerarLote(vNumLote);
+   ACBrNFSe1.NotasFiscais.Clear;
+   GerarNFSe(vAux);
+   ACBrNFSe1.GerarLote(vNumLote);
 
- ShowMessage('Arquivo gerado em: '+ACBrNFSe1.NotasFiscais.Items[0].NomeArq);
+   ShowMessage('Arquivo gerado em: '+ACBrNFSe1.NotasFiscais.Items[0].NomeArq);
 
- ACBrNFSe1.NotasFiscais.Clear;
+   ACBrNFSe1.NotasFiscais.Clear;
 end;
 
 procedure TFormEmissorNFSe.btnGerarEnviarSincronoClick(Sender: TObject);
 var
- vAux, vNumLote : String;
+   vAux, vNumLote : String;
 begin
- //**************************************************************************
- //
- // A function EnviarSincrono só esta disponivel para alguns provedores.
- //
- //**************************************************************************
+   //**************************************************************************
+   //
+   // A function EnviarSincrono só esta disponivel para alguns provedores.
+   //
+   //**************************************************************************
 
- if not(InputQuery('Gerar e Enviar Lote - Sincrono', 'Numero do RPS', vAux))
-  then exit;
+   if not(InputQuery('Gerar e Enviar Lote - Sincrono', 'Numero do RPS', vAux))
+    then exit;
 
- if not(InputQuery('Gerar e Enviar Lote - Sincrono', 'Numero do Lote', vNumLote))
-  then exit;
+   if not(InputQuery('Gerar e Enviar Lote - Sincrono', 'Numero do Lote', vNumLote))
+    then exit;
 
- ACBrNFSe1.NotasFiscais.Clear;
- GerarNFSe(vAux);
- ACBrNFSe1.EnviarSincrono(vNumLote);
+   ACBrNFSe1.NotasFiscais.Clear;
+   GerarNFSe(vAux);
+   ACBrNFSe1.EnviarSincrono(vNumLote);
 
- ACBrNFSe1.NotasFiscais.Clear;
+   ACBrNFSe1.NotasFiscais.Clear;
 end;
 
 procedure TFormEmissorNFSe.Button1Click(Sender: TObject);
@@ -1143,9 +891,7 @@ var
 begin
  if not(InputQuery('Informe o código IBGE da cidade com 7 digitos', 'Código:', vAux))
   then exit;
-
- provedor := CodCidadeToProvedor(StrToIntDef(vAux, 0));
-
+ //provedor := CodCidadeToProvedor(StrToIntDef(vAux, 0));
  ShowMessage('Provedor: ' + provedor);
 end;
 

@@ -188,6 +188,7 @@ type
     procedure VisualizarFatura1Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
     procedure cboProdutoCloseUp(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     ItensOrcamento           : TItensEntradas;
     ItemOrcamento            : TGenericEntidade;
@@ -221,6 +222,7 @@ type
     procedure SalvarOrcamentoFormaPagamento(CodigoOrcamento: string);
     procedure AdicionarItem;
     procedure VerificarModelo(Modelo: string);
+    procedure ShowLembrete;
 
     { Private declarations }
   public
@@ -240,7 +242,7 @@ implementation
 uses
    ControllerOrcamento, EntidadeFactory, ControllerClientes, Principal,
    DBUtils, DialogsUtils, Winapi.Windows, UtilsString, ControllerRecebimento
-   {EmissorNfe}, ControllerParametros;
+   {EmissorNfe}, ControllerParametros, LembretesExibir, ControllerTabelas;
 
 
 procedure TFormOrcamentoDetalhes.BitBtn1Click(Sender: TObject);
@@ -1007,6 +1009,37 @@ begin
     srcItens.DataSet.edit;
     SelecionarComissao;
     MapperItemOrcamento.SendEntidadeToDataSet;
+  end;
+end;
+
+procedure TFormOrcamentoDetalhes.FormShow(Sender: TObject);
+begin
+  inherited;
+  ShowLembrete;
+end;
+
+procedure  TFormOrcamentoDetalhes.ShowLembrete;
+var
+   ControllerLembrete: TControllerTabelas;
+   DataSet : TDataset;
+   FormLembrete: TForm;
+begin
+  inherited;
+  try
+     ControllerLembrete:= TControllerTabelas.create;
+     DataSet := TControllerTabelas(ControllerLembrete).GetDataSet(
+                TEntidadeFactory.Criar(tpLembretes),
+                'coalesce( encerrado , ''N'') <> ''S'' ');
+     if not DataSet.isempty then
+     begin
+       FormLembrete := FormPrincipal.ShowForm(TFormLembretesExibir,nil,false,false);
+       TFormLembretesExibir(FormLembrete).srcLembretes.DataSet := DataSet;
+       TFormLembretesExibir(FormLembrete).ShowModal;
+       FormLembrete.Free;
+     end;
+  finally
+     DataSet.free;
+     ControllerLembrete.free;
   end;
 end;
 

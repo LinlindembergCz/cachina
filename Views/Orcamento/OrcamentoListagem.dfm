@@ -18,14 +18,16 @@ inherited FormOrcamentoListagem: TFormOrcamentoListagem
     ExplicitWidth = 905
     ExplicitHeight = 184
     inherited SpeedButton2: TSpeedButton
-      Left = 818
+      Left = 853
       Top = 100
+      Width = 45
       Height = 30
       Flat = True
       Font.Height = -13
       Font.Style = [fsBold, fsUnderline]
-      ExplicitLeft = 818
+      ExplicitLeft = 853
       ExplicitTop = 100
+      ExplicitWidth = 45
       ExplicitHeight = 30
     end
     inherited btnSelecionar: TSpeedButton
@@ -41,9 +43,9 @@ inherited FormOrcamentoListagem: TFormOrcamentoListagem
       ExplicitHeight = 30
     end
     object btnInserir: TSpeedButton
-      Left = 95
+      Left = 98
       Top = 100
-      Width = 80
+      Width = 63
       Height = 30
       Caption = 'Novo'
       Flat = True
@@ -56,9 +58,9 @@ inherited FormOrcamentoListagem: TFormOrcamentoListagem
       OnClick = btnInserirClick
     end
     object btnAlterar: TSpeedButton
-      Left = 198
-      Top = 100
-      Width = 80
+      Left = 174
+      Top = 99
+      Width = 67
       Height = 30
       Caption = 'Alterar'
       Flat = True
@@ -71,7 +73,7 @@ inherited FormOrcamentoListagem: TFormOrcamentoListagem
       OnClick = btnAlterarClick
     end
     object SpeedButton1: TSpeedButton
-      Left = 391
+      Left = 346
       Top = 100
       Width = 80
       Height = 30
@@ -86,7 +88,7 @@ inherited FormOrcamentoListagem: TFormOrcamentoListagem
       PopupMenu = PopupMenu2
     end
     object SpeedButton3: TSpeedButton
-      Left = 490
+      Left = 438
       Top = 100
       Width = 80
       Height = 30
@@ -101,7 +103,7 @@ inherited FormOrcamentoListagem: TFormOrcamentoListagem
       OnClick = SpeedButton3Click
     end
     object SpeedButton4: TSpeedButton
-      Left = 679
+      Left = 616
       Top = 100
       Width = 126
       Height = 30
@@ -116,7 +118,7 @@ inherited FormOrcamentoListagem: TFormOrcamentoListagem
       OnClick = SpeedButton4Click
     end
     object SpeedButton6: TSpeedButton
-      Left = 576
+      Left = 526
       Top = 100
       Width = 80
       Height = 30
@@ -131,7 +133,7 @@ inherited FormOrcamentoListagem: TFormOrcamentoListagem
       OnClick = SpeedButton6Click
     end
     object SpeedButton5: TSpeedButton
-      Left = 295
+      Left = 253
       Top = 100
       Width = 80
       Height = 30
@@ -158,6 +160,22 @@ inherited FormOrcamentoListagem: TFormOrcamentoListagem
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+    end
+    object SpeedButton7: TSpeedButton
+      Left = 751
+      Top = 100
+      Width = 87
+      Height = 30
+      Caption = 'Emitir NFS-e'
+      Enabled = False
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold, fsUnderline]
+      ParentFont = False
+      OnClick = SpeedButton4Click
     end
     object GroupBox1: TGroupBox
       Left = 2

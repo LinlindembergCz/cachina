@@ -34,16 +34,12 @@ object FormParametrosDetalhes: TFormParametrosDetalhes
       Top = 1
       Width = 726
       Height = 540
-      ActivePage = TabSheet5
+      ActivePage = TabSheet2
       Align = alClient
       TabOrder = 0
       object TabSheet2: TTabSheet
         Caption = 'Venda'
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label1: TLabel
           Left = 97
           Top = 20
@@ -78,10 +74,6 @@ object FormParametrosDetalhes: TFormParametrosDetalhes
       object TabSheet3: TTabSheet
         Caption = 'Compra'
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label3: TLabel
           Left = 114
           Top = 17
@@ -146,38 +138,26 @@ object FormParametrosDetalhes: TFormParametrosDetalhes
       object TabSheet4: TTabSheet
         Caption = 'Financeiro'
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
       end
       object TabSheet5: TTabSheet
         Caption = 'NFE/NFC'
         ImageIndex = 4
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object PageControl2: TPageControl
           Left = 0
           Top = 0
           Width = 718
           Height = 512
-          ActivePage = TabSheet7
+          ActivePage = TabSheet1
           Align = alClient
           MultiLine = True
           TabOrder = 0
           object TabSheet1: TTabSheet
             Caption = 'Certificado'
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object GroupBox2: TGroupBox
               Left = 3
               Top = 2
               Width = 265
-              Height = 144
+              Height = 231
               Caption = 'Certificado'
               TabOrder = 0
               object Label7: TLabel
@@ -242,6 +222,20 @@ object FormParametrosDetalhes: TFormParametrosDetalhes
                   3BB33773333773333773B333333B3333333B7333333733333337}
                 NumGlyphs = 2
               end
+              object Label45: TLabel
+                Left = 8
+                Top = 139
+                Width = 73
+                Height = 13
+                Caption = 'IdToken/IdCSC'
+              end
+              object Label44: TLabel
+                Left = 11
+                Top = 184
+                Width = 53
+                Height = 13
+                Caption = 'Token/CSC'
+              end
               object edtCaminho: TEdit
                 Left = 8
                 Top = 32
@@ -258,35 +252,31 @@ object FormParametrosDetalhes: TFormParametrosDetalhes
                 TabOrder = 1
               end
               object edtNumSerie: TEdit
-                Left = 3
-                Top = 115
+                Left = 8
+                Top = 112
                 Width = 225
                 Height = 21
                 TabOrder = 2
+              end
+              object edtIdToken: TEdit
+                Left = 8
+                Top = 158
+                Width = 225
+                Height = 21
+                TabOrder = 3
+              end
+              object edtToken: TEdit
+                Left = 8
+                Top = 202
+                Width = 225
+                Height = 21
+                TabOrder = 4
               end
             end
           end
           object TabSheet6: TTabSheet
             Caption = 'Geral'
             ImageIndex = 1
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
-            object Label44: TLabel
-              Left = 156
-              Top = 426
-              Width = 53
-              Height = 13
-              Caption = 'Token/CSC'
-            end
-            object Label45: TLabel
-              Left = 139
-              Top = 402
-              Width = 73
-              Height = 13
-              Caption = 'IdToken/IdCSC'
-            end
             object Label46: TLabel
               Left = 11
               Top = 312
@@ -462,54 +452,40 @@ object FormParametrosDetalhes: TFormParametrosDetalhes
               ParentFont = False
               TabOrder = 2
             end
-            object edtToken: TEdit
-              Left = 219
-              Top = 423
-              Width = 61
-              Height = 21
-              TabOrder = 3
-            end
-            object edtIdToken: TEdit
-              Left = 219
-              Top = 397
-              Width = 61
-              Height = 21
-              TabOrder = 4
-            end
             object cbVersaoDF: TComboBox
               Left = 138
               Top = 309
               Width = 133
               Height = 21
-              TabOrder = 5
+              TabOrder = 3
             end
             object cbModeloDF: TComboBox
               Left = 138
               Top = 282
               Width = 134
               Height = 21
-              TabOrder = 6
+              TabOrder = 4
             end
             object cbFormaEmissao: TComboBox
               Left = 104
               Top = 255
               Width = 168
               Height = 21
-              TabOrder = 7
+              TabOrder = 5
             end
             object edtFormatoAlerta: TEdit
               Left = 104
               Top = 228
               Width = 168
               Height = 21
-              TabOrder = 8
+              TabOrder = 6
             end
             object cboSSLCryptLib: TComboBox
               Left = 12
               Top = 358
               Width = 86
               Height = 21
-              TabOrder = 9
+              TabOrder = 7
               Items.Strings = (
                 'cryWinCrypt'
                 'cryCapicom'
@@ -522,7 +498,7 @@ object FormParametrosDetalhes: TFormParametrosDetalhes
               Top = 358
               Width = 86
               Height = 21
-              TabOrder = 10
+              TabOrder = 8
               Items.Strings = (
                 'httpIndy'
                 'httpNone'
@@ -535,7 +511,7 @@ object FormParametrosDetalhes: TFormParametrosDetalhes
               Top = 358
               Width = 86
               Height = 21
-              TabOrder = 11
+              TabOrder = 9
               Items.Strings = (
                 'libCapicom'
                 'libCapicomDelphiSoap'
@@ -549,7 +525,7 @@ object FormParametrosDetalhes: TFormParametrosDetalhes
               Top = 398
               Width = 86
               Height = 21
-              TabOrder = 12
+              TabOrder = 10
               Items.Strings = (
                 'xsLibXml2'
                 'xsMsXml'
@@ -562,7 +538,7 @@ object FormParametrosDetalhes: TFormParametrosDetalhes
               Top = 438
               Width = 86
               Height = 21
-              TabOrder = 13
+              TabOrder = 11
               Items.Strings = (
                 'LT_all'
                 'LT_SSHv2'
@@ -576,10 +552,6 @@ object FormParametrosDetalhes: TFormParametrosDetalhes
           object TabSheet7: TTabSheet
             Caption = 'WebService'
             ImageIndex = 2
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object GroupBox4: TGroupBox
               Left = 0
               Top = 4
@@ -813,10 +785,6 @@ object FormParametrosDetalhes: TFormParametrosDetalhes
           object TabSheet8: TTabSheet
             Caption = 'Emitente'
             ImageIndex = 3
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label15: TLabel
               Left = 8
               Top = 4
@@ -1017,10 +985,6 @@ object FormParametrosDetalhes: TFormParametrosDetalhes
           object TabSheet9: TTabSheet
             Caption = 'Email'
             ImageIndex = 4
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object GroupBox5: TGroupBox
               Left = 1
               Top = 4
@@ -1125,10 +1089,6 @@ object FormParametrosDetalhes: TFormParametrosDetalhes
           object TabSheet13: TTabSheet
             Caption = 'Pastas'
             ImageIndex = 5
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label36: TLabel
               Left = 8
               Top = 0

@@ -23,7 +23,6 @@ object FormEmissorNfe: TFormEmissorNfe
     Height = 605
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 1217
     object Panel3: TPanel
       Left = 1
       Top = 1
@@ -31,7 +30,6 @@ object FormEmissorNfe: TFormEmissorNfe
       Height = 603
       Align = alClient
       TabOrder = 0
-      ExplicitWidth = 1215
       object PageControl3: TPageControl
         Left = 1
         Top = 1
@@ -40,11 +38,9 @@ object FormEmissorNfe: TFormEmissorNfe
         ActivePage = TabSheet14
         Align = alClient
         TabOrder = 0
-        ExplicitWidth = 1213
         object TabSheet14: TTabSheet
           Caption = 'Conte'#250'do'
           ImageIndex = 3
-          ExplicitWidth = 1205
           object grdCobranca: TDBGrid
             Left = 0
             Top = 400
@@ -334,7 +330,6 @@ object FormEmissorNfe: TFormEmissorNfe
               'Valor aproximado dos tributos  8,28 %')
             ScrollBars = ssVertical
             TabOrder = 3
-            ExplicitWidth = 1205
           end
           object Panel4: TPanel
             Left = 0
@@ -343,7 +338,6 @@ object FormEmissorNfe: TFormEmissorNfe
             Height = 69
             Align = alTop
             TabOrder = 4
-            ExplicitWidth = 1205
             object Label38: TLabel
               Left = 3
               Top = 14
@@ -423,7 +417,6 @@ object FormEmissorNfe: TFormEmissorNfe
             Height = 41
             Align = alBottom
             TabOrder = 5
-            ExplicitWidth = 1205
             object Button2: TButton
               Tag = 65
               Left = 194
@@ -461,7 +454,10 @@ object FormEmissorNfe: TFormEmissorNfe
         object tsNFe: TTabSheet
           Caption = 'NF-e'
           OnEnter = tsNFeEnter
+          ExplicitLeft = 0
+          ExplicitTop = 0
           ExplicitWidth = 1205
+          ExplicitHeight = 0
           object btnImprimir: TButton
             Left = 10
             Top = 126
@@ -611,7 +607,10 @@ object FormEmissorNfe: TFormEmissorNfe
             ExplicitWidth = 1205
             object TabSheet5: TTabSheet
               Caption = 'Respostas'
+              ExplicitLeft = 0
+              ExplicitTop = 0
               ExplicitWidth = 1197
+              ExplicitHeight = 0
               object MemoResp: TMemo
                 Left = 0
                 Top = 0
@@ -626,7 +625,10 @@ object FormEmissorNfe: TFormEmissorNfe
             object TabSheet6: TTabSheet
               Caption = 'XML Resposta'
               ImageIndex = 1
+              ExplicitLeft = 0
+              ExplicitTop = 0
               ExplicitWidth = 1197
+              ExplicitHeight = 0
               object WBResposta: TWebBrowser
                 Left = 0
                 Top = 0
@@ -646,7 +648,10 @@ object FormEmissorNfe: TFormEmissorNfe
             object TabSheet8: TTabSheet
               Caption = 'Log'
               ImageIndex = 2
+              ExplicitLeft = 0
+              ExplicitTop = 0
               ExplicitWidth = 1197
+              ExplicitHeight = 0
               object memoLog: TMemo
                 Left = 0
                 Top = 0
@@ -661,7 +666,10 @@ object FormEmissorNfe: TFormEmissorNfe
             object TabSheet9: TTabSheet
               Caption = 'NFe'
               ImageIndex = 3
+              ExplicitLeft = 0
+              ExplicitTop = 0
               ExplicitWidth = 1197
+              ExplicitHeight = 0
               object trvwNFe: TTreeView
                 Left = 0
                 Top = 0
@@ -670,13 +678,15 @@ object FormEmissorNfe: TFormEmissorNfe
                 Align = alClient
                 Indent = 19
                 TabOrder = 0
-                ExplicitWidth = 1197
               end
             end
             object TabSheet10: TTabSheet
               Caption = 'Retorno Completo WS'
               ImageIndex = 4
+              ExplicitLeft = 0
+              ExplicitTop = 0
               ExplicitWidth = 1197
+              ExplicitHeight = 0
               object memoRespWS: TMemo
                 Left = 0
                 Top = 0
@@ -691,7 +701,10 @@ object FormEmissorNfe: TFormEmissorNfe
             object Dados: TTabSheet
               Caption = 'Dados'
               ImageIndex = 5
+              ExplicitLeft = 0
+              ExplicitTop = 0
               ExplicitWidth = 1197
+              ExplicitHeight = 0
               object MemoDados: TMemo
                 Left = 0
                 Top = 0
@@ -706,7 +719,10 @@ object FormEmissorNfe: TFormEmissorNfe
             object TabSheet11: TTabSheet
               Caption = 'RetornoConsulta NFe 2.01'
               ImageIndex = 6
+              ExplicitLeft = 0
+              ExplicitTop = 0
               ExplicitWidth = 1197
+              ExplicitHeight = 0
               object TreeViewRetornoConsulta: TTreeView
                 Left = 0
                 Top = 0
@@ -715,7 +731,6 @@ object FormEmissorNfe: TFormEmissorNfe
                 Align = alClient
                 Indent = 19
                 TabOrder = 0
-                ExplicitWidth = 1197
               end
             end
           end
@@ -723,7 +738,10 @@ object FormEmissorNfe: TFormEmissorNfe
         object TabSheet12: TTabSheet
           Caption = 'Depurador'
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
           ExplicitWidth = 1205
+          ExplicitHeight = 0
           object Memo1: TMemo
             Left = 0
             Top = 0

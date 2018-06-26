@@ -4,6 +4,7 @@ inherited FormProdutoListagem: TFormProdutoListagem
   ClientHeight = 481
   ClientWidth = 764
   Position = poDesktopCenter
+  Visible = False
   ExplicitWidth = 770
   ExplicitHeight = 509
   PixelsPerInch = 96

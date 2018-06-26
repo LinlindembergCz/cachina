@@ -61,6 +61,7 @@ type
     Servios1: TMenuItem;
     chkSefaz: TCheckBox;
     lbregistros: TLabel;
+    SpeedButton7: TSpeedButton;
     procedure btnconsultarClick(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure btnSelecionarClick(Sender: TObject);

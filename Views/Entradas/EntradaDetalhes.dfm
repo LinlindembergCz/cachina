@@ -10,7 +10,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
     Width = 978
     Height = 517
     ExplicitWidth = 978
-    ExplicitHeight = 570
+    ExplicitHeight = 517
     object lbData: TLabel
       Left = 67
       Top = 12
@@ -226,7 +226,7 @@ inherited FormEntradaDetalhes: TFormEntradaDetalhes
       ParentFont = False
     end
     object SpeedButton4: TSpeedButton
-      Left = 558
+      Left = 563
       Top = 26
       Width = 20
       Height = 21

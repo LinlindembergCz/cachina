@@ -14,7 +14,6 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
     inherited tabPrincipal: TPageControl
       Width = 752
       Height = 433
-      ActivePage = TabSheet2
       ExplicitWidth = 752
       ExplicitHeight = 433
       inherited TabSheet1: TTabSheet
@@ -57,7 +56,7 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
           Top = 0
           Width = 744
           Height = 405
-          ActivePage = TabSheet5
+          ActivePage = TabSheet7
           Align = alClient
           TabOrder = 0
           object TabSheet7: TTabSheet
@@ -1252,6 +1251,234 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
               OnClick = Button2Click
             end
           end
+          object b: TTabSheet
+            Caption = 'Notifica'#231#245'es'
+            ImageIndex = 8
+            OnShow = bShow
+            object Label33: TLabel
+              Left = 275
+              Top = 307
+              Width = 62
+              Height = 13
+              Caption = 'Frequ'#234'ncia'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Visible = False
+            end
+            object Label34: TLabel
+              Left = 599
+              Top = 305
+              Width = 24
+              Height = 13
+              Caption = 'Tipo'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Visible = False
+            end
+            object Label35: TLabel
+              Left = 360
+              Top = 307
+              Width = 38
+              Height = 13
+              Caption = 'A cada'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Visible = False
+            end
+            object Label36: TLabel
+              Left = 483
+              Top = 306
+              Width = 48
+              Height = 13
+              Caption = 'Validade'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Visible = False
+            end
+            object Label37: TLabel
+              Left = 21
+              Top = 6
+              Width = 33
+              Height = 13
+              Caption = 'Texto'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object DBGrid4: TDBGrid
+              Left = 20
+              Top = 115
+              Width = 693
+              Height = 180
+              DataSource = srcLembretes
+              TabOrder = 0
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'Tahoma'
+              TitleFont.Style = []
+              OnCellClick = DBGrid4CellClick
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'Descricao'
+                  Title.Caption = 'Descri'#231#227'o'
+                  Width = 378
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'TipoRepeticao'
+                  Title.Caption = 'Tipo'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'RepetirACada'
+                  Title.Caption = 'Repetir'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'UnidadeRepeticao'
+                  Title.Caption = 'A cada'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'Encerrado'
+                  Visible = True
+                end>
+            end
+            object memoDescricao: TMemo
+              Left = 19
+              Top = 22
+              Width = 693
+              Height = 55
+              MaxLength = 500
+              TabOrder = 1
+            end
+            object edtRepetirACada: TEdit
+              Left = 271
+              Top = 325
+              Width = 63
+              Height = 21
+              TabOrder = 2
+              Text = '1'
+              Visible = False
+            end
+            object cboUnidadeRepeticao: TComboBox
+              Left = 360
+              Top = 325
+              Width = 117
+              Height = 21
+              TabOrder = 3
+              Visible = False
+              Items.Strings = (
+                'Hora'
+                'Dia'
+                'M'#234's')
+            end
+            object cboTipoRepeticao: TComboBox
+              Left = 599
+              Top = 324
+              Width = 113
+              Height = 21
+              TabOrder = 4
+              Visible = False
+              Items.Strings = (
+                'Diaria'
+                'Semanal'
+                'Mensal')
+            end
+            object Button3: TButton
+              Left = 19
+              Top = 84
+              Width = 75
+              Height = 25
+              Caption = 'Novo'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 5
+              OnClick = Button3Click
+            end
+            object Button4: TButton
+              Left = 110
+              Top = 84
+              Width = 75
+              Height = 25
+              Caption = 'Confirmar'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 6
+              OnClick = Button4Click
+            end
+            object Button5: TButton
+              Left = 197
+              Top = 84
+              Width = 75
+              Height = 25
+              Caption = 'Remover'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 7
+            end
+            object chkEncerrado: TCheckBox
+              Left = 71
+              Top = 3
+              Width = 97
+              Height = 17
+              Caption = 'Encerrado'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 8
+            end
+            object dateData: TDateTimePicker
+              Left = 483
+              Top = 324
+              Width = 97
+              Height = 21
+              Date = 41722.540775486110000000
+              Time = 41722.540775486110000000
+              TabOrder = 9
+              Visible = False
+            end
+          end
         end
       end
     end
@@ -1329,5 +1556,10 @@ inherited FormClientesDetalhes: TFormClientesDetalhes
     PesquisarIBGE = False
     Left = 641
     Top = 330
+  end
+  object srcLembretes: TDataSource
+    AutoEdit = False
+    Left = 64
+    Top = 366
   end
 end

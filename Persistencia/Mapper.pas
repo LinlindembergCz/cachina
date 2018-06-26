@@ -441,7 +441,9 @@ begin
        else
        if Componente is TDateTimePicker then (Componente as TDateTimePicker).Date:= 0
        else
-       if Componente is TDBLookUpCombobox then (Componente as TDBLookUpCombobox).Keyvalue:= null;
+       if Componente is TDBLookUpCombobox then (Componente as TDBLookUpCombobox).Keyvalue:= null
+        else
+       if Componente is TMemo then (Componente as TMemo).clear;
     end;
   end;
 end;

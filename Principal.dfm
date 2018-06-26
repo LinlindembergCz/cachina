@@ -1,7 +1,7 @@
 object FormPrincipal: TFormPrincipal
   Left = 0
   Top = 0
-  Caption = 'GC Velocimetros'
+  Caption = 'd'
   ClientHeight = 521
   ClientWidth = 897
   Color = clBtnFace

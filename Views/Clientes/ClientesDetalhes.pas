@@ -117,6 +117,23 @@ type
     SpeedButton7: TSpeedButton;
     ACBrConsultaCPF1: TACBrConsultaCPF;
     ACBrConsultaCNPJ1: TACBrConsultaCNPJ;
+    b: TTabSheet;
+    DBGrid4: TDBGrid;
+    memoDescricao: TMemo;
+    edtRepetirACada: TEdit;
+    Label33: TLabel;
+    cboUnidadeRepeticao: TComboBox;
+    cboTipoRepeticao: TComboBox;
+    Label34: TLabel;
+    Label35: TLabel;
+    Button3: TButton;
+    Button4: TButton;
+    Button5: TButton;
+    chkEncerrado: TCheckBox;
+    Label36: TLabel;
+    dateData: TDateTimePicker;
+    Label37: TLabel;
+    srcLembretes: TDataSource;
     procedure btnConfirmarContatoClick(Sender: TObject);
     procedure btnInserirVeiculoClick(Sender: TObject);
     procedure btnInserirContatoClick(Sender: TObject);
@@ -141,15 +158,23 @@ type
     procedure SpeedButton6Click(Sender: TObject);
     procedure ACBrCEP1BuscaEfetuada(Sender: TObject);
     procedure SpeedButton7Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure bShow(Sender: TObject);
+    procedure DBGrid4CellClick(Column: TColumn);
   private
     Veiculos: TGenericEntidade;
     Contatos: TGenericEntidade;
+    Lembretes: TGenericEntidade;
     MapperContatos:TMapper;
     MapperVeiculos:TMapper;
+    MapperLembretes:TMapper;
     procedure MapearCampoContatos;
     procedure MapearCampoVeiculos;
+    procedure MapearCampoLembretes;
     procedure ConsultarContatos;
     procedure ConsultarVeiculos;
+    procedure ConsultarLembretes;
 
     { Private declarations }
   public
@@ -175,11 +200,14 @@ begin
   Entidade   := TEntidadeFactory.Criar(tpPessoa);
   Contatos   := TEntidadeFactory.Criar(tpContatos);
   Veiculos   := TEntidadeFactory.Criar(tpVeiculos);
+  Lembretes  := TEntidadeFactory.Criar(tpLembretes);
   Condicao   := '0=1';
   inherited;
   MapearComponentes;
   MapearCampoContatos;
   MapearCampoVeiculos;
+  MapearCampoLembretes;
+
   FillCombobox( tpClassificacaoCliente, CodigoClassificacao );
   FillCombobox( tpModeloVeiculo, cboModelo );
   FillLookUpCombobox( tpFormaPagamento, cboFormPagamento );
@@ -196,6 +224,17 @@ begin
 
   if MapperContatos <> nil then
   MapperContatos.Dataset := srcContatos.Dataset;
+end;
+
+procedure TFormClientesDetalhes.ConsultarLembretes;
+begin
+  if (Operacao <> 'Insert') then
+     srcLembretes.Dataset:= Controller.GetDataset(Lembretes,
+                           'CodigoCliente='+quotedstr(srcEntidade.DataSet.FieldByName('Codigo').AsString) )
+  else
+     srcLembretes.Dataset:= Controller.GetDataset(Lembretes,'CodigoCliente=0 ');
+  if MapperLembretes <> nil then
+     MapperLembretes.Dataset:= srcLembretes.Dataset;
 end;
 
 procedure TFormClientesDetalhes.MapearCampoContatos;
@@ -228,7 +267,7 @@ end;
 procedure TFormClientesDetalhes.MapearCampoVeiculos;
 begin
   ConsultarVeiculos;
-  MapperVeiculos:=TMapper.Create(Veiculos,srcVeiculos.DataSet);
+  MapperVeiculos:=TMapper.Create( Veiculos,srcVeiculos.DataSet);
   with MapperVeiculos do
   begin
     Associar('CodigoCliente', nil);
@@ -249,6 +288,24 @@ begin
     Associar('DataVenda', edtPrecoVenda );
     Associar('TipoCombustivel', cboCombustivel ); }
 
+  end;
+end;
+
+procedure TFormClientesDetalhes.MapearCampoLembretes;
+begin
+  ConsultarLembretes;
+  MapperLembretes:=TMapper.Create(Lembretes,srcLembretes.DataSet);
+  with MapperLembretes do
+  begin
+    Associar('Codigo', nil);
+    Associar('CodigoCliente', nil);
+    Associar('Codigofuncionario', nil);
+    Associar('Descricao', memoDescricao);
+    Associar('RepetirACada', edtRepetirACada);
+    Associar('TipoRepeticao', cboTipoRepeticao);
+    Associar('UnidadeRepeticao', cboUnidadeRepeticao);
+    Associar('Encerrado',  chkEncerrado);
+    Associar('Validade',  dateData);
   end;
 end;
 
@@ -360,12 +417,18 @@ end;
 procedure TFormClientesDetalhes.ACBrCEP1BuscaEfetuada(Sender: TObject);
 begin
   inherited;
-  Endereco.Text := ACBrCEP1.Enderecos.Objects[0].Logradouro;
-  bairro.Text := ACBrCEP1.Enderecos.Objects[0].bairro;
-  UF.Text := ACBrCEP1.Enderecos.Objects[0].UF;
-  CodigoIBGE.Text := ACBrCEP1.Enderecos.Objects[0].IBGE_Municipio;
-  Municipio.Text := ACBrCEP1.Enderecos.Objects[0].Municipio;
+  Endereco.Text    := ACBrCEP1.Enderecos.Objects[0].Logradouro;
+  bairro.Text      := ACBrCEP1.Enderecos.Objects[0].bairro;
+  UF.Text          := ACBrCEP1.Enderecos.Objects[0].UF;
+  CodigoIBGE.Text  := ACBrCEP1.Enderecos.Objects[0].IBGE_Municipio;
+  Municipio.Text   := ACBrCEP1.Enderecos.Objects[0].Municipio;
   Complemento.Text := ACBrCEP1.Enderecos.Objects[0].Complemento;
+end;
+
+procedure TFormClientesDetalhes.bShow(Sender: TObject);
+begin
+  inherited;
+  ConsultarLembretes
 end;
 
 procedure TFormClientesDetalhes.btnConfirmarContatoClick(Sender: TObject);
@@ -475,6 +538,38 @@ begin
                                       MapperEntidade.GetValueEntidade('Codigo'));
 end;
 
+procedure TFormClientesDetalhes.Button3Click(Sender: TObject);
+begin
+  inherited;
+  MapperLembretes.SendNullToComponent;
+  cboTipoRepeticao.ItemIndex:= 0;
+
+end;
+
+procedure TFormClientesDetalhes.Button4Click(Sender: TObject);
+var
+  CodigoCliente: string;
+  ControllerTabelas: TControllerTabelas;
+begin
+  inherited;
+  if srcEntidade.DataSet.FieldByName('Codigo').AsString <> '' then
+  begin
+    MapperLembretes.ComponentToEntidade;
+
+    CodigoCliente      := MapperEntidade.GetValueEntidade('Codigo');
+    MapperLembretes.SendValueToFieldEntidade('CodigoCliente', CodigoCliente);
+    ControllerTabelas:= TControllerTabelas.Create;
+    if MapperLembretes.GetValueEntidade('Codigo') = '0' then
+       ControllerTabelas.Inserir(Lembretes)
+    else
+       ControllerTabelas.Atualizar(Lembretes);
+    ConsultarLembretes;
+  end
+  else
+    showmessage('Não existe cliente confirmado!');
+
+end;
+
 procedure TFormClientesDetalhes.DBGrid2CellClick(Column: TColumn);
 begin
   inherited;
@@ -503,6 +598,18 @@ procedure TFormClientesDetalhes.DBGrid3DblClick(Sender: TObject);
 begin
   inherited;
   MapperEntidade.EntidadeToComponent;
+end;
+
+procedure TFormClientesDetalhes.DBGrid4CellClick(Column: TColumn);
+begin
+  inherited;
+  if Lembretes <> nil then
+    FreeandNil(Lembretes);
+  Lembretes := TEntidadeFactory.Criar(tpLembretes);
+  MapperLembretes.Entidade := Lembretes;
+  MapperLembretes.Dataset := srcLembretes.DataSet;
+  MapperLembretes.SendDataSetToEntidade;
+  MapperLembretes.EntidadeToComponent;
 end;
 
 procedure TFormClientesDetalhes.btnInserirVeiculoClick(Sender: TObject);

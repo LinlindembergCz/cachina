@@ -44,8 +44,6 @@ type
     edtSenha: TEdit;
     edtNumSerie: TEdit;
     TabSheet6: TTabSheet;
-    Label44: TLabel;
-    Label45: TLabel;
     Label46: TLabel;
     Label47: TLabel;
     Label48: TLabel;
@@ -64,8 +62,6 @@ type
     rgFormaEmissao: TRadioGroup;
     cbxRetirarAcentos: TCheckBox;
     CheckBox1: TCheckBox;
-    edtToken: TEdit;
-    edtIdToken: TEdit;
     cbVersaoDF: TComboBox;
     cbModeloDF: TComboBox;
     cbFormaEmissao: TComboBox;
@@ -168,6 +164,10 @@ type
     edtPathCCe: TEdit;
     edtPathSalvar: TEdit;
     edtPathSquemas: TEdit;
+    Label45: TLabel;
+    edtIdToken: TEdit;
+    Label44: TLabel;
+    edtToken: TEdit;
     procedure FormActivate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure sbtnCaminhoCertClick(Sender: TObject);

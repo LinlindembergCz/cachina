@@ -3,6 +3,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
   ClientHeight = 562
   ClientWidth = 873
   DoubleBuffered = True
+  OnShow = FormShow
   ExplicitWidth = 889
   ExplicitHeight = 600
   PixelsPerInch = 96
@@ -84,7 +85,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
         end
         object Label42: TLabel
           Left = 10
-          Top = 189
+          Top = 181
           Width = 77
           Height = 16
           Caption = 'Observa'#231#227'o'
@@ -425,7 +426,7 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
         end
         object memoObservacao: TMemo
           Left = 3
-          Top = 211
+          Top = 204
           Width = 197
           Height = 268
           TabStop = False
@@ -734,10 +735,6 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
       object TabSheet2: TTabSheet
         Caption = 'Faturamento'
         OnShow = TabSheet2Show
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 870
-        ExplicitHeight = 0
         object Label18: TLabel
           Left = 319
           Top = 215
@@ -1005,10 +1002,6 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
         Caption = 'Vistoria'
         ImageIndex = 2
         OnShow = TabSheet3Show
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 870
-        ExplicitHeight = 0
         object Label20: TLabel
           Left = 1
           Top = 17
@@ -1664,8 +1657,8 @@ inherited FormOrcamentoDetalhes: TFormOrcamentoDetalhes
     Top = 497
   end
   object PopupMenu1: TPopupMenu
-    Left = 456
-    Top = 160
+    Left = 472
+    Top = 320
     object VisualizarFatura1: TMenuItem
       Caption = 'Visualizar Fatura'
       OnClick = VisualizarFatura1Click
