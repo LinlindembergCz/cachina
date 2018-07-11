@@ -1,11 +1,24 @@
 inherited FormCentroCustoDetalhes: TFormCentroCustoDetalhes
   Caption = 'Centro de custo'
+  ClientHeight = 523
+  ClientWidth = 733
+  ExplicitWidth = 749
+  ExplicitHeight = 561
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
+    Width = 733
+    Height = 474
+    ExplicitWidth = 116
     inherited tabPrincipal: TPageControl
+      Width = 731
+      Height = 472
+      ExplicitWidth = 114
       inherited TabSheet1: TTabSheet
+        ExplicitWidth = 106
         inherited grdEntidade: TDBGrid
+          Width = 723
+          Height = 357
           Columns = <
             item
               Expanded = False
@@ -18,6 +31,15 @@ inherited FormCentroCustoDetalhes: TFormCentroCustoDetalhes
               Width = 530
               Visible = True
             end>
+        end
+        inherited pnlSuperior: TPanel
+          Width = 723
+          ExplicitWidth = 106
+        end
+        inherited pnlInferior: TPanel
+          Top = 422
+          Width = 723
+          ExplicitWidth = 106
         end
       end
       inherited TabSheet2: TTabSheet
@@ -41,5 +63,9 @@ inherited FormCentroCustoDetalhes: TFormCentroCustoDetalhes
         end
       end
     end
+  end
+  inherited Panel2: TPanel
+    Width = 733
+    ExplicitWidth = 116
   end
 end

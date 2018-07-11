@@ -804,7 +804,7 @@ begin
  ACBrNFSe1.NotasFiscais.Clear;
  GerarNFSe(vNumRPS);
 
- ACBrNFSe1.Gerar(StrToInt(vNumRPS));
+ ACBrNFSe1.Gerar( StrToInt( vNumRPS ) );
 
  sNomeArq := ACBrNFSe1.NotasFiscais.Items[0].NomeArq;
 

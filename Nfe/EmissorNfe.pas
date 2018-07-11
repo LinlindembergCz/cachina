@@ -10,7 +10,8 @@ uses
   Buttons, ComCtrls, OleCtrls, SHDocVw,ACBrNFe, pcnConversao, ACBrNFeDANFEClass,
   ACBrUtil, pcnNFeW, pcnNFeRTXT, pcnAuxiliar, ACBrDFeUtil,  DB, XMLIntf, XMLDoc,
   Vcl.Grids, Vcl.DBGrids, ACBrNFeDANFEFRDM, ACBrNFeDANFEFR, ACBrBase, ACBrDFe,
-  ACBrNFeNotasFiscais,strUtils, frxClass, Vcl.Menus, blcksock, ACBrDFeSSL;
+  ACBrNFeNotasFiscais,ACBrNFSeNotasFiscais, strUtils, frxClass, Vcl.Menus, blcksock, ACBrDFeSSL,
+  ACBrNFSe, ACBrNFSeDANFSeClass,  pnfsConversao, ACBrNFSeDANFSeFR;
 
 type
   TFormEmissorNfe = class(TForm)
@@ -76,6 +77,9 @@ type
     Button2: TButton;
     Button1: TButton;
     OpenDialog1: TOpenDialog;
+    Button3: TButton;
+    ACBrNFSe1: TACBrNFSe;
+    ACBrNFSeDANFSeFR1: TACBrNFSeDANFSeFR;
     procedure FormCreate(Sender: TObject);
     procedure btnStatusServClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
@@ -102,6 +106,7 @@ type
     procedure Timer1Timer(Sender: TObject);
     procedure Recalculartotal1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button3Click(Sender: TObject);
   private
     liFormaEmissao      : integer;
     lbSalvar            : boolean;
@@ -176,19 +181,22 @@ type
     procedure LerConfiguracao ;
     procedure GerarNFe(NumNFe : String);
     procedure GerarNFC(NumNFe: String);
+    procedure GerarNFSe(NumNFe: String );
+
     procedure LoadXML(MyMemo: TMemo; MyWebBrowser: TWebBrowser);
     procedure LoadConsulta201(XML: string);
     procedure SetDataSetProdutos(const Value: TDataSet);
     procedure SetDataSetVenda(const Value: TDataSet);
     procedure SetDataSetCobranca(const Value: TDataSet);
-    procedure PreencherIde(NotaF: NotaFiscal;NumNFe : String;Modelo:integer);
-    procedure PreencherNFeref(NotaF: NotaFiscal);
-    procedure PreencherEmitente(NotaF: NotaFiscal);
-    procedure PreencherDestinatario(NotaF: NotaFiscal);
-    procedure PreencherProdutos(NotaF: NotaFiscal);
-    procedure PreencherTransportadora(NotaF: NotaFiscal);
-    procedure PreencherPagamento(NotaF: NotaFiscal);
-    procedure PreencherInformacoesAdic(NotaF: NotaFiscal);
+    procedure PreencherIde(NotaF: ACBrNFeNotasFiscais.NotaFiscal;NumNFe : String;Modelo:integer);
+    procedure PreencherNFeref(NotaF: ACBrNFeNotasFiscais.NotaFiscal);
+    procedure PreencherEmitente(NotaF: ACBrNFeNotasFiscais.NotaFiscal);
+    procedure PreencherDestinatario(NotaF: ACBrNFeNotasFiscais.NotaFiscal);
+    procedure PreencherProdutos(NotaF: ACBrNFeNotasFiscais.NotaFiscal);
+    procedure PreencherServicos(NotaF: ACBrNFSeNotasFiscais.NotaFiscal);
+    procedure PreencherTransportadora(NotaF: ACBrNFeNotasFiscais.NotaFiscal);
+    procedure PreencherPagamento(NotaF: ACBrNFeNotasFiscais.NotaFiscal);
+    procedure PreencherInformacoesAdic(NotaF: ACBrNFeNotasFiscais.NotaFiscal);
 
   public
     TipoNfe: string;
@@ -221,11 +229,13 @@ Var IniFile  : String ;
     Ok : Boolean;
 begin
   ACBrNFe1.SSL.DescarregarCertificado;
+  ACBrNFSe1.SSL.DescarregarCertificado;
 
   IniFile := ChangeFileExt( Application.ExeName, '.ini') ;
   Ini := TIniFile.Create( IniFile );
   try
-      ACBrNFe1.Configuracoes.Certificados.NumeroSerie :=  Ini.ReadString( 'Certificado','NumSerie','') ;
+      ACBrNFe1.Configuracoes.Certificados.NumeroSerie  :=  Ini.ReadString( 'Certificado','NumSerie','') ;
+      ACBrNFSe1.Configuracoes.Certificados.NumeroSerie :=  Ini.ReadString( 'Certificado','NumSerie','') ;
 
       liFormaEmissao      := Ini.ReadInteger( 'Geral','FormaEmissao'  ,0);
       lbSalvar            := Ini.ReadBool(   'Geral','Salvar'         ,True);
@@ -249,6 +259,7 @@ begin
       cboSSLXMLLib        := Ini.ReadInteger( 'Geral','SSLXMLLib',0);
 
       ACBrNFe1.Configuracoes.Arquivos.PathSalvar   := edtPathSalvar;
+      ACBrNFSe1.Configuracoes.Arquivos.PathSalvar   := edtPathSalvar;
       with ACBrNFe1.Configuracoes.Geral do
       begin
          if liFormaEmissao >-1 then
@@ -264,7 +275,24 @@ begin
          SSLXMLSignLib := TSSLXMLSignLib(cboSSLXMLLib);
       end;
 
+      with ACBrNFSe1.Configuracoes.Geral do
+      begin
+         if liFormaEmissao >-1 then
+            FormaEmissao          := TpcnTipoEmissao(liFormaEmissao);
+         Salvar        := lbSalvar;
+         SSLCryptLib   := TSSLCryptLib(cboSSLCryptLib);
+         SSLHTTPLib    := TSSLHTTPLib(cboSSLHTTPLib);
+         SSLLib        := TSSLLib(cboSSLLib);
+         SSLXMLSignLib := TSSLXMLSignLib(cboSSLXMLLib);
+      end;
+
       with ACBrNFe1.Configuracoes.arquivos do
+      begin
+         PathSalvar   := edtPathSalvar;
+         PathSchemas  := edtPathSquemas;
+      end;
+
+      with ACBrNFSe1.Configuracoes.arquivos do
       begin
          PathSalvar   := edtPathSalvar;
          PathSchemas  := edtPathSquemas;
@@ -272,9 +300,9 @@ begin
 
       cbUF             := Ini.ReadString( 'WebService','UF','RN') ;
       rgTipoAmb        := Ini.ReadInteger( 'WebService','Ambiente'  ,0) ;
-      ckxVisualizar    := Ini.ReadBool(    'WebService','Visualizar',False) ;
-      cbxSalvarSOAP    := Ini.ReadBool(  'WebService','SalvarSOAP',False) ;
-      cbxAjustarAut    := Ini.ReadBool(  'WebService','AjustarAut',False) ;
+      ckxVisualizar    := Ini.ReadBool( 'WebService','Visualizar',False) ;
+      cbxSalvarSOAP    := Ini.ReadBool( 'WebService','SalvarSOAP',False) ;
+      cbxAjustarAut    := Ini.ReadBool( 'WebService','AjustarAut',False) ;
       edtAguardar      := Ini.ReadString( 'WebService','Aguardar'  ,'0') ;
       edtTentativas    := Ini.ReadString( 'WebService','Tentativas','3') ;
       edtIntervalo     := Ini.ReadString( 'WebService','Intervalo' ,'0') ;
@@ -304,11 +332,17 @@ begin
           if edtIntervalo<>'' then
              IntervaloTentativas := ifthen(StrToInt(edtIntervalo)<1000,StrToInt(edtIntervalo)*1000,StrToInt(edtIntervalo))
           else
-             edtIntervalo := IntToStr(ACBrNFe1.Configuracoes.WebServices.IntervaloTentativas);
-          }
-
+             edtIntervalo := IntToStr(ACBrNFe1.Configuracoes.WebServices.IntervaloTentativas); }
           SSLType := TSSLType( cboSSLType  );
+      end;
 
+      with ACBrNFSe1.Configuracoes.WebServices do
+      begin
+          UF         := cbUF;
+          Ambiente   := StrToTpAmb(Ok,IntToStr(rgTipoAmb+1));
+          Visualizar := ckxVisualizar;
+          Salvar     := cbxSalvarSOAP;
+          SSLType := TSSLType( cboSSLType  );
       end;
 
       rgTipoDanfe    := Ini.ReadInteger( 'Geral','DANFE'       ,0) ;
@@ -617,6 +651,32 @@ begin
 
 end;
 
+procedure TFormEmissorNfe.Button3Click(Sender: TObject);
+var
+ vAux, CodigoLote , sNomeArq , vNumRPS : String;
+begin
+    vNumRPS := srcEntidade.DataSet.fieldbyname('Codigo').asstring;
+
+    CodigoLote := TControllerSequencias.GetSequenciaNFS;
+
+    GerarNFSe( CodigoLote );
+
+    ACBrNFSe1.Gerar(StrToInt(vNumRPS));
+
+    TContollerNFE.InserirLoteNFE( CodigoLote ,
+                               Stringreplace( ACBrNFSe1.NotasFiscais.Items[0].NFSe.InfID.id,'NFSe','',[]),
+                               ACBrNFSe1.NotasFiscais.Items[0].NFSe.Protocolo,
+                               FDataSetEntidade.fieldbyname('Codigo').asstring,
+                               FDataSetEntidade.fieldbyname('CodigoLoteRecebimento').asstring,
+                               'NFS' );
+
+    sNomeArq := ACBrNFSe1.NotasFiscais.Items[0].NomeArq;
+
+    ACBrNFSe1.NotasFiscais.Clear;
+    ACBrNFSe1.NotasFiscais.LoadFromFile(sNomeArq);
+    ACBrNFSe1.NotasFiscais.Imprimir;
+end;
+
 procedure TFormEmissorNfe.grdCobrancaCellClick(Column: TColumn);
 begin
   if Column.FieldName = 'Selecionado' then
@@ -795,7 +855,7 @@ begin
   ShellExecute(0, Nil, 'http://acbr.sourceforge.net/drupal/?q=node/14', Nil, Nil, SW_NORMAL);
 end;
 
-procedure TFormEmissorNfe.PreencherIde(NotaF: NotaFiscal; NumNFe : String; Modelo:integer);
+procedure TFormEmissorNfe.PreencherIde(NotaF: ACBrNFeNotasFiscais.NotaFiscal;NumNFe : String;Modelo:integer);
 begin
   with NotaF.NFe do
   begin
@@ -874,7 +934,7 @@ begin
   end;
 end;
 
-procedure TFormEmissorNfe.PreencherNFeref(NotaF: NotaFiscal);
+procedure TFormEmissorNfe.PreencherNFeref(NotaF: ACBrNFeNotasFiscais.NotaFiscal);
 begin
   with NotaF.NFe do
   begin
@@ -892,7 +952,7 @@ begin
   end;
 end;
 
-procedure TFormEmissorNfe.PreencherEmitente(NotaF: NotaFiscal);
+procedure TFormEmissorNfe.PreencherEmitente(NotaF: ACBrNFeNotasFiscais.NotaFiscal);
 begin
   with NotaF.NFe do
   begin
@@ -936,7 +996,7 @@ begin
   end;
 end;
 
-procedure TFormEmissorNfe.PreencherDestinatario(NotaF: NotaFiscal);
+procedure TFormEmissorNfe.PreencherDestinatario(NotaF: ACBrNFeNotasFiscais.NotaFiscal);
 var
   DataSetParticipante:TDataSet;
   Controller: TControllerTabelas;
@@ -1019,7 +1079,7 @@ begin
   end;
 end;
 
-procedure TFormEmissorNfe.PreencherProdutos(NotaF: NotaFiscal);
+procedure TFormEmissorNfe.PreencherProdutos(NotaF: ACBrNFeNotasFiscais.NotaFiscal);
 var
   ValorTotal : Double;
   ValorTotalBaseICMS : Double;
@@ -1223,7 +1283,217 @@ begin
   end;
 end;
 
-procedure TFormEmissorNfe.PreencherTransportadora(NotaF: NotaFiscal);
+procedure TFormEmissorNfe.PreencherServicos(NotaF: ACBrNFSeNotasFiscais.NotaFiscal);
+
+  function RoundTo5(Valor: Double; Casas: Integer): Double;
+  var
+   xValor, xDecimais: String;
+   p, nCasas: Integer;
+   nValor: Double;
+  begin
+   nValor := Valor;
+   xValor := Trim(FloatToStr(Valor));
+   p      := pos(',', xValor);
+   if Casas < 0
+    then nCasas := - Casas
+    else nCasas := Casas;
+   if p > 0
+    then begin
+     xDecimais := Copy(xValor, p + 1, length(xValor));
+     if length(xDecimais) > nCasas
+      then begin
+       if xDecimais[nCasas + 1] >= '5'
+        then SetRoundMode(rmUP)
+        else SetRoundMode(rmNearest);
+      end;
+     nValor := RoundTo(Valor, Casas);
+    end;
+   Result := nValor;
+  end;
+
+
+var
+ ValorISS: Double;
+  Cliente: TPessoa;
+  ControllerCliente: TControllerClientes;
+  MapperCliente: TMapper;
+  Total: Double;
+
+  DataSetParticipante:TDataSet;
+  Controller: TControllerTabelas;
+
+begin
+ ACBrNFSe1.NotasFiscais.Clear;
+
+ with ACBrNFSe1 do
+ begin
+   NotasFiscais.NumeroLote:='1';
+   NotasFiscais.Transacao := True;
+   with NotasFiscais.Add.NFSe do
+   begin
+   //IdentificacaoRps.Numero := FormatFloat('#########0', StrToInt(NumNFSe));
+   //Para o provedor ISS.NET em ambiente de Homologação mudar a série para '8'
+     IdentificacaoRps.Serie := 'UNICA';
+   //TnfseTipoRPS = ( trRPS, trNFConjugada, trCupom );
+     IdentificacaoRps.Tipo := trRPS;
+     DataEmissao := Date;
+   //TnfseNaturezaOperacao = ( noTributacaoNoMunicipio, noTributacaoForaMunicipio, noIsencao, noImune, noSuspensaDecisaoJudicial, noSuspensaProcedimentoAdministrativo );
+     NaturezaOperacao := no0;
+     //NaturezaOperacao := noTributacaoNoMunicipio51;
+   //TnfseRegimeEspecialTributacao = ( retNenhum, retMicroempresaMunicipal, retEstimativa, retSociedadeProfissionais, retCooperativa, retMicroempresarioIndividual, retMicroempresarioEmpresaPP );
+   //RegimeEspecialTributacao := retNenhum;
+     RegimeEspecialTributacao := retMicroempresaMunicipal;
+   //TnfseSimNao = ( snSim, snNao );
+     OptanteSimplesNacional := snSim;
+   //TnfseSimNao = ( snSim, snNao );
+     IncentivadorCultural := snNao;
+   //TnfseSimNao = ( snSim, snNao );
+   //snSim = Ambiente de Produção
+   //snNao = Ambiente de Homologação
+     Producao := snNao;
+   //TnfseStatusRPS = ( srNormal, srCancelado );
+     Status := srNormal;
+   //Somente Os provedores Betha, FISSLex e SimplISS permitem incluir no RPS
+   //a TAG: OutrasInformacoes os demais essa TAG é gerada e preenchida pelo
+   //WebService do provedor.
+     OutrasInformacoes := 'Pagamento a Vista';
+     (*
+     Usando quando o RPS for substituir outro
+     RpsSubstituido.Numero := FormatFloat('#########0', i);
+     RpsSubstituido.Serie  := 'UNICA';
+     // TnfseTipoRPS = ( trRPS, trNFConjugada, trCupom );
+     RpsSubstituido.Tipo   := trRPS;
+     *)
+     Servico.Valores.ValorServicos := srcEntidade.dataset.fieldbyname('TotalEntidade').asFloat;
+     Servico.Valores.ValorDeducoes := 0.00;
+     Servico.Valores.ValorPis      := 0.00;
+     Servico.Valores.ValorCofins   := 0.00;
+     Servico.Valores.ValorInss     := 0.00;
+     Servico.Valores.ValorIr       := 0.00;
+     Servico.Valores.ValorCsll     := 0.00;
+
+     Servico.MunicipioIncidencia   := 2408102;
+   //TnfseSituacaoTributaria = ( stRetencao, stNormal, stSubstituicao );
+   //stRetencao = snSim
+   //stNormal   = snNao
+   //Neste exemplo não temos ISS Retido ( stNormal = Não )
+   //Logo o valor do ISS Retido é igual a zero.
+     Servico.Valores.IssRetido              := stNormal;
+     Servico.Valores.ValorIssRetido         := 0.00;
+     Servico.Valores.OutrasRetencoes        := 0.00;
+     Servico.Valores.DescontoIncondicionado := 0.00;
+     Servico.Valores.DescontoCondicionado   := 0.00;
+
+     Servico.Valores.BaseCalculo := Servico.Valores.ValorServicos -
+                                    Servico.Valores.ValorDeducoes -
+                                    Servico.Valores.DescontoIncondicionado;
+   //No caso do provedor Ginfes devemos informar a aliquota já dividida por 100
+   //para outros provedores devemos informar por exemplo 3, mas ao fazer o calculo
+   //do valor do ISS devemos dividir por 100
+     Servico.Valores.Aliquota    := 0.00;
+   //Valor do ISS calculado multiplicando-se a base de calculo pela aliquota
+     ValorISS := Servico.Valores.BaseCalculo * Servico.Valores.Aliquota;
+     Servico.Valores.ValorIss         := RoundTo5(ValorISS, -2);
+     Servico.Valores.ValorLiquidoNfse := Servico.Valores.ValorServicos -
+                                         Servico.Valores.ValorPis -
+                                         Servico.Valores.ValorCofins -
+                                         Servico.Valores.ValorInss -
+                                         Servico.Valores.ValorIr -
+                                         Servico.Valores.ValorCsll -
+                                         Servico.Valores.OutrasRetencoes -
+                                         Servico.Valores.ValorIssRetido -
+                                         Servico.Valores.DescontoIncondicionado -
+                                         Servico.Valores.DescontoCondicionado;
+
+     Servico.ItemListaServico         := FDataSetProdutos.fieldByname('Ordem').asstring;
+
+   //Para o provedor ISS.NET em ambiente de Homologação
+   //o Codigo CNAE tem que ser '6511102'
+     Servico.CodigoCnae                := '4520003'; // Informação Opcional
+     //Servico.CodigoTributacaoMunicipio := '118879';
+     Servico.Discriminacao             := srcItems.DataSet.fieldByname('CodigoNFSe').asstring+' - '+
+                                          srcItems.DataSet.fieldByname('DescricaoServicoNFSe').asstring;
+   //Para o provedor ISS.NET em ambiente de Homologação
+   //o Codigo do Municipio tem que ser '999'
+     Servico.CodigoMunicipio := edtEmitCodCidade;
+   //Informar A Exigibilidade ISS para fintelISS [1/2/3/4/5/6/7]
+     Servico.ExigibilidadeISS := exiExigivel;
+   //Informar para Saatri
+     Servico.CodigoPais := 1058; // Brasil
+     Servico.MunicipioIncidencia := StrToIntDef(edtEmitCodCidade, 0);
+     // Somente o provedor SimplISS permite infomar mais de 1 serviço
+
+     {
+     Servico.ItemServico.Add;
+
+     with Servico.ItemServico do
+     begin
+       Total                  := FDataSetProdutos.fieldByname('Valor').asFloat *
+                                 FDataSetProdutos.fieldByname('Quantidade').asInteger;
+       Items[0].BaseCalculo   := Total;
+       Items[0].Descricao     := FDataSetProdutos.fieldByname('Descricao').AsString;
+       Items[0].Quantidade    := FDataSetProdutos.fieldByname('Quantidade').asInteger;
+       Items[0].ValorUnitario := FDataSetProdutos.fieldByname('Valor').asFloat;
+       Items[0].ValorTotal    := Total;
+       Items[0].Tributavel    := snNao;
+     end;
+     }
+
+     Prestador.Cnpj               := edtEmitCNPJ;
+     //Prestador.InscricaoMunicipal := edtEmitIM;
+     // Para o provedor ISSDigital deve-se informar também:
+     //Prestador.Senha        := 'senha';
+     //Prestador.FraseSecreta := 'frase secreta';
+     Prestador.cUF                                := 24;
+     PrestadorServico.RazaoSocial                 := edtEmitRazao;
+     PrestadorServico.NomeFantasia                := edtEmitFantasia;
+     PrestadorServico.IdentificacaoPrestador.Cnpj := edtEmitCNPJ;
+     PrestadorServico.Contato.Email               := '';
+     PrestadorServico.Contato.Telefone            := edtEmitFone;
+     PrestadorServico.Endereco.Endereco           := edtEmitLogradouro;
+     PrestadorServico.Endereco.UF                 := edtEmitUF;
+     PrestadorServico.Endereco.Bairro             := edtEmitBairro;
+     PrestadorServico.Endereco.CEP                := edtEmitCEP;
+     PrestadorServico.Endereco.Complemento        := edtEmitComp;
+     PrestadorServico.Endereco.CodigoMunicipio    := edtEmitCodCidade;
+
+     DataSetParticipante:= Controller.GetSelect('Pessoa T1',
+        ' Codigo = '+ DataSetEntidade.fieldbyName('CodigoCliente').asstring);
+
+     MapperCliente.SendDataSetToEntidade;
+
+     Tomador.IdentificacaoTomador.CpfCnpj := DataSetParticipante.fieldbyname('CpfCnpj').AsString;
+   //Tomador.IdentificacaoTomador.InscricaoMunicipal := Cliente;
+     Tomador.RazaoSocial                  := DataSetParticipante.fieldbyname('Nome').AsString;
+     Tomador.Endereco.Endereco            := DataSetParticipante.fieldbyname('Endereco').AsString;
+   //Tomador.Endereco.Numero              := '100';
+     Tomador.Endereco.Complemento         := DataSetParticipante.fieldbyname('Complemento').AsString;
+     Tomador.Endereco.Bairro              := DataSetParticipante.fieldbyname('Bairro').AsString;
+     Tomador.Endereco.CodigoMunicipio     := DataSetParticipante.fieldbyname('CodigoIBGE').AsString;
+     Tomador.Endereco.UF                  := DataSetParticipante.fieldbyname('UF').AsString;
+     Tomador.Endereco.CEP                 := UtilsString.SoNumeros(Cliente.CEP);
+   //Provedor Equiplano é obrigatório o pais e IE
+     Tomador.Endereco.xPais               := 'BRASIL';
+     Tomador.IdentificacaoTomador.InscricaoEstadual := DataSetParticipante.fieldbyname('InscricaoEstadual').AsString;
+     Tomador.Contato.Telefone             := DataSetParticipante.fieldbyname('Telefone').AsString;
+     Tomador.Contato.Email                := DataSetParticipante.fieldbyname('Email').AsString;
+
+     (* Usando quando houver um intermediario na prestação do serviço
+     IntermediarioServico.RazaoSocial        := 'razao';
+     IntermediarioServico.CpfCnpj            := '00000000000';
+     IntermediarioServico.InscricaoMunicipal := '12547478';
+     *)
+     (* Usando quando o serviço for uma obra
+     ConstrucaoCivil.CodigoObra := '88888';
+     ConstrucaoCivil.Art        := '433';
+     *)
+    end;
+
+  end;
+
+end;
+
+procedure TFormEmissorNfe.PreencherTransportadora(NotaF: ACBrNFeNotasFiscais.NotaFiscal);
 begin
   with NotaF.NFe do
   begin
@@ -1267,7 +1537,7 @@ begin
   end;
 end;
 
-procedure TFormEmissorNfe.PreencherPagamento(NotaF: NotaFiscal);
+procedure TFormEmissorNfe.PreencherPagamento(NotaF: ACBrNFeNotasFiscais.NotaFiscal);
 var
   lbTefOK:boolean;
   lsNSU: string;
@@ -1382,7 +1652,7 @@ begin
   end;
 end;
 
-procedure TFormEmissorNfe.PreencherInformacoesAdic(NotaF: NotaFiscal);
+procedure TFormEmissorNfe.PreencherInformacoesAdic(NotaF: ACBrNFeNotasFiscais.NotaFiscal);
 begin
   with NotaF.NFe do
   begin
@@ -1403,7 +1673,7 @@ end;
 
 procedure TFormEmissorNfe.GerarNFe(NumNFe : String);
 Var
-  NotaF: NotaFiscal;
+  NotaF: ACBrNFENotasFiscais.NotaFiscal;
 begin
    if (not rdbContribuinte.Checked) and (not rdbNaoContribuinte.Checked) and (not rdbIsento.Checked) then
    begin
@@ -1436,6 +1706,20 @@ begin
    PreencherInformacoesAdic( NotaF);
 end;
 
+procedure TFormEmissorNfe.GerarNFSe(NumNFe: String);
+Var
+  NotaF: ACBrNFSeNotasFiscais.NotaFiscal;
+begin
+   NotaF := ACBrNFSe1.NotasFiscais.Add;
+   //PreencherIde( NotaF, NumNFe , 55);
+   //PreencherEmitente( NotaF);
+   //PreencherDestinatario( NotaF);
+   PreencherServicos( NotaF);
+   //PreencherPagamento( NotaF);
+   //PreencherInformacoesAdic( NotaF);
+
+end;
+
 procedure TFormEmissorNfe.GravarConfiguracao;
 begin
 
@@ -1443,7 +1727,7 @@ end;
 
 procedure TFormEmissorNfe.GerarNFC(NumNFe : String);
 Var
-  NotaF: NotaFiscal;
+  NotaF: ACBrNFeNotasFiscais.NotaFiscal;
 begin
    if (not rdbContribuinte.Checked) and (not rdbNaoContribuinte.Checked) and (not rdbIsento.Checked) then
    begin

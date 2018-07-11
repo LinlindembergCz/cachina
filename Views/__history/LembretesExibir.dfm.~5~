@@ -1,0 +1,57 @@
+object FormLembretesExibir: TFormLembretesExibir
+  Left = 0
+  Top = 0
+  BorderStyle = bsDialog
+  Caption = 'Lembretes'
+  ClientHeight = 382
+  ClientWidth = 366
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBCtrlGrid1: TDBCtrlGrid
+    Left = 0
+    Top = 0
+    Width = 366
+    Height = 382
+    Align = alClient
+    DataSource = srcLembretes
+    PanelHeight = 127
+    PanelWidth = 349
+    TabOrder = 0
+    ExplicitHeight = 381
+    object DBMemo1: TDBMemo
+      Left = 3
+      Top = 4
+      Width = 342
+      Height = 102
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Ctl3D = False
+      DataField = 'Descricao'
+      DataSource = srcLembretes
+      ParentCtl3D = False
+      TabOrder = 0
+    end
+    object Encerrar: TDBCheckBox
+      Left = 3
+      Top = 108
+      Width = 97
+      Height = 17
+      Caption = 'Encerrar'
+      DataField = 'Encerrado'
+      DataSource = srcLembretes
+      TabOrder = 1
+    end
+  end
+  object srcLembretes: TDataSource
+    Left = 144
+    Top = 144
+  end
+end

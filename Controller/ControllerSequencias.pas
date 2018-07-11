@@ -8,14 +8,15 @@ ControllerTabelas, sysUtils;
 type
   TControllerSequencias = class( TControllerTabelas )
   private
-
   public
     class function GetSequenciaRemessa: string;static;
     class function GetSequenciaNFC: string; static;
     class function GetSequenciaNFE: string; static;
+    class function GetSequenciaNFS: string; static;
     class procedure IncrementarSequenciaRemessa;static;
     class procedure IncrementarSequenciaNFE; static;
     class procedure IncrementarSequenciaNFC; static;
+    class procedure IncrementarSequenciaNFS; static;
   end;
 
 implementation
@@ -32,6 +33,11 @@ end;
 class function TControllerSequencias.GetSequenciaNFE: string;
 begin
    result := TGenericDAO.GetValue('SequenciaNF','Especie=''NFE'' ','isNull( Sequencia , 0 ) + 1');//TGenericDAO.GetValue('LoteNFE','Especie=''NFE'' ','isNull( Max(CodigoLote) , 0 ) + 1');
+end;
+
+class function TControllerSequencias.GetSequenciaNFS: string;
+begin
+   result := TGenericDAO.GetValue('SequenciaNF','Especie=''NFS'' ','isNull( Sequencia , 0 ) + 1');//TGenericDAO.GetValue('LoteNFE','Especie=''NFE'' ','isNull( Max(CodigoLote) , 0 ) + 1');
 end;
 
 class function TControllerSequencias.GetSequenciaNFC: string;
@@ -59,6 +65,14 @@ begin
                          'Sequencia= Sequencia + 1',
                          ' Especie= ''NFE'' ' );
 end;
+
+class procedure TControllerSequencias.IncrementarSequenciaNFS;
+begin
+    TGenericDAO.UpdateSQL( 'SequenciaNF',
+                         'Sequencia= Sequencia + 1',
+                         ' Especie= ''NFS'' ' );
+end;
+
 
 
 

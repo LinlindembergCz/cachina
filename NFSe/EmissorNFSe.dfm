@@ -22,8 +22,6 @@ object FormEmissorNFSe: TFormEmissorNFSe
     Height = 530
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = 297
-    ExplicitWidth = 566
     object Panel3: TPanel
       Left = 1
       Top = 1
@@ -31,7 +29,6 @@ object FormEmissorNFSe: TFormEmissorNFSe
       Height = 168
       Align = alTop
       TabOrder = 0
-      ExplicitWidth = 564
       object btnImprimir: TButton
         Left = 376
         Top = 72
@@ -172,10 +169,8 @@ object FormEmissorNFSe: TFormEmissorNFSe
       ActivePage = TabSheet5
       Align = alClient
       TabOrder = 1
-      ExplicitWidth = 564
       object TabSheet5: TTabSheet
         Caption = 'Respostas'
-        ExplicitWidth = 556
         object MemoResp: TMemo
           Left = 0
           Top = 0
@@ -183,13 +178,11 @@ object FormEmissorNFSe: TFormEmissorNFSe
           Height = 332
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 556
         end
       end
       object TabSheet6: TTabSheet
         Caption = 'XML Resposta'
         ImageIndex = 1
-        ExplicitWidth = 556
         object WBResposta: TWebBrowser
           Left = 0
           Top = 0
@@ -210,7 +203,6 @@ object FormEmissorNFSe: TFormEmissorNFSe
       object TabSheet8: TTabSheet
         Caption = 'Log'
         ImageIndex = 2
-        ExplicitWidth = 556
         object memoLog: TMemo
           Left = 0
           Top = 0
@@ -219,13 +211,11 @@ object FormEmissorNFSe: TFormEmissorNFSe
           Align = alClient
           ScrollBars = ssVertical
           TabOrder = 0
-          ExplicitWidth = 556
         end
       end
       object TabSheet9: TTabSheet
         Caption = 'NFSe'
         ImageIndex = 3
-        ExplicitWidth = 556
         object trvwNFSe: TTreeView
           Left = 0
           Top = 0
@@ -234,13 +224,11 @@ object FormEmissorNFSe: TFormEmissorNFSe
           Align = alClient
           Indent = 19
           TabOrder = 0
-          ExplicitWidth = 556
         end
       end
       object TabSheet10: TTabSheet
         Caption = 'Retorno Completo WS'
         ImageIndex = 4
-        ExplicitWidth = 556
         object memoRespWS: TMemo
           Left = 0
           Top = 0
@@ -248,13 +236,11 @@ object FormEmissorNFSe: TFormEmissorNFSe
           Height = 332
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 556
         end
       end
       object Dados: TTabSheet
         Caption = 'Dados'
         ImageIndex = 5
-        ExplicitWidth = 556
         object MemoDados: TMemo
           Left = 0
           Top = 0
@@ -262,7 +248,6 @@ object FormEmissorNFSe: TFormEmissorNFSe
           Height = 332
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 556
         end
       end
     end

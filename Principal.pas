@@ -84,7 +84,6 @@ type
     SequenciaNF1: TMenuItem;
     Parametros1: TMenuItem;
     ActParametrosSistema: TAction;
-    Image2: TImage;
     ActTabelaPreco: TAction;
     procedure ActFuncionariosExecute(Sender: TObject);
     procedure ActProdutosExecute(Sender: TObject);

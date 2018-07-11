@@ -1,0 +1,71 @@
+unit ControllerSequencias;
+
+interface
+
+uses
+ControllerTabelas, sysUtils;
+
+type
+  TControllerSequencias = class( TControllerTabelas )
+  private
+
+  public
+    class function GetSequenciaRemessa: string;static;
+    class function GetSequenciaNFC: string; static;
+    class function GetSequenciaNFE: string; static;
+    class function GetSequenciaNFS: string; static;
+    class procedure IncrementarSequenciaRemessa;static;
+    class procedure IncrementarSequenciaNFE; static;
+    class procedure IncrementarSequenciaNFC; static;
+  end;
+
+implementation
+
+{ TControllerSequencias }
+
+uses GenericDAO;
+
+ class function TControllerSequencias.GetSequenciaRemessa: string;
+begin
+  result:=  TGenericDAO.GetValue('SequenciaNF','Especie=''REM'' ','isNull( Sequencia , 0 ) + 1');
+end;
+
+class function TControllerSequencias.GetSequenciaNFE: string;
+begin
+   result := TGenericDAO.GetValue('SequenciaNF','Especie=''NFE'' ','isNull( Sequencia , 0 ) + 1');//TGenericDAO.GetValue('LoteNFE','Especie=''NFE'' ','isNull( Max(CodigoLote) , 0 ) + 1');
+end;
+
+class function TControllerSequencias.GetSequenciaNFS: string;
+begin
+   result := TGenericDAO.GetValue('SequenciaNF','Especie=''NFS'' ','isNull( Sequencia , 0 ) + 1');//TGenericDAO.GetValue('LoteNFE','Especie=''NFE'' ','isNull( Max(CodigoLote) , 0 ) + 1');
+end;
+
+class function TControllerSequencias.GetSequenciaNFC: string;
+begin
+   result := TGenericDAO.GetValue('SequenciaNF','Especie=''NFC'' ','isNull( Sequencia , 0 ) + 1');//TGenericDAO.GetValue('LoteNFE','Especie=''NFC'' ','isNull( Max(CodigoLote) , 0 ) + 1');
+end;
+
+class procedure TControllerSequencias.IncrementarSequenciaRemessa;
+begin
+    TGenericDAO.UpdateSQL( 'SequenciaNF',
+                            'Sequencia= Sequencia + 1',
+                            ' Especie= '+ quotedstr('REM') );
+end;
+
+class procedure TControllerSequencias.IncrementarSequenciaNFC;
+begin
+     TGenericDAO.UpdateSQL( 'SequenciaNF',
+                         'Sequencia= Sequencia + 1',
+                         ' Especie= ''NFC'' ' );
+end;
+
+class procedure TControllerSequencias.IncrementarSequenciaNFE;
+begin
+    TGenericDAO.UpdateSQL( 'SequenciaNF',
+                         'Sequencia= Sequencia + 1',
+                         ' Especie= ''NFE'' ' );
+end;
+
+
+
+end.
