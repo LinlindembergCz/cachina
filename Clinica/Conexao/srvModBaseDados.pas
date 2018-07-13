@@ -11,6 +11,46 @@ type
   TDSServerModuleBaseDados = class(TDataModule)
     LSCONEXAO: TSQLConnection;
     SQLDSServidor: TSQLDataSet;
+    SQLGUIATISS: TSQLDataSet;
+    SQLGUIATISScodigoPrestadorNaOperadora: TStringField;
+    SQLGUIATISSRegistroANS: TStringField;
+    SQLGUIATISSNumeroLote: TStringField;
+    SQLGUIATISSnumeroGuiaPrestador: TStringField;
+    SQLGUIATISSdataAutorizacao: TDateField;
+    SQLGUIATISSsenha: TStringField;
+    SQLGUIATISSdataValidadeSenha: TDateField;
+    SQLGUIATISSnumeroCarteira: TStringField;
+    SQLGUIATISSatendimentoRN: TStringField;
+    SQLGUIATISSnomeBeneficiario: TStringField;
+    SQLGUIATISScodigoPrestadorNaOperadora_SOLI: TStringField;
+    SQLGUIATISSnomeContratado: TStringField;
+    SQLGUIATISSnomeProfissional: TStringField;
+    SQLGUIATISSconselhoProfissional: TStringField;
+    SQLGUIATISSnumeroConselhoProfissional: TStringField;
+    SQLGUIATISSUF_SOLICITANTE: TSmallintField;
+    SQLGUIATISSCBOS_SOLICITANTE: TStringField;
+    SQLGUIATISSdataSolicitacao: TDateField;
+    SQLGUIATISScaraterAtendimento: TStringField;
+    SQLGUIATISScodigoPrestadorNaOperadora_EXEC: TStringField;
+    SQLGUIATISSnomeContratado_EXEC: TStringField;
+    SQLGUIATISSCNES: TStringField;
+    SQLGUIATISStipoAtendimento: TStringField;
+    SQLGUIATISSindicacaoAcidente: TStringField;
+    SQLGUIATISStipoConsulta: TStringField;
+    SQLGUIATISSdataExecucao: TDateField;
+    SQLGUIATISScodigoTabela: TIntegerField;
+    SQLGUIATISScodigoProcedimento: TStringField;
+    SQLGUIATISSdescricaoProcedimento: TStringField;
+    SQLGUIATISSquantidadeExecutada: TIntegerField;
+    SQLGUIATISSreducaoAcrescimo: TSingleField;
+    SQLGUIATISSvalorUnitario: TSingleField;
+    SQLGUIATISSvalorTotal: TSingleField;
+    SQLGUIATISSvalorProcedimentos: TSingleField;
+    SQLGUIATISSvalorTotalGeral: TSingleField;
+    SQLGUIATISSCODIGO: TIntegerField;
+    SQLGUIATISSviaAcesso: TStringField;
+    SQLGUIATISStecnicaUtilizada: TStringField;
+    SQLGUIATISSgrauPart: TSingleField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

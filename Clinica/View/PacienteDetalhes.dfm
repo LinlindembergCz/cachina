@@ -2,6 +2,7 @@ inherited FormPacienteDetalhes: TFormPacienteDetalhes
   Caption = 'Paciente'
   ClientHeight = 572
   ClientWidth = 694
+  Visible = False
   ExplicitWidth = 710
   ExplicitHeight = 610
   PixelsPerInch = 96
@@ -230,10 +231,6 @@ inherited FormPacienteDetalhes: TFormPacienteDetalhes
       end
       object TabSheet4: TTabSheet
         Caption = 'Antecedentes cl'#237'nicos'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object memoAntecedentes: TMemo
           Left = 8
           Top = 8
@@ -244,10 +241,6 @@ inherited FormPacienteDetalhes: TFormPacienteDetalhes
       end
       object TabSheet5: TTabSheet
         Caption = 'Medica'#231#245'es'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object memoMedicacoes: TMemo
           Left = 8
           Top = 8

@@ -1,8 +1,7 @@
 inherited FormPacienteListagem: TFormPacienteListagem
   Caption = 'Pesquisa de peciente'
+  Visible = False
   OnCreate = FormCreate
-  ExplicitWidth = 656
-  ExplicitHeight = 518
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel

@@ -1,12 +1,15 @@
 inherited FormEspecialistaDetalhes2: TFormEspecialistaDetalhes2
   Caption = 'Especialistas'
+  ClientHeight = 483
   ClientWidth = 641
+  Visible = False
   ExplicitWidth = 657
-  ExplicitHeight = 516
+  ExplicitHeight = 521
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
     Width = 641
+    Height = 434
     ExplicitWidth = 641
     object lbDescricao: TLabel
       Left = 8
@@ -106,6 +109,10 @@ inherited FormEspecialistaDetalhes2: TFormEspecialistaDetalhes2
       object TabSheet2: TTabSheet
         Caption = 'Convenios'
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Label4: TLabel
           Left = 5
           Top = 11
@@ -183,6 +190,10 @@ inherited FormEspecialistaDetalhes2: TFormEspecialistaDetalhes2
       object TabSheet3: TTabSheet
         Caption = 'Usuario'
         ImageIndex = 2
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Label5: TLabel
           Left = 3
           Top = 22

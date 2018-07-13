@@ -111,9 +111,7 @@ uses
   RelRecibo in '..\Views\Recebimentos\RelRecibo.pas' {FormRelRecibo},
   RelGuiaFaturamentoAmil1 in 'Relatorios\RelGuiaFaturamentoAmil1.pas' {FormRelGuiaFaturamentoAmil1},
   Agenda in 'View\Agenda.pas' {TemplateFormComTabDetalhes1},
-  ControllerOrcamento in '..\Controller\ControllerOrcamento.pas',
-  RelRecebimento2 in '..\Views\Recebimentos\RelRecebimento2.pas' {FormRelRecebimento2},
-  RelBalancoContabil in '..\Views\Pagamentos\RelBalancoContabil.pas' {FormRelBalancoContabil};
+  uGuiaSADT in 'View\uGuiaSADT.pas' {FormSADT};
 
 {$R *.res}
 

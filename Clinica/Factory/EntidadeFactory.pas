@@ -13,7 +13,8 @@ Type
                     tpEntrada, tpItemSaida, tpSaida, tpRecebimento,
                     tpPagamento, tpCategoria, tpCaixa, tpEstabelecimento, tpTabelaCID, tpSessoes,
                     tpCaixaMovimentacao, tpUnidadeMedida, tpFornecedor, tpSubfase , tpitemorcamento,
-                    tpCentroCusto, tpTabelaNCM, tpVeiculos, tpOrcamentoFormaPagamento, tpTabelaNFSe);
+                    tpCentroCusto, tpTabelaNCM, tpVeiculos, tpOrcamentoFormaPagamento, tpTabelaNFSe,tpSequenciaNF, tpCFOP,
+                    tpTabelaPreco, tpItemTabelaPreco, tpLembretes, tpPlanoContas);
 
 
 

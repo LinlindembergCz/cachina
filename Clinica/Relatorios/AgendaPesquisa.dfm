@@ -204,7 +204,6 @@ object FormAgendamentoPesquisa: TFormAgendamentoPesquisa
       item
         Expanded = False
         FieldName = 'Hora'
-        Width = 64
         Visible = True
       end
       item

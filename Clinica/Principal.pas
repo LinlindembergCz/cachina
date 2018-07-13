@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   VCL.Graphics, VCL.Controls, VCL.Forms, VCL.Dialogs, VCL.StdCtrls, VCL.Menus,  VCL.ActnList,
-  Vcl.ExtCtrls, Vcl.OleCtrls, SHDocVw, DB, System.Actions;
+  Vcl.ExtCtrls, Vcl.OleCtrls, SHDocVw, DB, System.Actions,EntidadeFactory;
 
 type
   TFormPrincipal = class(TForm)
@@ -55,6 +55,9 @@ type
     ActCentroCusto: TAction;
     ActTabelaNCM: TAction;
     ActTabelaNFSe: TAction;
+    ActUnidadeMedida: TAction;
+    Faturamento1: TMenuItem;
+    SPSADT1: TMenuItem;
     procedure MenuItem6Click(Sender: TObject);
     procedure ActPacienteExecute(Sender: TObject);
     procedure ActTipoAgendamentoExecute(Sender: TObject);
@@ -79,13 +82,20 @@ type
     procedure ActPagamentoExecute(Sender: TObject);
     procedure ActEstabelecimentoExecute(Sender: TObject);
     procedure ActTabelaCIDExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure SPSADT1Click(Sender: TObject);
   private
+    FormList: TStringList;
+
 
     { Private declarations }
   public
     { Public declarations }
     login: string;
     CodigoPessoa: string;
+    procedure UnRegisterForm(ClassFormName: string);
+    function ShowForm(FormClass:TFormClass;
+    Action:TAction; Modal:boolean = false; Showing:boolean = true): TForm;
     function SelecionarPaciente( var CodigoConvenio , NomePaciente, Telefone , CodigoCID: string): string;
     procedure ShowAgendaPesquisa(CodigoEspecialista, Paciente, Mes: string);
     procedure ShowRelFichaTriagem(DataSet:TDataSet);
@@ -94,6 +104,22 @@ type
     function ShowParcienteDetalhesInsert(Nome: string): string;
     function ShowEntradaListagem: string;
     function ShowSaidaListagem: string;
+
+
+     procedure ShowFormClienteDetlahes(CPF: string);
+    function ShowComboEditDialgo(TipoEntidade: TTipoEntidade; Titulo: string): string;
+    function ShowFuncionariosComboEditDialgo(TipoEntidade: TTipoEntidade;
+      Titulo: string): string;
+    procedure SelecionarContato(CodigoCliente: string; var CPF, Nome: string);
+    procedure ShowRelOrcamento(DataSetOrcamento, DataSetItemOrcamento, DataSetFormaPagamento: TDataSet);
+    procedure ShowRelOrcamento2(DataSetOrcamento, DataSetItemOrcamento,
+      DataSetFormaPagamento: TDataSet);
+    procedure ShowRecebimentosListagem(Condicao: string);
+    function ShowTabelaPrecoListagem: string;
+    procedure ShowProdutosListagem(prsCondicao: string);
+
+    function SelectOrcamento: string;
+    procedure SelecionarOrcamentDetalhe(prsOperacao, Codigo: string);
   end;
 
 var
@@ -106,17 +132,17 @@ implementation
 uses AgendamentoDetalhes ,  TipoAgendamentoDetalhes,  ConvenioDetalhes,  EspecialistaDetalhes,
      PacienteDetalhes, PacienteListagem, EspecialistaDetalhes2, AgendaPesquisa,
      AgendaRecorrencia, RelFichaTriagem, ModuloAgenda, RelFichaPaciente,
-     EntidadeFactory, ControllerPaciente, EntradaListagem, SaidaListagem,
+     ControllerPaciente, EntradaListagem, SaidaListagem,
      FornecedoresDetalhes, ProdutosDetalhes, EntradaDetalhes, SaidaDetalhes,
      FamiliaProdutosDetalhes, FormaPagamentoDetalhes, GrupoProdutosDetalhes,
      SubGrupoProdutosDetalhes, CaixaDetalhes, CategoriasDetalhes,
      PagamentoDetalhes, RecebimentosDetalhes, EstabelecimentoDetalhes,
-     TabelaCIDDetalhes, LoginAcesso, AgendamentoMedicoDetalhes;
+     TabelaCIDDetalhes, LoginAcesso, AgendamentoMedicoDetalhes, uGuiaSADT;
 
 procedure TFormPrincipal.ActAgendamentoExecute(Sender: TObject);
 begin
    application.CreateForm(TFormAgendamentoMedicosDetalhes,FormAgendamentoMedicosDetalhes);
-   FormAgendamentoMedicosDetalhes.Show;
+   FormAgendamentoMedicosDetalhes.Showmodal;
 end;
 
 procedure TFormPrincipal.ActAgendaPesquisaExecute(Sender: TObject);
@@ -147,6 +173,12 @@ begin
 end;
 
 
+
+function TFormPrincipal.ShowComboEditDialgo(TipoEntidade: TTipoEntidade;
+  Titulo: string): string;
+begin
+
+end;
 
 procedure TFormPrincipal.ActConvenioExecute(Sender: TObject);
 begin
@@ -204,8 +236,20 @@ end;
 
 procedure TFormPrincipal.ActPacienteExecute(Sender: TObject);
 begin
-   application.CreateForm(TFormPacienteDetalhes,FormPacienteDetalhes);
-   FormPacienteDetalhes.Show;
+   ShowForm( TFormPacienteDetalhes, nil );
+{   application.CreateForm(TFormPacienteDetalhes,FormPacienteDetalhes);
+   FormPacienteDetalhes.Show;}
+end;
+
+procedure TFormPrincipal.SelecionarContato(CodigoCliente: string; var CPF,
+  Nome: string);
+begin
+
+end;
+
+procedure TFormPrincipal.SelecionarOrcamentDetalhe(prsOperacao, Codigo: string);
+begin
+
 end;
 
 function TFormPrincipal.SelecionarPaciente(var CodigoConvenio, NomePaciente, Telefone, CodigoCID: string): string;
@@ -226,6 +270,11 @@ begin
      end;
      Free;
   end;
+end;
+
+function TFormPrincipal.SelectOrcamento: string;
+begin
+
 end;
 
 procedure TFormPrincipal.ShowParcienteDetalhes(Codigo: string);
@@ -253,6 +302,11 @@ begin
       ShowModal;
       result:= edtNome.text;
    end;
+end;
+
+procedure TFormPrincipal.ShowProdutosListagem(prsCondicao: string);
+begin
+
 end;
 
 procedure TFormPrincipal.ActPacientePesquisaExecute(Sender: TObject);
@@ -320,6 +374,11 @@ begin
    FormTipoAgendamentoDetalhes.Show;
 end;
 
+procedure TFormPrincipal.FormCreate(Sender: TObject);
+begin
+  FormList:= TStringList.Create;
+end;
+
 procedure TFormPrincipal.FormShow(Sender: TObject);
 begin
     Application.CreateForm(TFormLoginAcesso, FormLoginAcesso);
@@ -332,11 +391,28 @@ begin
    application.Terminate;
 end;
 
+procedure TFormPrincipal.ShowRecebimentosListagem(Condicao: string);
+begin
+
+end;
+
 procedure TFormPrincipal.ShowRelFichaTriagem(DataSet:TDataSet);
 begin
   application.CreateForm(TFormRelFichaPacinte,FormRelFichaPacinte);
   FormRelFichaPacinte.DataSet := DataSet;
   FormRelFichaPacinte.QuickRep1.Previewmodal;
+end;
+
+procedure TFormPrincipal.ShowRelOrcamento(DataSetOrcamento,
+  DataSetItemOrcamento, DataSetFormaPagamento: TDataSet);
+begin
+
+end;
+
+procedure TFormPrincipal.ShowRelOrcamento2(DataSetOrcamento,
+  DataSetItemOrcamento, DataSetFormaPagamento: TDataSet);
+begin
+
 end;
 
 function TFormPrincipal.ShowEntradaListagem: string;
@@ -357,5 +433,80 @@ begin
   FormSaidaListagem.Free;
 end;
 
+function TFormPrincipal.ShowTabelaPrecoListagem: string;
+begin
+
+end;
+
+procedure TFormPrincipal.SPSADT1Click(Sender: TObject);
+begin
+ ShowForm(TFormSADT , nil );
+end;
+
+procedure TFormPrincipal.UnRegisterForm(ClassFormName: string);
+  var
+  i:integer;
+begin
+  i :=  formPrincipal.FormList.IndexOf(  ClassFormName );
+  if i > -1 then
+    FormList.Delete( i );
+end;
+
+function TFormPrincipal.ShowForm( FormClass:TFormClass;
+                                   Action:TAction; Modal:boolean = false; Showing:boolean = true):TForm;
+var
+  Form: Tform;
+  i:integer;
+begin
+  i :=  FormList.IndexOf( FormClass.ClassName );
+  if i = -1 then
+  begin
+    application.CreateForm( FormClass , Form );
+    if Modal then
+    begin
+       if Showing then
+       begin
+          Form.ShowModal;
+       end;
+    end
+    else
+    begin
+       FormList.AddObject( FormClass.ClassName ,  Form );
+       if Showing then
+       begin
+          Form.Show;
+       end;
+    end;
+    result := Form;
+  end
+  else
+  begin
+    if Modal then
+    begin
+      if Showing then
+      begin
+         Form.ShowModal;
+      end;
+    end
+    else
+    if Showing then
+    begin
+       Tform( FormList.Objects[i] ).Show;
+    end;
+    result := Tform( FormList.Objects[i] );
+  end;
+end;
+
+
+procedure TFormPrincipal.ShowFormClienteDetlahes(CPF: string);
+begin
+
+end;
+
+function TFormPrincipal.ShowFuncionariosComboEditDialgo(
+  TipoEntidade: TTipoEntidade; Titulo: string): string;
+begin
+
+end;
 
 end.

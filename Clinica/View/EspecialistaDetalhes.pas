@@ -3,7 +3,8 @@ unit EspecialistaDetalhes;
 interface
 
 uses TemplateDetalhesComTabGrid, Vcl.Controls, Vcl.StdCtrls, Data.DB, Vcl.Grids,
-  Vcl.DBGrids, Vcl.ComCtrls, System.Classes, Vcl.ExtCtrls, Vcl.Buttons;
+  Vcl.DBGrids, Vcl.ComCtrls, System.Classes, Vcl.ExtCtrls, Vcl.Buttons,
+  Vcl.Menus;
 
 type
   TFormEspecialistaDetalhes = class(TTemplateFormComTabGridDetalhes)

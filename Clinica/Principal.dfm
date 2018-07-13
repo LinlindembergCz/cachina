@@ -2,8 +2,8 @@ object FormPrincipal: TFormPrincipal
   Left = 0
   Top = 0
   Caption = 'Ama psicologia'
-  ClientHeight = 469
-  ClientWidth = 659
+  ClientHeight = 487
+  ClientWidth = 676
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,14 +14,15 @@ object FormPrincipal: TFormPrincipal
   OldCreateOrder = True
   Position = poDesktopCenter
   WindowState = wsMaximized
+  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object WebBrowser1: TWebBrowser
     Left = 0
     Top = 0
-    Width = 659
-    Height = 469
+    Width = 676
+    Height = 487
     Align = alClient
     TabOrder = 0
     ExplicitLeft = 376
@@ -29,7 +30,7 @@ object FormPrincipal: TFormPrincipal
     ExplicitWidth = 300
     ExplicitHeight = 150
     ControlData = {
-      4C0000001C440000793000000000000000000000000000000000000000000000
+      4C000000DE450000553200000000000000000000000000000000000000000000
       000000004C000000000000000000000001000000E0D057007335CF11AE690800
       2B2E126208000000000000004C0000000114020000000000C000000000000046
       8000000000000000000000000000000000000000000000000000000000000000
@@ -141,6 +142,9 @@ object FormPrincipal: TFormPrincipal
     object ActTabelaNFSe: TAction
       Caption = 'ActTabelaNFSe'
     end
+    object ActUnidadeMedida: TAction
+      Caption = 'ActUnidadeMedida'
+    end
   end
   object MainMenu1: TMainMenu
     Left = 304
@@ -191,6 +195,13 @@ object FormPrincipal: TFormPrincipal
       end
       object ActRecebimento1: TMenuItem
         Action = ActRecebimento
+      end
+    end
+    object Faturamento1: TMenuItem
+      Caption = 'Faturamento'
+      object SPSADT1: TMenuItem
+        Caption = 'Guia SADT'
+        OnClick = SPSADT1Click
       end
     end
     object MenuItem6: TMenuItem

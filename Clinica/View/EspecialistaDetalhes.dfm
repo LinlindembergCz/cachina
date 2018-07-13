@@ -1,11 +1,36 @@
 inherited FormEspecialistaDetalhes: TFormEspecialistaDetalhes
   Caption = 'Especialista'
-  ExplicitWidth = 320
-  ExplicitHeight = 240
+  ClientHeight = 533
+  ClientWidth = 749
+  Visible = False
+  ExplicitWidth = 765
+  ExplicitHeight = 571
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
+    Width = 749
+    Height = 484
+    ExplicitWidth = 116
     inherited tabPrincipal: TPageControl
+      Width = 747
+      Height = 482
+      ExplicitWidth = 114
+      inherited TabSheet1: TTabSheet
+        ExplicitWidth = 106
+        inherited grdEntidade: TDBGrid
+          Width = 739
+          Height = 367
+        end
+        inherited pnlSuperior: TPanel
+          Width = 739
+          ExplicitWidth = 106
+        end
+        inherited pnlInferior: TPanel
+          Top = 432
+          Width = 739
+          ExplicitWidth = 106
+        end
+      end
       inherited TabSheet2: TTabSheet
         ExplicitLeft = 4
         ExplicitTop = 24
@@ -72,6 +97,10 @@ inherited FormEspecialistaDetalhes: TFormEspecialistaDetalhes
         end
       end
     end
+  end
+  inherited Panel2: TPanel
+    Width = 749
+    ExplicitWidth = 116
   end
   inherited srcEntidade: TDataSource
     Left = 136

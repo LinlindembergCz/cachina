@@ -2,6 +2,7 @@ inherited FormEstabelecimentoDetalhes: TFormEstabelecimentoDetalhes
   Caption = 'FormEstabelecimentoDetalhes'
   ClientHeight = 504
   ClientWidth = 666
+  Visible = False
   ExplicitWidth = 682
   ExplicitHeight = 542
   PixelsPerInch = 96
@@ -9,28 +10,29 @@ inherited FormEstabelecimentoDetalhes: TFormEstabelecimentoDetalhes
   inherited Panel1: TPanel
     Width = 666
     Height = 455
+    ExplicitWidth = 666
+    ExplicitHeight = 455
     inherited tabPrincipal: TPageControl
       Width = 664
       Height = 453
+      ExplicitWidth = 664
+      ExplicitHeight = 453
       inherited TabSheet1: TTabSheet
-        inherited DBGrid1: TDBGrid
+        ExplicitWidth = 656
+        ExplicitHeight = 425
+        inherited grdEntidade: TDBGrid
           Width = 656
-          Height = 376
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'Codigo'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'Descricao'
-              Width = 520
-              Visible = True
-            end>
+          Height = 338
         end
-        inherited Panel3: TPanel
+        inherited pnlSuperior: TPanel
           Width = 656
+          ExplicitWidth = 656
+        end
+        inherited pnlInferior: TPanel
+          Top = 403
+          Width = 656
+          ExplicitTop = 403
+          ExplicitWidth = 656
         end
       end
       inherited TabSheet2: TTabSheet
@@ -145,6 +147,7 @@ inherited FormEstabelecimentoDetalhes: TFormEstabelecimentoDetalhes
   end
   inherited Panel2: TPanel
     Width = 666
+    ExplicitWidth = 666
   end
   inherited srcEntidade: TDataSource
     Left = 120

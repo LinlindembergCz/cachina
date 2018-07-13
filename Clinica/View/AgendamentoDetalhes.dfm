@@ -1,10 +1,9 @@
 inherited FormAgendamentoDetalhes: TFormAgendamentoDetalhes
-  BorderIcons = [biSystemMenu, biMinimize, biMaximize]
   Caption = 'Agendamento'
   ClientHeight = 567
   ClientWidth = 1016
   Position = poScreenCenter
-  WindowState = wsMaximized
+  Visible = False
   ExplicitWidth = 1032
   ExplicitHeight = 605
   PixelsPerInch = 96
@@ -245,7 +244,7 @@ inherited FormAgendamentoDetalhes: TFormAgendamentoDetalhes
         Height = 186
         Align = alCustom
         Anchors = [akRight]
-        Date = 41722.554321793980000000
+        Date = 41722.862156655090000000
         DoubleBuffered = False
         MaxSelectRange = 30
         ParentDoubleBuffered = False
