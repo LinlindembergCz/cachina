@@ -48,13 +48,10 @@ type
     Label14: TLabel;
     Label15: TLabel;
     Edit11: TDBEdit;
-    Edit12: TDBEdit;
     Edit13: TDBEdit;
-    Edit14: TDBEdit;
     Edit15: TDBEdit;
     GroupBox7: TGroupBox;
     Label16: TLabel;
-    Edit16: TDBEdit;
     GroupBox8: TGroupBox;
     Label17: TLabel;
     Label18: TLabel;
@@ -65,8 +62,6 @@ type
     GroupBox9: TGroupBox;
     Label20: TLabel;
     Label21: TLabel;
-    Edit20: TDBEdit;
-    Edit21: TDBEdit;
     GroupBox10: TGroupBox;
     Label22: TLabel;
     Label23: TLabel;
@@ -83,8 +78,6 @@ type
     Edit24: TDBEdit;
     Edit25: TDBEdit;
     Edit26: TDBEdit;
-    Edit27: TDBEdit;
-    Edit28: TDBEdit;
     Edit29: TDBEdit;
     Edit30: TDBEdit;
     Edit32: TDBEdit;
@@ -122,7 +115,6 @@ type
     Label40: TLabel;
     DBEdit2: TDBEdit;
     Label41: TLabel;
-    DBEdit3: TDBEdit;
     DataSetProvider1: TDataSetProvider;
     cdsTISScodigoPrestadorNaOperadora: TStringField;
     cdsTISSRegistroANS: TStringField;
@@ -163,6 +155,14 @@ type
     cdsTISSviaAcesso: TStringField;
     cdsTISStecnicaUtilizada: TStringField;
     cdsTISSgrauPart: TSingleField;
+    DBComboBox1: TDBComboBox;
+    DBComboBox2: TDBComboBox;
+    DBComboBox3: TDBComboBox;
+    DBComboBox4: TDBComboBox;
+    DBComboBox5: TDBComboBox;
+    DBComboBox6: TDBComboBox;
+    DBComboBox7: TDBComboBox;
+    DBComboBox8: TDBComboBox;
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
@@ -170,6 +170,8 @@ type
     procedure Button2Click(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    function DataSetProvider1DataRequest(Sender: TObject;
+      Input: OleVariant): OleVariant;
   private
     procedure AdicionarTag(texto: string; valor: string = '');
     procedure ValidarXML(caminho: string);
@@ -232,7 +234,7 @@ begin
    if valor = '' then
       XML.Add( texto )
    else
-     XML.Add( Format('<'+texto+'>%s</'+texto +'>',[valor]) )
+     XML.Add( Format('<ansTISS:'+texto+'>%s</ansTISS:'+texto +'>',[valor]) )
 end;
 
 function MD5String(const Value: string): string;
@@ -266,7 +268,7 @@ procedure TFormSADT.BitBtn3Click(Sender: TObject);
 
 function formatarValor(texto: string): string;
 begin
-  result:=  Formatfloat(',0.00', texto );
+  result:=  Formatfloat(',0.00', strtofloat(texto ));
 end;
 
 
@@ -383,77 +385,78 @@ begin
 
       AdicionarTag('<ansTISS:guiaSP-SADT>');
       AdicionarTag('<ansTISS:cabecalhoGuia>');
-      AdicionarTag(Format('	<ansTISS:registroANS>%s</ansTISS:registroANS>',[registroANS]));
-      AdicionarTag(Format('	<ansTISS:numeroGuiaPrestador>%s</ansTISS:numeroGuiaPrestador> ',[numeroGuiaPrestador]));
+      AdicionarTag('registroANS',registroANS);
+      AdicionarTag('numeroGuiaPrestador',numeroGuiaPrestador);
       AdicionarTag('</ansTISS:cabecalhoGuia>');
 
       AdicionarTag('<ansTISS:dadosAutorizacao> ');
-      AdicionarTag(Format('	<ansTISS:dataAutorizacao>%s</ansTISS:dataAutorizacao>',[dataAutorizacao]));
-      AdicionarTag(Format('	<ansTISS:senha>%s</ansTISS:senha>',[senha]));
-      AdicionarTag(Format('	<ansTISS:dataValidadeSenha>%s</ansTISS:dataValidadeSenha>',[dataValidadeSenha]));
+      AdicionarTag('dataAutorizacao',dataAutorizacao);
+      AdicionarTag('senha',senha);
+      AdicionarTag('dataValidadeSenha',dataValidadeSenha);
       AdicionarTag('</ansTISS:dadosAutorizacao>');
 
-      AdicionarTag('<ansTISS:dadosBeneficiario> ');
-      AdicionarTag(Format('	<ansTISS:numeroCarteira>%s</ansTISS:numeroCarteira> ',[numeroCarteira]));
-      AdicionarTag(Format('	<ansTISS:atendimentoRN>%s</ansTISS:atendimentoRN> ',[atendimentoRN]));
-      AdicionarTag(Format('	<ansTISS:nomeBeneficiario>%s</ansTISS:nomeBeneficiario>',[nomeBeneficiario]));
+      AdicionarTag('<ansTISS:dadosBeneficiario>');
+      AdicionarTag('numeroCarteira',numeroCarteira);
+      AdicionarTag('atendimentoRN',atendimentoRN);
+      AdicionarTag('nomeBeneficiario',nomeBeneficiario);
       AdicionarTag('</ansTISS:dadosBeneficiario>');
 
       AdicionarTag('<ansTISS:dadosSolicitante>');
       AdicionarTag('	<ansTISS:contratadoSolicitante> ');
-      AdicionarTag(Format('		<ansTISS:codigoPrestadorNaOperadora>%s</ansTISS:codigoPrestadorNaOperadora> ',[codigoPrestadorNaOperadora]));
-      AdicionarTag(Format('		<ansTISS:nomeContratado>%s</ansTISS:nomeContratado>',[nomeContratado]));
+      AdicionarTag('codigoPrestadorNaOperadora',codigoPrestadorNaOperadora);
+      AdicionarTag('nomeContratado',nomeContratado);
       AdicionarTag('	</ansTISS:contratadoSolicitante>');
 
       AdicionarTag('	<ansTISS:profissionalSolicitante>');
-      AdicionarTag(Format('		<ansTISS:nomeProfissional>%s</ansTISS:nomeProfissional> ',[nomeProfissional]));
-      AdicionarTag(Format('		<ansTISS:conselhoProfissional>%s</ansTISS:conselhoProfissional>',[conselhoProfissional]));
-      AdicionarTag(Format('		<ansTISS:numeroConselhoProfissional>%s</ansTISS:numeroConselhoProfissional>',[numeroConselhoProfissional]));
-      AdicionarTag(Format('		<ansTISS:UF>%s</ansTISS:UF>',[UF]));
-      AdicionarTag(Format('		<ansTISS:CBOS>%s</ansTISS:CBOS>',[CBOS]));
+      AdicionarTag('nomeProfissional',nomeProfissional);
+      AdicionarTag('conselhoProfissional',conselhoProfissional);
+      AdicionarTag('numeroConselhoProfissional',numeroConselhoProfissional);
+      AdicionarTag('UF',UF);
+      AdicionarTag('CBOS',CBOS);
       AdicionarTag('	</ansTISS:profissionalSolicitante> ');
       AdicionarTag('</ansTISS:dadosSolicitante> ');
 
       AdicionarTag('<ansTISS:dadosSolicitacao>');
-      AdicionarTag(Format(' <ansTISS:dataSolicitacao>%s</ansTISS:dataSolicitacao>',[dataSolicitacao]));
-      AdicionarTag(Format('	<ansTISS:caraterAtendimento>%s</ansTISS:caraterAtendimento>',[caraterAtendimento]));
+      AdicionarTag('dataSolicitacao',dataSolicitacao);
+      AdicionarTag('caraterAtendimento',caraterAtendimento);
       AdicionarTag('</ansTISS:dadosSolicitacao> ');
 
       AdicionarTag('<ansTISS:dadosExecutante>');
       AdicionarTag('	<ansTISS:contratadoExecutante>');
-      AdicionarTag(Format('		<ansTISS:codigoPrestadorNaOperadora>%s</ansTISS:codigoPrestadorNaOperadora>',[codigoPrestadorNaOperadora]));
-      AdicionarTag(Format('		<ansTISS:nomeContratado>%s</ansTISS:nomeContratado>',[nomeContratado]));
+      AdicionarTag('codigoPrestadorNaOperadora',codigoPrestadorNaOperadora);
+      AdicionarTag('nomeContratado',nomeContratado);
       AdicionarTag('	</ansTISS:contratadoExecutante>');
-      AdicionarTag(Format('	<ansTISS:CNES>%s</ansTISS:CNES>',[CNES]));
+      AdicionarTag('CNES',CNES);
       AdicionarTag('</ansTISS:dadosExecutante> ');
 
       AdicionarTag('<ansTISS:dadosAtendimento> ');
-      AdicionarTag(Format('	<ansTISS:tipoAtendimento>%s</ansTISS:tipoAtendimento> ',[tipoAtendimento]));
-      AdicionarTag(Format('	<ansTISS:indicacaoAcidente>%s</ansTISS:indicacaoAcidente> ',[indicacaoAcidente]));
-      AdicionarTag(Format(' <ansTISS:tipoConsulta>%s</ansTISS:tipoConsulta>',[tipoConsulta]));
+      AdicionarTag('tipoAtendimento',tipoAtendimento);
+      AdicionarTag('indicacaoAcidente',indicacaoAcidente);
+      AdicionarTag('tipoConsulta',tipoConsulta);
       AdicionarTag('</ansTISS:dadosAtendimento> ');
 
       AdicionarTag('<ansTISS:procedimentosExecutados>');
       AdicionarTag('	<ansTISS:procedimentoExecutado>');
-      AdicionarTag(Format('		<ansTISS:dataExecucao>%s</ansTISS:dataExecucao>',[dataExecucao]));
+      AdicionarTag('dataExecucao',dataExecucao);
       AdicionarTag('		<ansTISS:procedimento>');
-      AdicionarTag(Format('			<ansTISS:codigoTabela>%s</ansTISS:codigoTabela>',[codigoTabela]));
-      AdicionarTag(Format('			<ansTISS:codigoProcedimento>%s</ansTISS:codigoProcedimento>',[codigoProcedimento]));
-      AdicionarTag(Format('			<ansTISS:descricaoProcedimento>%s</ansTISS:descricaoProcedimento>',[descricaoProcedimento]));
+      AdicionarTag('codigoTabela',codigoTabela);
+      AdicionarTag('codigoProcedimento',codigoProcedimento);
+      AdicionarTag('descricaoProcedimento',descricaoProcedimento);
       AdicionarTag('		</ansTISS:procedimento>');
 
-      AdicionarTag(Format('		<ansTISS:quantidadeExecutada>%s</ansTISS:quantidadeExecutada>',[quantidadeExecutada]));
+      AdicionarTag('quantidadeExecutada',quantidadeExecutada);
 
       if viaAcesso <> '' then
-      AdicionarTag(Format('		<ansTISS:viaAcesso>%s</ansTISS:viaAcesso>',[viaAcesso]));
+      AdicionarTag('viaAcesso',viaAcesso);
        if tecnicaUtilizada <> '' then
-      AdicionarTag(Format('		<ansTISS:tecnicaUtilizada>%s</ansTISS:tecnicaUtilizada>',[tecnicaUtilizada]));
+      AdicionarTag('tecnicaUtilizada',tecnicaUtilizada);
        if reducaoAcrescimo <> '' then
-      AdicionarTag(Format('		<ansTISS:reducaoAcrescimo>%s</ansTISS:reducaoAcrescimo>',[formatarValor(reducaoAcrescimo)]));
+      AdicionarTag('reducaoAcrescimo',formatarValor(reducaoAcrescimo));
 
-      AdicionarTag(Format('		<ansTISS:valorUnitario>%s</ansTISS:valorUnitario>',[formatarValor(valorUnitario)]));
-      AdicionarTag(Format('		<ansTISS:valorTotal>%s</ansTISS:valorTotal>',[formatarValor(valorTotal)]));
-      {AdicionarTag('		<ansTISS:equipeSadt>');
+      AdicionarTag('valorUnitario',formatarValor(valorUnitario));
+      AdicionarTag('valorTotal',formatarValor(valorTotal));
+      {
+      AdicionarTag('		<ansTISS:equipeSadt>');
       AdicionarTag(Format('			<ansTISS:grauPart>%s</ansTISS:grauPart>',[grauPart]));
 
       AdicionarTag('			<ansTISS:codProfissional>');
@@ -465,13 +468,14 @@ begin
       AdicionarTag(Format('			<ansTISS:numeroConselhoProfissional>%s</ansTISS:numeroConselhoProfissional>',[numeroConselhoProfissional]));
       AdicionarTag(Format('			<ansTISS:UF>%s</ansTISS:UF>',[UF]));
       AdicionarTag(Format('			<ansTISS:CBOS>%s</ansTISS:CBOS>',[CBOS]));
-      AdicionarTag('		</ansTISS:equipeSadt>'); }
+      AdicionarTag('		</ansTISS:equipeSadt>');
+      }
       AdicionarTag('	</ansTISS:procedimentoExecutado>');
       AdicionarTag('</ansTISS:procedimentosExecutados>');
 
       AdicionarTag('<ansTISS:valorTotal>');
-      AdicionarTag(Format('	<ansTISS:valorProcedimentos>%s</ansTISS:valorProcedimentos>',[ formatarValor(valorTotal)]));
-      AdicionarTag(Format('	<ansTISS:valorTotalGeral>%s</ansTISS:valorTotalGeral>',[ formatarValor(valorTotal)]));
+      AdicionarTag('valorProcedimentos', formatarValor(valorTotal));
+      AdicionarTag('valorTotalGeral', formatarValor(valorTotal));
       AdicionarTag('</ansTISS:valorTotal>');
 
       AdicionarTag('</ansTISS:guiaSP-SADT>');
@@ -483,7 +487,7 @@ begin
 	 AdicionarTag('		</ansTISS:loteGuias> ');
 	 AdicionarTag('	</ansTISS:prestadorParaOperadora>');
 
-	 AdicionarTag('	    <ansTISS:epilogo>');
+	 AdicionarTag('	    <ansTISS:epilogo>');                      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	 AdicionarTag(Format('		<ansTISS:hash>%s</ansTISS:hash> ',['733ecc3f3dfe45f4b7d95ccecbcb8879']));
 	 AdicionarTag('	</ansTISS:epilogo>');
 
@@ -542,9 +546,9 @@ end;
 
 procedure TFormSADT.Button1Click(Sender: TObject);
 begin
-  cdsTISS.filter:= 'dataAutorizacao >= '''+ datetostr(DateTimePicker1.Date)+
-            ''' and dataAutorizacao <= '''+ datetostr(DateTimePicker2.Date)+'''';
-  cdsTISS.filtered:= true;
+  cdsTISS.close;
+  cdsTISS.commandtext:= 'Select * from GUISADt where dataAutorizacao >= '''+ datetostr(DateTimePicker1.Date)+ ''' and dataAutorizacao <= '''+ datetostr(DateTimePicker2.Date)+'''';
+  cdsTISS.open;
 end;
 
 procedure TFormSADT.Button2Click(Sender: TObject);
@@ -658,6 +662,12 @@ begin
 
 end;
 
+function TFormSADT.DataSetProvider1DataRequest(Sender: TObject;
+  Input: OleVariant): OleVariant;
+begin
+DSServerModuleBaseDados.SQLGUIATISS.CommandText:= Input;
+end;
+
 procedure TFormSADT.FormShow(Sender: TObject);
 begin
   cdsTISS.close;
@@ -665,3 +675,33 @@ begin
 end;
 
 end.
+
+{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

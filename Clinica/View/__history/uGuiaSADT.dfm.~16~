@@ -11,7 +11,8 @@ object FormSADT: TFormSADT
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnCreate = FormCreate
+  WindowState = wsMaximized
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object PageControl1: TPageControl
@@ -19,16 +20,20 @@ object FormSADT: TFormSADT
     Top = 41
     Width = 942
     Height = 564
-    ActivePage = TabSheet2
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Pesquisa'
+      DesignSize = (
+        934
+        536)
       object DBGrid1: TDBGrid
         Left = 12
         Top = 45
         Width = 909
         Height = 476
+        Anchors = [akLeft, akTop, akRight, akBottom]
         DataSource = DataSource1
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -45,7 +50,7 @@ object FormSADT: TFormSADT
           end
           item
             Expanded = False
-            FieldName = 'numeroLote'
+            FieldName = 'NumeroLote'
             Width = 88
             Visible = True
           end
@@ -81,43 +86,36 @@ object FormSADT: TFormSADT
           item
             Expanded = False
             FieldName = 'atendimentoRN'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'nomeBeneficiario'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'codigoPrestadorNaOperadora'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'nomeContratado'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'nomeProfissional'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'conselhoProfissional'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'numeroConselhoProfissional'
-            Width = 64
             Visible = True
           end
           item
@@ -133,13 +131,11 @@ object FormSADT: TFormSADT
           item
             Expanded = False
             FieldName = 'caraterAtendimento'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'CNES'
-            Width = 64
             Visible = True
           end
           item
@@ -150,37 +146,31 @@ object FormSADT: TFormSADT
           item
             Expanded = False
             FieldName = 'indicacaoAcidente'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'dataExecucao'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'codigoTabela'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'codigoProcedimento'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'descricaoProcedimento'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'quantidadeExecutada'
-            Width = 64
             Visible = True
           end
           item
@@ -196,13 +186,11 @@ object FormSADT: TFormSADT
           item
             Expanded = False
             FieldName = 'reducaoAcrescimo'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'valorUnitario'
-            Width = 64
             Visible = True
           end
           item
@@ -527,7 +515,7 @@ object FormSADT: TFormSADT
               Top = 33
               Width = 128
               Height = 21
-              DataField = 'codigoPrestadorNaOperadora'
+              DataField = 'codigoPrestadorNaOperadora_SOLI'
               DataSource = DataSource1
               TabOrder = 0
             end
@@ -645,7 +633,7 @@ object FormSADT: TFormSADT
               Top = 33
               Width = 35
               Height = 21
-              DataField = 'UF'
+              DataField = 'UF_SOLICITANTE'
               DataSource = DataSource1
               TabOrder = 3
             end
@@ -654,7 +642,7 @@ object FormSADT: TFormSADT
               Top = 33
               Width = 63
               Height = 21
-              DataField = 'CBOS'
+              DataField = 'CBOS_SOLICITANTE'
               DataSource = DataSource1
               TabOrder = 4
             end
@@ -763,7 +751,7 @@ object FormSADT: TFormSADT
             Top = 31
             Width = 142
             Height = 21
-            DataField = 'codigoPrestadorNaOperadora2'
+            DataField = 'codigoPrestadorNaOperadora_EXEC'
             DataSource = DataSource1
             TabOrder = 0
           end
@@ -772,7 +760,7 @@ object FormSADT: TFormSADT
             Top = 30
             Width = 149
             Height = 21
-            DataField = 'nomeExecutante'
+            DataField = 'nomeContratado_EXEC'
             DataSource = DataSource1
             TabOrder = 1
           end
@@ -1200,7 +1188,7 @@ object FormSADT: TFormSADT
             Top = 32
             Width = 92
             Height = 21
-            DataField = 'codigoPrestadorNaOperadora2'
+            DataField = 'codigoPrestadorNaOperadora_EXEC'
             DataSource = DataSource1
             TabOrder = 1
           end
@@ -1227,7 +1215,7 @@ object FormSADT: TFormSADT
             Top = 32
             Width = 32
             Height = 21
-            DataField = 'UF'
+            DataField = 'UF_SOLICITANTE'
             DataSource = DataSource1
             TabOrder = 4
           end
@@ -1245,7 +1233,7 @@ object FormSADT: TFormSADT
             Top = 32
             Width = 64
             Height = 21
-            DataField = 'CBOS'
+            DataField = 'CBOS_SOLICITANTE'
             DataSource = DataSource1
             TabOrder = 6
           end
@@ -1335,8 +1323,11 @@ object FormSADT: TFormSADT
   end
   object cdsTISS: TClientDataSet
     Aggregates = <>
+    FieldDefs = <>
+    IndexDefs = <>
     Params = <>
     ProviderName = 'DataSetProvider1'
+    StoreDefs = True
     Left = 368
     Top = 48
     object cdsTISScodigoPrestadorNaOperadora: TStringField
@@ -1500,7 +1491,15 @@ object FormSADT: TFormSADT
     object cdsTISSCODIGO: TIntegerField
       FieldName = 'CODIGO'
       ProviderFlags = [pfInWhere, pfInKey]
-      Required = True
+    end
+    object cdsTISSviaAcesso: TStringField
+      FieldName = 'viaAcesso'
+    end
+    object cdsTISStecnicaUtilizada: TStringField
+      FieldName = 'tecnicaUtilizada'
+    end
+    object cdsTISSgrauPart: TSingleField
+      FieldName = 'grauPart'
     end
   end
   object XMLDocument1: TXMLDocument
@@ -1517,6 +1516,7 @@ object FormSADT: TFormSADT
   object DataSetProvider1: TDataSetProvider
     DataSet = DSServerModuleBaseDados.SQLGUIATISS
     UpdateMode = upWhereKeyOnly
+    OnDataRequest = DataSetProvider1DataRequest
     Left = 280
     Top = 48
   end

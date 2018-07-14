@@ -48,13 +48,10 @@ type
     Label14: TLabel;
     Label15: TLabel;
     Edit11: TDBEdit;
-    Edit12: TDBEdit;
     Edit13: TDBEdit;
-    Edit14: TDBEdit;
     Edit15: TDBEdit;
     GroupBox7: TGroupBox;
     Label16: TLabel;
-    Edit16: TDBEdit;
     GroupBox8: TGroupBox;
     Label17: TLabel;
     Label18: TLabel;
@@ -65,8 +62,6 @@ type
     GroupBox9: TGroupBox;
     Label20: TLabel;
     Label21: TLabel;
-    Edit20: TDBEdit;
-    Edit21: TDBEdit;
     GroupBox10: TGroupBox;
     Label22: TLabel;
     Label23: TLabel;
@@ -83,8 +78,6 @@ type
     Edit24: TDBEdit;
     Edit25: TDBEdit;
     Edit26: TDBEdit;
-    Edit27: TDBEdit;
-    Edit28: TDBEdit;
     Edit29: TDBEdit;
     Edit30: TDBEdit;
     Edit32: TDBEdit;
@@ -122,7 +115,6 @@ type
     Label40: TLabel;
     DBEdit2: TDBEdit;
     Label41: TLabel;
-    DBEdit3: TDBEdit;
     DataSetProvider1: TDataSetProvider;
     cdsTISScodigoPrestadorNaOperadora: TStringField;
     cdsTISSRegistroANS: TStringField;
@@ -163,6 +155,14 @@ type
     cdsTISSviaAcesso: TStringField;
     cdsTISStecnicaUtilizada: TStringField;
     cdsTISSgrauPart: TSingleField;
+    DBComboBox1: TDBComboBox;
+    DBComboBox2: TDBComboBox;
+    DBComboBox3: TDBComboBox;
+    DBComboBox4: TDBComboBox;
+    DBComboBox5: TDBComboBox;
+    DBComboBox6: TDBComboBox;
+    DBComboBox7: TDBComboBox;
+    DBComboBox8: TDBComboBox;
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
@@ -170,6 +170,8 @@ type
     procedure Button2Click(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    function DataSetProvider1DataRequest(Sender: TObject;
+      Input: OleVariant): OleVariant;
   private
     procedure AdicionarTag(texto: string; valor: string = '');
     procedure ValidarXML(caminho: string);
@@ -442,18 +444,19 @@ begin
       AdicionarTag('descricaoProcedimento',descricaoProcedimento);
       AdicionarTag('		</ansTISS:procedimento>');
 
-      AdicionarTag('quantidadeExecutada',quantidadeExecutada));
+      AdicionarTag('quantidadeExecutada',quantidadeExecutada);
 
       if viaAcesso <> '' then
       AdicionarTag('viaAcesso',viaAcesso);
        if tecnicaUtilizada <> '' then
-      AdicionarTag('		<ansTISS:tecnicaUtilizada>%s</ansTISS:tecnicaUtilizada>',[tecnicaUtilizada]));
+      AdicionarTag('tecnicaUtilizada',tecnicaUtilizada);
        if reducaoAcrescimo <> '' then
       AdicionarTag('reducaoAcrescimo',formatarValor(reducaoAcrescimo));
 
       AdicionarTag('valorUnitario',formatarValor(valorUnitario));
       AdicionarTag('valorTotal',formatarValor(valorTotal));
-      {AdicionarTag('		<ansTISS:equipeSadt>');
+      {
+      AdicionarTag('		<ansTISS:equipeSadt>');
       AdicionarTag(Format('			<ansTISS:grauPart>%s</ansTISS:grauPart>',[grauPart]));
 
       AdicionarTag('			<ansTISS:codProfissional>');
@@ -465,7 +468,8 @@ begin
       AdicionarTag(Format('			<ansTISS:numeroConselhoProfissional>%s</ansTISS:numeroConselhoProfissional>',[numeroConselhoProfissional]));
       AdicionarTag(Format('			<ansTISS:UF>%s</ansTISS:UF>',[UF]));
       AdicionarTag(Format('			<ansTISS:CBOS>%s</ansTISS:CBOS>',[CBOS]));
-      AdicionarTag('		</ansTISS:equipeSadt>'); }
+      AdicionarTag('		</ansTISS:equipeSadt>');
+      }
       AdicionarTag('	</ansTISS:procedimentoExecutado>');
       AdicionarTag('</ansTISS:procedimentosExecutados>');
 
@@ -483,7 +487,7 @@ begin
 	 AdicionarTag('		</ansTISS:loteGuias> ');
 	 AdicionarTag('	</ansTISS:prestadorParaOperadora>');
 
-	 AdicionarTag('	    <ansTISS:epilogo>');
+	 AdicionarTag('	    <ansTISS:epilogo>');                      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	 AdicionarTag(Format('		<ansTISS:hash>%s</ansTISS:hash> ',['733ecc3f3dfe45f4b7d95ccecbcb8879']));
 	 AdicionarTag('	</ansTISS:epilogo>');
 
@@ -542,9 +546,10 @@ end;
 
 procedure TFormSADT.Button1Click(Sender: TObject);
 begin
-  cdsTISS.filter:= 'dataAutorizacao >= '''+ datetostr(DateTimePicker1.Date)+
-            ''' and dataAutorizacao <= '''+ datetostr(DateTimePicker2.Date)+'''';
-  cdsTISS.filtered:= true;
+  cdsTISS.close;
+  cdsTISS.DataRequest( 'Select * from GUISADt where dataAutorizacao >= '''+ datetostr(DateTimePicker1.Date)+
+                       ''' and dataAutorizacao <= '''+ datetostr(DateTimePicker2.Date)+'''');
+  cdsTISS.open;
 end;
 
 procedure TFormSADT.Button2Click(Sender: TObject);
@@ -658,9 +663,16 @@ begin
 
 end;
 
+function TFormSADT.DataSetProvider1DataRequest(Sender: TObject;
+  Input: OleVariant): OleVariant;
+begin
+DSServerModuleBaseDados.SQLGUIATISS.CommandText:= Input;
+end;
+
 procedure TFormSADT.FormShow(Sender: TObject);
 begin
   cdsTISS.close;
+  cdsTISS.DataRequest( 'Select * from GUISADt where 0=1');
   cdsTISS.open;
 end;
 

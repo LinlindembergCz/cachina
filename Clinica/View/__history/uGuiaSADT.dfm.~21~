@@ -11,7 +11,8 @@ object FormSADT: TFormSADT
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnCreate = FormCreate
+  WindowState = wsMaximized
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object PageControl1: TPageControl
@@ -24,15 +25,28 @@ object FormSADT: TFormSADT
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Pesquisa'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      DesignSize = (
+        934
+        536)
+      object Label42: TLabel
+        Left = 264
+        Top = 0
+        Width = 64
+        Height = 13
+        Caption = 'Executante'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
       object DBGrid1: TDBGrid
         Left = 12
         Top = 45
         Width = 909
         Height = 476
+        Anchors = [akLeft, akTop, akRight, akBottom]
         DataSource = DataSource1
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -237,13 +251,20 @@ object FormSADT: TFormSADT
         TabOrder = 2
       end
       object Button1: TButton
-        Left = 255
-        Top = 12
+        Left = 583
+        Top = 14
         Width = 75
         Height = 25
         Caption = 'Pesquisada'
         TabOrder = 3
         OnClick = Button1Click
+      end
+      object edtNomeExecutante: TEdit
+        Left = 264
+        Top = 16
+        Width = 313
+        Height = 21
+        TabOrder = 4
       end
     end
     object TabSheet2: TTabSheet
@@ -575,7 +596,7 @@ object FormSADT: TFormSADT
               ParentFont = False
             end
             object Label14: TLabel
-              Left = 497
+              Left = 488
               Top = 17
               Width = 14
               Height = 13
@@ -609,15 +630,6 @@ object FormSADT: TFormSADT
               DataSource = DataSource1
               TabOrder = 0
             end
-            object Edit12: TDBEdit
-              Left = 209
-              Top = 33
-              Width = 103
-              Height = 21
-              DataField = 'conselhoProfissional'
-              DataSource = DataSource1
-              TabOrder = 1
-            end
             object Edit13: TDBEdit
               Left = 343
               Top = 33
@@ -625,16 +637,7 @@ object FormSADT: TFormSADT
               Height = 21
               DataField = 'numeroConselhoProfissional'
               DataSource = DataSource1
-              TabOrder = 2
-            end
-            object Edit14: TDBEdit
-              Left = 494
-              Top = 33
-              Width = 35
-              Height = 21
-              DataField = 'UF_SOLICITANTE'
-              DataSource = DataSource1
-              TabOrder = 3
+              TabOrder = 1
             end
             object Edit15: TDBEdit
               Left = 535
@@ -643,6 +646,64 @@ object FormSADT: TFormSADT
               Height = 21
               DataField = 'CBOS_SOLICITANTE'
               DataSource = DataSource1
+              TabOrder = 2
+            end
+            object DBComboBox1: TDBComboBox
+              Left = 216
+              Top = 33
+              Width = 117
+              Height = 21
+              DataField = 'conselhoProfissional'
+              DataSource = DataSource1
+              Items.Strings = (
+                '01- CRAS'
+                '02- COREN'
+                '03- CRF'
+                '04- CRFA'
+                '05- REFITO'
+                '06- CRM'
+                '07- CRN'
+                '08- CRO'
+                '09- CRP'
+                '10- Outros')
+              TabOrder = 3
+            end
+            object DBComboBox8: TDBComboBox
+              Left = 487
+              Top = 33
+              Width = 42
+              Height = 21
+              DataField = 'UF_SOLICITANTE'
+              DataSource = DataSource1
+              Items.Strings = (
+                '11-RO'
+                '12-AC'
+                '13-AM'
+                '14-RR'
+                '15-PA'
+                '16-AP'
+                '17-TO'
+                '21-MA'
+                '22-PI'
+                '23-CE'
+                '24-RN'
+                '25-PB'
+                '26-PE'
+                '27-AL'
+                '28-SE'
+                '29-BA'
+                '31-MG'
+                '32-ES'
+                '33-RJ'
+                '35-SP'
+                '41-PR'
+                '42-SC'
+                '43-RS'
+                '50-MS'
+                '51-MT'
+                '52-GO'
+                '53-DF'
+                '98-EX')
               TabOrder = 4
             end
           end
@@ -680,15 +741,6 @@ object FormSADT: TFormSADT
             Font.Style = [fsBold]
             ParentFont = False
           end
-          object Edit16: TDBEdit
-            Left = 7
-            Top = 32
-            Width = 101
-            Height = 21
-            DataField = 'caraterAtendimento'
-            DataSource = DataSource1
-            TabOrder = 0
-          end
           object DBEdit2: TDBEdit
             Left = 118
             Top = 32
@@ -696,6 +748,18 @@ object FormSADT: TFormSADT
             Height = 21
             DataField = 'dataSolicitacao'
             DataSource = DataSource1
+            TabOrder = 0
+          end
+          object DBComboBox2: TDBComboBox
+            Left = 11
+            Top = 32
+            Width = 97
+            Height = 21
+            DataField = 'caraterAtendimento'
+            DataSource = DataSource1
+            Items.Strings = (
+              '1-Efetiva'
+              '2-Urgencia')
             TabOrder = 1
           end
         end
@@ -819,37 +883,65 @@ object FormSADT: TFormSADT
             Font.Style = [fsBold]
             ParentFont = False
           end
-          object Edit20: TDBEdit
-            Left = 4
+          object DBComboBox3: TDBComboBox
+            Left = 8
             Top = 31
-            Width = 83
+            Width = 79
             Height = 21
             DataField = 'tipoAtendimento'
             DataSource = DataSource1
+            Items.Strings = (
+              '01 - Remo'#231#227'o'
+              '02 - Pequena Cirurgia'
+              '03 - Outras Terapias'
+              '04 - Consulta'
+              '05 - Exame Ambulatorial'
+              '06- Atendimento Domiciliar'
+              '07- Interna'#231#227'o'
+              '08- Quimioterapia'
+              '09- Radioterapia'
+              '10- Terapia Renal Substitutiva (TRS)'
+              '11- Pronto Socorro'
+              '13- Pequeno atendimento'
+              '14- Sa'#250'de Ocupacional - Admissional'
+              '15- Sa'#250'de Ocupacional - Demissional'
+              '16- Sa'#250'de Ocupacional - Peri'#243'dico'
+              '17- Sa'#250'de Ocupacional - Retorno ao trabalho'
+              '18- Sa'#250'de Ocupacional - Mudan'#231'a de fun'#231#227'o')
             TabOrder = 0
           end
-          object Edit21: TDBEdit
-            Left = 93
-            Top = 31
-            Width = 76
+          object DBComboBox4: TDBComboBox
+            Left = 96
+            Top = 32
+            Width = 73
             Height = 21
             DataField = 'indicacaoAcidente'
             DataSource = DataSource1
+            Items.Strings = (
+              '0- Trabalho'
+              '1- Tr'#226'nsito'
+              '2- Outros Acidentes'
+              '9- N'#227'o Acidentes')
             TabOrder = 1
           end
-          object DBEdit3: TDBEdit
+          object DBComboBox5: TDBComboBox
             Left = 175
-            Top = 31
-            Width = 76
+            Top = 35
+            Width = 83
             Height = 21
             DataField = 'tipoConsulta'
             DataSource = DataSource1
+            Items.Strings = (
+              '1- Primeira Consulta'
+              '2- Retorno'
+              '3- Pr'#233'-natal'
+              '4- Por encaminhamento')
             TabOrder = 2
           end
         end
         object GroupBox10: TGroupBox
           Left = 14
-          Top = 334
+          Top = 335
           Width = 907
           Height = 105
           Caption = 'Procedimentos Executados'
@@ -1029,24 +1121,6 @@ object FormSADT: TFormSADT
             DataSource = DataSource1
             TabOrder = 4
           end
-          object Edit27: TDBEdit
-            Left = 8
-            Top = 75
-            Width = 61
-            Height = 21
-            DataField = 'viaAcesso'
-            DataSource = DataSource1
-            TabOrder = 5
-          end
-          object Edit28: TDBEdit
-            Left = 112
-            Top = 75
-            Width = 77
-            Height = 21
-            DataField = 'tecnicaUtilizada'
-            DataSource = DataSource1
-            TabOrder = 6
-          end
           object Edit29: TDBEdit
             Left = 443
             Top = 75
@@ -1054,7 +1128,7 @@ object FormSADT: TFormSADT
             Height = 21
             DataField = 'valorUnitario'
             DataSource = DataSource1
-            TabOrder = 7
+            TabOrder = 5
           end
           object Edit30: TDBEdit
             Left = 532
@@ -1063,7 +1137,7 @@ object FormSADT: TFormSADT
             Height = 21
             DataField = 'valorTotal'
             DataSource = DataSource1
-            TabOrder = 8
+            TabOrder = 6
           end
           object Edit32: TDBEdit
             Left = 352
@@ -1072,6 +1146,32 @@ object FormSADT: TFormSADT
             Height = 21
             DataField = 'reducaoAcrescimo'
             DataSource = DataSource1
+            TabOrder = 7
+          end
+          object DBComboBox6: TDBComboBox
+            Left = 9
+            Top = 74
+            Width = 89
+            Height = 21
+            DataField = 'viaAcesso'
+            DataSource = DataSource1
+            Items.Strings = (
+              '1- Unica'
+              '2-Mesma via '
+              '3-Diferentes vias')
+            TabOrder = 8
+          end
+          object DBComboBox7: TDBComboBox
+            Left = 112
+            Top = 74
+            Width = 126
+            Height = 21
+            DataField = 'tecnicaUtilizada'
+            DataSource = DataSource1
+            Items.Strings = (
+              '1-Convencional'
+              '2-Videolaparoscopia'
+              '3-Rob'#243'tica')
             TabOrder = 9
           end
         end
@@ -1317,15 +1417,18 @@ object FormSADT: TFormSADT
   end
   object DataSource1: TDataSource
     DataSet = cdsTISS
-    Left = 445
-    Top = 48
+    Left = 261
+    Top = 160
   end
   object cdsTISS: TClientDataSet
     Aggregates = <>
+    FieldDefs = <>
+    IndexDefs = <>
     Params = <>
     ProviderName = 'DataSetProvider1'
-    Left = 368
-    Top = 48
+    StoreDefs = True
+    Left = 160
+    Top = 160
     object cdsTISScodigoPrestadorNaOperadora: TStringField
       FieldName = 'codigoPrestadorNaOperadora'
       ProviderFlags = [pfInUpdate]
@@ -1486,8 +1589,7 @@ object FormSADT: TFormSADT
     end
     object cdsTISSCODIGO: TIntegerField
       FieldName = 'CODIGO'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
+      ProviderFlags = [pfInWhere, pfInKey]
     end
     object cdsTISSviaAcesso: TStringField
       FieldName = 'viaAcesso'
@@ -1495,7 +1597,7 @@ object FormSADT: TFormSADT
     object cdsTISStecnicaUtilizada: TStringField
       FieldName = 'tecnicaUtilizada'
     end
-    object cdsTISSgrauPart: TSmallintField
+    object cdsTISSgrauPart: TSingleField
       FieldName = 'grauPart'
     end
   end
@@ -1513,7 +1615,8 @@ object FormSADT: TFormSADT
   object DataSetProvider1: TDataSetProvider
     DataSet = DSServerModuleBaseDados.SQLGUIATISS
     UpdateMode = upWhereKeyOnly
-    Left = 280
-    Top = 48
+    OnDataRequest = DataSetProvider1DataRequest
+    Left = 56
+    Top = 160
   end
 end

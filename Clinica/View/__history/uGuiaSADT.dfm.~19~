@@ -11,7 +11,8 @@ object FormSADT: TFormSADT
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnCreate = FormCreate
+  WindowState = wsMaximized
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object PageControl1: TPageControl
@@ -19,16 +20,20 @@ object FormSADT: TFormSADT
     Top = 41
     Width = 942
     Height = 564
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Pesquisa'
+      DesignSize = (
+        934
+        536)
       object DBGrid1: TDBGrid
         Left = 12
         Top = 45
         Width = 909
         Height = 476
+        Anchors = [akLeft, akTop, akRight, akBottom]
         DataSource = DataSource1
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -45,7 +50,7 @@ object FormSADT: TFormSADT
           end
           item
             Expanded = False
-            FieldName = 'numeroLote'
+            FieldName = 'NumeroLote'
             Width = 88
             Visible = True
           end
@@ -510,7 +515,7 @@ object FormSADT: TFormSADT
               Top = 33
               Width = 128
               Height = 21
-              DataField = 'codigoPrestadorNaOperadora'
+              DataField = 'codigoPrestadorNaOperadora_SOLI'
               DataSource = DataSource1
               TabOrder = 0
             end
@@ -571,7 +576,7 @@ object FormSADT: TFormSADT
               ParentFont = False
             end
             object Label14: TLabel
-              Left = 497
+              Left = 488
               Top = 17
               Width = 14
               Height = 13
@@ -605,15 +610,6 @@ object FormSADT: TFormSADT
               DataSource = DataSource1
               TabOrder = 0
             end
-            object Edit12: TDBEdit
-              Left = 209
-              Top = 33
-              Width = 103
-              Height = 21
-              DataField = 'conselhoProfissional'
-              DataSource = DataSource1
-              TabOrder = 1
-            end
             object Edit13: TDBEdit
               Left = 343
               Top = 33
@@ -621,24 +617,73 @@ object FormSADT: TFormSADT
               Height = 21
               DataField = 'numeroConselhoProfissional'
               DataSource = DataSource1
-              TabOrder = 2
-            end
-            object Edit14: TDBEdit
-              Left = 494
-              Top = 33
-              Width = 35
-              Height = 21
-              DataField = 'UF'
-              DataSource = DataSource1
-              TabOrder = 3
+              TabOrder = 1
             end
             object Edit15: TDBEdit
               Left = 535
               Top = 33
               Width = 63
               Height = 21
-              DataField = 'CBOS'
+              DataField = 'CBOS_SOLICITANTE'
               DataSource = DataSource1
+              TabOrder = 2
+            end
+            object DBComboBox1: TDBComboBox
+              Left = 216
+              Top = 33
+              Width = 117
+              Height = 21
+              DataField = 'conselhoProfissional'
+              DataSource = DataSource1
+              Items.Strings = (
+                '01 - CRAS'
+                '02 - COREN'
+                '03 - CRF'
+                '04 - CRFA'
+                '05 - REFITO'
+                '06 - CRM'
+                '07 - CRN'
+                '08 - CRO'
+                '09 - CRP'
+                '10 - Outros')
+              TabOrder = 3
+            end
+            object DBComboBox8: TDBComboBox
+              Left = 487
+              Top = 33
+              Width = 42
+              Height = 21
+              DataField = 'UF_SOLICITANTE'
+              DataSource = DataSource1
+              Items.Strings = (
+                '11-RO'
+                '12-AC'
+                '13-AM'
+                '14-RR'
+                '15-PA'
+                '16-AP'
+                '17-TO'
+                '21-MA'
+                '22-PI'
+                '23-CE'
+                '24-RN'
+                '25-PB'
+                '26-PE'
+                '27-AL'
+                '28-SE'
+                '29-BA'
+                '31-MG'
+                '32-ES'
+                '33-RJ'
+                '35-SP'
+                '41-PR'
+                '42-SC'
+                '43-RS'
+                '50-MS'
+                '51-MT'
+                '52-GO'
+                '53-DF'
+                '98-EX')
               TabOrder = 4
             end
           end
@@ -676,15 +721,6 @@ object FormSADT: TFormSADT
             Font.Style = [fsBold]
             ParentFont = False
           end
-          object Edit16: TDBEdit
-            Left = 7
-            Top = 32
-            Width = 101
-            Height = 21
-            DataField = 'caraterAtendimento'
-            DataSource = DataSource1
-            TabOrder = 0
-          end
           object DBEdit2: TDBEdit
             Left = 118
             Top = 32
@@ -692,6 +728,18 @@ object FormSADT: TFormSADT
             Height = 21
             DataField = 'dataSolicitacao'
             DataSource = DataSource1
+            TabOrder = 0
+          end
+          object DBComboBox2: TDBComboBox
+            Left = 11
+            Top = 32
+            Width = 97
+            Height = 21
+            DataField = 'caraterAtendimento'
+            DataSource = DataSource1
+            Items.Strings = (
+              '1-Efetiva'
+              '2-Urgencia')
             TabOrder = 1
           end
         end
@@ -746,7 +794,7 @@ object FormSADT: TFormSADT
             Top = 31
             Width = 142
             Height = 21
-            DataField = 'codigoPrestadorNaOperadora2'
+            DataField = 'codigoPrestadorNaOperadora_EXEC'
             DataSource = DataSource1
             TabOrder = 0
           end
@@ -755,7 +803,7 @@ object FormSADT: TFormSADT
             Top = 30
             Width = 149
             Height = 21
-            DataField = 'nomeExecutante'
+            DataField = 'nomeContratado_EXEC'
             DataSource = DataSource1
             TabOrder = 1
           end
@@ -815,37 +863,65 @@ object FormSADT: TFormSADT
             Font.Style = [fsBold]
             ParentFont = False
           end
-          object Edit20: TDBEdit
-            Left = 4
+          object DBComboBox3: TDBComboBox
+            Left = 8
             Top = 31
-            Width = 83
+            Width = 79
             Height = 21
             DataField = 'tipoAtendimento'
             DataSource = DataSource1
+            Items.Strings = (
+              '01 - Remo'#231#227'o'
+              '02 - Pequena Cirurgia'
+              '03 - Outras Terapias'
+              '04 - Consulta'
+              '05 - Exame Ambulatorial'
+              '06 - Atendimento Domiciliar'
+              '07 - Interna'#231#227'o'
+              '08 - Quimioterapia'
+              '09 - Radioterapia'
+              '10 - Terapia Renal Substitutiva (TRS)'
+              '11 - Pronto Socorro'
+              '13 - Pequeno atendimento'
+              '14 - Sa'#250'de Ocupacional - Admissional'
+              '15 - Sa'#250'de Ocupacional - Demissional'
+              '16 - Sa'#250'de Ocupacional - Peri'#243'dico'
+              '17 - Sa'#250'de Ocupacional - Retorno ao trabalho'
+              '18 - Sa'#250'de Ocupacional - Mudan'#231'a de fun'#231#227'o')
             TabOrder = 0
           end
-          object Edit21: TDBEdit
-            Left = 93
-            Top = 31
-            Width = 76
+          object DBComboBox4: TDBComboBox
+            Left = 96
+            Top = 32
+            Width = 73
             Height = 21
             DataField = 'indicacaoAcidente'
             DataSource = DataSource1
+            Items.Strings = (
+              '0 - Trabalho'
+              '1 - Tr'#226'nsito'
+              '2 - Outros Acidentes'
+              '9 - N'#227'o Acidentes')
             TabOrder = 1
           end
-          object DBEdit3: TDBEdit
-            Left = 175
-            Top = 31
-            Width = 76
+          object DBComboBox5: TDBComboBox
+            Left = 176
+            Top = 30
+            Width = 83
             Height = 21
             DataField = 'tipoConsulta'
             DataSource = DataSource1
+            Items.Strings = (
+              '1 - Primeira Consulta'
+              '2 - Retorno'
+              '3 - Pr'#233'-natal'
+              '4 - Por encaminhamento')
             TabOrder = 2
           end
         end
         object GroupBox10: TGroupBox
           Left = 14
-          Top = 334
+          Top = 335
           Width = 907
           Height = 105
           Caption = 'Procedimentos Executados'
@@ -1025,24 +1101,6 @@ object FormSADT: TFormSADT
             DataSource = DataSource1
             TabOrder = 4
           end
-          object Edit27: TDBEdit
-            Left = 8
-            Top = 75
-            Width = 61
-            Height = 21
-            DataField = 'viaAcesso'
-            DataSource = DataSource1
-            TabOrder = 5
-          end
-          object Edit28: TDBEdit
-            Left = 112
-            Top = 75
-            Width = 77
-            Height = 21
-            DataField = 'tecnicaUtilizada'
-            DataSource = DataSource1
-            TabOrder = 6
-          end
           object Edit29: TDBEdit
             Left = 443
             Top = 75
@@ -1050,7 +1108,7 @@ object FormSADT: TFormSADT
             Height = 21
             DataField = 'valorUnitario'
             DataSource = DataSource1
-            TabOrder = 7
+            TabOrder = 5
           end
           object Edit30: TDBEdit
             Left = 532
@@ -1059,7 +1117,7 @@ object FormSADT: TFormSADT
             Height = 21
             DataField = 'valorTotal'
             DataSource = DataSource1
-            TabOrder = 8
+            TabOrder = 6
           end
           object Edit32: TDBEdit
             Left = 352
@@ -1068,6 +1126,32 @@ object FormSADT: TFormSADT
             Height = 21
             DataField = 'reducaoAcrescimo'
             DataSource = DataSource1
+            TabOrder = 7
+          end
+          object DBComboBox6: TDBComboBox
+            Left = 9
+            Top = 74
+            Width = 89
+            Height = 21
+            DataField = 'viaAcesso'
+            DataSource = DataSource1
+            Items.Strings = (
+              '1- Unica'
+              '2-Mesma via '
+              '3-Diferentes vias')
+            TabOrder = 8
+          end
+          object DBComboBox7: TDBComboBox
+            Left = 112
+            Top = 74
+            Width = 126
+            Height = 21
+            DataField = 'tecnicaUtilizada'
+            DataSource = DataSource1
+            Items.Strings = (
+              '1-Convencional'
+              '2-Videolaparoscopia'
+              '3-Rob'#243'tica')
             TabOrder = 9
           end
         end
@@ -1183,7 +1267,7 @@ object FormSADT: TFormSADT
             Top = 32
             Width = 92
             Height = 21
-            DataField = 'codigoPrestadorNaOperadora2'
+            DataField = 'codigoPrestadorNaOperadora_EXEC'
             DataSource = DataSource1
             TabOrder = 1
           end
@@ -1210,7 +1294,7 @@ object FormSADT: TFormSADT
             Top = 32
             Width = 32
             Height = 21
-            DataField = 'UF'
+            DataField = 'UF_SOLICITANTE'
             DataSource = DataSource1
             TabOrder = 4
           end
@@ -1228,7 +1312,7 @@ object FormSADT: TFormSADT
             Top = 32
             Width = 64
             Height = 21
-            DataField = 'CBOS'
+            DataField = 'CBOS_SOLICITANTE'
             DataSource = DataSource1
             TabOrder = 6
           end
@@ -1313,160 +1397,188 @@ object FormSADT: TFormSADT
   end
   object DataSource1: TDataSource
     DataSet = cdsTISS
-    Left = 501
-    Top = 144
+    Left = 445
+    Top = 48
   end
   object cdsTISS: TClientDataSet
     Aggregates = <>
+    FieldDefs = <>
+    IndexDefs = <>
     Params = <>
-    Left = 408
-    Top = 144
+    ProviderName = 'DataSetProvider1'
+    StoreDefs = True
+    Left = 368
+    Top = 48
+    object cdsTISScodigoPrestadorNaOperadora: TStringField
+      FieldName = 'codigoPrestadorNaOperadora'
+      ProviderFlags = [pfInUpdate]
+      Size = 10
+    end
     object cdsTISSRegistroANS: TStringField
       FieldName = 'RegistroANS'
-      Size = 50
+      ProviderFlags = [pfInUpdate]
+      Size = 7
     end
-    object cdsTISSnumeroLote: TStringField
-      FieldName = 'numeroLote'
-      Size = 50
+    object cdsTISSNumeroLote: TStringField
+      FieldName = 'NumeroLote'
+      ProviderFlags = [pfInUpdate]
+      Size = 8
     end
     object cdsTISSnumeroGuiaPrestador: TStringField
       FieldName = 'numeroGuiaPrestador'
-      Size = 50
+      ProviderFlags = [pfInUpdate]
+      Size = 10
     end
-    object cdsTISSdataAutorizacao: TStringField
+    object cdsTISSdataAutorizacao: TDateField
       FieldName = 'dataAutorizacao'
-      Size = 50
+      ProviderFlags = [pfInUpdate]
     end
     object cdsTISSsenha: TStringField
       FieldName = 'senha'
-      Size = 50
+      ProviderFlags = [pfInUpdate]
+    end
+    object cdsTISSdataValidadeSenha: TDateField
+      FieldName = 'dataValidadeSenha'
+      ProviderFlags = [pfInUpdate]
     end
     object cdsTISSnumeroCarteira: TStringField
       FieldName = 'numeroCarteira'
-      Size = 50
-    end
-    object cdsTISSdataValidadeSenha: TStringField
-      FieldName = 'dataValidadeSenha'
-      Size = 50
+      ProviderFlags = [pfInUpdate]
+      Size = 10
     end
     object cdsTISSatendimentoRN: TStringField
       FieldName = 'atendimentoRN'
-      Size = 50
+      ProviderFlags = [pfInUpdate]
+      FixedChar = True
+      Size = 1
     end
     object cdsTISSnomeBeneficiario: TStringField
       FieldName = 'nomeBeneficiario'
+      ProviderFlags = [pfInUpdate]
       Size = 50
     end
-    object cdsTISScodigoPrestadorNaOperadora: TStringField
-      FieldName = 'codigoPrestadorNaOperadora'
-      Size = 50
+    object cdsTISScodigoPrestadorNaOperadora_SOLI: TStringField
+      FieldName = 'codigoPrestadorNaOperadora_SOLI'
+      ProviderFlags = [pfInUpdate]
+      Size = 10
     end
     object cdsTISSnomeContratado: TStringField
       FieldName = 'nomeContratado'
+      ProviderFlags = [pfInUpdate]
       Size = 50
     end
     object cdsTISSnomeProfissional: TStringField
       FieldName = 'nomeProfissional'
+      ProviderFlags = [pfInUpdate]
       Size = 50
     end
     object cdsTISSconselhoProfissional: TStringField
       FieldName = 'conselhoProfissional'
-      Size = 50
+      ProviderFlags = [pfInUpdate]
     end
     object cdsTISSnumeroConselhoProfissional: TStringField
       FieldName = 'numeroConselhoProfissional'
-      Size = 50
+      ProviderFlags = [pfInUpdate]
+      Size = 10
     end
-    object cdsTISSUF: TStringField
-      FieldName = 'UF'
-      Size = 50
+    object cdsTISSUF_SOLICITANTE: TSmallintField
+      FieldName = 'UF_SOLICITANTE'
+      ProviderFlags = [pfInUpdate]
     end
-    object cdsTISSCBOS: TStringField
-      FieldName = 'CBOS'
-      Size = 50
+    object cdsTISSCBOS_SOLICITANTE: TStringField
+      FieldName = 'CBOS_SOLICITANTE'
+      ProviderFlags = [pfInUpdate]
+      Size = 10
+    end
+    object cdsTISSdataSolicitacao: TDateField
+      FieldName = 'dataSolicitacao'
+      ProviderFlags = [pfInUpdate]
     end
     object cdsTISScaraterAtendimento: TStringField
       FieldName = 'caraterAtendimento'
+      ProviderFlags = [pfInUpdate]
+    end
+    object cdsTISScodigoPrestadorNaOperadora_EXEC: TStringField
+      FieldName = 'codigoPrestadorNaOperadora_EXEC'
+      ProviderFlags = [pfInUpdate]
+      Size = 10
+    end
+    object cdsTISSnomeContratado_EXEC: TStringField
+      FieldName = 'nomeContratado_EXEC'
+      ProviderFlags = [pfInUpdate]
       Size = 50
     end
     object cdsTISSCNES: TStringField
       FieldName = 'CNES'
-      Size = 50
+      ProviderFlags = [pfInUpdate]
+      Size = 8
     end
     object cdsTISStipoAtendimento: TStringField
       FieldName = 'tipoAtendimento'
-      Size = 50
+      ProviderFlags = [pfInUpdate]
     end
     object cdsTISSindicacaoAcidente: TStringField
       FieldName = 'indicacaoAcidente'
-      Size = 50
-    end
-    object cdsTISSdataExecucao: TStringField
-      FieldName = 'dataExecucao'
-      Size = 50
-    end
-    object cdsTISScodigoTabela: TStringField
-      FieldName = 'codigoTabela'
-      Size = 50
-    end
-    object cdsTISScodigoProcedimento: TStringField
-      FieldName = 'codigoProcedimento'
-      Size = 50
-    end
-    object cdsTISSdescricaoProcedimento: TStringField
-      FieldName = 'descricaoProcedimento'
-      Size = 50
-    end
-    object cdsTISSquantidadeExecutada: TStringField
-      FieldName = 'quantidadeExecutada'
-      Size = 50
-    end
-    object cdsTISSnomeExecutante: TStringField
-      FieldName = 'nomeExecutante'
-      Size = 50
-    end
-    object cdsTISSviaAcesso: TStringField
-      FieldName = 'viaAcesso'
-      Size = 50
-    end
-    object cdsTISStecnicaUtilizada: TStringField
-      FieldName = 'tecnicaUtilizada'
-      Size = 50
-    end
-    object cdsTISSreducaoAcrescimo: TStringField
-      FieldName = 'reducaoAcrescimo'
-      Size = 50
-    end
-    object cdsTISSvalorUnitario: TStringField
-      FieldName = 'valorUnitario'
-      Size = 50
-    end
-    object cdsTISSvalorTotal: TStringField
-      FieldName = 'valorTotal'
-      Size = 50
-    end
-    object cdsTISSgrauPart: TStringField
-      FieldName = 'grauPart'
-      Size = 50
-    end
-    object cdsTISScodigoPrestadorNaOperadora2: TStringField
-      FieldName = 'codigoPrestadorNaOperadora2'
-      Size = 50
-    end
-    object cdsTISSnomeProf: TStringField
-      FieldName = 'nomeProf'
-      Size = 50
-    end
-    object cdsTISSconselho: TStringField
-      FieldName = 'conselho'
-      Size = 50
-    end
-    object cdsTISSdataSolicitacao: TStringField
-      FieldName = 'dataSolicitacao'
-      Size = 10
+      ProviderFlags = [pfInUpdate]
     end
     object cdsTISStipoConsulta: TStringField
       FieldName = 'tipoConsulta'
+      ProviderFlags = [pfInUpdate]
+    end
+    object cdsTISSdataExecucao: TDateField
+      FieldName = 'dataExecucao'
+      ProviderFlags = [pfInUpdate]
+    end
+    object cdsTISScodigoTabela: TIntegerField
+      FieldName = 'codigoTabela'
+      ProviderFlags = [pfInUpdate]
+    end
+    object cdsTISScodigoProcedimento: TStringField
+      FieldName = 'codigoProcedimento'
+      ProviderFlags = [pfInUpdate]
+      Size = 10
+    end
+    object cdsTISSdescricaoProcedimento: TStringField
+      FieldName = 'descricaoProcedimento'
+      ProviderFlags = [pfInUpdate]
+      Size = 50
+    end
+    object cdsTISSquantidadeExecutada: TIntegerField
+      FieldName = 'quantidadeExecutada'
+      ProviderFlags = [pfInUpdate]
+    end
+    object cdsTISSreducaoAcrescimo: TSingleField
+      FieldName = 'reducaoAcrescimo'
+      ProviderFlags = [pfInUpdate]
+    end
+    object cdsTISSvalorUnitario: TSingleField
+      FieldName = 'valorUnitario'
+      ProviderFlags = [pfInUpdate]
+    end
+    object cdsTISSvalorTotal: TSingleField
+      FieldName = 'valorTotal'
+      ProviderFlags = [pfInUpdate]
+    end
+    object cdsTISSvalorProcedimentos: TSingleField
+      FieldName = 'valorProcedimentos'
+      ProviderFlags = [pfInUpdate]
+    end
+    object cdsTISSvalorTotalGeral: TSingleField
+      FieldName = 'valorTotalGeral'
+      ProviderFlags = [pfInUpdate]
+    end
+    object cdsTISSCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object cdsTISSviaAcesso: TStringField
+      FieldName = 'viaAcesso'
+    end
+    object cdsTISStecnicaUtilizada: TStringField
+      FieldName = 'tecnicaUtilizada'
+    end
+    object cdsTISSgrauPart: TSingleField
+      FieldName = 'grauPart'
     end
   end
   object XMLDocument1: TXMLDocument
@@ -1479,5 +1591,12 @@ object FormSADT: TFormSADT
     Options = []
     Left = 672
     Top = 8
+  end
+  object DataSetProvider1: TDataSetProvider
+    DataSet = DSServerModuleBaseDados.SQLGUIATISS
+    UpdateMode = upWhereKeyOnly
+    OnDataRequest = DataSetProvider1DataRequest
+    Left = 280
+    Top = 48
   end
 end

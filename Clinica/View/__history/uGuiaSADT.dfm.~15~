@@ -11,7 +11,8 @@ object FormSADT: TFormSADT
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnCreate = FormCreate
+  WindowState = wsMaximized
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object PageControl1: TPageControl
@@ -24,11 +25,15 @@ object FormSADT: TFormSADT
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Pesquisa'
+      DesignSize = (
+        934
+        536)
       object DBGrid1: TDBGrid
         Left = 12
         Top = 45
         Width = 909
         Height = 476
+        Anchors = [akLeft, akTop, akRight, akBottom]
         DataSource = DataSource1
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -1317,10 +1322,12 @@ object FormSADT: TFormSADT
     Top = 48
   end
   object cdsTISS: TClientDataSet
-    Active = True
     Aggregates = <>
+    FieldDefs = <>
+    IndexDefs = <>
     Params = <>
     ProviderName = 'DataSetProvider1'
+    StoreDefs = True
     Left = 368
     Top = 48
     object cdsTISScodigoPrestadorNaOperadora: TStringField
@@ -1483,8 +1490,7 @@ object FormSADT: TFormSADT
     end
     object cdsTISSCODIGO: TIntegerField
       FieldName = 'CODIGO'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
+      ProviderFlags = [pfInWhere, pfInKey]
     end
     object cdsTISSviaAcesso: TStringField
       FieldName = 'viaAcesso'
@@ -1492,7 +1498,7 @@ object FormSADT: TFormSADT
     object cdsTISStecnicaUtilizada: TStringField
       FieldName = 'tecnicaUtilizada'
     end
-    object cdsTISSgrauPart: TSmallintField
+    object cdsTISSgrauPart: TSingleField
       FieldName = 'grauPart'
     end
   end
@@ -1510,6 +1516,7 @@ object FormSADT: TFormSADT
   object DataSetProvider1: TDataSetProvider
     DataSet = DSServerModuleBaseDados.SQLGUIATISS
     UpdateMode = upWhereKeyOnly
+    OnDataRequest = DataSetProvider1DataRequest
     Left = 280
     Top = 48
   end
