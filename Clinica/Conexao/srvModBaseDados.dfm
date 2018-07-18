@@ -170,7 +170,7 @@ object DSServerModuleBaseDados: TDSServerModuleBaseDados
     end
     object SQLGUIATISSdescricaoProcedimento: TStringField
       FieldName = 'descricaoProcedimento'
-      Size = 50
+      Size = 200
     end
     object SQLGUIATISSquantidadeExecutada: TIntegerField
       FieldName = 'quantidadeExecutada'
@@ -202,6 +202,32 @@ object DSServerModuleBaseDados: TDSServerModuleBaseDados
     end
     object SQLGUIATISSgrauPart: TSingleField
       FieldName = 'grauPart'
+    end
+    object SQLGUIATISScodigoPrestadorNaOperadora_EQUI: TStringField
+      FieldName = 'codigoPrestadorNaOperadora_EQUI'
+      ProviderFlags = [pfInUpdate]
+    end
+    object SQLGUIATISSnomeProfissional_EQUI: TStringField
+      FieldName = 'nomeProfissional_EQUI'
+      ProviderFlags = [pfInUpdate]
+      Size = 50
+    end
+    object SQLGUIATISSconselhoProfissional_EQUI: TStringField
+      FieldName = 'conselhoProfissional_EQUI'
+      ProviderFlags = [pfInUpdate]
+    end
+    object SQLGUIATISSnumeroConselhoProfissional_EQUI: TStringField
+      FieldName = 'numeroConselhoProfissional_EQUI'
+      ProviderFlags = [pfInUpdate]
+    end
+    object SQLGUIATISSUF_EQUI: TSmallintField
+      FieldName = 'UF_EQUI'
+      ProviderFlags = [pfInUpdate]
+    end
+    object SQLGUIATISSCBOS_EQUI: TStringField
+      FieldName = 'CBOS_EQUI'
+      ProviderFlags = [pfInUpdate]
+      Size = 10
     end
   end
 end

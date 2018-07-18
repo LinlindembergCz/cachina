@@ -165,6 +165,14 @@ type
     DBComboBox8: TDBComboBox;
     edtNomeExecutante: TEdit;
     Label42: TLabel;
+    edtLote: TEdit;
+    Label43: TLabel;
+    cdsTISScodigoPrestadorNaOperadora_EQUI: TStringField;
+    cdsTISSnomeProfissional_EQUI: TStringField;
+    cdsTISSconselhoProfissional_EQUI: TStringField;
+    cdsTISSnumeroConselhoProfissional_EQUI: TStringField;
+    cdsTISSUF_EQUI: TSmallintField;
+    cdsTISSCBOS_EQUI: TStringField;
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
@@ -175,12 +183,12 @@ type
     function DataSetProvider1DataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
   private
-    procedure AdicionarTag(texto: string; valor: string = '');
+    Conteudo: string;
     procedure ValidarXML(caminho: string);
     { Private declarations }
   public
     { Public declarations }
-    XML: TStringList;
+
   end;
 
 var
@@ -220,23 +228,14 @@ procedure TFormSADT.BitBtn2Click(Sender: TObject);
   end;
 
 begin
-
   CopyRecord;
-  {
+
   cdsTISSsenha.value := '';
   cdsTISSnumeroCarteira.value := '';
-  cdsTISSdataAutorizacao.Value:= '';
+  cdsTISSdataAutorizacao.asstring:= '';
+  cdsTISSnumeroGuiaPrestador.asstring:= '';
   cdsTISSnumeroLote.Value:= '';
-  }
 
-end;
-
-procedure TFormSADT.AdicionarTag(texto: string; valor: string = '');
-begin
-   if valor = '' then
-      XML.Add( texto )
-   else
-     XML.Add( Format('<ansTISS:'+texto+'>%s</ansTISS:'+texto +'>',[valor]) )
 end;
 
 function MD5String(const Value: string): string;
@@ -268,14 +267,14 @@ end;
 
 procedure TFormSADT.BitBtn3Click(Sender: TObject);
 
-function formatarValor(texto: string): string;
-begin
-  result:=  Formatfloat(',0.00', strtofloat(texto ));
-end;
+  function formatarValor(texto: string): string;
+  begin
+    result:= stringReplace( formatFloat(',0.00;', strtofloat(texto) ) , ',' , '.' , [] );
+  end;
 
 
 var
-  Conteudo: string;
+
 
   RegistroANS: String;
   numeroLote: String;
@@ -313,171 +312,214 @@ var
   conselho: String;
   dataSolicitacao: string;
   tipoConsulta: string;
+  codigoPrestadorNaOperadora_Equi : string;
+  nomeProf_Equi                   : string;
+  conselho_Equi                   : string;
+  numeroConselhoProfissional_Equi : string;
+  UF_Equi                         : string;
+  CBOS_Equi                       : string;
+
+  XML: TStringList;
+
+  function formatarData(Data: Tdatetime): string;
+  begin
+     result:= Formatdatetime('YYYY-MM-DD', Data );
+  end;
+
+  procedure AdicionarTag(texto: string; valor: string = '');
+  begin
+     if valor = '' then
+        XML.Add( texto )
+     else
+     begin
+       if (valor <> '1899-12-30') and (valor <> '') then
+       begin
+         XML.Add( Format(texto ,[valor] ));
+         Conteudo:= Conteudo + valor;
+       end;
+     end;
+  end;
+
 begin
+   Conteudo:= '';
+
    XML:= TStringList.Create;
 
    AdicionarTag('<?xml version="1.0" encoding="iso-8859-1"?>');
-
    AdicionarTag('<ansTISS:mensagemTISS xmlns:ansTISS="http://www.ans.gov.br/padroes/tiss/schemas">');
 
    AdicionarTag('<ansTISS:cabecalho>');
-   AdicionarTag('<ansTISS:identificacaoTransacao>');
-   AdicionarTag('  <ansTISS:tipoTransacao>ENVIO_LOTE_GUIAS</ansTISS:tipoTransacao>');
-   AdicionarTag('  <ansTISS:sequencialTransacao>1</ansTISS:sequencialTransacao>');
-   AdicionarTag(Format('  <ansTISS:dataRegistroTransacao>%s</ansTISS:dataRegistroTransacao>',[FormatDatetime('YYYY-MM-DD',date)] ));
-   AdicionarTag(Format('  <ansTISS:horaRegistroTransacao>%s</ansTISS:horaRegistroTransacao>',[timetostr(time)] ));
-   AdicionarTag(' </ansTISS:identificacaoTransacao>');
+   AdicionarTag('   <ansTISS:identificacaoTransacao>');
+   AdicionarTag('       <ansTISS:tipoTransacao>%s</ansTISS:tipoTransacao>','ENVIO_LOTE_GUIAS');
+   AdicionarTag('       <ansTISS:sequencialTransacao>%s</ansTISS:sequencialTransacao>','1');
+   AdicionarTag('       <ansTISS:dataRegistroTransacao>%s</ansTISS:dataRegistroTransacao>','2018-01-03'{FormatDatetime('YYYY-MM-DD',date)} );
+   AdicionarTag('       <ansTISS:horaRegistroTransacao>%s</ansTISS:horaRegistroTransacao>','18:49:17'{timetostr(time) });
+   AdicionarTag('   </ansTISS:identificacaoTransacao>');
 
-   AdicionarTag(' <ansTISS:origem> ');
-   AdicionarTag('  <ansTISS:identificacaoPrestador> ');
-   AdicionarTag(Format('     <ansTISS:codigoPrestadorNaOperadora>%s</ansTISS:codigoPrestadorNaOperadora>',['44631669']));
-   AdicionarTag('   </ansTISS:identificacaoPrestador> ');
-   AdicionarTag(' </ansTISS:origem>');
+   AdicionarTag('   <ansTISS:origem> ');
+   AdicionarTag('       <ansTISS:identificacaoPrestador> ');
+   AdicionarTag('           <ansTISS:codigoPrestadorNaOperadora>%s</ansTISS:codigoPrestadorNaOperadora>','39772616');
+   AdicionarTag('       </ansTISS:identificacaoPrestador> ');
+   AdicionarTag('   </ansTISS:origem>');
 
    AdicionarTag('<ansTISS:destino>');
-   AdicionarTag(Format('  <ansTISS:registroANS>%s</ansTISS:registroANS>',['326305']));
+   AdicionarTag('  <ansTISS:registroANS>%s</ansTISS:registroANS>','326305');
    AdicionarTag('</ansTISS:destino>');
 
-   AdicionarTag(' <ansTISS:Padrao>3.03.01</ansTISS:Padrao> ');
+   AdicionarTag(' <ansTISS:Padrao>%s</ansTISS:Padrao> ','3.03.01');
    AdicionarTag('</ansTISS:cabecalho>');
 
    AdicionarTag('		<ansTISS:prestadorParaOperadora> ');
 	 AdicionarTag('		  <ansTISS:loteGuias>  ');
-	 AdicionarTag(Format('		  	<ansTISS:numeroLote>%s</ansTISS:numeroLote>  ',[cdsTISSnumeroLote.Asstring]));
+	 AdicionarTag('		  	<ansTISS:numeroLote>%s</ansTISS:numeroLote>  ', cdsTISSnumeroLote.Asstring);
 	 AdicionarTag('		      <ansTISS:guiasTISS>  ');
 
    cdsTISS.First;
    while not cdsTISS.Eof do
    begin
-     RegistroANS                 := cdsTISSRegistroANS.Asstring;
-     numeroGuiaPrestador         := cdsTISSnumeroGuiaPrestador.Asstring;
-     dataAutorizacao             := cdsTISSdataAutorizacao.Asstring;
-     senha                       := cdsTISSsenha.Asstring;
-     dataValidadeSenha           := cdsTISSdataValidadeSenha.Asstring;
-     numeroCarteira              := cdsTISSnumeroCarteira.Asstring;
-     atendimentoRN               := cdsTISSatendimentoRN.Asstring;
-     nomeBeneficiario            := cdsTISSnomeBeneficiario.Asstring;
-     codigoPrestadorNaOperadora  := cdsTISScodigoPrestadorNaOperadora.Asstring;
-     nomeContratado              := cdsTISSnomeContratado.Asstring;
-     nomeProfissional            := cdsTISSnomeProfissional.Asstring;
-     conselhoProfissional        := cdsTISSconselhoProfissional.Asstring;
-     numeroConselhoProfissional  := cdsTISSnumeroConselhoProfissional.Asstring;
-     UF                          := Copy(cdsTISSUF_SOLICITANTE.Asstring,1,2);
-     CBOS                        := cdsTISSCBOS_SOLICITANTE.Asstring;
-     caraterAtendimento          := cdsTISScaraterAtendimento.Asstring[1];
-     CNES                        := cdsTISSCNES.Asstring;
-     tipoAtendimento             := Copy(cdsTISStipoAtendimento.Asstring,1,2);
-     indicacaoAcidente           := cdsTISSindicacaoAcidente.Asstring[1];
-     dataExecucao                := cdsTISSdataExecucao.Asstring;
-     codigoTabela                := cdsTISScodigoTabela.Asstring;
-     codigoProcedimento          := cdsTISScodigoProcedimento.Asstring;
-     descricaoProcedimento       := cdsTISSdescricaoProcedimento.Asstring;
-     quantidadeExecutada         := cdsTISSquantidadeExecutada.Asstring;
-     viaAcesso                   := cdsTISSviaAcesso.Asstring[1];
-     tecnicaUtilizada            := cdsTISStecnicaUtilizada.Asstring[1];
-     reducaoAcrescimo            := cdsTISSreducaoAcrescimo.Asstring;
-     valorUnitario               := cdsTISSvalorUnitario.Asstring;
-     valorTotal                  := cdsTISSvalorTotal.Asstring;
-     grauPart                    := cdsTISSgrauPart.Asstring;
-     codigoPrestadorNaOperadora2 := cdsTISScodigoPrestadorNaOperadora_EXEC.Asstring;
-     nomeProf                    := cdsTISSnomeProfissional.Asstring;
-     conselho                    := cdsTISSconselhoProfissional.Asstring;
-     dataSolicitacao             := cdsTISSdataSolicitacao.Asstring;
-     tipoConsulta                := cdsTISStipoConsulta.AsString[1];
+      RegistroANS                 := cdsTISSRegistroANS.Asstring;
+      numeroGuiaPrestador         := cdsTISSnumeroGuiaPrestador.Asstring;
+      dataAutorizacao             := formatarData(cdsTISSdataAutorizacao.AsDatetime);
+      senha                       := cdsTISSsenha.Asstring;
+      dataValidadeSenha           := formatarData(cdsTISSdataValidadeSenha.AsDatetime);
+      numeroCarteira              := cdsTISSnumeroCarteira.Asstring;
+      atendimentoRN               := cdsTISSatendimentoRN.Asstring;
+      nomeBeneficiario            := cdsTISSnomeBeneficiario.Asstring;
+      codigoPrestadorNaOperadora  := cdsTISScodigoPrestadorNaOperadora.Asstring;
+      nomeContratado              := cdsTISSnomeContratado.Asstring;
+      nomeProfissional            := cdsTISSnomeProfissional.Asstring;
+      conselhoProfissional        := cdsTISSconselhoProfissional.Asstring;
+      numeroConselhoProfissional  := cdsTISSnumeroConselhoProfissional.Asstring;
+      UF                          := Copy(cdsTISSUF_SOLICITANTE.Asstring,1,2);
+      CBOS                        := cdsTISSCBOS_SOLICITANTE.Asstring;
+      if cdsTISScaraterAtendimento.Asstring <> '' then
+         caraterAtendimento          := cdsTISScaraterAtendimento.Asstring[1];
+      CNES                        := cdsTISSCNES.Asstring;
+      tipoAtendimento             := Copy(cdsTISStipoAtendimento.Asstring,1,2);
+      if cdsTISSindicacaoAcidente.Asstring <> '' then
+         indicacaoAcidente           := cdsTISSindicacaoAcidente.Asstring[1];
+      dataExecucao                := formatarData(cdsTISSdataExecucao.AsDatetime);
+      codigoTabela                := cdsTISScodigoTabela.Asstring;
+      codigoProcedimento          := cdsTISScodigoProcedimento.Asstring;
+      descricaoProcedimento       := cdsTISSdescricaoProcedimento.Asstring;
+      quantidadeExecutada         := cdsTISSquantidadeExecutada.Asstring;
+      if cdsTISSviaAcesso.Asstring <> '' then
+         viaAcesso                   := cdsTISSviaAcesso.Asstring[1];
+      tecnicaUtilizada            := cdsTISStecnicaUtilizada.Asstring[1];
+      reducaoAcrescimo            := cdsTISSreducaoAcrescimo.Asstring;
+      valorUnitario               := cdsTISSvalorUnitario.Asstring;
+      valorTotal                  := cdsTISSvalorTotal.Asstring;
+      nomeProf                    := cdsTISSnomeProfissional.Asstring;
+      conselho                    := cdsTISSconselhoProfissional.Asstring;
+      dataSolicitacao             := formatarData(cdsTISSdataSolicitacao.AsDatetime);
+      if cdsTISStipoConsulta.AsString <> '' then
+         tipoConsulta                := cdsTISStipoConsulta.AsString[1];
+
+      grauPart                        := cdsTISSgrauPart.Asstring;
+      codigoPrestadorNaOperadora_Equi := cdsTISScodigoPrestadorNaOperadora_EQUI.AsString;
+      nomeProf_Equi                   := cdsTISSnomeProfissional_EQUI.AsString;
+      conselho_Equi                   := cdsTISSconselhoProfissional_EQUI.AsString;
+      numeroConselhoProfissional_Equi := cdsTISSnumeroConselhoProfissional_EQUI.AsString;
+      UF_Equi                         := cdsTISSUF_EQUI.AsString;
+      CBOS_Equi                       := cdsTISSCBOS_EQUI.AsString;
 
       AdicionarTag('<ansTISS:guiaSP-SADT>');
       AdicionarTag('<ansTISS:cabecalhoGuia>');
-      AdicionarTag('registroANS',registroANS);
-      AdicionarTag('numeroGuiaPrestador',numeroGuiaPrestador);
+      AdicionarTag('<ansTISS:registroANS>%s</ansTISS:registroANS>',registroANS);
+      AdicionarTag('<ansTISS:numeroGuiaPrestador>%s</ansTISS:numeroGuiaPrestador>',numeroGuiaPrestador);
       AdicionarTag('</ansTISS:cabecalhoGuia>');
 
       AdicionarTag('<ansTISS:dadosAutorizacao> ');
-      AdicionarTag('dataAutorizacao',dataAutorizacao);
-      AdicionarTag('senha',senha);
-      AdicionarTag('dataValidadeSenha',dataValidadeSenha);
+      AdicionarTag('<ansTISS:dataAutorizacao>%s</ansTISS:dataAutorizacao>',dataAutorizacao);
+      AdicionarTag('<ansTISS:senha>%s</ansTISS:senha>',senha);
+      AdicionarTag('<ansTISS:dataValidadeSenha>%s</ansTISS:dataValidadeSenha>',dataValidadeSenha);
       AdicionarTag('</ansTISS:dadosAutorizacao>');
 
       AdicionarTag('<ansTISS:dadosBeneficiario>');
-      AdicionarTag('numeroCarteira',numeroCarteira);
-      AdicionarTag('atendimentoRN',atendimentoRN);
-      AdicionarTag('nomeBeneficiario',nomeBeneficiario);
+      AdicionarTag('<ansTISS:numeroCarteira>%s</ansTISS:numeroCarteira>',numeroCarteira);
+      AdicionarTag('<ansTISS:atendimentoRN>%s</ansTISS:atendimentoRN>',atendimentoRN);
+      AdicionarTag('<ansTISS:nomeBeneficiario>%s</ansTISS:nomeBeneficiario>',nomeBeneficiario);
       AdicionarTag('</ansTISS:dadosBeneficiario>');
 
       AdicionarTag('<ansTISS:dadosSolicitante>');
       AdicionarTag('	<ansTISS:contratadoSolicitante> ');
-      AdicionarTag('codigoPrestadorNaOperadora',codigoPrestadorNaOperadora);
-      AdicionarTag('nomeContratado',nomeContratado);
+      AdicionarTag('<ansTISS:codigoPrestadorNaOperadora>%s</ansTISS:codigoPrestadorNaOperadora>',codigoPrestadorNaOperadora);
+      AdicionarTag('<ansTISS:nomeContratado>%s</ansTISS:nomeContratado>',nomeContratado);
       AdicionarTag('	</ansTISS:contratadoSolicitante>');
 
       AdicionarTag('	<ansTISS:profissionalSolicitante>');
-      AdicionarTag('nomeProfissional',nomeProfissional);
-      AdicionarTag('conselhoProfissional',conselhoProfissional);
-      AdicionarTag('numeroConselhoProfissional',numeroConselhoProfissional);
-      AdicionarTag('UF',UF);
-      AdicionarTag('CBOS',CBOS);
+      AdicionarTag('<ansTISS:nomeProfissional>%s</ansTISS:nomeProfissional>',nomeProfissional);
+      AdicionarTag('<ansTISS:conselhoProfissional>%s</ansTISS:conselhoProfissional>',conselhoProfissional);
+      AdicionarTag('<ansTISS:numeroConselhoProfissional>%s</ansTISS:numeroConselhoProfissional>',numeroConselhoProfissional);
+      AdicionarTag('<ansTISS:UF>%s</ansTISS:UF>',UF);
+      AdicionarTag('<ansTISS:CBOS>%s</ansTISS:CBOS>',CBOS);
       AdicionarTag('	</ansTISS:profissionalSolicitante> ');
       AdicionarTag('</ansTISS:dadosSolicitante> ');
 
       AdicionarTag('<ansTISS:dadosSolicitacao>');
-      AdicionarTag('dataSolicitacao',dataSolicitacao);
-      AdicionarTag('caraterAtendimento',caraterAtendimento);
+      AdicionarTag('<ansTISS:dataSolicitacao>%s</ansTISS:dataSolicitacao>',dataSolicitacao);
+      AdicionarTag('<ansTISS:caraterAtendimento>%s</ansTISS:caraterAtendimento>',caraterAtendimento);
       AdicionarTag('</ansTISS:dadosSolicitacao> ');
 
       AdicionarTag('<ansTISS:dadosExecutante>');
       AdicionarTag('	<ansTISS:contratadoExecutante>');
-      AdicionarTag('codigoPrestadorNaOperadora',codigoPrestadorNaOperadora);
-      AdicionarTag('nomeContratado',nomeContratado);
+      AdicionarTag('<ansTISS:codigoPrestadorNaOperadora>%s</ansTISS:codigoPrestadorNaOperadora>',codigoPrestadorNaOperadora);
+      AdicionarTag('<ansTISS:nomeContratado>%s</ansTISS:nomeContratado>',nomeContratado);
       AdicionarTag('	</ansTISS:contratadoExecutante>');
-      AdicionarTag('CNES',CNES);
+      AdicionarTag('<ansTISS:CNES>%s</ansTISS:CNES>',CNES);
       AdicionarTag('</ansTISS:dadosExecutante> ');
 
       AdicionarTag('<ansTISS:dadosAtendimento> ');
-      AdicionarTag('tipoAtendimento',tipoAtendimento);
-      AdicionarTag('indicacaoAcidente',indicacaoAcidente);
-      AdicionarTag('tipoConsulta',tipoConsulta);
+      AdicionarTag('<ansTISS:tipoAtendimento>%s</ansTISS:tipoAtendimento>',tipoAtendimento);
+      AdicionarTag('<ansTISS:indicacaoAcidente>%s</ansTISS:indicacaoAcidente>',indicacaoAcidente);
+      if tipoConsulta <> '' then
+         AdicionarTag('<ansTISS:tipoConsulta>%s</ansTISS:tipoConsulta>',tipoConsulta);
       AdicionarTag('</ansTISS:dadosAtendimento> ');
 
       AdicionarTag('<ansTISS:procedimentosExecutados>');
       AdicionarTag('	<ansTISS:procedimentoExecutado>');
-      AdicionarTag('dataExecucao',dataExecucao);
+      AdicionarTag('<ansTISS:dataExecucao>%s</ansTISS:dataExecucao>',dataExecucao);
       AdicionarTag('		<ansTISS:procedimento>');
-      AdicionarTag('codigoTabela',codigoTabela);
-      AdicionarTag('codigoProcedimento',codigoProcedimento);
-      AdicionarTag('descricaoProcedimento',descricaoProcedimento);
+      AdicionarTag('<ansTISS:codigoTabela>%s</ansTISS:codigoTabela>',codigoTabela);
+      AdicionarTag('<ansTISS:codigoProcedimento>%s</ansTISS:codigoProcedimento>',codigoProcedimento);
+      AdicionarTag('<ansTISS:descricaoProcedimento>%s</ansTISS:descricaoProcedimento>',descricaoProcedimento);
       AdicionarTag('		</ansTISS:procedimento>');
 
-      AdicionarTag('quantidadeExecutada',quantidadeExecutada);
+      AdicionarTag('<ansTISS:quantidadeExecutada>%s</ansTISS:quantidadeExecutada>',quantidadeExecutada);
 
       if viaAcesso <> '' then
-      AdicionarTag('viaAcesso',viaAcesso);
+      AdicionarTag('<ansTISS:viaAcesso>%s</ansTISS:viaAcesso>',viaAcesso);
        if tecnicaUtilizada <> '' then
-      AdicionarTag('tecnicaUtilizada',tecnicaUtilizada);
+      AdicionarTag('<ansTISS:tecnicaUtilizada>%s</ansTISS:tecnicaUtilizada>',tecnicaUtilizada);
        if reducaoAcrescimo <> '' then
-      AdicionarTag('reducaoAcrescimo',formatarValor(reducaoAcrescimo));
+      AdicionarTag('<ansTISS:reducaoAcrescimo>%s</ansTISS:reducaoAcrescimo>',formatarValor(reducaoAcrescimo));
 
-      AdicionarTag('valorUnitario',formatarValor(valorUnitario));
-      AdicionarTag('valorTotal',formatarValor(valorTotal));
-      {
-      AdicionarTag('		<ansTISS:equipeSadt>');
-      AdicionarTag(Format('			<ansTISS:grauPart>%s</ansTISS:grauPart>',[grauPart]));
+      AdicionarTag('<ansTISS:valorUnitario>%s</ansTISS:valorUnitario>',formatarValor(valorUnitario));
+      AdicionarTag('<ansTISS:valorTotal>%s</ansTISS:valorTotal>',formatarValor(valorTotal));
 
-      AdicionarTag('			<ansTISS:codProfissional>');
-      AdicionarTag(Format('				<ansTISS:codigoPrestadorNaOperadora>%s</ansTISS:codigoPrestadorNaOperadora>',[codigoPrestadorNaOperadora]));
-      AdicionarTag('			</ansTISS:codProfissional>');
+      if grauPart <> '' then
+      begin
+         AdicionarTag('		<ansTISS:equipeSadt>');
+         AdicionarTag('			<ansTISS:grauPart>%s</ansTISS:grauPart>',grauPart);
 
-      AdicionarTag(Format('			<ansTISS:nomeProf>%s</ansTISS:nomeProf>',[nomeProf]));
-      AdicionarTag(Format('			<ansTISS:conselho>%s</ansTISS:conselho>',[conselho]));
-      AdicionarTag(Format('			<ansTISS:numeroConselhoProfissional>%s</ansTISS:numeroConselhoProfissional>',[numeroConselhoProfissional]));
-      AdicionarTag(Format('			<ansTISS:UF>%s</ansTISS:UF>',[UF]));
-      AdicionarTag(Format('			<ansTISS:CBOS>%s</ansTISS:CBOS>',[CBOS]));
-      AdicionarTag('		</ansTISS:equipeSadt>');
-      }
+         AdicionarTag('			<ansTISS:codProfissional>');
+         AdicionarTag('				<ansTISS:codigoPrestadorNaOperadora>%s</ansTISS:codigoPrestadorNaOperadora>',codigoPrestadorNaOperadora_Equi);
+         AdicionarTag('			</ansTISS:codProfissional>');
+
+         AdicionarTag('			<ansTISS:nomeProf>%s</ansTISS:nomeProf>',nomeProf_Equi);
+         AdicionarTag('			<ansTISS:conselho>%s</ansTISS:conselho>',conselho_Equi);
+         AdicionarTag('			<ansTISS:numeroConselhoProfissional>%s</ansTISS:numeroConselhoProfissional>',numeroConselhoProfissional_Equi);
+         AdicionarTag('			<ansTISS:UF>%s</ansTISS:UF>',UF_Equi);
+         AdicionarTag('			<ansTISS:CBOS>%s</ansTISS:CBOS>',CBOS_Equi);
+         AdicionarTag('		</ansTISS:equipeSadt>');
+      end;
+
       AdicionarTag('	</ansTISS:procedimentoExecutado>');
       AdicionarTag('</ansTISS:procedimentosExecutados>');
 
       AdicionarTag('<ansTISS:valorTotal>');
-      AdicionarTag('valorProcedimentos', formatarValor(valorTotal));
-      AdicionarTag('valorTotalGeral', formatarValor(valorTotal));
+      AdicionarTag('<ansTISS:valorProcedimentos>%s</ansTISS:valorProcedimentos>', formatarValor(valorTotal));
+      AdicionarTag('<ansTISS:valorTotalGeral>%s</ansTISS:valorTotalGeral>', formatarValor(valorTotal));
       AdicionarTag('</ansTISS:valorTotal>');
 
       AdicionarTag('</ansTISS:guiaSP-SADT>');
@@ -489,8 +531,8 @@ begin
 	 AdicionarTag('		</ansTISS:loteGuias> ');
 	 AdicionarTag('	</ansTISS:prestadorParaOperadora>');
 
-	 AdicionarTag('	    <ansTISS:epilogo>');                      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	 AdicionarTag(Format('		<ansTISS:hash>%s</ansTISS:hash> ',['733ecc3f3dfe45f4b7d95ccecbcb8879']));
+	 AdicionarTag('	    <ansTISS:epilogo>');
+	 AdicionarTag('		<ansTISS:hash>%s</ansTISS:hash> ', lowercase( MD5String(Conteudo) ) );
 	 AdicionarTag('	</ansTISS:epilogo>');
 
    AdicionarTag('</ansTISS:mensagemTISS> ');
@@ -548,126 +590,170 @@ end;
 
 procedure TFormSADT.Button1Click(Sender: TObject);
 var
-executante: string;
+executante, NumeroLote : string;
 begin
-  if edtNomeExecutante.Text <> '' then
+  { if edtNomeExecutante.Text <> '' then
      executante:= ' AND nomeContratado_EXEC LIKE ('+quotedstr(edtNomeExecutante.Text+'%')+')';
+     }
+    if edtLote.Text <> '' then
+     NumeroLote:= ' GUITISS."NumeroLote" = '+ quotedstr(edtLote.Text);
 
   cdsTISS.close;
-  cdsTISS.DataRequest( 'Select * from GUISADt where dataAutorizacao >= '''+ datetostr(DateTimePicker1.Date)+
-                       ''' and dataAutorizacao <= '''+ datetostr(DateTimePicker2.Date)+''' '+ executante);
+  cdsTISS.DataRequest( 'Select * from GUITISS where '+
+                      {' dataAutorizacao >= '''+ datetostr(DateTimePicker1.Date)+
+                       ''' and dataAutorizacao <= '''+ datetostr(DateTimePicker2.Date)+''' '+
+                        executante+}
+                       NumeroLote);
   cdsTISS.open;
 end;
 
 procedure TFormSADT.Button2Click(Sender: TObject);
 
-function formatarData(texto: string): string;
-begin
-  result:= copy(texto,9,2)+'/'+ copy(texto,6,2) +'/'+copy(texto,1,4)
-end;
-
-function formatarValor(texto: string): string;
-begin
-  result:=  stringreplace( texto, '.',',',[]);
-end;
-
 var
   Node, NodeChild: IXMLNode;
   i:integer;
-  texto: string;
+  NumeroLote: string;
+  count: integer;
 
-begin
-  if FileOpenDialog1.Execute then
+  function formatarData(texto: string): string;
   begin
-    XMLDocument1.LoadFromFile(FileOpenDialog1.FileName);
-    XMLDocument1.Active := true;
-  end
-  else
-    exit;
-
-  Node := XMLDocument1.DocumentElement.
-           childNodes.FindNode('prestadorParaOperadora').
-           childNodes.FindNode('loteGuias').
-           childNodes.FindNode('guiasTISS').
-           childNodes.FindNode('guiaSP-SADT');
-
-  while (Node <> nil) do
-  begin
-    cdsTISS.append;
-  //cdsTISSnumeroLote:= Node5.ChildNodes.FindNode('numeroGuiaPrestador').text;
-    NodeChild := Node.childNodes.FindNode('cabecalhoGuia');
-
-    texto:= NodeChild.ChildNodes.FindNode('registroANS').text;
-    cdsTISSRegistroANS.AsString         := texto;
-
-    texto:= NodeChild.ChildNodes.FindNode('numeroGuiaPrestador').text;
-    cdsTISSnumeroGuiaPrestador.AsString := texto;
-
-    NodeChild := Node.childNodes.FindNode('dadosAutorizacao');
-    cdsTISSdataAutorizacao.AsString:= formatarData(NodeChild.ChildNodes.FindNode('dataAutorizacao').text);
-    cdsTISSsenha.AsString:= NodeChild.ChildNodes.FindNode('senha').text;
-    cdsTISSdataValidadeSenha.AsString:= formatarData(NodeChild.ChildNodes.FindNode('dataValidadeSenha').text);
-
-    NodeChild := Node.childNodes.FindNode('dadosBeneficiario');
-    cdsTISSnumeroCarteira.AsString:= NodeChild.ChildNodes.FindNode('numeroCarteira').text;
-    cdsTISSatendimentoRN.AsString:= NodeChild.ChildNodes.FindNode('atendimentoRN').text;
-    cdsTISSnomeBeneficiario.AsString:= NodeChild.ChildNodes.FindNode('nomeBeneficiario').text;
-
-    NodeChild := Node.childNodes.FindNode('dadosSolicitante').childNodes.FindNode('contratadoSolicitante');
-    cdsTISScodigoPrestadorNaOperadora.AsString:= NodeChild.ChildNodes.FindNode('codigoPrestadorNaOperadora').text;
-    cdsTISSnomeContratado.AsString:= NodeChild.ChildNodes.FindNode('nomeContratado').text;
-
-    NodeChild := Node.childNodes.FindNode('dadosSolicitante').childNodes.FindNode('profissionalSolicitante');
-
-    cdsTISSnomeProfissional.AsString:= NodeChild.ChildNodes.FindNode('nomeProfissional').text;
-    cdsTISSconselhoProfissional.AsString:= NodeChild.ChildNodes.FindNode('conselhoProfissional').text;
-    cdsTISSnumeroConselhoProfissional.AsString:= NodeChild.ChildNodes.FindNode('numeroConselhoProfissional').text;
-    cdsTISSUF_SOLICITANTE.AsString:= NodeChild.ChildNodes.FindNode('UF').text;
-    cdsTISSCBOS_SOLICITANTE.AsString:= NodeChild.ChildNodes.FindNode('CBOS').text;
-
-    NodeChild := Node.childNodes.FindNode('dadosSolicitacao');
-    cdsTISSdataSolicitacao.AsString:= formatarData(NodeChild.ChildNodes.FindNode('dataSolicitacao').text);
-    cdsTISScaraterAtendimento.AsString:= NodeChild.ChildNodes.FindNode('caraterAtendimento').text;
-
-    NodeChild := Node.childNodes.FindNode('dadosExecutante').childNodes.FindNode('contratadoExecutante');
-    cdsTISScodigoPrestadorNaOperadora_EXEC.AsString:=  NodeChild.ChildNodes.FindNode('codigoPrestadorNaOperadora').text;
-    cdsTISSnomeContratado_EXEC.AsString := NodeChild.ChildNodes.FindNode('nomeContratado').text;
-
-    NodeChild := Node.childNodes.FindNode('dadosExecutante');
-    cdsTISSCNES.AsString:= NodeChild.ChildNodes.FindNode('CNES').text;
-
-     NodeChild := Node.childNodes.FindNode('dadosAtendimento');
-    cdsTISStipoAtendimento.AsString:= NodeChild.ChildNodes.FindNode('tipoAtendimento').text;
-    cdsTISSindicacaoAcidente.AsString:= NodeChild.ChildNodes.FindNode('indicacaoAcidente').text;
-    cdsTISStipoConsulta.AsString:= NodeChild.ChildNodes.FindNode('tipoConsulta').text;
-
-    NodeChild := Node.childNodes.FindNode('procedimentosExecutados').childNodes.FindNode('procedimentoExecutado');
-    cdsTISSdataExecucao.AsString:= formatarData(NodeChild.ChildNodes.FindNode('dataExecucao').text);
-    cdsTISSquantidadeExecutada.AsString:= NodeChild.ChildNodes.FindNode('quantidadeExecutada').text;
-
-    if NodeChild.ChildNodes.FindNode('viaAcesso') <> nil then
-       cdsTISSviaAcesso.AsString:= NodeChild.ChildNodes.FindNode('viaAcesso').text;
-    if NodeChild.ChildNodes.FindNode('tecnicaUtilizada') <> nil then
-       cdsTISStecnicaUtilizada.AsString:= NodeChild.ChildNodes.FindNode('tecnicaUtilizada').text;
-    if NodeChild.ChildNodes.FindNode('reducaoAcrescimo') <> nil then
-       cdsTISSreducaoAcrescimo.AsString:= formatarValor(NodeChild.ChildNodes.FindNode('reducaoAcrescimo').text);
-
-    cdsTISSvalorUnitario.AsString:= formatarValor(NodeChild.ChildNodes.FindNode('valorUnitario').text);
-    cdsTISSvalorTotal.AsString:= formatarValor(NodeChild.ChildNodes.FindNode('valorTotal').text);
-
-    NodeChild := NodeChild.childNodes.FindNode('procedimento');
-
-    cdsTISScodigoTabela.AsString:= NodeChild.ChildNodes.FindNode('codigoTabela').text;
-    cdsTISScodigoProcedimento.AsString:= NodeChild.ChildNodes.FindNode('codigoProcedimento').text;
-    cdsTISSdescricaoProcedimento.AsString:= NodeChild.ChildNodes.FindNode('descricaoProcedimento').text;
-
-    cdsTISSCODIGO.value:= cdsTISS.RecordCount;
-
-    cdsTISS.Post;
-
-    Node := Node.NextSibling;
+    result:= '';
+    if texto <> '' then
+       result:= copy(texto,9,2)+'/'+ copy(texto,6,2) +'/'+copy(texto,1,4)
   end;
 
+  function GetNodevalue( NodeChild: IXMLNode; texto: string): string;
+  var
+    node: IXMLNode;
+  begin
+    node :=  NodeChild.ChildNodes.FindNode(texto);
+    if node <> nil then
+       result:= node.text;
+  end;
+
+  function formatarValor(texto: string): string;
+  begin
+    result:=  stringreplace( texto, '.',',',[]);
+  end;
+
+
+begin
+  try
+      cdsTISS.DisableControls;
+      if FileOpenDialog1.Execute then
+      begin
+        count := FileOpenDialog1.Files.Count -1;
+
+        for I := 0 to count  do
+        begin
+           XMLDocument1.LoadFromFile(FileOpenDialog1.Files[i]);
+           XMLDocument1.Active := true;
+
+           NumeroLote:= XMLDocument1.DocumentElement.
+                        childNodes.FindNode('prestadorParaOperadora').
+                        childNodes.FindNode('loteGuias').
+                        ChildNodes.FindNode('numeroLote').Text;
+
+           Node :=  XMLDocument1.DocumentElement.
+                    childNodes.FindNode('prestadorParaOperadora').
+                    childNodes.FindNode('loteGuias').
+                    childNodes.FindNode('guiasTISS').
+                    childNodes.FindNode('guiaSP-SADT');
+
+          while (Node <> nil) do
+          begin
+             cdsTISS.append;
+
+             cdsTISSNumeroLote.AsString := NumeroLote;
+
+             NodeChild := Node.childNodes.FindNode('cabecalhoGuia');
+
+             cdsTISSRegistroANS.AsString         := GetNodevalue(NodeChild,'registroANS');
+
+             cdsTISSnumeroGuiaPrestador.AsString := GetNodevalue(NodeChild,'numeroGuiaPrestador');
+
+             NodeChild := Node.childNodes.FindNode('dadosAutorizacao');
+             cdsTISSdataAutorizacao.AsString:= formatarData(GetNodevalue(NodeChild,'dataAutorizacao'));
+             cdsTISSsenha.AsString:= GetNodevalue(NodeChild,'senha');
+             cdsTISSdataValidadeSenha.AsString:= formatarData(GetNodevalue(NodeChild,'dataValidadeSenha'));
+
+             NodeChild := Node.childNodes.FindNode('dadosBeneficiario');
+             cdsTISSnumeroCarteira.AsString:= GetNodevalue(NodeChild,'numeroCarteira');
+             cdsTISSatendimentoRN.AsString:= GetNodevalue(NodeChild,'atendimentoRN');
+             cdsTISSnomeBeneficiario.AsString:= GetNodevalue(NodeChild,'nomeBeneficiario');
+
+             NodeChild := Node.childNodes.FindNode('dadosSolicitante').childNodes.FindNode('contratadoSolicitante');
+             cdsTISScodigoPrestadorNaOperadora.AsString:= GetNodevalue(NodeChild,'codigoPrestadorNaOperadora');
+             cdsTISSnomeContratado.AsString:= GetNodevalue(NodeChild,'nomeContratado');
+
+             NodeChild := Node.childNodes.FindNode('dadosSolicitante').childNodes.FindNode('profissionalSolicitante');
+
+             cdsTISSnomeProfissional.AsString:= GetNodevalue(NodeChild,'nomeProfissional');
+             cdsTISSconselhoProfissional.AsString:= GetNodevalue(NodeChild,'conselhoProfissional');
+             cdsTISSnumeroConselhoProfissional.AsString:= GetNodevalue(NodeChild,'numeroConselhoProfissional');
+             cdsTISSUF_SOLICITANTE.AsString:= GetNodevalue(NodeChild,'UF');
+             cdsTISSCBOS_SOLICITANTE.AsString:= GetNodevalue(NodeChild,'CBOS');
+
+             NodeChild := Node.childNodes.FindNode('dadosSolicitacao');
+             cdsTISSdataSolicitacao.AsString:= formatarData(GetNodevalue(NodeChild,'dataSolicitacao'));
+             cdsTISScaraterAtendimento.AsString:= GetNodevalue(NodeChild,'caraterAtendimento');
+
+             NodeChild := Node.childNodes.FindNode('dadosExecutante').childNodes.FindNode('contratadoExecutante');
+             cdsTISScodigoPrestadorNaOperadora_EXEC.AsString:=  GetNodevalue(NodeChild,'codigoPrestadorNaOperadora');
+             cdsTISSnomeContratado_EXEC.AsString := GetNodevalue(NodeChild,'nomeContratado');
+
+             NodeChild := Node.childNodes.FindNode('dadosExecutante');
+             cdsTISSCNES.AsString:= GetNodevalue(NodeChild,'CNES');
+
+             NodeChild := Node.childNodes.FindNode('dadosAtendimento');
+             cdsTISStipoAtendimento.AsString:= GetNodevalue(NodeChild,'tipoAtendimento');
+             cdsTISSindicacaoAcidente.AsString:= GetNodevalue(NodeChild,'indicacaoAcidente');
+             cdsTISStipoConsulta.AsString:= GetNodevalue(NodeChild,'tipoConsulta');
+
+             NodeChild := Node.childNodes.FindNode('procedimentosExecutados').childNodes.FindNode('procedimentoExecutado');
+             cdsTISSdataExecucao.AsString:= formatarData(GetNodevalue(NodeChild,'dataExecucao'));
+             cdsTISSquantidadeExecutada.AsString:= GetNodevalue(NodeChild,'quantidadeExecutada');
+
+             cdsTISSviaAcesso.AsString:= GetNodevalue(NodeChild,'viaAcesso');
+             cdsTISStecnicaUtilizada.AsString:= GetNodevalue(NodeChild,'tecnicaUtilizada');
+             cdsTISSreducaoAcrescimo.AsString:= formatarValor(GetNodevalue(NodeChild,'reducaoAcrescimo'));
+
+             cdsTISSvalorUnitario.AsString:= formatarValor(GetNodevalue(NodeChild,'valorUnitario'));
+             cdsTISSvalorTotal.AsString:= formatarValor(GetNodevalue(NodeChild,'valorTotal'));
+
+             NodeChild := Node.childNodes.FindNode('procedimentosExecutados').
+                               childNodes.FindNode('procedimentoExecutado').
+                               childNodes.FindNode('equipeSadt');
+
+             cdsTISSgrauPart.AsString                        := GetNodevalue(NodeChild,'grauPart');
+             cdsTISSnomeProfissional_EQUI.AsString           := GetNodevalue(NodeChild,'nomeProf');
+             cdsTISSconselhoProfissional_EQUI.AsString       := GetNodevalue(NodeChild,'conselho');
+             cdsTISSnumeroConselhoProfissional_EQUI.AsString := GetNodevalue(NodeChild,'numeroConselhoProfissional');
+             cdsTISSUF_EQUI.AsString                         := GetNodevalue(NodeChild,'UF');
+             cdsTISSCBOS_EQUI.AsString                       := GetNodevalue(NodeChild,'CBOS');
+             cdsTISScodigoPrestadorNaOperadora_EQUI.AsString := GetNodevalue(NodeChild.
+                                                                ChildNodes.FindNode('codProfissional'),
+                                                                'codigoPrestadorNaOperadora');
+
+             NodeChild := NodeChild.childNodes.FindNode('procedimento');
+
+             cdsTISScodigoTabela.AsString:= GetNodevalue(NodeChild,'codigoTabela');
+             cdsTISScodigoProcedimento.AsString:= GetNodevalue(NodeChild,'codigoProcedimento');
+             cdsTISSdescricaoProcedimento.AsString:= GetNodevalue(NodeChild,'descricaoProcedimento');
+
+             cdsTISSCODIGO.value:= cdsTISS.RecordCount;
+
+             cdsTISS.Post;
+
+             Node := Node.NextSibling;
+          end;
+
+          cdsTISS.applyupdates(0);
+        end;
+      end;
+  finally
+    cdsTISS.EnableControls;
+  end
 end;
 
 function TFormSADT.DataSetProvider1DataRequest(Sender: TObject;
@@ -679,7 +765,7 @@ end;
 procedure TFormSADT.FormShow(Sender: TObject);
 begin
   cdsTISS.close;
-  cdsTISS.DataRequest( 'Select * from GUISADt where 0=1');
+  cdsTISS.DataRequest( 'Select * from GUITISS where 0=1');
   cdsTISS.open;
 end;
 

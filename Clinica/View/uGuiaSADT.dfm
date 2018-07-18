@@ -41,8 +41,21 @@ object FormSADT: TFormSADT
         Font.Style = [fsBold]
         ParentFont = False
       end
+      object Label43: TLabel
+        Left = 583
+        Top = 0
+        Width = 41
+        Height = 13
+        Caption = 'N'#186' Lote'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
       object DBGrid1: TDBGrid
-        Left = 12
+        Left = 3
         Top = 45
         Width = 909
         Height = 476
@@ -251,7 +264,7 @@ object FormSADT: TFormSADT
         TabOrder = 2
       end
       object Button1: TButton
-        Left = 583
+        Left = 703
         Top = 14
         Width = 75
         Height = 25
@@ -265,6 +278,13 @@ object FormSADT: TFormSADT
         Width = 313
         Height = 21
         TabOrder = 4
+      end
+      object edtLote: TEdit
+        Left = 583
+        Top = 16
+        Width = 114
+        Height = 21
+        TabOrder = 5
       end
     end
     object TabSheet2: TTabSheet
@@ -710,7 +730,7 @@ object FormSADT: TFormSADT
         end
         object GroupBox7: TGroupBox
           Left = 14
-          Top = 267
+          Top = 268
           Width = 246
           Height = 61
           Caption = 'Dados da Solicitacao'
@@ -1177,7 +1197,7 @@ object FormSADT: TFormSADT
         end
         object GroupBox11: TGroupBox
           Left = 11
-          Top = 445
+          Top = 446
           Width = 910
           Height = 67
           Caption = 'Equipe SADT'
@@ -1275,7 +1295,7 @@ object FormSADT: TFormSADT
           end
           object Edit33: TDBEdit
             Left = 10
-            Top = 32
+            Top = 31
             Width = 84
             Height = 21
             DataField = 'grauPart'
@@ -1283,11 +1303,11 @@ object FormSADT: TFormSADT
             TabOrder = 0
           end
           object Edit34: TDBEdit
-            Left = 136
+            Left = 133
             Top = 32
             Width = 92
             Height = 21
-            DataField = 'codigoPrestadorNaOperadora_EXEC'
+            DataField = 'codigoPrestadorNaOperadora_EQUI'
             DataSource = DataSource1
             TabOrder = 1
           end
@@ -1296,7 +1316,7 @@ object FormSADT: TFormSADT
             Top = 32
             Width = 44
             Height = 21
-            DataField = 'conselhoProfissional'
+            DataField = 'conselhoProfissional_EQUI'
             DataSource = DataSource1
             TabOrder = 2
           end
@@ -1305,7 +1325,7 @@ object FormSADT: TFormSADT
             Top = 32
             Width = 329
             Height = 21
-            DataField = 'nomeProfissional'
+            DataField = 'nomeProfissional_EQUI'
             DataSource = DataSource1
             TabOrder = 3
           end
@@ -1314,7 +1334,7 @@ object FormSADT: TFormSADT
             Top = 32
             Width = 32
             Height = 21
-            DataField = 'UF_SOLICITANTE'
+            DataField = 'UF_EQUI'
             DataSource = DataSource1
             TabOrder = 4
           end
@@ -1323,7 +1343,7 @@ object FormSADT: TFormSADT
             Top = 32
             Width = 92
             Height = 21
-            DataField = 'numeroConselhoProfissional'
+            DataField = 'numeroConselhoProfissional_EQUI'
             DataSource = DataSource1
             TabOrder = 5
           end
@@ -1332,7 +1352,7 @@ object FormSADT: TFormSADT
             Top = 32
             Width = 64
             Height = 21
-            DataField = 'CBOS_SOLICITANTE'
+            DataField = 'CBOS_EQUI'
             DataSource = DataSource1
             TabOrder = 6
           end
@@ -1422,7 +1442,218 @@ object FormSADT: TFormSADT
   end
   object cdsTISS: TClientDataSet
     Aggregates = <>
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'codigoPrestadorNaOperadora'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'RegistroANS'
+        DataType = ftString
+        Size = 7
+      end
+      item
+        Name = 'NumeroLote'
+        DataType = ftString
+        Size = 8
+      end
+      item
+        Name = 'numeroGuiaPrestador'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'dataAutorizacao'
+        DataType = ftDate
+      end
+      item
+        Name = 'senha'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'dataValidadeSenha'
+        DataType = ftDate
+      end
+      item
+        Name = 'numeroCarteira'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'atendimentoRN'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'nomeBeneficiario'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'codigoPrestadorNaOperadora_SOLI'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'nomeContratado'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'nomeProfissional'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'conselhoProfissional'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'numeroConselhoProfissional'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'UF_SOLICITANTE'
+        DataType = ftSmallint
+      end
+      item
+        Name = 'CBOS_SOLICITANTE'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'dataSolicitacao'
+        DataType = ftDate
+      end
+      item
+        Name = 'caraterAtendimento'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'codigoPrestadorNaOperadora_EXEC'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'nomeContratado_EXEC'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'CNES'
+        DataType = ftString
+        Size = 8
+      end
+      item
+        Name = 'tipoAtendimento'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'indicacaoAcidente'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'tipoConsulta'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'dataExecucao'
+        DataType = ftDate
+      end
+      item
+        Name = 'codigoTabela'
+        DataType = ftInteger
+      end
+      item
+        Name = 'codigoProcedimento'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'descricaoProcedimento'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'quantidadeExecutada'
+        DataType = ftInteger
+      end
+      item
+        Name = 'reducaoAcrescimo'
+        DataType = ftSingle
+      end
+      item
+        Name = 'valorUnitario'
+        DataType = ftSingle
+      end
+      item
+        Name = 'valorTotal'
+        DataType = ftSingle
+      end
+      item
+        Name = 'valorProcedimentos'
+        DataType = ftSingle
+      end
+      item
+        Name = 'valorTotalGeral'
+        DataType = ftSingle
+      end
+      item
+        Name = 'CODIGO'
+        DataType = ftInteger
+      end
+      item
+        Name = 'viaAcesso'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'tecnicaUtilizada'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'grauPart'
+        DataType = ftSingle
+      end
+      item
+        Name = 'codigoPrestadorNaOperadora_EQUI'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'nomeProfissional_EQUI'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'conselhoProfissional_EQUI'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'numeroConselhoProfissional_EQUI'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'UF_EQUI'
+        DataType = ftSmallint
+      end
+      item
+        Name = 'CBOS_EQUI'
+        DataType = ftString
+        Size = 10
+      end>
     IndexDefs = <>
     Params = <>
     ProviderName = 'DataSetProvider1'
@@ -1561,7 +1792,7 @@ object FormSADT: TFormSADT
     object cdsTISSdescricaoProcedimento: TStringField
       FieldName = 'descricaoProcedimento'
       ProviderFlags = [pfInUpdate]
-      Size = 50
+      Size = 200
     end
     object cdsTISSquantidadeExecutada: TIntegerField
       FieldName = 'quantidadeExecutada'
@@ -1600,6 +1831,26 @@ object FormSADT: TFormSADT
     object cdsTISSgrauPart: TSingleField
       FieldName = 'grauPart'
     end
+    object cdsTISScodigoPrestadorNaOperadora_EQUI: TStringField
+      FieldName = 'codigoPrestadorNaOperadora_EQUI'
+    end
+    object cdsTISSnomeProfissional_EQUI: TStringField
+      FieldName = 'nomeProfissional_EQUI'
+      Size = 50
+    end
+    object cdsTISSconselhoProfissional_EQUI: TStringField
+      FieldName = 'conselhoProfissional_EQUI'
+    end
+    object cdsTISSnumeroConselhoProfissional_EQUI: TStringField
+      FieldName = 'numeroConselhoProfissional_EQUI'
+    end
+    object cdsTISSUF_EQUI: TSmallintField
+      FieldName = 'UF_EQUI'
+    end
+    object cdsTISSCBOS_EQUI: TStringField
+      FieldName = 'CBOS_EQUI'
+      Size = 10
+    end
   end
   object XMLDocument1: TXMLDocument
     Left = 576
@@ -1608,7 +1859,7 @@ object FormSADT: TFormSADT
   object FileOpenDialog1: TFileOpenDialog
     FavoriteLinks = <>
     FileTypes = <>
-    Options = []
+    Options = [fdoAllowMultiSelect]
     Left = 672
     Top = 8
   end

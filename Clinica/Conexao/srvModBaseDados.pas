@@ -51,6 +51,12 @@ type
     SQLGUIATISSviaAcesso: TStringField;
     SQLGUIATISStecnicaUtilizada: TStringField;
     SQLGUIATISSgrauPart: TSingleField;
+    SQLGUIATISScodigoPrestadorNaOperadora_EQUI: TStringField;
+    SQLGUIATISSnomeProfissional_EQUI: TStringField;
+    SQLGUIATISSconselhoProfissional_EQUI: TStringField;
+    SQLGUIATISSnumeroConselhoProfissional_EQUI: TStringField;
+    SQLGUIATISSUF_EQUI: TSmallintField;
+    SQLGUIATISSCBOS_EQUI: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
