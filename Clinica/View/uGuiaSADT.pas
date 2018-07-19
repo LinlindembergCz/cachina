@@ -185,6 +185,7 @@ type
   private
     Conteudo: string;
     procedure ValidarXML(caminho: string);
+    function GetHashMD5String(AStr: String; AMinusculo: Boolean= true): String;
     { Private declarations }
   public
     { Public declarations }
@@ -198,7 +199,7 @@ implementation
 
 {$R *.dfm}
 
-uses srvModBaseDados;
+uses srvModBaseDados, IdGlobal ;
 
 procedure TFormSADT.BitBtn1Click(Sender: TObject);
 begin
@@ -352,8 +353,8 @@ begin
    AdicionarTag('   <ansTISS:identificacaoTransacao>');
    AdicionarTag('       <ansTISS:tipoTransacao>%s</ansTISS:tipoTransacao>','ENVIO_LOTE_GUIAS');
    AdicionarTag('       <ansTISS:sequencialTransacao>%s</ansTISS:sequencialTransacao>','1');
-   AdicionarTag('       <ansTISS:dataRegistroTransacao>%s</ansTISS:dataRegistroTransacao>','2018-01-03'{FormatDatetime('YYYY-MM-DD',date)} );
-   AdicionarTag('       <ansTISS:horaRegistroTransacao>%s</ansTISS:horaRegistroTransacao>','18:49:17'{timetostr(time) });
+   AdicionarTag('       <ansTISS:dataRegistroTransacao>%s</ansTISS:dataRegistroTransacao>',FormatDatetime('YYYY-MM-DD',date) );
+   AdicionarTag('       <ansTISS:horaRegistroTransacao>%s</ansTISS:horaRegistroTransacao>',timetostr(time) );
    AdicionarTag('   </ansTISS:identificacaoTransacao>');
 
    AdicionarTag('   <ansTISS:origem> ');
@@ -532,15 +533,27 @@ begin
 	 AdicionarTag('	</ansTISS:prestadorParaOperadora>');
 
 	 AdicionarTag('	    <ansTISS:epilogo>');
-	 AdicionarTag('		<ansTISS:hash>%s</ansTISS:hash> ', lowercase( MD5String(Conteudo) ) );
+	 AdicionarTag('		<ansTISS:hash>%s</ansTISS:hash> ', GetHashMD5String(Conteudo) );
 	 AdicionarTag('	</ansTISS:epilogo>');
 
    AdicionarTag('</ansTISS:mensagemTISS> ');
 
    XML.SaveToFile( Extractfilepath(application.ExeName)+'Lote_Envio_GuiasSADT.xml');
 
-   ValidarXML( Extractfilepath(application.ExeName)+'Lote_Envio_GuiasSADT.xml' );
+   //ValidarXML( Extractfilepath(application.ExeName)+'Lote_Envio_GuiasSADT.xml' );
 
+end;
+
+function TFormSADT.GetHashMD5String(AStr: String; AMinusculo: Boolean = True): String;
+begin
+
+  with TIdHashMessageDigest5.Create do
+  begin                                 //
+      Result := HashStringAsHex(AStr, IndyTextEncoding(28591));
+      Free;
+  end;
+  if AMinusculo then
+     Result := LowerCase(Result);
 end;
 
 procedure TFormSADT.ValidarXML(caminho: string );

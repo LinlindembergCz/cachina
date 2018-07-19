@@ -25,6 +25,10 @@ object FormSADT: TFormSADT
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Pesquisa'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         934
         536)
