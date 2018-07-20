@@ -20,15 +20,11 @@ object FormSADT: TFormSADT
     Top = 41
     Width = 942
     Height = 564
-    ActivePage = TabSheet2
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Pesquisa'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         934
         536)
@@ -46,7 +42,7 @@ object FormSADT: TFormSADT
         ParentFont = False
       end
       object Label43: TLabel
-        Left = 583
+        Left = 585
         Top = 0
         Width = 41
         Height = 13
@@ -380,7 +376,7 @@ object FormSADT: TFormSADT
             Height = 13
             Caption = 'Data Autorizacao'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
+            Font.Color = clRed
             Font.Height = -11
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
@@ -393,7 +389,7 @@ object FormSADT: TFormSADT
             Height = 13
             Caption = 'Senha'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
+            Font.Color = clRed
             Font.Height = -11
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
@@ -406,7 +402,7 @@ object FormSADT: TFormSADT
             Height = 13
             Caption = 'Data Validade Senha'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
+            Font.Color = clRed
             Font.Height = -11
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
@@ -454,7 +450,7 @@ object FormSADT: TFormSADT
             Height = 13
             Caption = 'Numero Carteira'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
+            Font.Color = clRed
             Font.Height = -11
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
@@ -475,18 +471,18 @@ object FormSADT: TFormSADT
           end
           object Label8: TLabel
             Left = 160
-            Top = 16
+            Top = 14
             Width = 101
             Height = 13
             Caption = 'Nome Beneficiario'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
+            Font.Color = clRed
             Font.Height = -11
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
             ParentFont = False
           end
-          object Edit6: TDBEdit
+          object edtNumerocarteira: TDBEdit
             Left = 16
             Top = 32
             Width = 121
@@ -494,6 +490,7 @@ object FormSADT: TFormSADT
             DataField = 'numeroCarteira'
             DataSource = DataSource1
             TabOrder = 0
+            OnExit = edtNumerocarteiraExit
           end
           object Edit7: TDBEdit
             Left = 513
@@ -505,7 +502,7 @@ object FormSADT: TFormSADT
             TabOrder = 1
           end
           object Edit8: TDBEdit
-            Left = 160
+            Left = 156
             Top = 32
             Width = 347
             Height = 21
@@ -529,7 +526,7 @@ object FormSADT: TFormSADT
             Caption = 'Contratado do Solicitante'
             TabOrder = 0
             object Label9: TLabel
-              Left = 11
+              Left = 6
               Top = 17
               Width = 140
               Height = 13
@@ -555,17 +552,17 @@ object FormSADT: TFormSADT
               ParentFont = False
             end
             object Edit9: TDBEdit
-              Left = 8
-              Top = 33
+              Left = 3
+              Top = 36
               Width = 128
               Height = 21
-              DataField = 'codigoPrestadorNaOperadora_SOLI'
+              DataField = 'codigoPrestadorNaOperadora'
               DataSource = DataSource1
               TabOrder = 0
             end
             object Edit31: TDBEdit
-              Left = 160
-              Top = 34
+              Left = 166
+              Top = 37
               Width = 110
               Height = 21
               DataField = 'nomeContratado'
@@ -1309,7 +1306,7 @@ object FormSADT: TFormSADT
           object Edit34: TDBEdit
             Left = 133
             Top = 32
-            Width = 92
+            Width = 144
             Height = 21
             DataField = 'codigoPrestadorNaOperadora_EQUI'
             DataSource = DataSource1
@@ -1373,7 +1370,7 @@ object FormSADT: TFormSADT
         end
         object BitBtn2: TBitBtn
           Left = 14
-          Top = 1
+          Top = 2
           Width = 75
           Height = 25
           Caption = 'Duplicar'
@@ -1441,8 +1438,8 @@ object FormSADT: TFormSADT
   end
   object DataSource1: TDataSource
     DataSet = cdsTISS
-    Left = 261
-    Top = 160
+    Left = 853
+    Top = 8
   end
   object cdsTISS: TClientDataSet
     Aggregates = <>
@@ -1662,8 +1659,10 @@ object FormSADT: TFormSADT
     Params = <>
     ProviderName = 'DataSetProvider1'
     StoreDefs = True
-    Left = 160
-    Top = 160
+    BeforePost = cdsTISSBeforePost
+    OnNewRecord = cdsTISSNewRecord
+    Left = 848
+    Top = 56
     object cdsTISScodigoPrestadorNaOperadora: TStringField
       FieldName = 'codigoPrestadorNaOperadora'
       ProviderFlags = [pfInUpdate]
@@ -1871,7 +1870,15 @@ object FormSADT: TFormSADT
     DataSet = DSServerModuleBaseDados.SQLGUIATISS
     UpdateMode = upWhereKeyOnly
     OnDataRequest = DataSetProvider1DataRequest
-    Left = 56
-    Top = 160
+    Left = 768
+    Top = 8
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 364
+    Top = 217
+    object GravarLote1: TMenuItem
+      Caption = 'Gravar Lote'
+      OnClick = GravarLote1Click
+    end
   end
 end

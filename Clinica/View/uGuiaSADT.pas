@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB,
   Datasnap.DBClient, Vcl.ExtCtrls, Vcl.Buttons, Vcl.Mask, Vcl.DBCtrls,
   Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, IdHashMessageDigest, Xml.xmldom,
-  Xml.XMLIntf, Xml.XMLDoc, System.Win.ComObj, Datasnap.Provider;
+  Xml.XMLIntf, Xml.XMLDoc, System.Win.ComObj, Datasnap.Provider, Vcl.Menus;
 
 type
   TFormSADT = class(TForm)
@@ -32,7 +32,7 @@ type
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
-    Edit6: TDBEdit;
+    edtNumerocarteira: TDBEdit;
     Edit7: TDBEdit;
     Edit8: TDBEdit;
     GroupBox4: TGroupBox;
@@ -173,6 +173,8 @@ type
     cdsTISSnumeroConselhoProfissional_EQUI: TStringField;
     cdsTISSUF_EQUI: TSmallintField;
     cdsTISSCBOS_EQUI: TStringField;
+    PopupMenu1: TPopupMenu;
+    GravarLote1: TMenuItem;
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
@@ -182,6 +184,10 @@ type
     procedure FormShow(Sender: TObject);
     function DataSetProvider1DataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
+    procedure edtNumerocarteiraExit(Sender: TObject);
+    procedure cdsTISSBeforePost(DataSet: TDataSet);
+    procedure GravarLote1Click(Sender: TObject);
+    procedure cdsTISSNewRecord(DataSet: TDataSet);
   private
     Conteudo: string;
     procedure ValidarXML(caminho: string);
@@ -233,10 +239,8 @@ begin
 
   cdsTISSsenha.value := '';
   cdsTISSnumeroCarteira.value := '';
-  cdsTISSdataAutorizacao.asstring:= '';
   cdsTISSnumeroGuiaPrestador.asstring:= '';
-  cdsTISSnumeroLote.Value:= '';
-
+  cdsTISSnomeBeneficiario.AsString:= '';
 end;
 
 function MD5String(const Value: string): string;
@@ -359,15 +363,15 @@ begin
 
    AdicionarTag('   <ansTISS:origem> ');
    AdicionarTag('       <ansTISS:identificacaoPrestador> ');
-   AdicionarTag('           <ansTISS:codigoPrestadorNaOperadora>%s</ansTISS:codigoPrestadorNaOperadora>','39772616');
+   AdicionarTag('           <ansTISS:codigoPrestadorNaOperadora>%s</ansTISS:codigoPrestadorNaOperadora>',cdsTISScodigoPrestadorNaOperadora.Asstring);
    AdicionarTag('       </ansTISS:identificacaoPrestador> ');
    AdicionarTag('   </ansTISS:origem>');
 
    AdicionarTag('<ansTISS:destino>');
-   AdicionarTag('  <ansTISS:registroANS>%s</ansTISS:registroANS>','326305');
+   AdicionarTag('  <ansTISS:registroANS>%s</ansTISS:registroANS>',cdsTISSRegistroANS.Asstring);
    AdicionarTag('</ansTISS:destino>');
 
-   AdicionarTag(' <ansTISS:Padrao>%s</ansTISS:Padrao> ','3.03.01');
+   AdicionarTag(' <ansTISS:Padrao>%s</ansTISS:Padrao> ','3.03.03');
    AdicionarTag('</ansTISS:cabecalho>');
 
    AdicionarTag('		<ansTISS:prestadorParaOperadora> ');
@@ -540,7 +544,7 @@ begin
 
    XML.SaveToFile( Extractfilepath(application.ExeName)+'Lote_Envio_GuiasSADT.xml');
 
-   //ValidarXML( Extractfilepath(application.ExeName)+'Lote_Envio_GuiasSADT.xml' );
+   ValidarXML( Extractfilepath(application.ExeName)+'Lote_Envio_GuiasSADT.xml' );
 
 end;
 
@@ -554,6 +558,19 @@ begin
   end;
   if AMinusculo then
      Result := LowerCase(Result);
+end;
+
+procedure TFormSADT.GravarLote1Click(Sender: TObject);
+var
+  NumeroLote: string;
+begin
+   NumeroLote:=   InputBox('Informe o Numero do Lote','Numero Lote','');
+   cdsTISS.first;
+   while not cdsTISS.eof do
+   begin
+      DSServerModuleBaseDados.execSql( format('Update GUISADT Set NumeroLote = ''%s'' where Codigo=%s ', [NumeroLote,cdsTISSCodigo.AsString] ) );
+      cdsTISS.Next;
+   end;
 end;
 
 procedure TFormSADT.ValidarXML(caminho: string );
@@ -603,21 +620,20 @@ end;
 
 procedure TFormSADT.Button1Click(Sender: TObject);
 var
-executante, NumeroLote : string;
+   executante, NumeroLote : string;
 begin
-  { if edtNomeExecutante.Text <> '' then
-     executante:= ' AND nomeContratado_EXEC LIKE ('+quotedstr(edtNomeExecutante.Text+'%')+')';
-     }
-    if edtLote.Text <> '' then
-     NumeroLote:= ' GUITISS."NumeroLote" = '+ quotedstr(edtLote.Text);
+   if edtNomeExecutante.Text <> '' then
+      executante:= ' AND nomeContratado_EXEC LIKE ('+quotedstr(edtNomeExecutante.Text+'%')+')';
 
-  cdsTISS.close;
-  cdsTISS.DataRequest( 'Select * from GUITISS where '+
-                      {' dataAutorizacao >= '''+ datetostr(DateTimePicker1.Date)+
+   if edtLote.Text <> '' then
+     NumeroLote:= ' AND GUITISS."NumeroLote" = '+ quotedstr(edtLote.Text);
+
+   cdsTISS.close;
+   cdsTISS.DataRequest( 'Select * from GUITISS where '+
+                      ' dataAutorizacao >= '''+ datetostr(DateTimePicker1.Date)+
                        ''' and dataAutorizacao <= '''+ datetostr(DateTimePicker2.Date)+''' '+
-                        executante+}
-                       NumeroLote);
-  cdsTISS.open;
+                        executante + NumeroLote);
+   cdsTISS.open;
 end;
 
 procedure TFormSADT.Button2Click(Sender: TObject);
@@ -697,6 +713,7 @@ begin
 
              NodeChild := Node.childNodes.FindNode('dadosSolicitante').childNodes.FindNode('contratadoSolicitante');
              cdsTISScodigoPrestadorNaOperadora.AsString:= GetNodevalue(NodeChild,'codigoPrestadorNaOperadora');
+
              cdsTISSnomeContratado.AsString:= GetNodevalue(NodeChild,'nomeContratado');
 
              NodeChild := Node.childNodes.FindNode('dadosSolicitante').childNodes.FindNode('profissionalSolicitante');
@@ -769,10 +786,45 @@ begin
   end
 end;
 
+procedure TFormSADT.cdsTISSBeforePost(DataSet: TDataSet);
+var
+   MaxDataSet: TDataSet;
+begin
+   try
+      MaxDataSet := DSServerModuleBaseDados.getDataSet(
+       'Select (Cast(Max("numeroGuiaPrestador") as INTEGER) + 1) as numeroGuia From GUITISS' );
+      cdsTISSnumeroGuiaPrestador.Value:=  DataSet.FieldByName('numeroGuia').Value;
+   finally
+      MaxDataSet.Free;
+   end;
+end;
+
+procedure TFormSADT.cdsTISSNewRecord(DataSet: TDataSet);
+begin
+  cdsTISSatendimentoRN.Value:= 'N';
+end;
+
 function TFormSADT.DataSetProvider1DataRequest(Sender: TObject;
   Input: OleVariant): OleVariant;
 begin
-DSServerModuleBaseDados.SQLGUIATISS.CommandText:= Input;
+   DSServerModuleBaseDados.SQLGUIATISS.CommandText:= Input;
+end;
+
+procedure TFormSADT.edtNumerocarteiraExit(Sender: TObject);
+var
+   DataSet: TDataSet;
+begin
+  try
+     DataSet := DSServerModuleBaseDados.getDataSet(
+     Format( 'Select First 1 "nomeBeneficiario" From GUITISS where "numeroCarteira"=''%s''' ,
+     [edtNumerocarteira.Text] ) );
+
+     if not (cdsTISS.State in[dsedit, dsinsert]) then
+       cdsTISS.Edit;
+     cdsTISSnomeBeneficiario.AsString:= DataSet.FieldByName('nomeBeneficiario').AsString;
+  finally
+     DataSet.Free;
+  end;
 end;
 
 procedure TFormSADT.FormShow(Sender: TObject);
