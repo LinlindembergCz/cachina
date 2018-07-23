@@ -2,8 +2,8 @@ object FormSADT: TFormSADT
   Left = 0
   Top = 0
   Caption = 'FormSADT'
-  ClientHeight = 605
-  ClientWidth = 942
+  ClientHeight = 598
+  ClientWidth = 945
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,18 +18,18 @@ object FormSADT: TFormSADT
   object PageControl1: TPageControl
     Left = 0
     Top = 41
-    Width = 942
-    Height = 564
-    ActivePage = TabSheet1
+    Width = 945
+    Height = 557
+    ActivePage = TabSheet2
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Pesquisa'
       DesignSize = (
-        934
-        536)
+        937
+        529)
       object Label42: TLabel
-        Left = 264
+        Left = 328
         Top = 0
         Width = 64
         Height = 13
@@ -42,7 +42,7 @@ object FormSADT: TFormSADT
         ParentFont = False
       end
       object Label43: TLabel
-        Left = 585
+        Left = 649
         Top = 0
         Width = 41
         Height = 13
@@ -54,11 +54,37 @@ object FormSADT: TFormSADT
         Font.Style = [fsBold]
         ParentFont = False
       end
+      object lbCount: TLabel
+        Left = 856
+        Top = 16
+        Width = 10
+        Height = 19
+        Caption = '0'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label44: TLabel
+        Left = 4
+        Top = 1
+        Width = 14
+        Height = 13
+        Caption = 'UF'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
       object DBGrid1: TDBGrid
-        Left = 3
+        Left = 4
         Top = 45
-        Width = 909
-        Height = 476
+        Width = 926
+        Height = 469
         Anchors = [akLeft, akTop, akRight, akBottom]
         DataSource = DataSource1
         TabOrder = 0
@@ -246,7 +272,7 @@ object FormSADT: TFormSADT
           end>
       end
       object DateTimePicker1: TDateTimePicker
-        Left = 12
+        Left = 76
         Top = 16
         Width = 105
         Height = 21
@@ -255,7 +281,7 @@ object FormSADT: TFormSADT
         TabOrder = 1
       end
       object DateTimePicker2: TDateTimePicker
-        Left = 136
+        Left = 200
         Top = 16
         Width = 113
         Height = 21
@@ -264,7 +290,7 @@ object FormSADT: TFormSADT
         TabOrder = 2
       end
       object Button1: TButton
-        Left = 703
+        Left = 767
         Top = 14
         Width = 75
         Height = 25
@@ -273,18 +299,56 @@ object FormSADT: TFormSADT
         OnClick = Button1Click
       end
       object edtNomeExecutante: TEdit
-        Left = 264
+        Left = 328
         Top = 16
         Width = 313
         Height = 21
         TabOrder = 4
       end
       object edtLote: TEdit
-        Left = 583
+        Left = 647
         Top = 16
         Width = 114
         Height = 21
         TabOrder = 5
+      end
+      object cboUFPesquisa: TComboBox
+        Left = 4
+        Top = 16
+        Width = 66
+        Height = 21
+        ItemIndex = 10
+        TabOrder = 6
+        Text = '24-RN'
+        Items.Strings = (
+          '11-RO'
+          '12-AC'
+          '13-AM'
+          '14-RR'
+          '15-PA'
+          '16-AP'
+          '17-TO'
+          '21-MA'
+          '22-PI'
+          '23-CE'
+          '24-RN'
+          '25-PB'
+          '26-PE'
+          '27-AL'
+          '28-SE'
+          '29-BA'
+          '31-MG'
+          '32-ES'
+          '33-RJ'
+          '35-SP'
+          '41-PR'
+          '42-SC'
+          '43-RS'
+          '50-MS'
+          '51-MT'
+          '52-GO'
+          '53-DF'
+          '98-EX')
       end
     end
     object TabSheet2: TTabSheet
@@ -293,8 +357,8 @@ object FormSADT: TFormSADT
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 934
-        Height = 536
+        Width = 937
+        Height = 529
         Align = alClient
         TabOrder = 0
         object Label10: TLabel
@@ -658,7 +722,7 @@ object FormSADT: TFormSADT
               Height = 21
               DataField = 'numeroConselhoProfissional'
               DataSource = DataSource1
-              TabOrder = 1
+              TabOrder = 2
             end
             object Edit15: TDBEdit
               Left = 535
@@ -667,7 +731,7 @@ object FormSADT: TFormSADT
               Height = 21
               DataField = 'CBOS_SOLICITANTE'
               DataSource = DataSource1
-              TabOrder = 2
+              TabOrder = 4
             end
             object DBComboBox1: TDBComboBox
               Left = 216
@@ -687,7 +751,7 @@ object FormSADT: TFormSADT
                 '08- CRO'
                 '09- CRP'
                 '10- Outros')
-              TabOrder = 3
+              TabOrder = 1
             end
             object DBComboBox8: TDBComboBox
               Left = 487
@@ -725,7 +789,7 @@ object FormSADT: TFormSADT
                 '52-GO'
                 '53-DF'
                 '98-EX')
-              TabOrder = 4
+              TabOrder = 3
             end
           end
         end
@@ -974,7 +1038,7 @@ object FormSADT: TFormSADT
             Height = 13
             Caption = 'Data da execucao'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
+            Font.Color = clRed
             Font.Height = -11
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
@@ -1140,7 +1204,7 @@ object FormSADT: TFormSADT
             Height = 21
             DataField = 'quantidadeExecutada'
             DataSource = DataSource1
-            TabOrder = 4
+            TabOrder = 6
           end
           object Edit29: TDBEdit
             Left = 443
@@ -1149,16 +1213,16 @@ object FormSADT: TFormSADT
             Height = 21
             DataField = 'valorUnitario'
             DataSource = DataSource1
-            TabOrder = 5
+            TabOrder = 8
           end
           object Edit30: TDBEdit
             Left = 533
             Top = 75
-            Width = 52
+            Width = 76
             Height = 21
             DataField = 'valorTotal'
             DataSource = DataSource1
-            TabOrder = 6
+            TabOrder = 9
           end
           object Edit32: TDBEdit
             Left = 352
@@ -1180,7 +1244,7 @@ object FormSADT: TFormSADT
               '1- Unica'
               '2-Mesma via '
               '3-Diferentes vias')
-            TabOrder = 8
+            TabOrder = 4
           end
           object DBComboBox7: TDBComboBox
             Left = 112
@@ -1193,7 +1257,7 @@ object FormSADT: TFormSADT
               '1-Convencional'
               '2-Videolaparoscopia'
               '3-Rob'#243'tica')
-            TabOrder = 9
+            TabOrder = 5
           end
         end
         object GroupBox11: TGroupBox
@@ -1393,7 +1457,7 @@ object FormSADT: TFormSADT
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 942
+    Width = 945
     Height = 41
     Align = alTop
     TabOrder = 1
@@ -1407,17 +1471,17 @@ object FormSADT: TFormSADT
       TabOrder = 0
     end
     object BitBtn3: TBitBtn
-      Left = 435
+      Left = 420
       Top = 10
       Width = 75
       Height = 25
-      Caption = 'Gerar XML'
+      Caption = 'Exportar XML'
       ModalResult = 1
       TabOrder = 1
       OnClick = BitBtn3Click
     end
     object Button2: TButton
-      Left = 267
+      Left = 246
       Top = 10
       Width = 81
       Height = 25
@@ -1425,15 +1489,14 @@ object FormSADT: TFormSADT
       TabOrder = 2
       OnClick = Button2Click
     end
-    object BitBtn4: TBitBtn
-      Left = 354
+    object Button3: TButton
+      Left = 333
       Top = 10
-      Width = 75
+      Width = 81
       Height = 25
-      Caption = 'Validar XML'
-      ModalResult = 1
+      Caption = 'Gerar Lote'
       TabOrder = 3
-      OnClick = BitBtn4Click
+      OnClick = Button3Click
     end
   end
   object DataSource1: TDataSource
@@ -1686,6 +1749,7 @@ object FormSADT: TFormSADT
     object cdsTISSdataAutorizacao: TDateField
       FieldName = 'dataAutorizacao'
       ProviderFlags = [pfInUpdate]
+      OnChange = cdsTISSdataAutorizacaoChange
     end
     object cdsTISSsenha: TStringField
       FieldName = 'senha'
@@ -1878,7 +1942,6 @@ object FormSADT: TFormSADT
     Top = 217
     object GravarLote1: TMenuItem
       Caption = 'Gravar Lote'
-      OnClick = GravarLote1Click
     end
   end
 end
